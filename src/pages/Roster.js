@@ -4,7 +4,7 @@ import { config } from '../constants'
 
 function Roster({ domElement }) {
   const apiKey = domElement.getAttribute('data-apikey')
-  const perscomKey = domElement.getAttribute('data-perscomkey')
+  const perscomId = domElement.getAttribute('data-perscomid')
   const [loading, setLoading] = useState()
   const [error, setError] = useState('')
   const [data, setData] = useState([])
@@ -14,26 +14,29 @@ function Roster({ domElement }) {
     fetch(config.roster.API_URL, {
       method: 'GET',
       headers: {
-        'X-Perscom-Key': perscomKey,
-        Authorization: `Bearer ${apiKey}`
+        'X-Perscom-Id': perscomId,
+        Authorization: `Bearer ${apiKey}`,
+        Accept: 'application/json',
+        'User-Agent': 'PERSCOM Widget'
       }
     })
       .then((response) => response.json())
       .then((data) => {
         setLoading(false)
-        setData(data.data.children.slice(0, 10))
+        setData(data)
       })
       .catch((e) => {
         console.log(e)
         setLoading(false)
         setError('We recevied an error while trying to communicate with PERSCOM.io.')
       })
-  }, [apiKey, perscomKey])
+  }, [apiKey, perscomId])
 
   return (
     <div className='perscom_roster_widget'>
       <div className='perscom_roster_loading'>{loading && 'Loading...'}</div>
       <div className='perscom_roster_error'>{error && error}</div>
+      {data && data}
     </div>
   )
 }
