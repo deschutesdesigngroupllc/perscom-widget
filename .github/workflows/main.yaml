@@ -1,0 +1,39 @@
+name: Widget CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Deploy Widget
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Build Application
+        run: npm run build:widget
+
+      - name: Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy to S3
+        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
