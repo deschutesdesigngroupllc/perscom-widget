@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './assets/css/index.css'
+import './assets/css/widget.css'
 import Roster from './pages/Roster'
 
 const rosterDivs = document.querySelectorAll('#perscom_roster')
