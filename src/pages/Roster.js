@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { config } from '../constants'
 
 function Roster({ domElement }) {
   const apiKey = domElement.getAttribute('data-apikey')
@@ -10,7 +11,7 @@ function Roster({ domElement }) {
 
   useEffect(() => {
     setLoading(true)
-    fetch('https://api.perscom.io/v1/widget/roster', {
+    fetch(config.roster.API_URL, {
       method: 'GET',
       headers: {
         'X-Perscom-Key': perscomKey,
