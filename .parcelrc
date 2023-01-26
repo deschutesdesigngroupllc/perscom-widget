@@ -6,5 +6,6 @@
       "@parcel/compressor-gzip",
       "@parcel/compressor-brotli"
     ]
-  }
+  },
+  "namers": [ "parcel-namer-rewrite" ]
 }
