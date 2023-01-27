@@ -27,6 +27,8 @@ jobs:
 
       - name: Build Application
         run: npm run build:widget
+        env:
+          REACT_APP_API_URL: https://api.perscom.io/v1/widget/roster
 
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
