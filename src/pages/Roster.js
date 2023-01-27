@@ -36,42 +36,63 @@ function Roster({ domElement }) {
     <div className='perscom_roster_widget'>
       <div className='sm:my-6 lg:my-8 sm:px-6 lg:px-8'>
         {error && renderError(error)}
-        <div className='perscom_roster_loading'>{loading && 'Loading...'}</div>
-        <div className='flex flex-col space-y-6'>{!!data.length && data.map(renderUnit)}</div>
+        <div className='perscom_roster_loading'>
+          {loading ? (
+            <div className='animate-pulse'>{renderUnit({}, true)}</div>
+          ) : (
+            <div className='flex flex-col space-y-6'>{!!data.length && data.map((unit) => renderUnit(unit, false))}</div>
+          )}
+        </div>
       </div>
     </div>
   )
 }
 
-function renderUnit(unit) {
+function renderUnit(unit, loading) {
   const { id, name, users } = unit
 
   return (
-    <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg'>
-      <table className='min-w-full divide-y divide-gray-300' key={id}>
+    <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg' key={id}>
+      <table className='min-w-full divide-y divide-gray-300'>
         <thead className='bg-gray-50'>
           <tr>
-            <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6'>
-              {name}
-            </th>
-            <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
-              Position
-            </th>
-            <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'>
-              Specialty
-            </th>
-            <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
-              Status
-            </th>
-            <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'>
-              Online
-            </th>
-            <th scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 lg:table-cell'>
-              <span className='sr-only'>View</span>
-            </th>
+            {loading ? (
+              <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6 text-center'>
+                Loading...
+              </th>
+            ) : (
+              <>
+                <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6'>
+                  {name}
+                </th>
+                <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
+                  Position
+                </th>
+                <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'>
+                  Specialty
+                </th>
+                <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
+                  Status
+                </th>
+                <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'>
+                  Online
+                </th>
+                <th scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 lg:table-cell'>
+                  <span className='sr-only'>View</span>
+                </th>
+              </>
+            )}
           </tr>
         </thead>
-        <tbody className='divide-y divide-gray-200 bg-white'>{!!users.length && users.map(renderUser)}</tbody>
+        <tbody className='divide-y divide-gray-200 bg-white'>
+          {!loading && !!users.length ? (
+            users.map(renderUser)
+          ) : (
+            <tr>
+              <td className='whitespace-nowrap py-6 pl-4 pr-3 text-sm sm:pl-6'></td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   )
