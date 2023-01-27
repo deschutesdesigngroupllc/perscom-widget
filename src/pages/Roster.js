@@ -63,7 +63,10 @@ function renderUnit(unit) {
             <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
               Status
             </th>
-            <th scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 md:table-cell'>
+            <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'>
+              Online
+            </th>
+            <th scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 lg:table-cell'>
               <span className='sr-only'>View</span>
             </th>
           </tr>
@@ -75,7 +78,7 @@ function renderUnit(unit) {
 }
 
 function renderUser(user) {
-  const { id, name, position, specialty, status, rank, url } = user
+  const { id, name, position, specialty, status, rank, url, online } = user
 
   return (
     <tr key={id}>
@@ -96,7 +99,14 @@ function renderUser(user) {
       <td className='whitespace-nowrap px-3 py-2 text-sm text-gray-500'>
         {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status.color}`}>{status.name}</span>}
       </td>
-      <td className='hidden whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 md:table-cell'>
+      <td className='hidden whitespace-nowrap px-3 py-2 text-sm text-gray-500 md:table-cell'>
+        {online ? (
+          <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
+        ) : (
+          <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
+        )}
+      </td>
+      <td className='hidden whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:table-cell'>
         <a href={url} className='text-gray-600 hover:text-gray-900'>
           Personnel Profile<span className='sr-only'>, {name}</span>
         </a>
