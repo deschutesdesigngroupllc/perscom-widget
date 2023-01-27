@@ -33,16 +33,16 @@ function Roster({ domElement }) {
   }, [apiKey, perscomId])
 
   return (
-    <div className='perscom_roster_widget'>
-      <div className='sm:my-6 lg:my-8 sm:px-6 lg:px-8'>
+    <div id='perscom_roster_widget'>
+      <div id='perscom_roster_wrapper' className='sm:my-6 lg:my-8 sm:px-6 lg:px-8'>
         {error && renderError(error)}
-        <div className='perscom_roster_loading'>
-          {loading ? (
-            <div className='animate-pulse'>{renderUnit({}, true)}</div>
-          ) : (
-            <div className='flex flex-col space-y-6'>{!!data.length && data.map((unit) => renderUnit(unit, false))}</div>
-          )}
-        </div>
+        {loading ? (
+          <div id='perscom_roster_loading' className='animate-pulse'>
+            {renderUnit({}, true)}
+          </div>
+        ) : (
+          <div className='flex flex-col space-y-6'>{!!data.length && data.map((unit) => renderUnit(unit, false))}</div>
+        )}
       </div>
     </div>
   )
@@ -52,9 +52,9 @@ function renderUnit(unit, loading) {
   const { id, name, users } = unit
 
   return (
-    <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg' key={id}>
-      <table className='min-w-full divide-y divide-gray-300'>
-        <thead className='bg-gray-50'>
+    <div id='perscom_roster_table_wrapper' className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg' key={id}>
+      <table id='perscom_roster_table' className='min-w-full divide-y divide-gray-300'>
+        <thead id='perscom_roster_table_header' className='bg-gray-50'>
           <tr>
             {loading ? (
               <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6 text-center'>
@@ -62,29 +62,49 @@ function renderUnit(unit, loading) {
               </th>
             ) : (
               <>
-                <th scope='col' className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6'>
+                <th
+                  id='perscom_roster_table_header_column_name'
+                  scope='col'
+                  className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6'
+                >
                   {name}
                 </th>
-                <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
+                <th
+                  id='perscom_roster_table_header_column_position'
+                  scope='col'
+                  className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
+                >
                   Position
                 </th>
-                <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'>
+                <th
+                  id='perscom_roster_table_header_column_specialty'
+                  scope='col'
+                  className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell'
+                >
                   Specialty
                 </th>
-                <th scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
+                <th
+                  id='perscom_roster_table_header_column_status'
+                  scope='col'
+                  className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
+                >
                   Status
                 </th>
-                <th scope='col' className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'>
+                <th
+                  id='perscom_roster_table_header_column_online'
+                  scope='col'
+                  className='hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 md:table-cell'
+                >
                   Online
                 </th>
-                <th scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 lg:table-cell'>
+                <th id='perscom_roster_table_header_column_link' scope='col' className='hidden py-3.5 pl-3 pr-4 sm:pr-6 lg:table-cell'>
                   <span className='sr-only'>View</span>
                 </th>
               </>
             )}
           </tr>
         </thead>
-        <tbody className='divide-y divide-gray-200 bg-white'>
+        <tbody id='perscom_roster_table_body' className='divide-y divide-gray-200 bg-white'>
           {!loading && !!users.length ? (
             users.map(renderUser)
           ) : (
@@ -102,32 +122,39 @@ function renderUser(user) {
   const { id, name, position, specialty, status, rank, url, online } = user
 
   return (
-    <tr key={id}>
-      <td className='whitespace-nowrap py-2 pl-4 pr-3 text-sm sm:pl-6'>
-        <div className='flex items-center'>
-          <div className='flex items-center h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0'>{rank && renderRankElement(rank)}</div>
+    <tr id='perscom_roster_table_row' key={id}>
+      <td id='perscom_roster_table_cell_name' className='whitespace-nowrap py-2 pl-4 pr-3 text-sm sm:pl-6'>
+        <div id='perscom_roster_table_cell_name_wrapper' className='flex items-center'>
+          <div id='perscom_roster_table_cell_name_rank' className='flex items-center h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0'>
+            {rank && renderRankElement(rank)}
+          </div>
           <div className='ml-4'>
-            <div className='font-semibold text-gray-900'>{name}</div>
+            <div id='perscom_roster_table_cell_name_name' className='font-semibold text-gray-900'>
+              {name}
+            </div>
           </div>
         </div>
       </td>
-      <td className='whitespace-nowrap px-3 py-2 text-sm text-gray-500'>
+      <td id='perscom_roster_table_cell_position' className='whitespace-nowrap px-3 py-2 text-sm text-gray-500'>
         {position && <div className='text-gray-900'>{position.name}</div>}
       </td>
-      <td className='hidden whitespace-nowrap px-3 py-2 text-sm text-gray-500 sm:table-cell'>
+      <td id='perscom_roster_table_cell_specialty' className='hidden whitespace-nowrap px-3 py-2 text-sm text-gray-500 sm:table-cell'>
         {specialty && <div className='text-gray-500'>{specialty.name}</div>}
       </td>
-      <td className='whitespace-nowrap px-3 py-2 text-sm text-gray-500'>
+      <td id='perscom_roster_table_cell_status' className='whitespace-nowrap px-3 py-2 text-sm text-gray-500'>
         {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status.color}`}>{status.name}</span>}
       </td>
-      <td className='hidden whitespace-nowrap px-3 py-2 text-sm text-gray-500 md:table-cell'>
+      <td id='perscom_roster_table_cell_online' className='hidden whitespace-nowrap px-3 py-2 text-sm text-gray-500 md:table-cell'>
         {online ? (
           <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
         ) : (
           <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
         )}
       </td>
-      <td className='hidden whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:table-cell'>
+      <td
+        id='perscom_roster_table_cell_link'
+        className='hidden whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:table-cell'
+      >
         <a href={url} className='text-gray-600 hover:text-gray-900'>
           Personnel Profile<span className='sr-only'>, {name}</span>
         </a>
@@ -140,19 +167,21 @@ function renderRankElement(rank) {
   const hasImage = rank.image_url
 
   return (
-    <div>
+    <>
       {hasImage ? (
-        <img className='h-6 w-6 sm:h-8 sm:w-8' src={rank.image_url} alt='' />
+        <img id='perscom_roster_table_cell_name_rank_image' className='h-6 w-6 sm:h-8 sm:w-8' src={rank.image_url} alt='' />
       ) : (
-        <div className='font-bold text-sm'>{rank.abbreviation}</div>
+        <div id='perscom_roster_table_cell_name_rank_abbreviation' className='font-bold text-sm'>
+          {rank.abbreviation}
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
 function renderError(error) {
   return (
-    <div className='md:rounded-lg bg-red-50 p-4 mb-4'>
+    <div id='perscom_roster_error_wrapper' className='md:rounded-lg bg-red-50 p-4 mb-4'>
       <div className='flex'>
         <div className='flex-shrink-0'>
           <svg
