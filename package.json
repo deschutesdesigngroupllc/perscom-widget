@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:widget": "parcel build src/index.js --no-source-maps",
+    "build:widget": "env PARCEL-NAMER-REWRITE-PROFILE=production parcel build src/index.js --no-source-maps",
+    "build:widget-staging": "env PARCEL-NAMER-REWRITE-PROFILE=staging parcel build src/index.js --no-source-maps",
     "test": "react-scripts test",
     "lint": "eslint --fix src/**/*.js",
     "format": "prettier src/**/*.js --write --config ./.prettierrc"
@@ -53,10 +54,20 @@
   },
   "parcel-namer-rewrite": {
     "chain": "@parcel/namer-default",
-    "hashing": "always",
-    "disable": false,
-    "rules": {
-      "index.js": "widget.{hash}.js",
-      "index.css": "widget.{hash}.css"}
+    "hashing": 'always',
+    "profiles": {
+      "production": {
+        "rules": {
+          "index.js": "widget.{hash}.js",
+          "index.css": "widget.{hash}.css"
+        }
+      },
+      "staging": {
+        "rules": {
+          "index.js": "widget.staging.{hash}.js",
+          "index.css": "widget.staging.{hash}.css"
+        }
+      }
+    }
   }
 }

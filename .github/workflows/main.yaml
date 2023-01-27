@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - prerelease
 
 jobs:
   build:
@@ -25,10 +26,19 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Build Application
+      - name: Build Application for Staging
+        if: github.ref == 'refs/heads/prerelease'
+        run: npm run build:widget-staging
+        env:
+          REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
+          PARCEL-NAMER-REWRITE-PROFILE: staging
+
+      - name: Build Application for Production
+        if: github.ref == 'refs/heads/master'
         run: npm run build:widget
         env:
           REACT_APP_API_URL: https://api.perscom.io/v1/widget/roster
+          PARCEL-NAMER-REWRITE-PROFILE: production
 
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
