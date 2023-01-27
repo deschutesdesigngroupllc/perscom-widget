@@ -28,17 +28,15 @@ jobs:
 
       - name: Build Application for Staging
         if: github.ref == 'refs/heads/prerelease'
-        run: npm run build:widget-staging
+        run: npm run build:widget
         env:
           REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
-          PARCEL-NAMER-REWRITE-PROFILE: staging
 
       - name: Build Application for Production
         if: github.ref == 'refs/heads/master'
         run: npm run build:widget
         env:
           REACT_APP_API_URL: https://api.perscom.io/v1/widget/roster
-          PARCEL-NAMER-REWRITE-PROFILE: production
 
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,8 +56,13 @@ jobs:
           pre_release_branches: prerelease
           append_to_pre_release_tag: prerelease
 
-      - name: Deploy to S3
-        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+      - name: Deploy to S3 Staging
+        if: github.ref == 'refs/heads/prerelease'
+        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
+
+      - name: Deploy to S3 Producion
+        if: github.ref == 'refs/heads/master'
+        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
 
       - name: Create Release
         uses: ncipollo/release-action@v1
