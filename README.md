@@ -18,7 +18,7 @@ Place the following HTML code block on your website wherever you'd like the widg
 
 The following example demonstrates the widget embedded within an Invision Community website.
 
-![Invision Widget Preview](https://d2h1yr8yf04c3n.cloudfront.net/images/widget-invision-preview.png)
+![Invision Widget Preview](https://assets.perscom.io/images/widget-invision-preview-2.png)
 
 ## Development
 
