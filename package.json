@@ -54,7 +54,7 @@
   },
   "parcel-namer-rewrite": {
     "chain": "@parcel/namer-default",
-    "hashing": 'always',
+    "hashing": "always",
     "profiles": {
       "production": {
         "rules": {
