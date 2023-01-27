@@ -11,6 +11,7 @@ function Roster({ domElement }) {
 
   useEffect(() => {
     setLoading(true)
+    setError('')
     fetch(config.roster.API_URL, {
       method: 'GET',
       headers: {
@@ -20,10 +21,23 @@ function Roster({ domElement }) {
         'User-Agent': 'PERSCOM Widget'
       }
     })
-      .then((response) => response.json())
+      .then((response) => {
+        switch (response.status) {
+          case 401:
+            setError(
+              'The request failed due to not being authenticated. Please make sure you have provided an API key and that is not revoked.'
+            )
+            break
+          case 403:
+            setError('The API key you provided does not have access to the widget.')
+            break
+        }
+
+        return response.json()
+      })
       .then((data) => {
-        setLoading(false)
         setData(data.data)
+        setLoading(false)
       })
       .catch((e) => {
         console.log(e)
@@ -34,16 +48,23 @@ function Roster({ domElement }) {
 
   return (
     <div id='perscom_roster_widget'>
-      <div id='perscom_roster_wrapper' className='sm:my-6 lg:my-8 sm:px-6 lg:px-8'>
-        {error && renderError(error)}
-        {loading ? (
-          <div id='perscom_roster_loading' className='animate-pulse'>
-            {renderUnit({}, true)}
+      {!loading && error && renderError(error)}
+      {loading ? (
+        <div id='perscom_roster_loading' className='animate-pulse'>
+          {renderUnit({}, true)}
+        </div>
+      ) : (
+        <div id='perscom_roster_wrapper' className='flex flex-col space-y-6'>
+          {data && !!data.length && data.map((unit) => renderUnit(unit, false))}
+          <div className='text-xs text-gray-400'>
+            Widget Provided By{' '}
+            <a href='https://perscom.io' target='_blank' rel='noreferrer'>
+              PERSCOM.io
+            </a>
+            . Copyright {new Date().getFullYear()} Deschutes Design Group LLC
           </div>
-        ) : (
-          <div className='flex flex-col space-y-6'>{!!data.length && data.map((unit) => renderUnit(unit, false))}</div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -155,7 +176,7 @@ function renderUser(user) {
         id='perscom_roster_table_cell_link'
         className='hidden whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:table-cell'
       >
-        <a href={url} className='text-gray-600 hover:text-gray-900'>
+        <a href={url} target='_blank' rel='noreferrer' className='text-gray-600 hover:text-gray-900'>
           Personnel Profile<span className='sr-only'>, {name}</span>
         </a>
       </td>
