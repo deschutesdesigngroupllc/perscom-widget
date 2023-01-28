@@ -53,10 +53,10 @@
   },
   "parcel-namer-rewrite": {
     "chain": "@parcel/namer-default",
-    "hashing": "always",
+    "hashing": "never",
     "rules": {
-      "index.js": "widget.{hash}.js",
-      "index.css": "widget.{hash}.css"
+      "index.js": "widget.js",
+      "index.css": "widget.css"
     }
   }
 }
