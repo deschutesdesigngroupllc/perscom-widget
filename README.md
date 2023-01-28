@@ -20,6 +20,10 @@ The following example demonstrates the widget embedded within an Invision Commun
 
 ![Invision Widget Preview](https://assets.perscom.io/images/widget-invision-preview-2.png)
 
+## Documentation
+
+Additional documentation can be found at [https://docs.perscom.io](https://docs.perscom.io).
+
 ## Development
 
 ### Available Scripts
