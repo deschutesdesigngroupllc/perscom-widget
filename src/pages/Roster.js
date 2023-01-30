@@ -8,6 +8,7 @@ function Roster({ domElement }) {
   const [loading, setLoading] = useState()
   const [error, setError] = useState('')
   const [data, setData] = useState([])
+  const version = config.version.WIDGET_VERSION
 
   useEffect(() => {
     setLoading(true)
@@ -61,7 +62,7 @@ function Roster({ domElement }) {
             <a href='https://perscom.io' target='_blank' rel='noreferrer'>
               PERSCOM.io
             </a>
-            . Copyright {new Date().getFullYear()} Deschutes Design Group LLC
+            . Copyright {new Date().getFullYear()} Deschutes Design Group LLC. {version && <span>Version {version}.</span>}
           </div>
         </div>
       )}
