@@ -26,25 +26,6 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Build Application for Staging
-        if: github.ref == 'refs/heads/prerelease'
-        run: npm run build:widget
-        env:
-          REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
-
-      - name: Build Application for Production
-        if: github.ref == 'refs/heads/master'
-        run: npm run build:widget
-        env:
-          REACT_APP_API_URL: https://api.perscom.io/v1/widget/roster
-
-      - name: Setup AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
       - name: Bump Application Version and Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
@@ -55,6 +36,27 @@ jobs:
           release_branches: master
           pre_release_branches: prerelease
           append_to_pre_release_tag: prerelease
+
+      - name: Build Application for Staging
+        if: github.ref == 'refs/heads/prerelease'
+        run: npm run build:widget
+        env:
+          REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
+          REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Build Application for Production
+        if: github.ref == 'refs/heads/master'
+        run: npm run build:widget
+        env:
+          REACT_APP_API_URL: https://api.perscom.io/v1/widget/roster
+          REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Deploy to S3 Staging
         if: github.ref == 'refs/heads/prerelease'
@@ -73,7 +75,16 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Create Release
+      - name: Create Staging Release
+        uses: ncipollo/release-action@v1
+        if: github.ref == 'refs/heads/prerelease'
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+          prerelease: true
+
+      - name: Create Production Release
         uses: ncipollo/release-action@v1
         if: github.ref == 'refs/heads/master'
         with:
