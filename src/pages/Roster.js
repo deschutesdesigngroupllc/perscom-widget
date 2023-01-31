@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import * as Sentry from '@sentry/react'
 import PropTypes from 'prop-types'
 import { config } from '../constants'
 
@@ -232,4 +233,4 @@ Roster.propTypes = {
   domElement: PropTypes.object
 }
 
-export default Roster
+export default Sentry.withProfiler(Roster)
