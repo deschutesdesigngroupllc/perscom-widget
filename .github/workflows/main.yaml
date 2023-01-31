@@ -38,7 +38,7 @@ jobs:
           append_to_pre_release_tag: prerelease
 
       - name: Build Application for Staging
-        if: startsWith(github.ref, 'ref/head/release/')
+        if: contains(github.ref, 'refs/heads/release/')
         run: npm run build:widget
         env:
           REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
@@ -59,7 +59,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3 Staging
-        if: startsWith(github.ref, 'ref/head/release/')
+        if: contains(github.ref, 'refs/heads/release/')
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
       - name: Deploy to S3 Producion
@@ -75,7 +75,29 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Create Release
+      - name: Create Sentry Release Production
+        if: github.ref == 'refs/heads/master'
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
+          version: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Create Sentry Release Staging
+        if: contains(github.ref, 'refs/heads/release/')
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: staging
+          version: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Create Github Release
         uses: ncipollo/release-action@v1
         if: github.ref == 'refs/heads/master'
         with:
