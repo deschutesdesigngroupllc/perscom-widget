@@ -38,7 +38,7 @@ jobs:
           append_to_pre_release_tag: prerelease
 
       - name: Build Application for Staging
-        if: github.ref == 'refs/heads/prerelease'
+        if: startsWith(github.ref, 'ref/head/release/')
         run: npm run build:widget
         env:
           REACT_APP_API_URL: https://api.staging.perscom.io/v1/widget/roster
@@ -59,7 +59,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3 Staging
-        if: github.ref == 'refs/heads/prerelease'
+        if: startsWith(github.ref, 'ref/head/release/')
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
       - name: Deploy to S3 Producion
