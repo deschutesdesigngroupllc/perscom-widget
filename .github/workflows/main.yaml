@@ -62,7 +62,7 @@ jobs:
         if: contains(github.ref, 'refs/heads/release/')
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
-      - name: Deploy to S3 Producion
+      - name: Deploy to S3 Production
         if: github.ref == 'refs/heads/master'
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
 
@@ -75,17 +75,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Create Sentry Release Production
-        if: github.ref == 'refs/heads/master'
-        uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment: production
-          version: ${{ steps.tag_version.outputs.new_tag }}
-
       - name: Create Sentry Release Staging
         if: contains(github.ref, 'refs/heads/release/')
         uses: getsentry/action-release@v1
@@ -95,6 +84,17 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: staging
+          version: ${{ steps.tag_version.outputs.new_tag }}
+
+      - name: Create Sentry Release Production
+        if: github.ref == 'refs/heads/master'
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: production
           version: ${{ steps.tag_version.outputs.new_tag }}
 
       - name: Create Github Release
