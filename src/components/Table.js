@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 const get = require('lodash/get')
+const hash = require('object-hash')
 
 export function Table({ columns, rows, tableClasses, wrapperClasses }) {
   return (
@@ -19,7 +20,7 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
                   <th
                     id='perscom_widget_table_header_column'
                     scope='col'
-                    key={column.key}
+                    key={hash(column)}
                     className={cx('px-3 py-3.5 text-left text-sm font-semibold text-gray-900', column.headerClasses)}
                   >
                     {!column.hidden && column.name}
@@ -32,13 +33,13 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
           {rows &&
             rows.map((row) => {
               return (
-                <tr id='perscom_widget_table_row' key={row.id}>
+                <tr id='perscom_widget_table_row' key={hash(row)}>
                   {columns.map((column) => {
                     return (
                       <td
                         id='perscom_widget_table_cell'
                         className={cx('whitespace-nowrap px-3 py-2 text-sm text-gray-500', column.cellClasses)}
-                        key={column.key}
+                        key={hash(column)}
                       >
                         {column.content ? <>{row && column.content.call(null, row)}</> : <>{column.key && get(row, column.key, '')}</>}
                       </td>
