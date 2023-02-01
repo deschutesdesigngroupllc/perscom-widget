@@ -43,7 +43,7 @@ function renderUnit(unit) {
           name: name,
           headerClasses: ['w-1/6'],
           cellClasses: ['w-1/6'],
-          content: (user) => {
+          cellContent: (user) => {
             const { name, rank } = user
             const { image_url, abbreviation } = rank ?? {}
             return (
@@ -80,7 +80,7 @@ function renderUnit(unit) {
           name: 'Status',
           headerClasses: ['w-1/6'],
           cellClasses: ['w-1/6'],
-          content: (user) => {
+          cellContent: (user) => {
             const { status } = user
             return (
               <>
@@ -95,7 +95,7 @@ function renderUnit(unit) {
           name: 'Online',
           headerClasses: ['hidden', 'md:table-cell', 'w-1/6'],
           cellClasses: ['hidden', 'md:table-cell', 'w-1/6'],
-          content: (user) => {
+          cellContent: (user) => {
             const { online } = user
             return (
               <>
@@ -113,7 +113,7 @@ function renderUnit(unit) {
           hidden: true,
           headerClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
           cellClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
-          content: (user) => {
+          cellContent: (user) => {
             const { url, name } = user
             return (
               <a href={url} target='_blank' rel='noreferrer' className='text-gray-600 hover:text-gray-900'>

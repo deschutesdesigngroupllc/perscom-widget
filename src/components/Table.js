@@ -23,7 +23,7 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
                     key={hash(column)}
                     className={cx('px-3 py-3.5 text-left text-sm font-semibold text-gray-900', column.headerClasses)}
                   >
-                    {!column.hidden && column.name}
+                    {!column.hidden && renderHeaderContent(column)}
                   </th>
                 )
               })}
@@ -41,7 +41,7 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
                         className={cx('whitespace-nowrap px-3 py-2 text-sm text-gray-500', column.cellClasses)}
                         key={hash(column)}
                       >
-                        {column.content ? <>{row && column.content.call(null, row)}</> : <>{column.key && get(row, column.key, '')}</>}
+                        {renderCellContent(row, column)}
                       </td>
                     )
                   })}
@@ -52,6 +52,20 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
       </table>
     </div>
   )
+}
+
+const renderHeaderContent = (column) => {
+  if (column.headerContent && typeof column.headerContent == 'function') {
+    return column.headerContent.call(null, column)
+  }
+  return column.name
+}
+
+const renderCellContent = (row, column) => {
+  if (column.cellContent && typeof column.cellContent == 'function') {
+    return column.cellContent.call(null, row)
+  }
+  return get(row, column.key, '')
 }
 
 Table.propTypes = {

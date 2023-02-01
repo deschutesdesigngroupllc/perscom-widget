@@ -41,7 +41,7 @@ function renderAwards(awards) {
           hidden: true,
           headerClasses: ['hidden', 'sm:table-cell'],
           cellClasses: ['hidden', 'sm:table-cell', 'w-1/6'],
-          content: (award) => {
+          cellContent: (award) => {
             const { name, image_url } = award
             return (
               <>
@@ -58,7 +58,7 @@ function renderAwards(awards) {
           name: 'Award',
           key: 'description',
           cellClasses: ['!whitespace-normal', 'break-normal'],
-          content: (award) => {
+          cellContent: (award) => {
             const { name, description, image_url } = award
             return (
               <div className='flex flex-col space-y-2'>
