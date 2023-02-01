@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/react'
 import { BrowserTracing } from '@sentry/tracing'
 import './assets/css/widget.css'
 import Roster from './pages/Roster'
+import Awards from './pages/Awards'
 import { config } from './constants'
 
 Sentry.init({
@@ -18,6 +19,16 @@ rosterDivs.forEach((domElement) => {
   roster.render(
     <React.StrictMode>
       <Roster domElement={domElement} />
+    </React.StrictMode>
+  )
+})
+
+const awardDivs = document.querySelectorAll('#perscom_awards')
+awardDivs.forEach((domElement) => {
+  const awards = ReactDOM.createRoot(domElement)
+  awards.render(
+    <React.StrictMode>
+      <Awards domElement={domElement} />
     </React.StrictMode>
   )
 })

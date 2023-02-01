@@ -3,7 +3,10 @@ const constants = {
     WIDGET_VERSION: process.env.REACT_APP_WIDGET_VERSION
   },
   roster: {
-    API_URL: process.env.REACT_APP_API_URL
+    API_URL: process.env.REACT_APP_ROSTER_API_URL
+  },
+  awards: {
+    API_URL: process.env.REACT_APP_AWARDS_API_URL
   },
   sentry: {
     SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
