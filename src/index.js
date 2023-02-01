@@ -6,6 +6,7 @@ import './assets/css/widget.css'
 import Roster from './pages/Roster'
 import Awards from './pages/Awards'
 import { config } from './constants'
+import Ranks from './pages/Ranks'
 
 Sentry.init({
   dsn: config.sentry.SENTRY_DSN,
@@ -29,6 +30,16 @@ awardDivs.forEach((domElement) => {
   awards.render(
     <React.StrictMode>
       <Awards domElement={domElement} />
+    </React.StrictMode>
+  )
+})
+
+const rankDivs = document.querySelectorAll('#perscom_ranks')
+rankDivs.forEach((domElement) => {
+  const ranks = ReactDOM.createRoot(domElement)
+  ranks.render(
+    <React.StrictMode>
+      <Ranks domElement={domElement} />
     </React.StrictMode>
   )
 })
