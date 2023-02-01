@@ -1,12 +1,12 @@
-import React from 'react'
 import * as Sentry from '@sentry/react'
 import PropTypes from 'prop-types'
-import { config } from '../constants'
+import React from 'react'
 import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
 import { Footer } from '../components/Footer'
-import { Table } from '../components/Table'
 import { Loading } from '../components/Loading'
+import { Table } from '../components/Table'
+import { config } from '../constants'
 
 function Roster({ domElement }) {
   const apiKey = domElement.getAttribute('data-apikey')
@@ -24,7 +24,7 @@ function Roster({ domElement }) {
       ) : (
         <>
           {error && <Error error={error} />}
-          {data && !!data.length && data.map((unit) => renderUnit(unit))}
+          <div className='flex flex-col space-y-6'>{data && !!data.length && data.map((unit) => renderUnit(unit))}</div>
         </>
       )}
       <Footer />
@@ -33,19 +33,29 @@ function Roster({ domElement }) {
 }
 
 function renderUnit(unit) {
-  const { name, users } = unit
+  const { id, name, users } = unit
 
   return (
     <Table
+      key={id}
       columns={[
         {
           name: name,
           key: 'name',
           content: (user) => {
             const { name, rank } = user
+            const { image_url, abbreviation } = rank ?? {}
             return (
               <div className='flex items-center'>
-                <div className='flex items-center h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0'>{rank && renderRankElement(rank)}</div>
+                {rank && (
+                  <div className='flex items-center w-6 sm:w-8 flex-shrink-0'>
+                    {image_url ? (
+                      <img className='w-6 sm:w-8 font-bold' src={image_url} alt={abbreviation} />
+                    ) : (
+                      <div className='font-bold text-sm'>`{abbreviation}`</div>
+                    )}
+                  </div>
+                )}
                 <div className='ml-4'>
                   <div className='font-semibold text-gray-900'>{name}</div>
                 </div>
@@ -116,24 +126,8 @@ function renderUnit(unit) {
   )
 }
 
-function renderRankElement(rank) {
-  const hasImage = rank.image_url
-
-  return (
-    <>
-      {hasImage ? (
-        <img id='perscom_roster_table_cell_name_rank_image' className='h-6 w-6 sm:h-8 sm:w-8' src={rank.image_url} alt='' />
-      ) : (
-        <div id='perscom_roster_table_cell_name_rank_abbreviation' className='font-bold text-sm'>
-          {rank.abbreviation}
-        </div>
-      )}
-    </>
-  )
-}
-
 Roster.propTypes = {
-  domElement: PropTypes.object
+  domElement: PropTypes.object.isRequired
 }
 
 export default Sentry.withProfiler(Roster)

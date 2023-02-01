@@ -24,15 +24,16 @@ const useQuery = ({ url, perscomId, apiKey }) => {
         setStatusCode(response.status)
         switch (response.status) {
           case 401:
-            setError(
-              'The request failed due to not being authenticated. Please make sure you have provided an API key and that is not revoked.'
-            )
+            setError('Unauthenticated: The API key provided is incorrect or there was none provided.')
             break
           case 403:
-            setError('The API key you provided does not have access to the widget.')
+            setError('Forbidden: The API key you provided does not have access to the widget.')
+            break
+          case 404:
+            setError('Not Found: The resource you are trying to access does not exist.')
             break
           case 500:
-            setError('We recevied an error while trying to communicate with PERSCOM.io.')
+            setError('Error: We recevied an error while trying to communicate with PERSCOM.io.')
             break
         }
 
@@ -44,7 +45,7 @@ const useQuery = ({ url, perscomId, apiKey }) => {
       })
       .catch((e) => {
         console.log(e)
-        setError('We recevied an error while trying to communicate with PERSCOM.io.')
+        setError('Error: We recevied an error while trying to communicate with PERSCOM.io.')
         setLoading(false)
       })
   }, [url, perscomId, apiKey])

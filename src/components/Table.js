@@ -54,10 +54,10 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
 }
 
 Table.propTypes = {
-  columns: PropTypes.array,
-  rows: PropTypes.array,
-  tableClasses: PropTypes.array || PropTypes.string || PropTypes.object,
-  wrapperClasses: PropTypes.array || PropTypes.string || PropTypes.object
+  columns: PropTypes.array.isRequired,
+  rows: PropTypes.array.isRequired,
+  tableClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
+  wrapperClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object])
 }
 
 export default Table
