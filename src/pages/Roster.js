@@ -41,7 +41,6 @@ function renderUnit(unit) {
       columns={[
         {
           name: name,
-          key: 'name',
           content: (user) => {
             const { name, rank } = user
             const { image_url, abbreviation } = rank ?? {}
@@ -75,7 +74,6 @@ function renderUnit(unit) {
         },
         {
           name: 'Status',
-          key: 'status.name',
           content: (user) => {
             const { status } = user
             return (
@@ -89,7 +87,6 @@ function renderUnit(unit) {
         },
         {
           name: 'Online',
-          key: 'online',
           headerClasses: ['hidden', 'md:table-cell'],
           cellClasses: ['hidden', 'md:table-cell'],
           content: (user) => {
@@ -107,7 +104,6 @@ function renderUnit(unit) {
         },
         {
           name: 'Link',
-          key: null,
           hidden: true,
           headerClasses: ['hidden', 'lg:table-cell'],
           cellClasses: ['hidden', 'lg:table-cell'],
