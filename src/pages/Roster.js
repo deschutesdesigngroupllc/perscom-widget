@@ -41,6 +41,8 @@ function renderUnit(unit) {
       columns={[
         {
           name: name,
+          headerClasses: ['w-1/6'],
+          cellClasses: ['w-1/6'],
           content: (user) => {
             const { name, rank } = user
             const { image_url, abbreviation } = rank ?? {}
@@ -64,16 +66,20 @@ function renderUnit(unit) {
         },
         {
           name: 'Position',
-          key: 'position.name'
+          key: 'position.name',
+          headerClasses: ['w-1/6'],
+          cellClasses: ['w-1/6']
         },
         {
           name: 'Specialty',
           key: 'specialty.name',
-          headerClasses: ['hidden', 'sm:table-cell'],
-          cellClasses: ['hidden', 'sm:table-cell']
+          headerClasses: ['hidden', 'sm:table-cell', 'w-1/6'],
+          cellClasses: ['hidden', 'sm:table-cell', 'w-1/6']
         },
         {
           name: 'Status',
+          headerClasses: ['w-1/6'],
+          cellClasses: ['w-1/6'],
           content: (user) => {
             const { status } = user
             return (
@@ -87,8 +93,8 @@ function renderUnit(unit) {
         },
         {
           name: 'Online',
-          headerClasses: ['hidden', 'md:table-cell'],
-          cellClasses: ['hidden', 'md:table-cell'],
+          headerClasses: ['hidden', 'md:table-cell', 'w-1/6'],
+          cellClasses: ['hidden', 'md:table-cell', 'w-1/6'],
           content: (user) => {
             const { online } = user
             return (
@@ -105,8 +111,8 @@ function renderUnit(unit) {
         {
           name: 'Link',
           hidden: true,
-          headerClasses: ['hidden', 'lg:table-cell'],
-          cellClasses: ['hidden', 'lg:table-cell'],
+          headerClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
+          cellClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
           content: (user) => {
             const { url, name } = user
             return (
