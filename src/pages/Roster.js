@@ -1,52 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import * as Sentry from '@sentry/react'
 import PropTypes from 'prop-types'
 import { config } from '../constants'
+import useQuery from '../api/APIUtils'
 
 function Roster({ domElement }) {
   const apiKey = domElement.getAttribute('data-apikey')
   const perscomId = domElement.getAttribute('data-perscomid')
-  const [loading, setLoading] = useState()
-  const [error, setError] = useState('')
-  const [data, setData] = useState([])
   const version = config.version.WIDGET_VERSION
-
-  useEffect(() => {
-    setLoading(true)
-    setError('')
-    fetch(config.roster.API_URL, {
-      method: 'GET',
-      headers: {
-        'X-Perscom-Id': perscomId,
-        Authorization: `Bearer ${apiKey}`,
-        Accept: 'application/json',
-        'User-Agent': 'PERSCOM Widget'
-      }
-    })
-      .then((response) => {
-        switch (response.status) {
-          case 401:
-            setError(
-              'The request failed due to not being authenticated. Please make sure you have provided an API key and that is not revoked.'
-            )
-            break
-          case 403:
-            setError('The API key you provided does not have access to the widget.')
-            break
-        }
-
-        return response.json()
-      })
-      .then((data) => {
-        setData(data.data)
-        setLoading(false)
-      })
-      .catch((e) => {
-        console.log(e)
-        setLoading(false)
-        setError('We recevied an error while trying to communicate with PERSCOM.io.')
-      })
-  }, [apiKey, perscomId])
+  const { data, loading, error } = useQuery({
+    url: config.roster.API_URL,
+    perscomId,
+    apiKey
+  })
 
   return (
     <div id='perscom_roster_widget'>
