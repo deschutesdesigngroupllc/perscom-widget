@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - release/*
+      - staging
 
 jobs:
   build:
@@ -34,11 +34,11 @@ jobs:
           default_bump: patch
           default_prerelease_bump: prerelease
           release_branches: master
-          pre_release_branches: release/*
+          pre_release_branches: staging
           append_to_pre_release_tag: prerelease
 
       - name: Build Application for Staging
-        if: contains(github.ref, 'refs/heads/release/')
+        if: github.ref == 'refs/heads/staging'
         run: npm run build:widget
         env:
           REACT_APP_ROSTER_API_URL: https://api.staging.perscom.io/v1/widget/roster
@@ -65,7 +65,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to S3 Staging
-        if: contains(github.ref, 'refs/heads/release/')
+        if: github.ref == 'refs/heads/staging'
         run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
       - name: Deploy to S3 Production
@@ -82,7 +82,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Create Sentry Release Staging
-        if: contains(github.ref, 'refs/heads/release/')
+        if: github.ref == 'refs/heads/staging'
         uses: getsentry/action-release@v1
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
