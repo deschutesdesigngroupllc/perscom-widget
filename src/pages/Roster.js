@@ -24,7 +24,7 @@ function Roster({ domElement }) {
       ) : (
         <>
           {error && <Error error={error} />}
-          <div className='flex flex-col space-y-6'>{data && !!data.length && data.map((unit) => renderUnit(unit))}</div>
+          <div className='flex flex-col space-y-4'>{data && !!data.length && data.map((unit) => renderUnit(unit))}</div>
         </>
       )}
       <Footer />
