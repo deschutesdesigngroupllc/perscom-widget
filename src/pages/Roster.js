@@ -8,13 +8,11 @@ import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
 
-function Roster({ domElement }) {
-  const apiKey = domElement.getAttribute('data-apikey')
-  const perscomId = domElement.getAttribute('data-perscomid')
+function Roster({ apiKey, perscomId }) {
   const { data, loading, error } = useQuery({
     url: config.roster.API_URL,
-    perscomId,
-    apiKey
+    apiKey: apiKey,
+    perscomId: perscomId
   })
 
   return (
@@ -129,7 +127,8 @@ function renderUnit(unit) {
 }
 
 Roster.propTypes = {
-  domElement: PropTypes.object.isRequired
+  apiKey: PropTypes.string,
+  perscomId: PropTypes.string
 }
 
 export default Sentry.withProfiler(Roster)

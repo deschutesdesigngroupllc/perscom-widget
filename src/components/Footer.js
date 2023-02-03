@@ -3,7 +3,7 @@ import { config } from '../constants'
 import { Logo } from './Logo'
 
 export function Footer() {
-  const version = config.version.WIDGET_VERSION
+  const version = config.app.WIDGET_VERSION
 
   return (
     <div className='flex items-center mt-2 space-x-1'>

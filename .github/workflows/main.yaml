@@ -39,25 +39,41 @@ jobs:
 
       - name: Build Application for Staging
         if: github.ref == 'refs/heads/staging'
-        run: npm run build:widget
+        run: |
+          npm run build
+          npm run build:loader
+          npm run build:snippet
         env:
+          REACT_APP_WIDGET_ENVIRONMENT: 'staging'
           REACT_APP_ROSTER_API_URL: https://api.staging.perscom.io/v1/widget/roster
+          REACT_APP_ROSTER_IFRAME_URL: https://perscom-widget-staging.s3.amazonaws.com/roster
           REACT_APP_AWARDS_API_URL: https://api.staging.perscom.io/v1/widget/awards
+          REACT_APP_AWARDS_IFRAME_URL: https://perscom-widget-staging.s3.amazonaws.com/awards
           REACT_APP_RANKS_API_URL: https://api.staging.perscom.io/v1/widget/ranks
+          REACT_APP_RANKS_IFRAME_URL: https://perscom-widget-staging.s3.amazonaws.com/iframe
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '1.0'
+          REACT_APP_FILE_URL: 'https://perscom-widget-staging.s3.amazonaws.com/loader.js'
 
       - name: Build Application for Production
         if: github.ref == 'refs/heads/master'
-        run: npm run build:widget
+        run: |
+          npm run build
+          npm run build:loader
+          npm run build:snippet
         env:
+          REACT_APP_WIDGET_ENVIRONMENT: 'production'
           REACT_APP_ROSTER_API_URL: https://api.perscom.io/v1/widget/roster
+          REACT_APP_ROSTER_IFRAME_URL: https://widget.perscom.io/roster
           REACT_APP_AWARDS_API_URL: https://api.perscom.io/v1/widget/awards
+          REACT_APP_AWARDS_IFRAME_URL: https://widget.perscom.io/awards
           REACT_APP_RANKS_API_URL: https://api.perscom.io/v1/widget/ranks
+          REACT_APP_RANKS_IFRAME_URL: https://widget.perscom.io/ranks
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '0.1'
+          REACT_APP_FILE_URL: 'https://widget.perscom.io/loader.js'
 
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
