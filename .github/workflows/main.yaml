@@ -84,11 +84,15 @@ jobs:
 
       - name: Deploy to S3 Staging
         if: github.ref == 'refs/heads/staging'
-        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
+        run: |
+          aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
+          aws s3 sync ./build/ s3://${{ secrets.AWS_BUCKET_NAME_STAGING }}
 
       - name: Deploy to S3 Production
         if: github.ref == 'refs/heads/master'
-        run: aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
+        run: |
+          aws s3 sync ./dist/ s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
+          aws s3 sync ./build/ s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }}
 
       - name: Invalidate Cloudfront Cache
         uses: chetan/invalidate-cloudfront-action@v2
