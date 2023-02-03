@@ -16,7 +16,7 @@ function Ranks({ apiKey, perscomId }) {
   })
 
   return (
-    <>
+    <div className='p-1'>
       {loading ? (
         <Loading />
       ) : (
@@ -26,7 +26,7 @@ function Ranks({ apiKey, perscomId }) {
         </>
       )}
       <Footer />
-    </>
+    </div>
   )
 }
 

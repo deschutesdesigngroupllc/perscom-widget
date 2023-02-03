@@ -16,7 +16,7 @@ function Roster({ apiKey, perscomId }) {
   })
 
   return (
-    <>
+    <div className='p-1'>
       {loading ? (
         <Loading />
       ) : (
@@ -26,7 +26,7 @@ function Roster({ apiKey, perscomId }) {
         </>
       )}
       <Footer />
-    </>
+    </div>
   )
 }
 
