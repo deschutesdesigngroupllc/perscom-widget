@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/react'
-import PropTypes from 'prop-types'
 import React from 'react'
 import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
@@ -7,14 +6,13 @@ import { Footer } from '../components/Footer'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Table } from '../components/Table'
+import PropTypes from 'prop-types'
 
-function Awards({ domElement }) {
-  const apiKey = domElement.getAttribute('data-apikey')
-  const perscomId = domElement.getAttribute('data-perscomid')
+function Awards({ apiKey, perscomId }) {
   const { data, loading, error } = useQuery({
     url: config.awards.API_URL,
-    perscomId,
-    apiKey
+    apiKey: apiKey,
+    perscomId: perscomId
   })
 
   return (
@@ -80,7 +78,8 @@ function renderAwards(awards) {
 }
 
 Awards.propTypes = {
-  domElement: PropTypes.object.isRequired
+  apiKey: PropTypes.string,
+  perscomId: PropTypes.string
 }
 
 export default Sentry.withProfiler(Awards)
