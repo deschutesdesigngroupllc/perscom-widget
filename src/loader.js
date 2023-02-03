@@ -47,7 +47,7 @@ class Widget {
   }
 
   initializeIframe = () => {
-    if (!document.getElementById(IFRAME_ID) && this.iframeUrl) {
+    if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID) && this.iframeUrl) {
       const iframe = document.createElement('iframe')
       iframe.onload = () => {
         this.iframe.contentWindow.postMessage(
@@ -80,27 +80,9 @@ class Widget {
    * Mount our iframe
    */
   mountIframe = () => {
-    if (!document.getElementById(IFRAME_ID) && this.iframeUrl) {
-      window.addEventListener('message', this.receiveMessage, false)
-      const wrapper = document.createElement('div')
-      wrapper.id = WRAPPER_ID
+    if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID) && this.iframeUrl) {
+      const wrapper = document.getElementById(WRAPPER_ID)
       wrapper.appendChild(this.iframe)
-      document.body.appendChild(wrapper)
-    }
-  }
-
-  /**
-   * Handle messages received from iframe
-   *
-   * @param event
-   */
-  receiveMessage = (event) => {
-    if (!!event && !!event.data && !!event.data.type) {
-      switch (event.data.type) {
-        case 'IFRAME_LOAD_DONE':
-          this.handleWidgetLoaded()
-          break
-      }
     }
   }
 }

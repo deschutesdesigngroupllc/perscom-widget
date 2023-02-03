@@ -20,16 +20,22 @@ import { config } from './constants'
   var before = document.getElementsByTagName('script')[0]
   before.parentNode.insertBefore(elt, before)
 })(window, document, undefined)
-const perscomRosterElement = document.getElementById('perscom_widget')
-if (perscomRosterElement) {
+const perscomWidgetElement = document.getElementById('perscom_widget')
+const perscomWidgetWrapperElement = document.getElementById('perscom_widget_wrapper')
+if (!perscomWidgetWrapperElement) {
+  console.error(
+    'We would not find the widget wrapper element. Please make sure the widget is wrapped in a div with ID "perscom_widget_wrapper".'
+  )
+}
+if (perscomWidgetElement) {
   const apiKey =
-    perscomRosterElement.getAttribute('data-apikey') ??
+    perscomWidgetElement.getAttribute('data-apikey') ??
     console.error('We could not find the widget API key. Please make sure to include the "data-apikey" attribute.')
   const perscomId =
-    perscomRosterElement.getAttribute('data-perscomid') ??
+    perscomWidgetElement.getAttribute('data-perscomid') ??
     console.error('We could not find the widget PERSCOM ID. Please make sure to include the "data-perscomid" attribute.')
   const widget =
-    perscomRosterElement.getAttribute('data-widget') ??
+    perscomWidgetElement.getAttribute('data-widget') ??
     console.error('We could not find the widget type. Please make sure to include the "data-widget" attribute.')
   if (apiKey && perscomId && widget) {
     window.perscom.init(apiKey, perscomId, widget)
