@@ -33,7 +33,7 @@ class Widget {
   setIframeUrl = () => {
     switch (this.widget) {
       case WIDGET_ROSTER:
-        this.iframeUrl = this.composeIframeUrl(config.ranks.IFRAME_URL)
+        this.iframeUrl = this.composeIframeUrl(config.roster.IFRAME_URL)
         break
 
       case WIDGET_AWARDS:
