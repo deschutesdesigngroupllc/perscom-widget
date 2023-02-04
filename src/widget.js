@@ -25,6 +25,24 @@ class Widget {
     this.setIframeUrl()
     this.initializeIframe()
     this.mountIframe()
+    this.setupIframeResizer()
+  }
+
+  setupIframeResizer = () => {
+    if (document.getElementById(WRAPPER_ID)) {
+      var iframe = document.getElementById(IFRAME_ID)
+
+      const iframeResizerScript = document.createElement('script')
+      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.3/js/iframeResizer.min.js'
+      iframeResizerScript.type = 'text/javascript'
+      iframe.before(iframeResizerScript)
+
+      const iframeResizerInitializer = document.createElement('script')
+      iframeResizerInitializer.type = 'text/javascript'
+      iframeResizerInitializer.text =
+        'var frame=document.getElementById("perscom_widget_iframe");frame.addEventListener("load",function(){iFrameResize({log:!1},"#perscom_widget_iframe")});'
+      iframe.after(iframeResizerInitializer)
+    }
   }
 
   /**
@@ -75,8 +93,8 @@ class Widget {
       iframe.src = this.iframeUrl
       iframe.id = IFRAME_ID
       iframe.crossorigin = 'anonymous'
-      iframe.style.width = '100%'
-      iframe.style.height = '100%'
+      iframe.style.width = '1px'
+      iframe.style.minWidth = '100%'
       iframe.style.background = 'transparent'
       iframe.style.position = 'relative'
       iframe.style.margin = 0

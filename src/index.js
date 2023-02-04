@@ -6,6 +6,7 @@ import './assets/css/widget.css'
 import { config } from './constants'
 import App from './pages/App'
 import { BrowserRouter } from 'react-router-dom'
+import 'iframe-resizer/js/iframeResizer.contentWindow'
 
 Sentry.init({
   dsn: config.sentry.SENTRY_DSN,
