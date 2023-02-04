@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { config } from '../constants'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useSearchParams } from 'react-router-dom'
 import Roster from './Roster'
 import Awards from './Awards'
 import Ranks from './Ranks'
 
 function App() {
+  const [searchParams] = useSearchParams()
   const [apiKey, setApiKey] = useState()
   const [perscomId, setPerscomId] = useState()
 
   useEffect(() => {
-    if (config.app.ENVIRONMENT !== 'local') {
-      window.addEventListener('message', (event) => {
-        if (event.data.type === config.messages.IFRAME_LOADED) {
-          const { apiKey, perscomId } = event.data.value
-          setApiKey(apiKey)
-          setPerscomId(perscomId)
-        }
-      })
-    } else {
-      setApiKey(config.app.API_KEY)
-      setPerscomId(config.app.PERSCOM_ID)
-    }
+    setApiKey(searchParams.get('apikey') ?? config.app.API_KEY ?? null)
+    setPerscomId(searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null)
   })
 
   return (

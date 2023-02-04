@@ -3,8 +3,7 @@ const constants = {
     WIDGET_VERSION: process.env.REACT_APP_WIDGET_VERSION,
     ENVIRONMENT: process.env.REACT_APP_WIDGET_ENVIRONMENT,
     API_KEY: process.env.REACT_APP_API_KEY,
-    PERSCOM_ID: process.env.REACT_APP_PERSCOM_ID,
-    FILE_URL: process.env.REACT_APP_FILE_URL
+    PERSCOM_ID: process.env.REACT_APP_PERSCOM_ID
   },
   roster: {
     API_URL: process.env.REACT_APP_ROSTER_API_URL,
@@ -21,9 +20,6 @@ const constants = {
   sentry: {
     SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
     SENTRY_SAMPLE_RATE: process.env.REACT_APP_SENTRY_SAMPLE_RATE
-  },
-  messages: {
-    IFRAME_LOADED: 'perscomWidgetIframeLoaded'
   }
 }
 

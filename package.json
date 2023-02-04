@@ -5,8 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:snippet": "parcel build src/snippet.js",
-    "build:loader": "parcel build src/loader.js",
+    "build:widget": "parcel build src/widget.js",
     "test": "react-scripts test",
     "lint": "eslint --fix 'src/**/*.js' './*.js'",
     "format": "prettier 'src/**/*.js' './*.js' --write --config ./.prettierrc"
@@ -65,7 +64,7 @@
     "rules": {
       "index.js": "app.js",
       "index.css": "app.css",
-      "snippet.js": "widget.js"
+      "loader.js": "widget.js"
     }
   }
 }

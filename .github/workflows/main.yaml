@@ -41,8 +41,7 @@ jobs:
         if: github.ref == 'refs/heads/staging'
         run: |
           npm run build
-          npm run build:loader
-          npm run build:snippet
+          npm run build:widget
         env:
           REACT_APP_WIDGET_ENVIRONMENT: 'staging'
           REACT_APP_ROSTER_API_URL: https://api.staging.perscom.io/v1/widget/roster
@@ -54,14 +53,12 @@ jobs:
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '1.0'
-          REACT_APP_FILE_URL: https://staging-widget.perscom.io/loader.js
 
       - name: Build Application for Production
         if: github.ref == 'refs/heads/master'
         run: |
           npm run build
-          npm run build:loader
-          npm run build:snippet
+          npm run build:widget
         env:
           REACT_APP_WIDGET_ENVIRONMENT: 'production'
           REACT_APP_ROSTER_API_URL: https://api.perscom.io/v1/widget/roster
@@ -73,7 +70,6 @@ jobs:
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '0.1'
-          REACT_APP_FILE_URL: 'https://widget.perscom.io/loader.js'
 
       - name: Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
