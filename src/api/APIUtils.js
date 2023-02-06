@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useQuery = ({ url, widgetId, page, apiKey, perscomId }) => {
+const useQuery = ({ url, apiKey, perscomId }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -9,17 +9,15 @@ const useQuery = ({ url, widgetId, page, apiKey, perscomId }) => {
   const headers = {
     'X-Perscom-Id': perscomId,
     'X-Perscom-Widget': true,
-    'X-Perscom-Widget-Id': widgetId,
     Authorization: `Bearer ${apiKey}`,
-    Accept: 'application/json',
-    'User-Agent': 'PERSCOM Widget'
+    Accept: 'application/json'
   }
 
   useEffect(() => {
     setLoading(true)
     setError('')
     if (apiKey && perscomId) {
-      fetch(formatUrl(url, page), {
+      fetch(url, {
         method: 'GET',
         headers: headers
       })
@@ -55,14 +53,6 @@ const useQuery = ({ url, widgetId, page, apiKey, perscomId }) => {
   }, [url, perscomId, apiKey])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
-}
-
-function formatUrl(url, page) {
-  const newUrl = new URL(url)
-
-  page && newUrl.searchParams.append('page', page)
-
-  return newUrl.href
 }
 
 export default useQuery

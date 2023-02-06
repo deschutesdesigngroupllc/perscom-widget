@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react'
-import React from 'react'
+import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
 import { Footer } from '../components/Footer'
@@ -8,14 +8,18 @@ import { config } from '../constants'
 import { Table } from '../components/Table'
 import PropTypes from 'prop-types'
 
-function Ranks({ apiKey, perscomId, page }) {
+function Ranks({ apiKey, perscomId }) {
+  const [url, setUrl] = useState(config.ranks.API_URL)
+
   const { data, links, meta, loading, error } = useQuery({
-    url: config.ranks.API_URL,
-    widgetId: 'ranks',
-    page: page,
+    url: url,
     apiKey: apiKey,
     perscomId: perscomId
   })
+
+  const onPaginationClick = (url) => {
+    setUrl(url)
+  }
 
   return (
     <div className='p-1'>
@@ -24,7 +28,7 @@ function Ranks({ apiKey, perscomId, page }) {
       ) : (
         <>
           {error && <Error error={error} />}
-          {data && !!data.length && renderRanks(data, links, meta)}
+          {data && !!data.length && renderRanks(data, links, meta, onPaginationClick)}
         </>
       )}
       <Footer />
@@ -32,7 +36,7 @@ function Ranks({ apiKey, perscomId, page }) {
   )
 }
 
-function renderRanks(ranks, links, meta) {
+function renderRanks(ranks, links, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -77,14 +81,14 @@ function renderRanks(ranks, links, meta) {
       rows={ranks}
       links={links}
       meta={meta}
+      onPaginationClick={onPaginationClick}
     />
   )
 }
 
 Ranks.propTypes = {
   apiKey: PropTypes.string,
-  perscomId: PropTypes.string,
-  page: PropTypes.string
+  perscomId: PropTypes.string
 }
 
 export default Sentry.withProfiler(Ranks)
