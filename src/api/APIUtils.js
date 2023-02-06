@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useQuery = ({ url, apiKey, perscomId }) => {
+const useQuery = ({ url, widgetId, page, apiKey, perscomId }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -8,6 +8,8 @@ const useQuery = ({ url, apiKey, perscomId }) => {
 
   const headers = {
     'X-Perscom-Id': perscomId,
+    'X-Perscom-Widget': true,
+    'X-Perscom-Widget-Id': widgetId,
     Authorization: `Bearer ${apiKey}`,
     Accept: 'application/json',
     'User-Agent': 'PERSCOM Widget'
@@ -17,7 +19,7 @@ const useQuery = ({ url, apiKey, perscomId }) => {
     setLoading(true)
     setError('')
     if (apiKey && perscomId) {
-      fetch(url, {
+      fetch(formatUrl(url, page), {
         method: 'GET',
         headers: headers
       })
@@ -41,7 +43,7 @@ const useQuery = ({ url, apiKey, perscomId }) => {
           return response.json()
         })
         .then((data) => {
-          setData(data.data)
+          setData(data)
           setLoading(false)
         })
         .catch((e) => {
@@ -52,7 +54,15 @@ const useQuery = ({ url, apiKey, perscomId }) => {
     }
   }, [url, perscomId, apiKey])
 
-  return { data: data, statusCode, loading, error }
+  return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
+}
+
+function formatUrl(url, page) {
+  const newUrl = new URL(url)
+
+  page && newUrl.searchParams.append('page', page)
+
+  return newUrl.href
 }
 
 export default useQuery

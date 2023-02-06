@@ -8,10 +8,15 @@ export function Loading() {
       columns={[
         {
           name: 'Loading...',
-          headerClasses: ['!text-center', '!text-gray-400']
+          headerClasses: ['!text-center', '!text-gray-400'],
+          cellClasses: ['py-8']
         }
       ]}
-      rows={[]}
+      rows={[
+        {
+          name: 'Loading'
+        }
+      ]}
     />
   )
 }

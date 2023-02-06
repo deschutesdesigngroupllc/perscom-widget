@@ -8,9 +8,11 @@ import { config } from '../constants'
 import { Table } from '../components/Table'
 import PropTypes from 'prop-types'
 
-function Ranks({ apiKey, perscomId }) {
-  const { data, loading, error } = useQuery({
+function Ranks({ apiKey, perscomId, page }) {
+  const { data, links, meta, loading, error } = useQuery({
     url: config.ranks.API_URL,
+    widgetId: 'ranks',
+    page: page,
     apiKey: apiKey,
     perscomId: perscomId
   })
@@ -22,7 +24,7 @@ function Ranks({ apiKey, perscomId }) {
       ) : (
         <>
           {error && <Error error={error} />}
-          {data && !!data.length && renderRanks(data)}
+          {data && !!data.length && renderRanks(data, links, meta)}
         </>
       )}
       <Footer />
@@ -30,7 +32,7 @@ function Ranks({ apiKey, perscomId }) {
   )
 }
 
-function renderRanks(ranks) {
+function renderRanks(ranks, links, meta) {
   return (
     <Table
       columns={[
@@ -73,13 +75,16 @@ function renderRanks(ranks) {
         }
       ]}
       rows={ranks}
+      links={links}
+      meta={meta}
     />
   )
 }
 
 Ranks.propTypes = {
   apiKey: PropTypes.string,
-  perscomId: PropTypes.string
+  perscomId: PropTypes.string,
+  page: PropTypes.string
 }
 
 export default Sentry.withProfiler(Ranks)

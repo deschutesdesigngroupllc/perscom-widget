@@ -43,15 +43,15 @@ function renderUnit(unit) {
           cellClasses: ['w-1/6'],
           cellContent: (user) => {
             const { name, rank } = user
-            const { image_url, abbreviation } = rank ?? {}
+            const { image_url, abbreviation, name: rank_name } = rank ?? {}
             return (
               <div className='flex items-center'>
                 {rank && (
                   <div className='flex items-center w-6 sm:w-8 flex-shrink-0'>
                     {image_url ? (
-                      <img className='w-6 sm:w-8 font-bold' src={image_url} alt={abbreviation} />
+                      <img className='w-6 sm:w-8 font-bold' src={image_url} alt={rank_name} />
                     ) : (
-                      <div className='font-bold text-sm'>`{abbreviation}`</div>
+                      <div className='font-bold text-sm'>{abbreviation}</div>
                     )}
                   </div>
                 )}
