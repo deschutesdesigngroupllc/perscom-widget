@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 const get = require('lodash/get')
 const hash = require('object-hash')
 
-export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses }) {
+export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses, onPaginationClick }) {
   return (
     <div
       id='perscom_widget_table_wrapper'
@@ -53,12 +53,12 @@ export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses
             })}
         </tbody>
       </table>
-      {renderPagination(rows, links, meta)}
+      {renderPagination(rows, links, meta, onPaginationClick)}
     </div>
   )
 }
 
-const renderPagination = (rows, links, meta) => {
+const renderPagination = (rows, links, meta, onPaginationClick) => {
   return (
     rows &&
     links &&
@@ -68,20 +68,20 @@ const renderPagination = (rows, links, meta) => {
       <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
         <div className='flex flex-1 justify-between sm:hidden'>
           {links.prev && (
-            <a
-              href={links.prev}
-              className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
+            <button
+              onClick={() => onPaginationClick(links.prev)}
+              className='disabled relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
             >
               Previous
-            </a>
+            </button>
           )}
           {links.next && (
-            <a
-              href={links.next}
+            <button
+              onClick={() => onPaginationClick(links.next)}
               className='relative ml-auto inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
             >
               Next
-            </a>
+            </button>
           )}
         </div>
         <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
@@ -94,15 +94,17 @@ const renderPagination = (rows, links, meta) => {
           <div>
             <nav className='isolate inline-flex -space-x-px rounded-md shadow-sm' aria-label='Pagination'>
               {meta.links.map((link) => (
-                <a
-                  href={link.url}
+                <button
+                  onClick={() => onPaginationClick(link.url)}
                   aria-current='page'
+                  disabled={!link.url}
                   className={cx(
-                    '!relative inline-flex items-center border px-4 py-2 text-sm font-medium bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
+                    '!relative inline-flex items-center border px-4 py-2 text-sm font-medium bg-white border-gray-300 text-gray-500',
                     {
                       'z-10 text-blue-600 border-blue-500 bg-blue-50 hover:bg-blue-50 focus:z-20': link.active,
                       'rounded-r-md': link.label === 'Next &raquo;',
-                      'rounded-l-md': link.label === '&laquo; Previous'
+                      'rounded-l-md': link.label === '&laquo; Previous',
+                      'hover:bg-gray-50': link.url
                     }
                   )}
                   key={link.label}
@@ -110,7 +112,7 @@ const renderPagination = (rows, links, meta) => {
                   {link.label !== '&laquo; Previous' && link.label !== 'Next &raquo;' && link.label}
                   {link.label === '&laquo; Previous' && <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />}
                   {link.label === 'Next &raquo;' && <ChevronRightIcon className='h-5 w-5' aria-hidden='true' />}
-                </a>
+                </button>
               ))}
             </nav>
           </div>
@@ -140,7 +142,8 @@ Table.propTypes = {
   links: PropTypes.object,
   meta: PropTypes.object,
   tableClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
-  wrapperClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object])
+  wrapperClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
+  onPaginationClick: PropTypes.func
 }
 
 export default Table
