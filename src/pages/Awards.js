@@ -8,9 +8,11 @@ import { config } from '../constants'
 import { Table } from '../components/Table'
 import PropTypes from 'prop-types'
 
-function Awards({ apiKey, perscomId }) {
-  const { data, loading, error } = useQuery({
+function Awards({ apiKey, perscomId, page }) {
+  const { data, links, meta, loading, error } = useQuery({
     url: config.awards.API_URL,
+    widgetId: 'awards',
+    page: page,
     apiKey: apiKey,
     perscomId: perscomId
   })
@@ -22,7 +24,7 @@ function Awards({ apiKey, perscomId }) {
       ) : (
         <>
           {error && <Error error={error} />}
-          {data && !!data.length && renderAwards(data)}
+          {data && !!data.length && renderAwards(data, links, meta)}
         </>
       )}
       <Footer />
@@ -30,7 +32,7 @@ function Awards({ apiKey, perscomId }) {
   )
 }
 
-function renderAwards(awards) {
+function renderAwards(awards, links, meta) {
   return (
     <Table
       columns={[
@@ -73,13 +75,16 @@ function renderAwards(awards) {
         }
       ]}
       rows={awards}
+      links={links}
+      meta={meta}
     />
   )
 }
 
 Awards.propTypes = {
   apiKey: PropTypes.string,
-  perscomId: PropTypes.string
+  perscomId: PropTypes.string,
+  page: PropTypes.string
 }
 
 export default Sentry.withProfiler(Awards)

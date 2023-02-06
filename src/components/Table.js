@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const get = require('lodash/get')
 const hash = require('object-hash')
 
-export function Table({ columns, rows, tableClasses, wrapperClasses }) {
+export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses }) {
   return (
     <div
       id='perscom_widget_table_wrapper'
@@ -15,6 +16,7 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
         <thead id='perscom_widget_table_header' className='bg-gray-50'>
           <tr>
             {columns &&
+              !!columns.length &&
               columns.map((column) => {
                 return (
                   <th
@@ -31,6 +33,7 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
         </thead>
         <tbody id='perscom_widget_table_body' className='divide-y divide-gray-200 bg-white'>
           {rows &&
+            !!rows.length &&
             rows.map((row) => {
               return (
                 <tr id='perscom_widget_table_row' key={hash(row)}>
@@ -50,7 +53,70 @@ export function Table({ columns, rows, tableClasses, wrapperClasses }) {
             })}
         </tbody>
       </table>
+      {renderPagination(rows, links, meta)}
     </div>
+  )
+}
+
+const renderPagination = (rows, links, meta) => {
+  return (
+    rows &&
+    links &&
+    meta &&
+    !!rows.length &&
+    parseInt(meta.total) > parseInt(meta.per_page) && (
+      <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
+        <div className='flex flex-1 justify-between sm:hidden'>
+          {links.prev && (
+            <a
+              href={links.prev}
+              className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
+            >
+              Previous
+            </a>
+          )}
+          {links.next && (
+            <a
+              href={links.next}
+              className='relative ml-auto inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
+            >
+              Next
+            </a>
+          )}
+        </div>
+        <div className='hidden sm:flex sm:flex-1 sm:items-center sm:justify-between'>
+          <div>
+            <p className='text-sm text-gray-500'>
+              Showing <span className='font-medium'>{meta.from}</span> to <span className='font-medium'>{meta.to}</span> of{' '}
+              <span className='font-medium'>{meta.total}</span> results
+            </p>
+          </div>
+          <div>
+            <nav className='isolate inline-flex -space-x-px rounded-md shadow-sm' aria-label='Pagination'>
+              {meta.links.map((link) => (
+                <a
+                  href={link.url}
+                  aria-current='page'
+                  className={cx(
+                    '!relative inline-flex items-center border px-4 py-2 text-sm font-medium bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
+                    {
+                      'z-10 text-blue-600 border-blue-500 bg-blue-50 hover:bg-blue-50 focus:z-20': link.active,
+                      'rounded-r-md': link.label === 'Next &raquo;',
+                      'rounded-l-md': link.label === '&laquo; Previous'
+                    }
+                  )}
+                  key={link.label}
+                >
+                  {link.label !== '&laquo; Previous' && link.label !== 'Next &raquo;' && link.label}
+                  {link.label === '&laquo; Previous' && <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />}
+                  {link.label === 'Next &raquo;' && <ChevronRightIcon className='h-5 w-5' aria-hidden='true' />}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+    )
   )
 }
 
@@ -71,6 +137,8 @@ const renderCellContent = (row, column) => {
 Table.propTypes = {
   columns: PropTypes.array.isRequired,
   rows: PropTypes.array.isRequired,
+  links: PropTypes.object,
+  meta: PropTypes.object,
   tableClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
   wrapperClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object])
 }
