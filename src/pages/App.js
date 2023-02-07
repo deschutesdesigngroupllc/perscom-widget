@@ -4,6 +4,7 @@ import { Route, Routes, useSearchParams } from 'react-router-dom'
 import Roster from './Roster'
 import Awards from './Awards'
 import Ranks from './Ranks'
+import Qualifications from './Qualifications'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -22,6 +23,7 @@ function App() {
         <Route path='/roster' element={<Roster apiKey={apiKey} perscomId={perscomId} />}></Route>
         <Route path='/awards' element={<Awards apiKey={apiKey} perscomId={perscomId} />}></Route>
         <Route path='/ranks' element={<Ranks apiKey={apiKey} perscomId={perscomId} />}></Route>
+        <Route path='/qualifications' element={<Qualifications apiKey={apiKey} perscomId={perscomId} />}></Route>
       </Routes>
     </>
   )

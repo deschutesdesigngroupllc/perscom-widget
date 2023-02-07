@@ -17,6 +17,10 @@ const constants = {
     API_URL: process.env.REACT_APP_RANKS_API_URL,
     IFRAME_URL: process.env.REACT_APP_RANKS_IFRAME_URL
   },
+  qualifications: {
+    API_URL: process.env.REACT_APP_QUALIFICATIONS_API_URL,
+    IFRAME_URL: process.env.REACT_APP_QUALIFICATIONS_IFRAME_URL
+  },
   sentry: {
     SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
     SENTRY_SAMPLE_RATE: process.env.REACT_APP_SENTRY_SAMPLE_RATE

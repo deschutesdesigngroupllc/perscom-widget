@@ -9,7 +9,7 @@ export function Loading() {
         {
           name: 'Loading...',
           headerClasses: ['!text-center', '!text-gray-400'],
-          cellClasses: ['py-8']
+          cellClasses: ['!py-8']
         }
       ]}
       rows={[
