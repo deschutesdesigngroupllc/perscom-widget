@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 const useQuery = ({ url, apiKey, perscomId }) => {
   const [statusCode, setStatusCode] = useState()
@@ -13,11 +14,13 @@ const useQuery = ({ url, apiKey, perscomId }) => {
     Accept: 'application/json'
   }
 
+  const [searchParams] = useSearchParams()
+
   useEffect(() => {
     setLoading(true)
     setError('')
     if (apiKey && perscomId) {
-      fetch(url, {
+      fetch(composeQueryUrl(url, searchParams), {
         method: 'GET',
         headers: headers
       })
@@ -53,6 +56,20 @@ const useQuery = ({ url, apiKey, perscomId }) => {
   }, [url, perscomId, apiKey])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
+}
+
+const composeQueryUrl = (url, newSearchParams) => {
+  const currentUrl = new URL(url)
+  const currentSearchParams = currentUrl.searchParams
+  const searchParams = new URLSearchParams({
+    ...Object.fromEntries(newSearchParams),
+    ...Object.fromEntries(currentSearchParams)
+  })
+
+  currentUrl.searchParams.forEach((value, key) => currentUrl.searchParams.delete(key))
+  searchParams.forEach((value, key) => currentUrl.searchParams.set(key, value))
+
+  return currentUrl.href
 }
 
 export default useQuery

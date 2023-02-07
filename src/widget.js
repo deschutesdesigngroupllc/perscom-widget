@@ -4,6 +4,7 @@ const WRAPPER_ID = 'perscom_widget_wrapper'
 const WIDGET_ROSTER = 'roster'
 const WIDGET_AWARDS = 'awards'
 const WIDGET_RANKS = 'ranks'
+const WIDGET_QUALIFICATIONS = 'qualifications'
 
 import { config } from './constants'
 
@@ -18,18 +19,24 @@ class Widget {
    * @param perscomId
    * @param widget
    */
-  init = (apiKey, perscomId, widget) => {
+  init = (apiKey, perscomId, widget, limit) => {
     this.apiKey = apiKey
     this.perscomId = perscomId
     this.widget = widget ?? WIDGET_ROSTER
+    this.limit = limit ?? 15
+
     this.setIframeUrl()
     this.initializeIframe()
     this.mountIframe()
     this.setupIframeResizer()
   }
 
+  /**
+   * Sets up the library to auto resize the iframe
+   * and injects into the client page.
+   */
   setupIframeResizer = () => {
-    if (document.getElementById(WRAPPER_ID)) {
+    if (document.getElementById(IFRAME_ID)) {
       var iframe = document.getElementById(IFRAME_ID)
 
       const iframeResizerScript = document.createElement('script')
@@ -46,7 +53,8 @@ class Widget {
   }
 
   /**
-   * Determine the iframe we will be using
+   * Determine the iframe URL we will be using based on
+   * the passed in widget data attribute.
    */
   setIframeUrl = () => {
     switch (this.widget) {
@@ -62,6 +70,10 @@ class Widget {
         this.iframeUrl = this.composeIframeUrl(config.ranks.IFRAME_URL)
         break
 
+      case WIDGET_QUALIFICATIONS:
+        this.iframeUrl = this.composeIframeUrl(config.qualifications.IFRAME_URL)
+        break
+
       default:
         console.error('The widget you entered does not exist.')
         break
@@ -70,7 +82,8 @@ class Widget {
 
   /**
    *
-   * Append our API key and PERSCOM ID to the iframe URL
+   * Compose our iframe URL appending query parameters necessary
+   * for the API request.
    *
    * @param iframeUrl
    * @returns {string}
@@ -80,6 +93,7 @@ class Widget {
 
     url.searchParams.append('apikey', this.apiKey)
     url.searchParams.append('perscomid', this.perscomId)
+    url.searchParams.append('limit', this.limit)
 
     return url.href
   }
@@ -121,7 +135,7 @@ class Widget {
  */
 export default ((window, document) => {
   if (window.perscom) {
-    console.error('PERSCOM widget already embedded in page')
+    console.error('The PERSCOM widget is already embedded in the page. Exiting.')
     return
   }
 
@@ -147,10 +161,12 @@ export default ((window, document) => {
     perscomWidgetElement.getAttribute('data-widget') ??
     console.error('We could not find the widget type. Please make sure to include the "data-widget" attribute.')
 
+  const limit = perscomWidgetElement.getAttribute('data-limit')
+
   if (!perscomWidgetWrapperElement || !perscomWidgetElement || !apiKey || !perscomId || !widget) {
     return
   }
 
   window.perscom = new Widget()
-  window.perscom.init(apiKey, perscomId, widget)
+  window.perscom.init(apiKey, perscomId, widget, limit)
 })(window, document)
