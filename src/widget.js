@@ -2,9 +2,6 @@ const IFRAME_ID = 'perscom_widget_iframe'
 const WRAPPER_ID = 'perscom_widget_wrapper'
 
 const WIDGET_ROSTER = 'roster'
-const WIDGET_AWARDS = 'awards'
-const WIDGET_RANKS = 'ranks'
-const WIDGET_QUALIFICATIONS = 'qualifications'
 
 import { config } from './constants'
 import { findIncomingAttributes } from './utils/ParameterManager'
