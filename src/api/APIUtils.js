@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { config } from '../constants'
+import { getOptionalApiParameters } from '../utils/ParameterManager'
 
-const useQuery = ({ url, apiKey, perscomId }) => {
+const useQuery = ({ url }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+
+  const [searchParams] = useSearchParams()
+
+  const apiKey = searchParams.get('apikey') ?? config.app.API_KEY ?? null
+  const perscomId = searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null
 
   const headers = {
     'X-Perscom-Id': perscomId,
@@ -13,8 +20,6 @@ const useQuery = ({ url, apiKey, perscomId }) => {
     Authorization: `Bearer ${apiKey}`,
     Accept: 'application/json'
   }
-
-  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     setLoading(true)
@@ -58,16 +63,13 @@ const useQuery = ({ url, apiKey, perscomId }) => {
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
 
-const composeQueryUrl = (url, newSearchParams) => {
+const composeQueryUrl = (url, currentSearchParams) => {
   const currentUrl = new URL(url)
-  const currentSearchParams = currentUrl.searchParams
-  const searchParams = new URLSearchParams({
-    ...Object.fromEntries(newSearchParams),
-    ...Object.fromEntries(currentSearchParams)
+  getOptionalApiParameters().forEach((parameter) => {
+    if (currentSearchParams.has(parameter)) {
+      currentUrl.searchParams.set(parameter, currentSearchParams.get(parameter))
+    }
   })
-
-  currentUrl.searchParams.forEach((value, key) => currentUrl.searchParams.delete(key))
-  searchParams.forEach((value, key) => currentUrl.searchParams.set(key, value))
 
   return currentUrl.href
 }

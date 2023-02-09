@@ -1,22 +1,18 @@
 import * as Sentry from '@sentry/react'
-import PropTypes from 'prop-types'
 import React from 'react'
 import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
-import { Footer } from '../components/Footer'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
 
-function Roster({ apiKey, perscomId }) {
+function Roster() {
   const { data, loading, error } = useQuery({
-    url: config.roster.API_URL,
-    apiKey: apiKey,
-    perscomId: perscomId
+    url: config.roster.API_URL
   })
 
   return (
-    <div className='p-1'>
+    <>
       {loading ? (
         <Loading />
       ) : (
@@ -25,8 +21,7 @@ function Roster({ apiKey, perscomId }) {
           <div className='flex flex-col space-y-4'>{data && !!data.length && data.map((unit) => renderUnit(unit))}</div>
         </>
       )}
-      <Footer />
-    </div>
+    </>
   )
 }
 
@@ -124,11 +119,6 @@ function renderUnit(unit) {
       rows={users}
     />
   )
-}
-
-Roster.propTypes = {
-  apiKey: PropTypes.string,
-  perscomId: PropTypes.string
 }
 
 export default Sentry.withProfiler(Roster)
