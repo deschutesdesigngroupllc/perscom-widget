@@ -44,15 +44,12 @@ jobs:
           npm run build:widget
         env:
           REACT_APP_WIDGET_ENVIRONMENT: 'staging'
-          REACT_APP_ROSTER_API_URL: https://api.staging.perscom.io/v1/widget/roster
-          REACT_APP_ROSTER_IFRAME_URL: https://staging-widget.perscom.io/roster
-          REACT_APP_AWARDS_API_URL: https://api.staging.perscom.io/v1/widget/awards
-          REACT_APP_AWARDS_IFRAME_URL: https://staging-widget.perscom.io/awards
-          REACT_APP_RANKS_API_URL: https://api.staging.perscom.io/v1/widget/ranks
-          REACT_APP_RANKS_IFRAME_URL: https://staging-widget.perscom.io/ranks
-          REACT_APP_QUALIFICATIONS_API_URL: https://api.staging.perscom.io/v1/widget/qualifications
-          REACT_APP_QUALIFICATIONS_IFRAME_URL: https://staging-widget.perscom.io/qualifications
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
+          REACT_APP_WIDGET_URL: https://staging-widget.perscom.io
+          REACT_APP_ROSTER_API_URL: https://api.staging.perscom.io/v1/widget/roster
+          REACT_APP_AWARDS_API_URL: https://api.staging.perscom.io/v1/widget/awards
+          REACT_APP_RANKS_API_URL: https://api.staging.perscom.io/v1/widget/ranks
+          REACT_APP_QUALIFICATIONS_API_URL: https://api.staging.perscom.io/v1/widget/qualifications
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '1.0'
 
@@ -63,15 +60,12 @@ jobs:
           npm run build:widget
         env:
           REACT_APP_WIDGET_ENVIRONMENT: 'production'
-          REACT_APP_ROSTER_API_URL: https://api.perscom.io/v1/widget/roster
-          REACT_APP_ROSTER_IFRAME_URL: https://widget.perscom.io/roster
-          REACT_APP_AWARDS_API_URL: https://api.perscom.io/v1/widget/awards
-          REACT_APP_AWARDS_IFRAME_URL: https://widget.perscom.io/awards
-          REACT_APP_RANKS_API_URL: https://api.perscom.io/v1/widget/ranks
-          REACT_APP_RANKS_IFRAME_URL: https://widget.perscom.io/ranks
-          REACT_APP_QUALIFICATIONS_API_URL: https://api.perscom.io/v1/widget/qualifications
-          REACT_APP_QUALIFICATIONS_IFRAME_URL: https://widget.perscom.io/qualifications
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
+          REACT_APP_WIDGET_URL: https://widget.perscom.io
+          REACT_APP_ROSTER_API_URL: https://api.perscom.io/v1/widget/roster
+          REACT_APP_AWARDS_API_URL: https://api.perscom.io/v1/widget/awards
+          REACT_APP_RANKS_API_URL: https://api.perscom.io/v1/widget/ranks
+          REACT_APP_QUALIFICATIONS_API_URL: https://api.perscom.io/v1/widget/qualifications
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '0.1'
 

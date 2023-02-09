@@ -7,6 +7,7 @@ const WIDGET_RANKS = 'ranks'
 const WIDGET_QUALIFICATIONS = 'qualifications'
 
 import { config } from './constants'
+import { findIncomingAttributes } from './utils/ParameterManager'
 
 /**
  * PERSCOM Widget
@@ -19,11 +20,10 @@ class Widget {
    * @param perscomId
    * @param widget
    */
-  init = (apiKey, perscomId, widget, limit) => {
-    this.apiKey = apiKey
-    this.perscomId = perscomId
+  init = (widget, requiredAttributes, optionalAttributes) => {
     this.widget = widget ?? WIDGET_ROSTER
-    this.limit = limit ?? 15
+    this.requiredAttributes = requiredAttributes
+    this.optionalAttributes = optionalAttributes
 
     this.setIframeUrl()
     this.initializeIframe()
@@ -53,47 +53,35 @@ class Widget {
   }
 
   /**
-   * Determine the iframe URL we will be using based on
-   * the passed in widget data attribute.
+   * Set the iframe URL
    */
   setIframeUrl = () => {
-    switch (this.widget) {
-      case WIDGET_ROSTER:
-        this.iframeUrl = this.composeIframeUrl(config.roster.IFRAME_URL)
-        break
-
-      case WIDGET_AWARDS:
-        this.iframeUrl = this.composeIframeUrl(config.awards.IFRAME_URL)
-        break
-
-      case WIDGET_RANKS:
-        this.iframeUrl = this.composeIframeUrl(config.ranks.IFRAME_URL)
-        break
-
-      case WIDGET_QUALIFICATIONS:
-        this.iframeUrl = this.composeIframeUrl(config.qualifications.IFRAME_URL)
-        break
-
-      default:
-        console.error('The widget you entered does not exist.')
-        break
-    }
+    this.iframeUrl = this.composeIframeUrl()
   }
 
   /**
    *
    * Compose our iframe URL appending query parameters necessary
-   * for the API request.
+   * for the API request and using the widget attribute for the
+   * path.
    *
    * @param iframeUrl
    * @returns {string}
    */
-  composeIframeUrl = (iframeUrl) => {
-    const url = new URL(iframeUrl)
+  composeIframeUrl = () => {
+    const url = new URL(`${config.app.WIDGET_URL}/${this.widget}`)
 
-    url.searchParams.append('apikey', this.apiKey)
-    url.searchParams.append('perscomid', this.perscomId)
-    url.searchParams.append('limit', this.limit)
+    if (this.requiredAttributes) {
+      for (let i = 0; i < this.requiredAttributes.length; i++) {
+        url.searchParams.append(this.requiredAttributes[i].parameter, this.requiredAttributes[i].value)
+      }
+    }
+
+    if (this.optionalAttributes) {
+      for (let i = 0; i < this.optionalAttributes.length; i++) {
+        url.searchParams.append(this.optionalAttributes[i].parameter, this.optionalAttributes[i].value)
+      }
+    }
 
     return url.href
   }
@@ -134,39 +122,8 @@ class Widget {
  * Initialze widget class
  */
 export default ((window, document) => {
-  if (window.perscom) {
-    console.error('The PERSCOM widget is already embedded in the page. Exiting.')
-    return
-  }
-
-  const perscomWidgetWrapperElement =
-    document.getElementById('perscom_widget_wrapper') ??
-    console.error(
-      'We would not find the widget wrapper element. Please make sure the widget is wrapped in a div with ID "perscom_widget_wrapper".'
-    )
-
-  const perscomWidgetElement =
-    document.getElementById('perscom_widget') ??
-    console.error('We could not find the widget element. Please make sure the widget element\'s ID is set to "perscom_widget".')
-
-  const apiKey =
-    perscomWidgetElement.getAttribute('data-apikey') ??
-    console.error('We could not find the widget API key. Please make sure to include the "data-apikey" attribute.')
-
-  const perscomId =
-    perscomWidgetElement.getAttribute('data-perscomid') ??
-    console.error('We could not find the widget PERSCOM ID. Please make sure to include the "data-perscomid" attribute.')
-
-  const widget =
-    perscomWidgetElement.getAttribute('data-widget') ??
-    console.error('We could not find the widget type. Please make sure to include the "data-widget" attribute.')
-
-  const limit = perscomWidgetElement.getAttribute('data-limit')
-
-  if (!perscomWidgetWrapperElement || !perscomWidgetElement || !apiKey || !perscomId || !widget) {
-    return
-  }
+  const { widget, requiredAttributes, optionalAttributes } = findIncomingAttributes(document)
 
   window.perscom = new Widget()
-  window.perscom.init(apiKey, perscomId, widget, limit)
+  window.perscom.init(widget, requiredAttributes, optionalAttributes)
 })(window, document)

@@ -2,19 +2,15 @@ import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
-import { Footer } from '../components/Footer'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Table } from '../components/Table'
-import PropTypes from 'prop-types'
 
-function Qualifications({ apiKey, perscomId }) {
+function Qualifications() {
   const [url, setUrl] = useState(config.qualifications.API_URL)
 
   const { data, links, meta, loading, error } = useQuery({
-    url: url,
-    apiKey: apiKey,
-    perscomId: perscomId
+    url: url
   })
 
   const onPaginationClick = (url) => {
@@ -22,7 +18,7 @@ function Qualifications({ apiKey, perscomId }) {
   }
 
   return (
-    <div className='p-1'>
+    <>
       {loading ? (
         <Loading />
       ) : (
@@ -31,8 +27,7 @@ function Qualifications({ apiKey, perscomId }) {
           {data && !!data.length && renderQualifications(data, links, meta, onPaginationClick)}
         </>
       )}
-      <Footer />
-    </div>
+    </>
   )
 }
 
@@ -84,11 +79,6 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
       onPaginationClick={onPaginationClick}
     />
   )
-}
-
-Qualifications.propTypes = {
-  apiKey: PropTypes.string,
-  perscomId: PropTypes.string
 }
 
 export default Sentry.withProfiler(Qualifications)
