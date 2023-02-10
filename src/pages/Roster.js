@@ -34,11 +34,12 @@ function renderUnit(unit) {
       columns={[
         {
           name: name,
-          headerClasses: ['w-1/6'],
-          cellClasses: ['w-1/6'],
+          headerAttributes: { colSpan: '6' },
+          cellClasses: ['w-1/6', 'whitespace-normal sm:whitespace-nowrap'],
           cellContent: (user) => {
-            const { name, rank } = user
+            const { name, rank, position } = user
             const { image_url, abbreviation, name: rank_name } = rank ?? {}
+            const { name: position_name } = position ?? {}
             return (
               <div className='flex items-center'>
                 {rank && (
@@ -50,8 +51,9 @@ function renderUnit(unit) {
                     )}
                   </div>
                 )}
-                <div className='ml-4'>
+                <div className='flex flex-col ml-4'>
                   <div className='font-semibold text-gray-900'>{name}</div>
+                  <div className='md:hidden text-xs text-gray-500'>{position_name}</div>
                 </div>
               </div>
             )
@@ -60,19 +62,19 @@ function renderUnit(unit) {
         {
           name: 'Position',
           key: 'position.name',
-          headerClasses: ['w-1/6'],
-          cellClasses: ['w-1/6']
+          hidden: true,
+          cellClasses: ['hidden', 'md:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap']
         },
         {
           name: 'Specialty',
+          hidden: true,
           key: 'specialty.name',
-          headerClasses: ['hidden', 'sm:table-cell', 'w-1/6'],
-          cellClasses: ['hidden', 'sm:table-cell', 'w-1/6']
+          cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap']
         },
         {
           name: 'Status',
-          headerClasses: ['w-1/6'],
-          cellClasses: ['w-1/6'],
+          hidden: true,
+          cellClasses: ['text-right', 'md:text-center', 'whitespace-nowrap', 'w-1/12'],
           cellContent: (user) => {
             const { status } = user
             return (
@@ -86,8 +88,8 @@ function renderUnit(unit) {
         },
         {
           name: 'Online',
-          headerClasses: ['hidden', 'md:table-cell', 'w-1/6'],
-          cellClasses: ['hidden', 'md:table-cell', 'w-1/6'],
+          hidden: true,
+          cellClasses: ['hidden', 'lg:table-cell', 'text-center', 'w-1/12'],
           cellContent: (user) => {
             const { online } = user
             return (
@@ -104,8 +106,7 @@ function renderUnit(unit) {
         {
           name: 'Link',
           hidden: true,
-          headerClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
-          cellClasses: ['hidden', 'lg:table-cell', 'w-1/6'],
+          cellClasses: ['hidden', 'xl:table-cell', 'text-center', 'w-1/6'],
           cellContent: (user) => {
             const { url, name } = user
             return (

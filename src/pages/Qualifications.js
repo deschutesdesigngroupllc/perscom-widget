@@ -36,9 +36,9 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
     <Table
       columns={[
         {
-          name: 'Qualification',
-          hidden: true,
-          headerClasses: ['hidden', 'sm:table-cell'],
+          name: 'Qualifications',
+          headerClasses: ['text-center'],
+          headerAttributes: { colSpan: '2' },
           cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', '!py-4'],
           cellContent: (qualification) => {
             const { name, image_url } = qualification
@@ -56,6 +56,7 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
         {
           name: 'Qualification',
           key: 'description',
+          hidden: true,
           cellClasses: ['!whitespace-normal', 'break-normal', '!py-4'],
           cellContent: (qualification) => {
             const { name, description, image_url } = qualification

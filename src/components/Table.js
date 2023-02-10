@@ -8,27 +8,27 @@ const hash = require('object-hash')
 
 export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses, onPaginationClick }) {
   return (
-    <div
-      id='perscom_widget_table_wrapper'
-      className={cx('overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg', wrapperClasses)}
-    >
-      <table id='perscom_widget_table' className={cx('min-w-full divide-y divide-gray-300', tableClasses)}>
+    <div id='perscom_widget_table_wrapper' className={cx('shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg', wrapperClasses)}>
+      <table id='perscom_widget_table' className={cx('overflow-hidden min-w-full divide-y divide-gray-300', tableClasses)}>
         <thead id='perscom_widget_table_header' className='bg-gray-50'>
           <tr>
             {columns &&
               !!columns.length &&
-              columns.map((column) => {
-                return (
-                  <th
-                    id='perscom_widget_table_header_column'
-                    scope='col'
-                    key={hash(column)}
-                    className={cx('px-3 py-3.5 text-left text-sm font-semibold text-gray-900', column.headerClasses)}
-                  >
-                    {!column.hidden && renderHeaderContent(column)}
-                  </th>
-                )
-              })}
+              columns
+                .filter((column) => !column.hidden)
+                .map((column) => {
+                  return (
+                    <th
+                      id='perscom_widget_table_header_column'
+                      scope='col'
+                      key={hash(column)}
+                      className={cx('px-3 py-3.5 text-left text-sm font-semibold text-gray-900', column.headerClasses)}
+                      {...column.headerAttributes}
+                    >
+                      {renderHeaderContent(column)}
+                    </th>
+                  )
+                })}
           </tr>
         </thead>
         <tbody id='perscom_widget_table_body' className='divide-y divide-gray-200 bg-white'>
@@ -41,8 +41,9 @@ export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses
                     return (
                       <td
                         id='perscom_widget_table_cell'
-                        className={cx('whitespace-nowrap px-3 py-2 text-sm text-gray-500', column.cellClasses)}
+                        className={cx('px-3 py-2 text-sm text-gray-500', column.cellClasses)}
                         key={hash(column)}
+                        {...column.cellAttributes}
                       >
                         {renderCellContent(row, column)}
                       </td>

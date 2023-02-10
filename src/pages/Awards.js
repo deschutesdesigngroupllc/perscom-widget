@@ -36,9 +36,9 @@ function renderAwards(awards, links, meta, onPaginationClick) {
     <Table
       columns={[
         {
-          name: 'Award',
-          hidden: true,
-          headerClasses: ['hidden', 'sm:table-cell'],
+          name: 'Awards',
+          headerClasses: ['text-center'],
+          headerAttributes: { colSpan: '2' },
           cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', '!py-4'],
           cellContent: (award) => {
             const { name, image_url } = award
@@ -56,6 +56,7 @@ function renderAwards(awards, links, meta, onPaginationClick) {
         {
           name: 'Award',
           key: 'description',
+          hidden: true,
           cellClasses: ['!whitespace-normal', 'break-normal', '!py-4'],
           cellContent: (award) => {
             const { name, description, image_url } = award
