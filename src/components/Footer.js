@@ -13,7 +13,7 @@ export function Footer() {
         <a href='https://perscom.io' target='_blank' rel='noreferrer' className='underline'>
           PERSCOM.io
         </a>
-        . Copyright {new Date().getFullYear()} <span className='sm:inline hidden'>Deschutes Design Group LLC.</span>{' '}
+        . <span className='sm:inline hidden'>Copyright {new Date().getFullYear()} Deschutes Design Group LLC.</span>{' '}
         {version && <span className='md:inline hidden'>Version {version}.</span>}
       </div>
     </div>

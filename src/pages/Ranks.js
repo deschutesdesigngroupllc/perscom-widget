@@ -36,9 +36,9 @@ function renderRanks(ranks, links, meta, onPaginationClick) {
     <Table
       columns={[
         {
-          name: 'Rank',
-          hidden: true,
-          headerClasses: ['hidden', 'sm:table-cell'],
+          name: 'Ranks',
+          headerClasses: ['text-center'],
+          headerAttributes: { colSpan: '2' },
           cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', '!py-4'],
           cellContent: (rank) => {
             const { name, image_url } = rank
@@ -56,6 +56,7 @@ function renderRanks(ranks, links, meta, onPaginationClick) {
         {
           name: 'Rank',
           key: 'description',
+          hidden: true,
           cellClasses: ['!whitespace-normal', 'break-normal', '!py-4'],
           cellContent: (rank) => {
             const { name, description, image_url } = rank
