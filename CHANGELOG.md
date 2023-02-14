@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v0.1.17...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.0...HEAD)
+
+## [v1.0.0](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v0.1.17...v1.0.0) - 2023-02-14
+
+### Added
+
+- Release of 1.0.0
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v0.1.17...v1.0.0
 
 ## [v0.1.17](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v0.1.16...v0.1.17) - 2023-02-14
 
