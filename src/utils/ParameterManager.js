@@ -3,6 +3,11 @@ const optionalAttributes = [
     attribute: 'data-limit',
     parameter: 'limit',
     value: ''
+  },
+  {
+    attribute: 'data-include',
+    parameter: 'include',
+    value: ''
   }
 ]
 
