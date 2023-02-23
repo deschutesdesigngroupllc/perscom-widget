@@ -80,69 +80,65 @@ function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
           <img src={cover_photo_url} className='w-full object-cover' />
         </div>
       )}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-        <div className='md:col-span-1'>
-          <div className='divide-y divide-gray-300 flex flex-col overflow-hidden rounded-lg bg-white shadow h-full'>
-            <div className='px-3 py-3.5 bg-gray-50'>
-              <div className='flex justify-between items-center'>
-                <div className='font-semibold text-gray-900'>Personnel Profile</div>
-                {status && (
-                  <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>
-                )}
-              </div>
+      <div className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4'>
+        <div className='divide-y divide-gray-300 flex flex-grow flex-col overflow-hidden rounded-lg bg-white shadow min-h-full md:max-w-2xl'>
+          <div className='px-3 py-3.5 bg-gray-50'>
+            <div className='flex justify-between items-center'>
+              <div className='font-semibold text-gray-900'>Personnel Profile</div>
+              {status && (
+                <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>
+              )}
             </div>
-            <div className='px-4 py-3.5 flex flex-grow flex-col space-y-6 justify-center items-center'>
-              {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' />}
-              <div className='flex flex-col space-y-1 justify-center items-center'>
-                <div className='font-bold'>
-                  {rank_abbreviation} {name} {'  '}
-                </div>
-                {rank_name && <div className='text-gray-700 font-medium'>{rank_name}</div>}{' '}
-                {position_name && <div className='text-gray-500'>{position_name}</div>}
+          </div>
+          <div className='px-4 py-3.5 flex flex-grow flex-col space-y-6 justify-center items-center'>
+            {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' />}
+            <div className='flex flex-col space-y-1 justify-center items-center'>
+              <div className='font-bold'>
+                {rank_abbreviation} {name} {'  '}
               </div>
+              {rank_name && <div className='text-gray-700 font-medium'>{rank_name}</div>}{' '}
+              {position_name && <div className='text-gray-500'>{position_name}</div>}
             </div>
           </div>
         </div>
-        <div className='md:col-span-2'>
-          <div className='divide-y divide-gray-300 flex flex-col overflow-hidden rounded-lg bg-white shadow min-h-full'>
-            <div className='px-3 py-3.5 bg-gray-50'>
-              <div className='flex justify-between items-center'>
-                <div className='font-semibold text-gray-900'>Demographics</div>
-                {online ? (
-                  <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
-                ) : (
-                  <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
-                )}
-              </div>
-            </div>
-            <div className='flex flex-col flex-grow'>
-              <dl>
-                <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Name</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{name}</dd>
-                </div>
-                <div className='bg-white px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Rank</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{rank_name}</dd>
-                </div>
-                <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Position</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{position_name}</dd>
-                </div>
-                <div className='bg-white px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Specialty</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{specialty_name}</dd>
-                </div>
-                <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Unit</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{unit_name}</dd>
-                </div>
-              </dl>
+        <div className='divide-y divide-gray-300 flex flex-col flex-grow overflow-hidden rounded-lg bg-white shadow min-h-full'>
+          <div className='px-3 py-3.5 bg-gray-50'>
+            <div className='flex justify-between items-center'>
+              <div className='font-semibold text-gray-900'>Demographics</div>
+              {online ? (
+                <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
+              ) : (
+                <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
+              )}
             </div>
           </div>
+          <div className='flex flex-col flex-grow'>
+            <dl>
+              <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>Name</dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{name}</dd>
+              </div>
+              <div className='bg-white px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>Rank</dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{rank_name}</dd>
+              </div>
+              <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>Position</dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{position_name}</dd>
+              </div>
+              <div className='bg-white px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>Specialty</dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{specialty_name}</dd>
+              </div>
+              <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                <dt className='text-sm font-medium text-gray-500'>Unit</dt>
+                <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{unit_name}</dd>
+              </div>
+            </dl>
+          </div>
         </div>
-        <div className='md:col-span-3'>{renderRecords(user, records, tabs, currentTab, setCurrentTab)}</div>
       </div>
+      {renderRecords(user, records, tabs, currentTab, setCurrentTab)}
     </div>
   )
 }
