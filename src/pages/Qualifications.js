@@ -10,7 +10,11 @@ function Qualifications() {
   const [url, setUrl] = useState(config.qualifications.API_URL)
 
   const { data, links, meta, loading, error } = useQuery({
-    url: url
+    url: url,
+    queryParams: {
+      key: 'include',
+      value: 'image'
+    }
   })
 
   const onPaginationClick = (url) => {
@@ -41,7 +45,8 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
           headerAttributes: { colSpan: '2' },
           cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', '!py-4'],
           cellContent: (qualification) => {
-            const { name, image_url } = qualification
+            const { name, image } = qualification
+            const { image_url } = image ?? {}
             return (
               <>
                 {image_url ? (
@@ -59,7 +64,8 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
           hidden: true,
           cellClasses: ['!whitespace-normal', 'break-normal', '!py-4'],
           cellContent: (qualification) => {
-            const { name, description, image_url } = qualification
+            const { name, description, image } = qualification
+            const { image_url } = image ?? {}
             return (
               <>
                 {image_url && (

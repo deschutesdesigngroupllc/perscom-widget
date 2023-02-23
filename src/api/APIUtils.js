@@ -22,9 +22,7 @@ const useQuery = ({ url, queryParams }) => {
   }
 
   useEffect(() => {
-    setLoading(true)
-    setError('')
-    if (apiKey && perscomId) {
+    if (apiKey && perscomId && loading !== false) {
       fetch(composeQueryUrl(url, searchParams, queryParams), {
         method: 'GET',
         headers: headers
@@ -58,7 +56,7 @@ const useQuery = ({ url, queryParams }) => {
           setLoading(false)
         })
     }
-  }, [url, perscomId, apiKey])
+  }, [])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
@@ -74,7 +72,9 @@ const composeQueryUrl = (url, currentSearchParams, queryParams = null) => {
   const apiParams = Array.isArray(queryParams) ? queryParams : [queryParams]
   if (queryParams && apiParams.length) {
     apiParams.forEach((parameter) => {
-      currentUrl.searchParams.set(parameter['key'], parameter['value'])
+      if (parameter['value']) {
+        currentUrl.searchParams.set(parameter['key'], parameter['value'])
+      }
     })
   }
 

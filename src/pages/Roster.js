@@ -5,6 +5,7 @@ import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
+import { Link } from 'react-router-dom'
 
 function Roster() {
   const { data, loading, error } = useQuery({
@@ -38,7 +39,8 @@ function renderUnit(unit) {
           cellClasses: ['w-1/6', 'whitespace-normal sm:whitespace-nowrap'],
           cellContent: (user) => {
             const { name, rank, position } = user
-            const { image_url, abbreviation, name: rank_name } = rank ?? {}
+            const { image, abbreviation, name: rank_name } = rank ?? {}
+            const { image_url } = image ?? {}
             const { name: position_name } = position ?? {}
             return (
               <div className='flex items-center'>
@@ -108,11 +110,11 @@ function renderUnit(unit) {
           hidden: true,
           cellClasses: ['hidden', 'xl:table-cell', 'text-center', 'w-1/6'],
           cellContent: (user) => {
-            const { url, name } = user
+            const { name, id } = user
             return (
-              <a href={url} target='_blank' rel='noreferrer' className='text-gray-600 hover:text-gray-900'>
+              <Link to={`/users/${id}`} className='text-gray-600 hover:text-gray-900'>
                 Personnel Profile<span className='sr-only'>, {name}</span>
-              </a>
+              </Link>
             )
           }
         }

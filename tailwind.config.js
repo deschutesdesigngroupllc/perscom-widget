@@ -4,7 +4,6 @@ module.exports = {
   theme: {
     extend: {}
   },
-  plugins: [],
   safelist: [
     'bg-sky-100',
     'text-sky-600',
