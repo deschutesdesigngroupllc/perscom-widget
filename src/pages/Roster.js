@@ -54,7 +54,9 @@ function renderUnit(unit) {
                   </div>
                 )}
                 <div className='flex flex-col ml-4'>
-                  <div className='font-semibold text-gray-900'>{name}</div>
+                  <Link to={`/users/${id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
+                    {name}
+                  </Link>
                   <div className='md:hidden text-xs text-gray-500'>{position_name}</div>
                 </div>
               </div>
@@ -112,7 +114,7 @@ function renderUnit(unit) {
           cellContent: (user) => {
             const { name, id } = user
             return (
-              <Link to={`/users/${id}`} className='text-gray-600 hover:text-gray-900'>
+              <Link to={`/users/${id}`} className='text-gray-500 hover:text-gray-700 active:text-blue-600'>
                 Personnel Profile<span className='sr-only'>, {name}</span>
               </Link>
             )
