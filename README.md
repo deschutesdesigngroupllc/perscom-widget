@@ -5,10 +5,10 @@ The PERSCOM widget provides seamless external integration of your PERSCOM.io dat
 
 ## Using The Widget
 
-Place the following HTML code block on your website wherever you'd like the widget to display. Make sure to replace APIKEY and PERSCOMID with the appropriate values. Your API key will need to have the `access:widget` scope assigned to it.
+Place the following HTML code block on your website wherever you'd like the widget to display. Make sure to replace APIKEY and PERSCOMID with the appropriate values.
 
     <!-- Place the code block where you would like the widget displayed on your website. !-->
-    <!-- Replace APIKEY and PERSCOMID with your API key with the ‘access:widget' scope and PERSCOM Account ID, respectively. !-->
+    <!-- Replace APIKEY and PERSCOMID with your API key and PERSCOM Account ID, respectively. !-->
 
     <div id="perscom_widget_wrapper">
       <script
@@ -20,6 +20,10 @@ Place the following HTML code block on your website wherever you'd like the widg
         type="text/javascript"
       ></script>
     </div>
+
+## Authentication and Authorization
+
+Your API key will need appropriate permissions based on the widget you are intending to display. Failure to assign the appropriate scopes to the API key will result in a 403 Forbidden error. Please visit our [documentation](https://docs.perscom.io) for further exaplanation and a list of permissions that are needed for each widget.
 
 ## Example
 
