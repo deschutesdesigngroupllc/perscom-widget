@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.0...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.1...HEAD)
+
+## [v1.0.1](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.0...v1.0.1) - 2023-02-23
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.1 -->
+### What's Changed
+
+#### Added
+
+- Add new user profile component/view by @JonErickson in https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/pull/22
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.0...v1.0.1
 
 ## [v1.0.0](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v0.1.17...v1.0.0) - 2023-02-14
 
