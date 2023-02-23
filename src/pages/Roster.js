@@ -5,7 +5,7 @@ import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
-import { Link } from 'react-router-dom'
+import { Link } from '../components/Link'
 
 function Roster() {
   const { data, loading, error } = useQuery({
@@ -54,7 +54,7 @@ function renderUnit(unit) {
                   </div>
                 )}
                 <div className='flex flex-col ml-4'>
-                  <Link to={`/users/${id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
+                  <Link href={`/users/${id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
                     {name}
                   </Link>
                   <div className='md:hidden text-xs text-gray-500'>{position_name}</div>
@@ -114,7 +114,7 @@ function renderUnit(unit) {
           cellContent: (user) => {
             const { name, id } = user
             return (
-              <Link to={`/users/${id}`} className='text-gray-500 hover:text-gray-700 active:text-blue-600'>
+              <Link href={`/users/${id}`} className='text-gray-500 hover:text-gray-700 active:text-blue-600'>
                 Personnel Profile<span className='sr-only'>, {name}</span>
               </Link>
             )

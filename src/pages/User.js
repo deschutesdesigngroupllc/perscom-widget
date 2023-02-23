@@ -4,7 +4,8 @@ import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from '../components/Link'
+import { useParams } from 'react-router-dom'
 import cx from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import DataTable from 'react-data-table-component'
@@ -52,7 +53,7 @@ function User() {
           <div className='flex flex-col space-y-4'>
             <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
               <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
-              <Link to={'/roster'} className='text-sm'>
+              <Link href={'/roster'} className='text-sm'>
                 Back to Roster
               </Link>
             </div>
