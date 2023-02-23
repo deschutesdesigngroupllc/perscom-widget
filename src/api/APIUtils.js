@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { config } from '../constants'
 import { getOptionalApiParameters } from '../utils/ParameterManager'
 
-const useQuery = ({ url }) => {
+const useQuery = ({ url, queryParams }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -22,10 +22,8 @@ const useQuery = ({ url }) => {
   }
 
   useEffect(() => {
-    setLoading(true)
-    setError('')
-    if (apiKey && perscomId) {
-      fetch(composeQueryUrl(url, searchParams), {
+    if (apiKey && perscomId && loading !== false) {
+      fetch(composeQueryUrl(url, searchParams, queryParams), {
         method: 'GET',
         headers: headers
       })
@@ -58,18 +56,27 @@ const useQuery = ({ url }) => {
           setLoading(false)
         })
     }
-  }, [url, perscomId, apiKey])
+  }, [])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
 
-const composeQueryUrl = (url, currentSearchParams) => {
+const composeQueryUrl = (url, currentSearchParams, queryParams = null) => {
   const currentUrl = new URL(url)
   getOptionalApiParameters().forEach((parameter) => {
     if (currentSearchParams.has(parameter)) {
       currentUrl.searchParams.set(parameter, currentSearchParams.get(parameter))
     }
   })
+
+  const apiParams = Array.isArray(queryParams) ? queryParams : [queryParams]
+  if (queryParams && apiParams.length) {
+    apiParams.forEach((parameter) => {
+      if (parameter['value']) {
+        currentUrl.searchParams.set(parameter['key'], parameter['value'])
+      }
+    })
+  }
 
   return currentUrl.href
 }

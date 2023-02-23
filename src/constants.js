@@ -19,6 +19,9 @@ const constants = {
   qualifications: {
     API_URL: process.env.REACT_APP_QUALIFICATIONS_API_URL
   },
+  users: {
+    API_URL: process.env.REACT_APP_USERS_API_URL
+  },
   sentry: {
     SENTRY_DSN: process.env.REACT_APP_SENTRY_DSN,
     SENTRY_SAMPLE_RATE: process.env.REACT_APP_SENTRY_SAMPLE_RATE

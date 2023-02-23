@@ -7,6 +7,7 @@ import Qualifications from './Qualifications'
 import { Error } from '../components/Error'
 import { Footer } from '../components/Footer'
 import { config } from '../constants'
+import User from './User'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -19,10 +20,11 @@ function App() {
       {apiKey && perscomId ? (
         <Routes>
           <Route path='/' element={<Roster />}></Route>
-          <Route path='/roster' element={<Roster />}></Route>
           <Route path='/awards' element={<Awards />}></Route>
-          <Route path='/ranks' element={<Ranks />}></Route>
           <Route path='/qualifications' element={<Qualifications />}></Route>
+          <Route path='/ranks' element={<Ranks />}></Route>
+          <Route path='/roster' element={<Roster />}></Route>
+          <Route path='/users/:id' element={<User />}></Route>
           <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
         </Routes>
       ) : (
