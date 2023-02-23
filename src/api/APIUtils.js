@@ -22,7 +22,7 @@ const useQuery = ({ url, queryParams }) => {
   }
 
   useEffect(() => {
-    if (apiKey && perscomId && loading !== false) {
+    if (apiKey && perscomId) {
       fetch(composeQueryUrl(url, searchParams, queryParams), {
         method: 'GET',
         headers: headers
@@ -56,7 +56,7 @@ const useQuery = ({ url, queryParams }) => {
           setLoading(false)
         })
     }
-  }, [])
+  }, [url])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
