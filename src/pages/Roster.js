@@ -38,7 +38,7 @@ function renderUnit(unit) {
           headerAttributes: { colSpan: '6' },
           cellClasses: ['w-1/6', 'whitespace-normal sm:whitespace-nowrap'],
           cellContent: (user) => {
-            const { name, rank, position } = user
+            const { name, rank, position, id: user_id } = user
             const { image, abbreviation, name: rank_name } = rank ?? {}
             const { image_url } = image ?? {}
             const { name: position_name } = position ?? {}
@@ -54,7 +54,7 @@ function renderUnit(unit) {
                   </div>
                 )}
                 <div className='flex flex-col ml-4'>
-                  <Link href={`/users/${id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
+                  <Link href={`/users/${user_id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
                     {name}
                   </Link>
                   <div className='md:hidden text-xs text-gray-500'>{position_name}</div>
