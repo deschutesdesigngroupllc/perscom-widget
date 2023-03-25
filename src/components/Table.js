@@ -8,8 +8,11 @@ const hash = require('object-hash')
 
 export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses, onPaginationClick }) {
   return (
-    <div id='perscom_widget_table_wrapper' className={cx('shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg', wrapperClasses)}>
-      <table id='perscom_widget_table' className={cx('overflow-hidden min-w-full divide-y divide-gray-300', tableClasses)}>
+    <div
+      id='perscom_widget_table_wrapper'
+      className={cx('overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg', wrapperClasses)}
+    >
+      <table id='perscom_widget_table' className={cx('min-w-full divide-y divide-gray-300', tableClasses)}>
         <thead id='perscom_widget_table_header' className='bg-gray-50'>
           <tr>
             {columns &&
