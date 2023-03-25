@@ -32,7 +32,7 @@ function User() {
 
   let records = {}
   for (var i = 0; i < tabs.length; i++) {
-    const { data: assignmentRecordData } = useQuery({
+    const { data: recordData } = useQuery({
       url: new URL(id + '/' + tabs[i].path, url).href,
       queryParams: {
         key: 'include',
@@ -40,7 +40,7 @@ function User() {
       }
     })
 
-    records[tabs[i].variable] = assignmentRecordData
+    records[tabs[i].variable] = recordData
   }
 
   return (
