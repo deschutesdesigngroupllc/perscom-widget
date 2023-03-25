@@ -16,7 +16,7 @@ function App() {
   const perscomId = searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null
 
   return (
-    <div className='p-1'>
+    <div className='p-0.5'>
       {apiKey && perscomId ? (
         <Routes>
           <Route path='/' element={<Roster />}></Route>

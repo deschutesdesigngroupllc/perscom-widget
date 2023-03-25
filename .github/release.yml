@@ -21,3 +21,6 @@ changelog:
     - title: Security
       labels:
         - 'Type: Vulnerability'
+    - title: Other
+      labels:
+        - '*'

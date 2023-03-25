@@ -32,7 +32,7 @@ function User() {
 
   let records = {}
   for (var i = 0; i < tabs.length; i++) {
-    const { data: assignmentRecordData } = useQuery({
+    const { data: recordData } = useQuery({
       url: new URL(id + '/' + tabs[i].path, url).href,
       queryParams: {
         key: 'include',
@@ -40,7 +40,7 @@ function User() {
       }
     })
 
-    records[tabs[i].variable] = assignmentRecordData
+    records[tabs[i].variable] = recordData
   }
 
   return (
@@ -81,7 +81,7 @@ function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
         </div>
       )}
       <div className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4'>
-        <div className='divide-y divide-gray-300 flex flex-grow flex-col overflow-hidden rounded-lg bg-white shadow min-h-full md:max-w-2xl'>
+        <div className='divide-y divide-gray-300 flex flex-grow flex-col overflow-hidden ring-1 ring-black ring-opacity-5 rounded-lg bg-white shadow min-h-full md:max-w-2xl'>
           <div className='px-3 py-3.5 bg-gray-50'>
             <div className='flex justify-between items-center'>
               <div className='font-semibold text-gray-900'>Personnel Profile</div>
@@ -101,7 +101,7 @@ function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
             </div>
           </div>
         </div>
-        <div className='divide-y divide-gray-300 flex flex-col flex-grow overflow-hidden rounded-lg bg-white shadow min-h-full'>
+        <div className='divide-y divide-gray-300 flex flex-col flex-grow overflow-hidden ring-1 ring-black ring-opacity-5 rounded-lg bg-white shadow min-h-full'>
           <div className='px-3 py-3.5 bg-gray-50'>
             <div className='flex justify-between items-center'>
               <div className='font-semibold text-gray-900'>Demographics</div>
@@ -145,7 +145,7 @@ function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
 
 function renderRecords(user, records, tabs, currentTab, setCurrentTab) {
   return (
-    <div className='divide-y divide-gray-300 flex flex-col overflow-hidden rounded-lg bg-white shadow'>
+    <div className='divide-y divide-gray-300 flex flex-col overflow-hidden ring-1 ring-black ring-opacity-5 rounded-lg bg-white shadow'>
       <div className='px-3 py-3.5 bg-gray-50 font-semibold text-gray-900'>Records</div>
       <div className='px-4 pt-4'>
         <Tabs onSelect={(index) => setCurrentTab(index)} defaultIndex={currentTab}>
