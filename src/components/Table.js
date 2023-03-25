@@ -10,7 +10,7 @@ export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses
   return (
     <div
       id='perscom_widget_table_wrapper'
-      className={cx('overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg', wrapperClasses)}
+      className={cx('overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg', wrapperClasses)}
     >
       <table id='perscom_widget_table' className={cx('min-w-full divide-y divide-gray-300', tableClasses)}>
         <thead id='perscom_widget_table_header' className='bg-gray-50'>
