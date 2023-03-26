@@ -223,30 +223,30 @@ function createRecordsTabs() {
           maxWidth: '250px'
         },
         {
-          name: 'Unit',
-          selector: (row) => row.unit?.name,
+          name: 'Assignment',
+          selector: (row) => {
+            const { unit, position, specialty, text } = row
+            const { name: unit_name } = unit ?? {}
+            const { name: position_name } = position ?? {}
+            const { name: specialty_name } = specialty ?? {}
+            return (
+              <div className='flex flex-col space-y-1'>
+                <div className='font-semibold'>
+                  {position_name}, {unit_name}
+                </div>
+                <div className='text-xs'>{specialty_name}</div>
+                <div className='text-xs text-gray-400'>{text}</div>
+              </div>
+            )
+          },
           sortable: true
-        },
-        {
-          name: 'Position',
-          selector: (row) => row.position?.name,
-          sortable: true
-        },
-        {
-          name: 'Specialty',
-          selector: (row) => row.specialty?.name,
-          sortable: true
-        },
-        {
-          name: 'Text',
-          selector: (row) => row.text
         }
       ]
     },
     {
       name: 'Award Records',
       path: 'award-records',
-      includes: 'award',
+      includes: Array('award', 'award.image').join(),
       variable: 'awardRecordData',
       columns: [
         {
@@ -257,12 +257,21 @@ function createRecordsTabs() {
         },
         {
           name: 'Award',
-          selector: (row) => row.award?.name,
+          selector: (row) => {
+            const { award, text } = row
+            const { image, name } = award ?? {}
+            const { image_url } = image ?? {}
+            return (
+              <div className='flex space-x-4'>
+                {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
+                <div className='flex flex-col space-y-1'>
+                  <div className='font-semibold'>{name}</div>
+                  <div className='text-xs text-gray-400'>{text}</div>
+                </div>
+              </div>
+            )
+          },
           sortable: true
-        },
-        {
-          name: 'Text',
-          selector: (row) => row.text
         }
       ]
     },
@@ -278,7 +287,7 @@ function createRecordsTabs() {
           maxWidth: '250px'
         },
         {
-          name: 'Text',
+          name: 'Record',
           selector: (row) => row.text
         }
       ]
@@ -286,7 +295,7 @@ function createRecordsTabs() {
     {
       name: 'Qualification Records',
       path: 'qualification-records',
-      includes: 'qualification',
+      includes: Array('qualification', 'qualification.image').join(),
       variable: 'qualificationRecordData',
       columns: [
         {
@@ -297,19 +306,28 @@ function createRecordsTabs() {
         },
         {
           name: 'Qualification',
-          selector: (row) => row.qualification?.name,
+          selector: (row) => {
+            const { qualification, text } = row
+            const { image, name } = qualification ?? {}
+            const { image_url } = image ?? {}
+            return (
+              <div className='flex space-x-4'>
+                {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
+                <div className='flex flex-col space-y-1'>
+                  <div className='font-semibold'>{name}</div>
+                  <div className='text-xs text-gray-400'>{text}</div>
+                </div>
+              </div>
+            )
+          },
           sortable: true
-        },
-        {
-          name: 'Text',
-          selector: (row) => row.text
         }
       ]
     },
     {
       name: 'Rank Records',
       path: 'rank-records',
-      includes: 'rank',
+      includes: Array('rank', 'rank.image').join(),
       variable: 'rankRecordData',
       columns: [
         {
@@ -320,12 +338,21 @@ function createRecordsTabs() {
         },
         {
           name: 'Rank',
-          selector: (row) => row.rank?.name,
+          selector: (row) => {
+            const { rank, text } = row
+            const { image, name } = rank ?? {}
+            const { image_url } = image ?? {}
+            return (
+              <div className='flex space-x-4'>
+                {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
+                <div className='flex flex-col space-y-1'>
+                  <div className='font-semibold'>{name}</div>
+                  <div className='text-xs text-gray-400'>{text}</div>
+                </div>
+              </div>
+            )
+          },
           sortable: true
-        },
-        {
-          name: 'Text',
-          selector: (row) => row.text
         }
       ]
     },
@@ -341,7 +368,7 @@ function createRecordsTabs() {
           maxWidth: '250px'
         },
         {
-          name: 'Text',
+          name: 'Record',
           selector: (row) => row.text
         }
       ]
