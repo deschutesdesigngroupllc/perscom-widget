@@ -230,12 +230,12 @@ function createRecordsTabs() {
             const { name: position_name } = position ?? {}
             const { name: specialty_name } = specialty ?? {}
             return (
-              <div className='flex flex-col space-y-1'>
+              <div className='flex flex-col space-y-1 justify-center'>
                 <div className='font-semibold'>
                   {position_name}, {unit_name}
                 </div>
-                <div className='text-xs'>{specialty_name}</div>
-                <div className='text-xs text-gray-400'>{text}</div>
+                {specialty_name && <div className='text-xs'>{specialty_name}</div>}
+                {text && <div className='text-xs text-gray-400'>{text}</div>}
               </div>
             )
           },
@@ -264,9 +264,9 @@ function createRecordsTabs() {
             return (
               <div className='flex space-x-4'>
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-                <div className='flex flex-col space-y-1'>
-                  <div className='font-semibold'>{name}</div>
-                  <div className='text-xs text-gray-400'>{text}</div>
+                <div className='flex flex-col space-y-1 justify-center'>
+                  {name && <div className='font-semibold'>{name}</div>}
+                  {text && <div className='text-xs text-gray-400'>{text}</div>}
                 </div>
               </div>
             )
@@ -313,9 +313,9 @@ function createRecordsTabs() {
             return (
               <div className='flex space-x-4'>
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-                <div className='flex flex-col space-y-1'>
-                  <div className='font-semibold'>{name}</div>
-                  <div className='text-xs text-gray-400'>{text}</div>
+                <div className='flex flex-col space-y-1 justify-center'>
+                  {name && <div className='font-semibold'>{name}</div>}
+                  {text && <div className='text-xs text-gray-400'>{text}</div>}
                 </div>
               </div>
             )
@@ -345,9 +345,9 @@ function createRecordsTabs() {
             return (
               <div className='flex space-x-4'>
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-                <div className='flex flex-col space-y-1'>
-                  <div className='font-semibold'>{name}</div>
-                  <div className='text-xs text-gray-400'>{text}</div>
+                <div className='flex flex-col space-y-1 justify-center'>
+                  {name && <div className='font-semibold'>{name}</div>}
+                  {text && <div className='text-xs text-gray-400'>{text}</div>}
                 </div>
               </div>
             )
