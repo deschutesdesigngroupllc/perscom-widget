@@ -239,7 +239,21 @@ function createRecordsTabs() {
               </div>
             )
           },
-          sortable: true
+          sortable: true,
+          sortFunction: (rowA, rowB) => {
+            const a = rowA.position?.name ?? ''
+            const b = rowB.position?.name ?? ''
+
+            if (a > b) {
+              return 1
+            }
+
+            if (b > a) {
+              return -1
+            }
+
+            return 0
+          }
         }
       ]
     },
@@ -271,7 +285,21 @@ function createRecordsTabs() {
               </div>
             )
           },
-          sortable: true
+          sortable: true,
+          sortFunction: (rowA, rowB) => {
+            const a = rowA.award?.name ?? ''
+            const b = rowB.award?.name ?? ''
+
+            if (a > b) {
+              return 1
+            }
+
+            if (b > a) {
+              return -1
+            }
+
+            return 0
+          }
         }
       ]
     },
@@ -320,7 +348,21 @@ function createRecordsTabs() {
               </div>
             )
           },
-          sortable: true
+          sortable: true,
+          sortFunction: (rowA, rowB) => {
+            const a = rowA.qualification?.name ?? ''
+            const b = rowB.qualification?.name ?? ''
+
+            if (a > b) {
+              return 1
+            }
+
+            if (b > a) {
+              return -1
+            }
+
+            return 0
+          }
         }
       ]
     },
@@ -352,7 +394,21 @@ function createRecordsTabs() {
               </div>
             )
           },
-          sortable: true
+          sortable: true,
+          sortFunction: (rowA, rowB) => {
+            const a = rowA.rank?.name ?? ''
+            const b = rowB.rank?.name ?? ''
+
+            if (a > b) {
+              return 1
+            }
+
+            if (b > a) {
+              return -1
+            }
+
+            return 0
+          }
         }
       ]
     },
