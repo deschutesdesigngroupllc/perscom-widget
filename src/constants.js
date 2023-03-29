@@ -13,11 +13,14 @@ const constants = {
   awards: {
     API_URL: process.env.REACT_APP_AWARDS_API_URL
   },
-  ranks: {
-    API_URL: process.env.REACT_APP_RANKS_API_URL
+  forms: {
+    API_URL: process.env.REACT_APP_FORMS_API_URL
   },
   qualifications: {
     API_URL: process.env.REACT_APP_QUALIFICATIONS_API_URL
+  },
+  ranks: {
+    API_URL: process.env.REACT_APP_RANKS_API_URL
   },
   users: {
     API_URL: process.env.REACT_APP_USERS_API_URL

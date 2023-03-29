@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {}
   },
+  plugins: [require('@tailwindcss/forms')],
   safelist: [
     'bg-sky-100',
     'text-sky-600',
