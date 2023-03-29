@@ -8,6 +8,7 @@ import { Error } from '../components/Error'
 import { Footer } from '../components/Footer'
 import { config } from '../constants'
 import User from './User'
+import Calendar from './Calendar'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Roster />}></Route>
           <Route path='/awards' element={<Awards />}></Route>
+          <Route path='/calendar' element={<Calendar />}></Route>
           <Route path='/qualifications' element={<Qualifications />}></Route>
           <Route path='/ranks' element={<Ranks />}></Route>
           <Route path='/roster' element={<Roster />}></Route>
