@@ -13,6 +13,9 @@ const constants = {
   awards: {
     API_URL: process.env.REACT_APP_AWARDS_API_URL
   },
+  calendars: {
+    API_URL: process.env.REACT_APP_CALENDARS_API_URL
+  },
   ranks: {
     API_URL: process.env.REACT_APP_RANKS_API_URL
   },

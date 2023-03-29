@@ -4,11 +4,10 @@ import useQuery from '../api/APIUtils'
 import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
-import { Calendar as CalendarComponent } from 'react-calendar'
+import { Calendar as CalendarComponent } from '../components/Calendar'
 
 function Calendar() {
-  const [url] = useState(config.awards.API_URL)
-  const [date, setDate] = useState(new Date())
+  const [url] = useState(config.calendars.API_URL)
 
   const { data, loading, error } = useQuery({
     url: url,
@@ -25,15 +24,15 @@ function Calendar() {
       ) : (
         <>
           {error && <Error error={error} />}
-          {data && !!data.length && renderCalendar(data, setDate, date)}
+          {data && !!data.length && renderCalendar(data)}
         </>
       )}
     </>
   )
 }
 
-function renderCalendar(data, setDate, date) {
-  return <CalendarComponent onChange={setDate} value={date} selectRange={true} />
+function renderCalendar() {
+  return <CalendarComponent />
 }
 
 export default Sentry.withProfiler(Calendar)
