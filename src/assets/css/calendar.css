@@ -1,0 +1,59 @@
+.fc {
+    @apply mb-8;
+}
+
+.fc a {
+    @apply text-gray-700 leading-6 text-xs
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    @apply flex items-center justify-between border-b px-6 py-4 lg:flex-none mb-0
+}
+
+.fc .fc-toolbar-title {
+    @apply text-base font-semibold leading-6 text-gray-900
+}
+
+.fc .fc-daygrid-day {
+    @apply bg-white px-3 py-2
+}
+
+.fc .fc-daygrid-event {
+    @apply mt-1
+}
+
+.fc .fc-daygrid-day-events {
+    @apply mt-0
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+    @apply mr-0
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-start, .fc-direction-rtl .fc-daygrid-event.fc-event-end {
+    @apply ml-0
+}
+
+.fc .fc-day-other {
+    @apply bg-gray-50
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    @apply bg-white
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+    @apply text-blue-600
+}
+
+.fc .fc-daygrid-day-top {
+    @apply flex-row
+}
+
+.fc .fc-daygrid-day-number {
+    @apply p-0 font-semibold
+}
+
+.fc .fc-event-main-frame {
+    @apply px-2
+}
