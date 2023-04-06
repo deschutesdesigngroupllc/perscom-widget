@@ -1,10 +1,8 @@
-const IFRAME_ID = 'perscom_widget_iframe'
-const WRAPPER_ID = 'perscom_widget_wrapper'
-
-const WIDGET_ROSTER = 'roster'
-
 import { config } from './constants'
 import { findIncomingAttributes } from './utils/ParameterManager'
+
+const IFRAME_ID = 'perscom_widget_iframe'
+const WRAPPER_ID = 'perscom_widget_wrapper'
 
 /**
  * PERSCOM Widget
@@ -13,12 +11,12 @@ class Widget {
   /**
    * Initalize the widget
    *
-   * @param apiKey
-   * @param perscomId
    * @param widget
+   * @param requiredAttributes
+   * @param optionalAttributes
    */
   init = (widget, requiredAttributes, optionalAttributes) => {
-    this.widget = widget ?? WIDGET_ROSTER
+    this.widget = widget ?? 'roster'
     this.requiredAttributes = requiredAttributes
     this.optionalAttributes = optionalAttributes
 
@@ -57,12 +55,10 @@ class Widget {
   }
 
   /**
-   *
    * Compose our iframe URL appending query parameters necessary
    * for the API request and using the widget attribute for the
    * path.
    *
-   * @param iframeUrl
    * @returns {string}
    */
   composeIframeUrl = () => {

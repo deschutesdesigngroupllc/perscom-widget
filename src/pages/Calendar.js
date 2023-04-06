@@ -17,15 +17,6 @@ function Calendar() {
 
   const { data, loading, error } = useQuery({
     url: url,
-    method: 'POST',
-    requestBody: {
-      scopes: [
-        {
-          name: 'forDatePeriod',
-          parameters: ['2023-02-26', '2023-04-01']
-        }
-      ]
-    },
     queryParams: {
       key: 'include',
       value: 'calendar'
@@ -56,7 +47,6 @@ function Calendar() {
 
   useEffect(() => {
     mapEventData()
-    console.log(eventData)
   }, [data])
 
   return (
@@ -69,10 +59,14 @@ function Calendar() {
           {data && !!data.length && (
             <FullCalendar
               plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
+              handleWindowResize={true}
               events={eventData}
               timeZone='UTC'
               displayEventEnd={true}
               eventClick={goToEvent}
+              buttonText={{
+                today: 'Today'
+              }}
             />
           )}
         </>
