@@ -10,10 +10,17 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import rrulePlugin from '@fullcalendar/rrule'
 import listPlugin from '@fullcalendar/list'
 import '../assets/css/calendar.css'
+import { useSearchParams } from 'react-router-dom'
 
 function Calendar() {
+  var utc = require('dayjs/plugin/utc')
+  var timezone = require('dayjs/plugin/timezone')
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+
   const [url] = useState(config.events.API_URL)
   const [eventData, setEventData] = useState([])
+  const [searchParams] = useSearchParams()
 
   const { data, loading, error } = useQuery({
     url: url,
@@ -23,14 +30,16 @@ function Calendar() {
     }
   })
 
+  const timezoneParameter = searchParams.get('timezone') ?? config.app.TIMEZONE ?? 'UTC'
+
   const mapEventData = () => {
     const mappedEventData = data?.map((event) => {
       return {
         id: event.id,
         title: event.name,
         allDay: event.all_day,
-        start: dayjs(event.start).toDate(),
-        end: dayjs(event.end).toDate(),
+        start: dayjs(event.start).tz(timezoneParameter).toDate(),
+        end: dayjs(event.end).tz(timezoneParameter).toDate(),
         description: event.description,
         rrule: event.rrule,
         color: event.calendar?.color ?? '#2563eb',
@@ -39,10 +48,6 @@ function Calendar() {
     })
 
     setEventData(mappedEventData)
-  }
-
-  const goToEvent = (event) => {
-    window.alert(event)
   }
 
   useEffect(() => {
@@ -61,9 +66,9 @@ function Calendar() {
               plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
               handleWindowResize={true}
               events={eventData}
-              timeZone='UTC'
+              timeZone={timezoneParameter}
+              height='1400'
               displayEventEnd={true}
-              eventClick={goToEvent}
               buttonText={{
                 today: 'Today'
               }}
