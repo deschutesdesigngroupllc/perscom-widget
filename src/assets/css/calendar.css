@@ -11,7 +11,7 @@
 }
 
 .fc-theme-standard td, .fc-theme-standard th {
-    @apply border-gray-200
+    @apply border-gray-200 bg-white
 }
 
 .fc .fc-media-screen {

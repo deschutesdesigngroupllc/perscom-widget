@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
+    "start:widget": "node widget-server.js",
     "build": "react-scripts build",
     "build:widget": "parcel build src/widget.js",
     "test": "react-scripts test",
