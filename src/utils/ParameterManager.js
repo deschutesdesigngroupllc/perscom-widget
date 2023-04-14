@@ -8,6 +8,11 @@ const optionalAttributes = [
     attribute: 'data-include',
     parameter: 'include',
     value: ''
+  },
+  {
+    attribute: 'data-timezone',
+    parameter: 'timezone',
+    value: 'UTC'
   }
 ]
 

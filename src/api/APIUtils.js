@@ -3,7 +3,16 @@ import { useSearchParams } from 'react-router-dom'
 import { config } from '../constants'
 import { getOptionalApiParameters } from '../utils/ParameterManager'
 
-const useQuery = ({ url, queryParams }) => {
+/**
+ * Hook to perform an API request to https://api.perscom.io
+ *
+ * @param url
+ * @param queryParams
+ * @param method
+ * @param requestBody
+ * @returns {{data, meta, links: *, loading: boolean, error: string, statusCode: undefined}}
+ */
+const useQuery = ({ url, queryParams, method = 'GET', requestBody = {} }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -23,10 +32,7 @@ const useQuery = ({ url, queryParams }) => {
 
   useEffect(() => {
     if (apiKey && perscomId) {
-      fetch(composeQueryUrl(url, searchParams, queryParams), {
-        method: 'GET',
-        headers: headers
-      })
+      createRequest(url, searchParams, queryParams, method, headers, requestBody)
         .then((response) => {
           setStatusCode(response.status)
           switch (response.status) {
@@ -61,7 +67,42 @@ const useQuery = ({ url, queryParams }) => {
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
 
-const composeQueryUrl = (url, currentSearchParams, queryParams = null) => {
+/**
+ * Creates a fetch request
+ *
+ * @param url
+ * @param searchParams
+ * @param queryParams
+ * @param method
+ * @param headers
+ * @param requestBody
+ * @returns {Promise<Response>}
+ */
+const createRequest = (url, searchParams, queryParams, method, headers, requestBody) => {
+  const init = {
+    method: method,
+    headers: headers
+  }
+
+  if (requestBody && method === 'POST') {
+    init.body = JSON.stringify(requestBody)
+  }
+
+  return fetch(composeRequestUrl(url, searchParams, queryParams), init)
+}
+
+/**
+ * Composes the API URL used in the fetch request taking
+ * into account the current search params in the iframe URL,
+ * filtering out any non-valid parameters and adding any additional
+ * query params specificed by a component using the useQuery hook.
+ *
+ * @param url
+ * @param currentSearchParams
+ * @param queryParams
+ * @returns {string}
+ */
+const composeRequestUrl = (url, currentSearchParams, queryParams = null) => {
   const currentUrl = new URL(url)
   getOptionalApiParameters().forEach((parameter) => {
     if (currentSearchParams.has(parameter)) {

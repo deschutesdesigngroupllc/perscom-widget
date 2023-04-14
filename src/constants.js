@@ -1,17 +1,24 @@
 const constants = {
   app: {
-    ENVIRONMENT: process.env.REACT_APP_WIDGET_ENVIRONMENT,
-    WIDGET_VERSION: process.env.REACT_APP_WIDGET_VERSION,
-    WIDGET_URL: process.env.REACT_APP_WIDGET_URL,
     API_KEY: process.env.REACT_APP_API_KEY,
+    ENVIRONMENT: process.env.REACT_APP_WIDGET_ENVIRONMENT,
+    JWT: process.env.REACT_APP_JWT,
     PERSCOM_ID: process.env.REACT_APP_PERSCOM_ID,
-    JWT: process.env.REACT_APP_JWT
+    TIMEZONE: process.env.REACT_APP_TIMEZONE,
+    WIDGET_URL: process.env.REACT_APP_WIDGET_URL,
+    WIDGET_VERSION: process.env.REACT_APP_WIDGET_VERSION
   },
   roster: {
     API_URL: process.env.REACT_APP_ROSTER_API_URL
   },
   awards: {
     API_URL: process.env.REACT_APP_AWARDS_API_URL
+  },
+  calendars: {
+    API_URL: process.env.REACT_APP_CALENDARS_API_URL
+  },
+  events: {
+    API_URL: process.env.REACT_APP_EVENTS_API_URL
   },
   ranks: {
     API_URL: process.env.REACT_APP_RANKS_API_URL
