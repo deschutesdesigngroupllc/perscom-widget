@@ -4,11 +4,11 @@ import Roster from './Roster'
 import Awards from './Awards'
 import Ranks from './Ranks'
 import Qualifications from './Qualifications'
-import { Error } from '../components/Error'
 import { Footer } from '../components/Footer'
 import { config } from '../constants'
 import User from './User'
 import Calendar from './Calendar'
+import { Alert } from '../components/Alert'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -30,7 +30,7 @@ function App() {
           <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
         </Routes>
       ) : (
-        <Error error='Please make sure all required parameters have been included.' />
+        <Alert message='Please make sure all required widget parameters have been included.' type='danger' />
       )}
       <Footer />
     </div>
