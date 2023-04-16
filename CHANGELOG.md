@@ -1,6 +1,21 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.3...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.4...HEAD)
+
+## [v1.0.4](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.3...v1.0.4) - 2023-04-16
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.4 -->
+### What's Changed
+
+#### Changed
+
+- Widget now shows alert when request has finished but no data exists. by @JonErickson in https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/pull/26
+
+#### Other
+
+- New calendar widget by @JonErickson in https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/pull/25
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.3...v1.0.4
 
 ## [v1.0.3](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.2...v1.0.3) - 2023-03-25
 
