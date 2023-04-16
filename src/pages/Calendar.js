@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useEffect, useState } from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import dayjs from 'dayjs'
@@ -11,6 +10,7 @@ import rrulePlugin from '@fullcalendar/rrule'
 import listPlugin from '@fullcalendar/list'
 import '../assets/css/calendar.css'
 import { useSearchParams } from 'react-router-dom'
+import { Alert } from '../components/Alert'
 
 function Calendar() {
   var utc = require('dayjs/plugin/utc')
@@ -60,19 +60,22 @@ function Calendar() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          {data && !!data.length && (
-            <FullCalendar
-              plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
-              handleWindowResize={true}
-              events={eventData}
-              timeZone={timezoneParameter}
-              height='1400'
-              displayEventEnd={true}
-              buttonText={{
-                today: 'Today'
-              }}
-            />
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : (
+            data && (
+              <FullCalendar
+                plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
+                handleWindowResize={true}
+                events={eventData}
+                timeZone={timezoneParameter}
+                height='1400'
+                displayEventEnd={true}
+                buttonText={{
+                  today: 'Today'
+                }}
+              />
+            )
           )}
         </>
       )}

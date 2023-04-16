@@ -1,10 +1,10 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Table } from '../components/Table'
+import { Alert } from '../components/Alert'
 
 function Ranks() {
   const [url, setUrl] = useState(config.ranks.API_URL)
@@ -27,8 +27,13 @@ function Ranks() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          {data && !!data.length && renderRanks(data, links, meta, onPaginationClick)}
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : data && !!data.length ? (
+            renderRanks(data, links, meta, onPaginationClick)
+          ) : (
+            <Alert message='No ranks found. Please add a rank.' />
+          )}
         </>
       )}
     </>
