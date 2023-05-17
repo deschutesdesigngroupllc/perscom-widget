@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Link } from '../components/Link'
@@ -10,6 +9,7 @@ import cx from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import DataTable from 'react-data-table-component'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
+import { Alert } from '../components/Alert'
 
 function User() {
   const { id } = useParams()
@@ -27,20 +27,36 @@ function User() {
     }
   })
 
-  const tabs = createRecordsTabs()
-  const [currentTab, setCurrentTab] = useState(0)
+  const recordsTabs = createRecordsTabs()
+  const [currentRecordTab, setCurrentRecordTab] = useState(0)
 
   let records = {}
-  for (var i = 0; i < tabs.length; i++) {
+  for (var i = 0; i < recordsTabs.length; i++) {
     const { data: recordData } = useQuery({
-      url: new URL(id + '/' + tabs[i].path, url).href,
+      url: new URL(id + '/' + recordsTabs[i].path, url).href,
       queryParams: {
         key: 'include',
-        value: tabs[i].includes
+        value: recordsTabs[i].includes
       }
     })
 
-    records[tabs[i].variable] = recordData
+    records[recordsTabs[i].variable] = recordData
+  }
+
+  const assignmentTabs = createAssignmentTabs()
+  const [currentAssignmentTab, setCurrentAssignmentTab] = useState(0)
+
+  let assignments = {}
+  for (var a = 0; a < assignmentTabs.length; a++) {
+    const { data: assignmentData } = useQuery({
+      url: new URL(id + '/' + assignmentTabs[a].path, url).href,
+      queryParams: {
+        key: 'include',
+        value: assignmentTabs[a].includes
+      }
+    })
+
+    assignments[assignmentTabs[a].variable] = assignmentData
   }
 
   return (
@@ -49,23 +65,47 @@ function User() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          <div className='flex flex-col space-y-4'>
-            <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
-              <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
-              <Link href={'/roster'} className='text-sm'>
-                Back to Roster
-              </Link>
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : (
+            <div className='flex flex-col space-y-4'>
+              <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
+                <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
+                <Link href={'/roster'} className='text-sm'>
+                  Back to Roster
+                </Link>
+              </div>
+              {user &&
+                renderProfile(
+                  user,
+                  records,
+                  recordsTabs,
+                  currentRecordTab,
+                  setCurrentRecordTab,
+                  assignments,
+                  assignmentTabs,
+                  currentAssignmentTab,
+                  setCurrentAssignmentTab
+                )}
             </div>
-            {user && renderProfile(user, records, tabs, currentTab, setCurrentTab)}
-          </div>
+          )}
         </>
       )}
     </>
   )
 }
 
-function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
+function renderProfile(
+  user,
+  records,
+  recordsTabs,
+  currentRecordTab,
+  setCurrentRecordTab,
+  assignments,
+  assignmentTabs,
+  currentAssignmentTab,
+  setCurrentAssignmentTab
+) {
   const { name, rank, position, profile_photo_url, cover_photo_url, online, status, unit, specialty } = user
   const { name: rank_name, abbreviation: rank_abbreviation } = rank ?? {}
   const { name: position_name } = position ?? {}
@@ -123,67 +163,130 @@ function renderProfile(user, records, tabs, currentTab, setCurrentTab) {
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{rank_name}</dd>
               </div>
               <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium text-gray-500'>Position</dt>
+                <dt className='text-sm font-medium text-gray-500'>Primary Position</dt>
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{position_name}</dd>
               </div>
               <div className='bg-white px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium text-gray-500'>Specialty</dt>
+                <dt className='text-sm font-medium text-gray-500'>Primary Specialty</dt>
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{specialty_name}</dd>
               </div>
               <div className='bg-gray-50 px-4 py-3.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium text-gray-500'>Unit</dt>
+                <dt className='text-sm font-medium text-gray-500'>Primary Unit</dt>
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{unit_name}</dd>
               </div>
             </dl>
           </div>
         </div>
       </div>
-      {renderRecords(user, records, tabs, currentTab, setCurrentTab)}
+      {renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab)}
+      {renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab)}
     </div>
   )
 }
 
-function renderRecords(user, records, tabs, currentTab, setCurrentTab) {
+function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab) {
   return (
     <div className='divide-y divide-gray-300 flex flex-col overflow-hidden ring-1 ring-black ring-opacity-5 rounded-lg bg-white shadow'>
-      <div className='px-3 py-3.5 bg-gray-50 font-semibold text-gray-900'>Records</div>
+      <div className='px-3 py-3.5 bg-gray-50 font-semibold text-gray-900'>Assignments</div>
       <div className='px-4 pt-4'>
-        <Tabs onSelect={(index) => setCurrentTab(index)} defaultIndex={currentTab}>
+        <Tabs onSelect={(index) => setCurrentAssignmentTab(index)} defaultIndex={currentAssignmentTab}>
           <TabList className='-mb-px flex space-x-8 border-b border-gray-200 overflow-scroll'>
-            {tabs.map((tab, index) => (
+            {assignmentTabs.map((tab, index) => (
               <Tab
                 key={index}
                 className={cx('cursor-pointer whitespace-nowrap flex py-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
-                  'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentTab,
-                  'active:border-transparent border-blue-600 text-blue-600': index === currentTab
+                  'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentAssignmentTab,
+                  'active:border-transparent border-blue-600 text-blue-600': index === currentAssignmentTab
                 })}
               >
                 {tab.name}
                 <span
                   aria-hidden='true'
                   className={cx('hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block', {
-                    'bg-blue-100 text-blue-600': index === currentTab,
-                    'bg-gray-100 text-gray-900': index !== currentTab
+                    'bg-blue-100 text-blue-600': index === currentAssignmentTab,
+                    'bg-gray-100 text-gray-900': index !== currentAssignmentTab
                   })}
                 >
-                  {records[tabs[index].variable] ? records[tabs[index].variable].length : 0}
+                  {assignments[assignmentTabs[index].variable] ? assignments[assignmentTabs[index].variable].length : 0}
                 </span>
               </Tab>
             ))}
           </TabList>
-          {tabs.map((tab, index) => (
+          {assignmentTabs.map((tab, index) => (
+            <TabPanel key={index}>
+              <div className='py-4'>
+                {assignments && (
+                  <DataTable
+                    key={index}
+                    columns={assignmentTabs[index].columns}
+                    data={assignments[assignmentTabs[index].variable]}
+                    pagination={true}
+                    progressPending={!assignments[assignmentTabs[index].variable]}
+                    progressComponent={DataTableLoading()}
+                    highlightOnHover={true}
+                    defaultSortFieldId={1}
+                    responsive={true}
+                    customStyles={{
+                      cells: {
+                        style: {
+                          marginTop: '0.5rem',
+                          marginBottom: '0.5rem'
+                        }
+                      }
+                    }}
+                  />
+                )}
+              </div>
+            </TabPanel>
+          ))}
+        </Tabs>
+      </div>
+    </div>
+  )
+}
+
+function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab) {
+  return (
+    <div className='divide-y divide-gray-300 flex flex-col overflow-hidden ring-1 ring-black ring-opacity-5 rounded-lg bg-white shadow'>
+      <div className='px-3 py-3.5 bg-gray-50 font-semibold text-gray-900'>Records</div>
+      <div className='px-4 pt-4'>
+        <Tabs onSelect={(index) => setCurrentRecordTab(index)} defaultIndex={currentRecordTab}>
+          <TabList className='-mb-px flex space-x-8 border-b border-gray-200 overflow-scroll'>
+            {recordsTabs.map((tab, index) => (
+              <Tab
+                key={index}
+                className={cx('cursor-pointer whitespace-nowrap flex py-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
+                  'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentRecordTab,
+                  'active:border-transparent border-blue-600 text-blue-600': index === currentRecordTab
+                })}
+              >
+                {tab.name}
+                <span
+                  aria-hidden='true'
+                  className={cx('hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block', {
+                    'bg-blue-100 text-blue-600': index === currentRecordTab,
+                    'bg-gray-100 text-gray-900': index !== currentRecordTab
+                  })}
+                >
+                  {records[recordsTabs[index].variable] ? records[recordsTabs[index].variable].length : 0}
+                </span>
+              </Tab>
+            ))}
+          </TabList>
+          {recordsTabs.map((tab, index) => (
             <TabPanel key={index}>
               <div className='py-4'>
                 {records && (
                   <DataTable
                     key={index}
-                    columns={tabs[index].columns}
-                    data={records[tabs[index].variable]}
+                    columns={recordsTabs[index].columns}
+                    data={records[recordsTabs[index].variable]}
                     pagination={true}
-                    progressPending={!records[tabs[index].variable]}
+                    progressPending={!records[recordsTabs[index].variable]}
                     progressComponent={DataTableLoading()}
                     highlightOnHover={true}
-                    defaultSortFieldId='date'
+                    defaultSortFieldId={1}
+                    defaultSortAsc={false}
                     responsive={true}
                     customStyles={{
                       cells: {
@@ -426,6 +529,47 @@ function createRecordsTabs() {
         {
           name: 'Record',
           selector: (row) => row.text
+        }
+      ]
+    }
+  ]
+}
+
+function createAssignmentTabs() {
+  return [
+    {
+      name: 'Secondary Positions',
+      path: 'secondary-positions',
+      variable: 'secondaryPositions',
+      columns: [
+        {
+          name: 'Position',
+          selector: (row) => row.name,
+          sortable: true
+        }
+      ]
+    },
+    {
+      name: 'Secondary Specialties',
+      path: 'secondary-specialties',
+      variable: 'secondarySpecialties',
+      columns: [
+        {
+          name: 'Specialty',
+          selector: (row) => row.name,
+          sortable: true
+        }
+      ]
+    },
+    {
+      name: 'Secondary Units',
+      path: 'secondary-units',
+      variable: 'secondaryUnits',
+      columns: [
+        {
+          name: 'Unit',
+          selector: (row) => row.name,
+          sortable: true
         }
       ]
     }

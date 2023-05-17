@@ -1,11 +1,11 @@
 import * as Sentry from '@sentry/react'
 import React from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
 import { Link } from '../components/Link'
+import { Alert } from '../components/Alert'
 
 function Roster() {
   const { data, loading, error } = useQuery({
@@ -18,8 +18,13 @@ function Roster() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          <div className='flex flex-col space-y-4'>{data && !!data.length && data.map((unit) => renderUnit(unit))}</div>
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : data && !!data.length ? (
+            <div className='flex flex-col space-y-4'>{data.map((unit) => renderUnit(unit))}</div>
+          ) : (
+            <Alert message='No units found. Please add a unit to view the roster.' />
+          )}
         </>
       )}
     </>

@@ -13,6 +13,11 @@ const optionalAttributes = [
     attribute: 'data-tags',
     parameter: 'tags',
     value: ''
+  },
+  {
+    attribute: 'data-timezone',
+    parameter: 'timezone',
+    value: 'UTC'
   }
 ]
 
