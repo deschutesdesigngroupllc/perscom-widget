@@ -1,16 +1,16 @@
-import React from 'react'
-import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-router-dom'
-import Roster from './Roster'
 import Awards from './Awards'
-import Ranks from './Ranks'
-import Qualifications from './Qualifications'
-import { Footer } from '../components/Footer'
-import { config } from '../constants'
-import User from './User'
-import Forms from './Forms'
-import Form from './Form'
 import Calendar from './Calendar'
+import Form from './Form'
+import Forms from './Forms'
+import Qualifications from './Qualifications'
+import Ranks from './Ranks'
+import React from 'react'
+import Roster from './Roster'
+import User from './User'
 import { Alert } from '../components/Alert'
+import { Footer } from '../components/Footer'
+import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-router-dom'
+import { config } from '../constants'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -24,9 +24,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Roster />}></Route>
           <Route path='/awards' element={<Awards />}></Route>
+          <Route path='/calendar' element={<Calendar />}></Route>
           <Route path='/forms' element={<Forms />}></Route>
           <Route path='/forms/:id' element={<Form />}></Route>
-          <Route path='/calendar' element={<Calendar />}></Route>
           <Route path='/qualifications' element={<Qualifications />}></Route>
           <Route path='/ranks' element={<Ranks />}></Route>
           <Route path='/roster' element={<Roster />}></Route>

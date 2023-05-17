@@ -69,6 +69,13 @@ export function findIncomingAttributes(document) {
   return { widget: widgetAttribute, requiredAttributes, optionalAttributes }
 }
 
+/**
+ * Finds the widget attribute that will determine which widget
+ * is to be displayed.
+ *
+ * @param perscomWidgetElement
+ * @returns {string}
+ */
 export function findWidgetAttribute(perscomWidgetElement) {
   return perscomWidgetElement.getAttribute('data-widget')
 }

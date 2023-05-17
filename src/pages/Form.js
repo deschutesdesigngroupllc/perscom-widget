@@ -1,13 +1,13 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
-import { Loading } from '../components/Loading'
-import { config } from '../constants'
-import { useParams } from 'react-router-dom'
+import { Alert } from '../components/Alert'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 import { Link } from '../components/Link'
+import { Loading } from '../components/Loading'
 import { classListForField, domElementForField, inputTypeForField, childElementForField } from '../utils/FormHelper'
+import { config } from '../constants'
+import { useParams } from 'react-router-dom'
 
 function Form() {
   const { id } = useParams()
@@ -42,16 +42,19 @@ function Form() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          <div className='flex flex-col space-y-4'>
-            <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
-              <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
-              <Link href={'/forms'} className='text-sm'>
-                Back to Forms
-              </Link>
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : (
+            <div className='flex flex-col space-y-4'>
+              <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
+                <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
+                <Link href={'/forms'} className='text-sm'>
+                  Back to Forms
+                </Link>
+              </div>
+              {data && renderForm(data, onChange, onSubmit)}
             </div>
-            {data && renderForm(data, onChange, onSubmit)}
-          </div>
+          )}
         </>
       )}
     </>

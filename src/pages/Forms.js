@@ -1,11 +1,11 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
-import { Error } from '../components/Error'
-import { Loading } from '../components/Loading'
-import { config } from '../constants'
-import { Table } from '../components/Table'
+import { Alert } from '../components/Alert'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Loading } from '../components/Loading'
+import { Table } from '../components/Table'
+import { config } from '../constants'
 
 function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
@@ -35,8 +35,13 @@ function Forms() {
         <Loading />
       ) : (
         <>
-          {error && <Error error={error} />}
-          {data && !!data.length && renderForms(data, links, meta, onPaginationClick)}
+          {error ? (
+            <Alert message={error} type='danger' />
+          ) : data && !!data.length ? (
+            renderForms(data, links, meta, onPaginationClick)
+          ) : (
+            <Alert message='No forms found. Please add an award.' />
+          )}
         </>
       )}
     </>
