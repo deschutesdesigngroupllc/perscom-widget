@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.4...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.5...HEAD)
+
+## [v1.0.5](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.4...v1.0.5) - 2023-05-17
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.5 -->
+### What's Changed
+
+#### Added
+
+- Added secondary assignments to user profile by @JonErickson in https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/pull/28
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.4...v1.0.5
 
 ## [v1.0.4](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.3...v1.0.4) - 2023-04-16
 
