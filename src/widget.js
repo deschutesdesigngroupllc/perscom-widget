@@ -96,6 +96,7 @@ class Widget {
       iframe.style.border = 'none'
       iframe.style.overflow = 'hidden'
       iframe.style.display = 'block'
+      iframe.style.userSelect = 'none'
       this.iframe = iframe
     }
   }
