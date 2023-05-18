@@ -55,7 +55,7 @@ function renderForms(forms, links, meta, onPaginationClick) {
         {
           name: 'Forms',
           headerClasses: ['text-center'],
-          cellClasses: ['!whitespace-normal', 'break-normal', '!py-4'],
+          cellClasses: ['!whitespace-normal', 'break-normal'],
           cellContent: (form) => {
             const { name, description, id } = form
             return (

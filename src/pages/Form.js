@@ -2,39 +2,25 @@ import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
 import { Alert } from '../components/Alert'
+import { Button, Label } from 'flowbite-react'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
+import { Controller, useForm } from 'react-hook-form'
 import { Link } from '../components/Link'
 import { Loading } from '../components/Loading'
-import { classListForField, domElementForField, inputTypeForField, childElementForField } from '../utils/FormHelper'
 import { config } from '../constants'
 import { useParams } from 'react-router-dom'
+import { componentForField } from '../utils/FormHelper'
 
 function Form() {
   const { id } = useParams()
   const [url] = useState(config.forms.API_URL)
-  const [values, setValues] = useState({})
 
   const { data, loading, error } = useQuery({
     url: new URL(id, url).href
   })
 
-  const onChange = (event) => {
-    const key = event.target.id
-    const value = event.target.value
-    setValues((values) => ({
-      ...values,
-      [key]: value
-    }))
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    useQuery({
-      url: new URL(id, url).href,
-      method: 'POST',
-      requestBody: values
-    })
-  }
+  const { control, handleSubmit } = useForm()
+  const onSubmit = (data) => console.log(data)
 
   return (
     <>
@@ -52,7 +38,7 @@ function Form() {
                   Back to Forms
                 </Link>
               </div>
-              {data && renderForm(data, onChange, onSubmit)}
+              {data && renderForm(data, control, handleSubmit, onSubmit)}
             </div>
           )}
         </>
@@ -61,7 +47,7 @@ function Form() {
   )
 }
 
-function renderForm(form, onChange, onSubmit) {
+function renderForm(form, control, handleSubmit, onSubmit) {
   const { name, fields, instructions } = form
 
   return (
@@ -71,53 +57,29 @@ function renderForm(form, onChange, onSubmit) {
           <div className='font-semibold text-gray-900'>{name}</div>
         </div>
       </div>
-      <div className='px-3'>
-        <form onSubmit={onSubmit} className='mb-0'>
-          <div className='space-y-12 sm:space-y-16'>
-            <div className='space-y-8 py-4 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:py-0'>
-              {instructions && <div className='text-sm text-gray-600 pt-4 sm:py-8'>{instructions}</div>}
-              {fields &&
-                !!fields.length &&
-                fields.map((field) => {
-                  return (
-                    <div className='sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6' key={field.id}>
-                      <label htmlFor={field.key} className='block text-sm font-bold leading-6 text-gray-900 sm:pt-1.5'>
-                        {field.name}
-                      </label>
-                      <div className='mt-2 sm:col-span-2 sm:mt-0'>
-                        <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 sm:max-w-md'>
-                          {React.createElement(
-                            domElementForField(field),
-                            {
-                              type: inputTypeForField(field),
-                              name: field.key,
-                              id: field.key,
-                              className: classListForField(field),
-                              placeholder: field.placeholder ?? '',
-                              readOnly: field.readonly,
-                              required: field.required,
-                              onChange: onChange
-                            },
-                            childElementForField(field)
-                          )}
-                        </div>
-                        {field.help && <p className='mt-1 text-sm text-gray-400'>{field.help}</p>}
-                      </div>
+      <div className='p-4'>
+        <form onSubmit={handleSubmit(onSubmit)} className='mb-0'>
+          <div className='flex flex-col gap-4 py-4 sm:py-0'>
+            {instructions && <div className='text-sm text-gray-600'>{instructions}</div>}
+            {fields &&
+              !!fields.length &&
+              fields.map((field) => {
+                return (
+                  <div key={field.key}>
+                    <div className='mb-2 block'>
+                      <Label htmlFor={field.key} value={field.name} />
                     </div>
-                  )
-                })}
-            </div>
-          </div>
-          <div className='flex items-center justify-end gap-x-6 border-t border-gray-900/10 py-4 px-4 sm:px-8'>
-            <button type='button' className='text-sm font-semibold leading-6 text-gray-900'>
-              Cancel
-            </button>
-            <button
-              type='submit'
-              className='rounded-md bg-blue-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
-            >
-              Submit
-            </button>
+                    <Controller
+                      render={(fieldObject) => {
+                        return componentForField(field, fieldObject)
+                      }}
+                      name={field.name}
+                      control={control}
+                    />
+                  </div>
+                )
+              })}
+            <Button type='submit'>Submit</Button>
           </div>
         </form>
       </div>

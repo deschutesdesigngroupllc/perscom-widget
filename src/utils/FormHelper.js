@@ -1,94 +1,135 @@
 import React from 'react'
 import { countries } from '../assets/js/countries'
+import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react'
 
 /**
- * Returns the DOM element type for a given field
+ * Returns the component for the PERSCOM field object
  *
  * @param field
- * @returns {string}
+ * @param fieldObject
+ * @returns {JSX.Element}
  */
-export function domElementForField(field) {
+export function componentForField(field, fieldObject) {
   switch (field.type) {
+    case 'boolean':
+      return (
+        <ToggleSwitch
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+          onChange={(state) => console.log(state)}
+        />
+      )
+    case 'country':
+      return (
+        <Select
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          helperText={<React.Fragment>{field.help}</React.Fragment>}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+        >
+          {countries.map((country) => {
+            return (
+              <option key={country.code} name={country.code}>
+                {country.name}
+              </option>
+            )
+          })}
+        </Select>
+      )
+    case 'file':
+      return (
+        <FileInput
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+        />
+      )
     case 'code':
-      return 'textarea'
-    case 'country':
-      return 'select'
-    case 'select':
-      return 'select'
     case 'textarea':
-      return 'textarea'
-    case 'timezone':
-      return 'select'
-    default:
-      return 'input'
-  }
-}
-
-/**
- * Returns the input type for a given field
- *
- * @param field
- * @returns {string}
- */
-export function inputTypeForField(field) {
-  switch (field.type) {
-    case 'boolean':
-      return 'checkbox'
-    case 'datetime':
-      return 'datetime-local'
-    default:
-      return field.type
-  }
-}
-
-/**
- * Returns a list of CSS classes for the field
- *
- * @param field
- * @returns {string}
- */
-export function classListForField(field) {
-  switch (field.type) {
-    case 'boolean':
-      return 'h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
-    default:
-      return 'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
-  }
-}
-
-/**
- *
- * @param field
- * @returns {unknown[]}
- */
-export function childElementForField(field) {
-  switch (field.type) {
+      return (
+        <Textarea
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          helperText={<React.Fragment>{field.help}</React.Fragment>}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+          rows={4}
+        />
+      )
     case 'select':
-      return Array.from(field.options).map((value, key) => {
-        return (
-          <option key={key} name={key}>
-            {value}
-          </option>
-        )
-      })
-    case 'country':
-      return countries.map((country) => {
-        return (
-          <option key={country.code} name={country.code}>
-            {country.name}
-          </option>
-        )
-      })
+      return (
+        <Select
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          helperText={<React.Fragment>{field.help}</React.Fragment>}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+        >
+          {!!field.options &&
+            !!field.options.length &&
+            field.options.map((value, key) => {
+              return (
+                <option key={key} name={key}>
+                  {value}
+                </option>
+              )
+            })}
+        </Select>
+      )
     case 'timezone':
       var timezones = Intl.supportedValuesOf('timeZone')
-      return timezones.map((timezone) => {
-        return (
-          <option key={timezone} name={timezone}>
-            {timezone}
-          </option>
-        )
-      })
+
+      return (
+        <Select
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          helperText={<React.Fragment>{field.help}</React.Fragment>}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+        >
+          {timezones.map((timezone) => {
+            return (
+              <option key={timezone} name={timezone}>
+                {timezone}
+              </option>
+            )
+          })}
+        </Select>
+      )
     default:
-      return null
+      return (
+        <TextInput
+          id={field.key}
+          type={field.type}
+          placeholder={field.placeholder}
+          required={field.required}
+          readOnly={field.readonly}
+          helperText={<React.Fragment>{field.help}</React.Fragment>}
+          fieldstate={fieldObject.fieldState}
+          formstate={fieldObject.formState}
+        />
+      )
   }
 }
