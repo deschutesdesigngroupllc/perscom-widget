@@ -102,7 +102,7 @@ class Widget {
       iframe.style.border = 'none'
       iframe.style.overflow = 'hidden'
       iframe.style.display = 'block'
-      iframe.style.userSelect = 'none'
+      iframe.style.outline = 'none'
       this.iframe = iframe
     }
   }

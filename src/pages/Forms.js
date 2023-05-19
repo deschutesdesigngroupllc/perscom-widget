@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
 import { Alert } from '../components/Alert'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
@@ -10,21 +10,10 @@ import { Button } from 'flowbite-react'
 
 function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
-  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
-  const tags = searchParams.has('tags') ? searchParams.get('tags').split(',') : null
   const { data, links, meta, loading, error } = useQuery({
-    url: url,
-    method: 'POST',
-    requestBody: tags && {
-      scopes: [
-        {
-          name: 'forTags',
-          parameters: tags
-        }
-      ]
-    }
+    url: url
   })
 
   const onPaginationClick = (url) => {

@@ -8,20 +8,34 @@ import { Controller, useForm } from 'react-hook-form'
 import { Link } from '../components/Link'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { componentForField } from '../utils/FormHelper'
 
 function Form() {
   const { id } = useParams()
   const [url] = useState(config.forms.API_URL)
   const [errors, setErrors] = useState()
+  const [searchParams] = useSearchParams()
 
   const { data, loading, error } = useQuery({
     url: new URL(id, url).href
   })
 
   const { control, handleSubmit } = useForm()
-  const onSubmit = (data, event) => console.log(data, event)
+  const onSubmit = (data) => {
+    fetch(config.forms.API_URL + `${id}` + '/submissions', {
+      method: 'POST',
+      headers: {
+        'X-Perscom-Id': searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null,
+        'X-Perscom-Widget': true,
+        Authorization: `Bearer ${searchParams.get('apikey') ?? config.app.API_KEY ?? null}`,
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+  }
   const onError = (errors) => setErrors(errors)
 
   return (
