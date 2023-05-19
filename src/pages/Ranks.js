@@ -57,7 +57,7 @@ function renderRanks(ranks, links, meta, onPaginationClick) {
                 {image_url ? (
                   <img className='w-16 block mx-auto' src={image_url} alt={name} />
                 ) : (
-                  <div className='text-center font-bold text-sm'>No Image</div>
+                  <div className='text-center font-medium'>No Image</div>
                 )}
               </>
             )
@@ -78,8 +78,8 @@ function renderRanks(ranks, links, meta, onPaginationClick) {
                     <img className='w-10' src={image_url} alt={name} />
                   </div>
                 )}
-                <div className='font-semibold text-black mb-2'>{name}</div>
-                <div className='text-sm'>{description}</div>
+                <div className='text-sm font-medium text-gray-900 dark:text-white mb-2'>{name}</div>
+                <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
               </>
             )
           }

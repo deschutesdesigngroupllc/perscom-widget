@@ -2,14 +2,16 @@ import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useQuery from '../api/APIUtils'
 import { Alert } from '../components/Alert'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
+import { Button } from 'flowbite-react'
 
 function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const tags = searchParams.has('tags') ? searchParams.get('tags').split(',') : null
   const { data, links, meta, loading, error } = useQuery({
@@ -38,7 +40,7 @@ function Forms() {
           {error ? (
             <Alert message={error} type='danger' />
           ) : data && !!data.length ? (
-            renderForms(data, links, meta, onPaginationClick)
+            renderForms(data, links, meta, onPaginationClick, navigate)
           ) : (
             <Alert message='No forms found. Please add an award.' />
           )}
@@ -48,7 +50,7 @@ function Forms() {
   )
 }
 
-function renderForms(forms, links, meta, onPaginationClick) {
+function renderForms(forms, links, meta, onPaginationClick, navigate) {
   return (
     <Table
       columns={[
@@ -62,16 +64,13 @@ function renderForms(forms, links, meta, onPaginationClick) {
               <>
                 <div className='flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 space-x-0 md:space-x-8'>
                   <div>
-                    <div className='font-semibold text-black mb-2'>{name}</div>
-                    <div className='text-sm'>{description}</div>
+                    <div className='text-sm font-medium text-gray-900 dark:text-white mb-2'>{name}</div>
+                    <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
                   </div>
                   <div className='flex-shrink-0'>
-                    <Link
-                      to={String(id)}
-                      className='relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50'
-                    >
+                    <Button onClick={() => navigate(String(id))} color='gray'>
                       Open Form
-                    </Link>
+                    </Button>
                   </div>
                 </div>
               </>

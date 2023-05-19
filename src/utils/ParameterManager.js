@@ -1,12 +1,12 @@
 const optionalAttributes = [
   {
-    attribute: 'data-limit',
-    parameter: 'limit',
+    attribute: 'data-include',
+    parameter: 'include',
     value: ''
   },
   {
-    attribute: 'data-include',
-    parameter: 'include',
+    attribute: 'data-limit',
+    parameter: 'limit',
     value: ''
   },
   {
@@ -63,10 +63,11 @@ export function findIncomingAttributes(document) {
   const perscomWidgetElement = document.getElementById('perscom_widget')
 
   const widgetAttribute = findWidgetAttribute(perscomWidgetElement)
+  const resourceAttribute = findResourceAttribute(perscomWidgetElement)
   const requiredAttributes = findRequiredIncomingAttributes(perscomWidgetElement)
   const optionalAttributes = findOptionalIncomingAttributes(perscomWidgetElement)
 
-  return { widget: widgetAttribute, requiredAttributes, optionalAttributes }
+  return { widget: widgetAttribute, resourceAttribute, requiredAttributes, optionalAttributes }
 }
 
 /**
@@ -78,6 +79,17 @@ export function findIncomingAttributes(document) {
  */
 export function findWidgetAttribute(perscomWidgetElement) {
   return perscomWidgetElement.getAttribute('data-widget')
+}
+
+/**
+ * Finds the resource attribute to determine if the widget will
+ * be displaying a specific resource.
+ *
+ * @param perscomWidgetElement
+ * @returns {string}
+ */
+export function findResourceAttribute(perscomWidgetElement) {
+  return perscomWidgetElement.getAttribute('data-resource')
 }
 
 /**

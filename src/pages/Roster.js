@@ -41,7 +41,7 @@ function renderUnit(unit) {
         {
           name: name,
           headerAttributes: { colSpan: '6' },
-          cellClasses: ['w-1/6', 'whitespace-normal sm:whitespace-nowrap'],
+          cellClasses: ['w-1/6', 'whitespace-normal', 'sm:whitespace-nowrap', '!py-3'],
           cellContent: (user) => {
             const { name, rank, position, id: user_id } = user
             const { image, abbreviation, name: rank_name } = rank ?? {}
@@ -59,10 +59,13 @@ function renderUnit(unit) {
                   </div>
                 )}
                 <div className='flex flex-col ml-4'>
-                  <Link href={`/users/${user_id}`} className='font-semibold text-gray-900 hover:text-gray-500 active:text-blue-600'>
+                  <Link
+                    href={`/users/${user_id}`}
+                    className='text-sm font-medium text-gray-900 dark:text-white hover:text-gray-500 active:text-blue-600'
+                  >
                     {name}
                   </Link>
-                  <div className='md:hidden text-xs text-gray-500'>{position_name}</div>
+                  <div className='md:hidden text-xs text-gray-500 dark:text-gray-400'>{position_name}</div>
                 </div>
               </div>
             )
@@ -72,18 +75,18 @@ function renderUnit(unit) {
           name: 'Position',
           key: 'position.name',
           hidden: true,
-          cellClasses: ['hidden', 'md:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap']
+          cellClasses: ['hidden', 'md:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap', '!py-3']
         },
         {
           name: 'Specialty',
           hidden: true,
           key: 'specialty.name',
-          cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap']
+          cellClasses: ['hidden', 'sm:table-cell', 'w-1/6', 'whitespace-normal', 'lg:whitespace-nowrap', '!py-3']
         },
         {
           name: 'Status',
           hidden: true,
-          cellClasses: ['text-right', 'md:text-center', 'whitespace-nowrap', 'w-1/12'],
+          cellClasses: ['text-right', 'md:text-center', 'whitespace-nowrap', 'w-1/12', '!py-3'],
           cellContent: (user) => {
             const { status } = user
             return (
@@ -98,7 +101,7 @@ function renderUnit(unit) {
         {
           name: 'Online',
           hidden: true,
-          cellClasses: ['hidden', 'lg:table-cell', 'text-center', 'w-1/12'],
+          cellClasses: ['hidden', 'lg:table-cell', 'text-center', 'w-1/12', '!py-3'],
           cellContent: (user) => {
             const { online } = user
             return (
@@ -115,7 +118,7 @@ function renderUnit(unit) {
         {
           name: 'Link',
           hidden: true,
-          cellClasses: ['hidden', 'xl:table-cell', 'text-center', 'w-1/6'],
+          cellClasses: ['hidden', 'xl:table-cell', 'text-center', 'w-1/6', '!py-3'],
           cellContent: (user) => {
             const { name, id } = user
             return (

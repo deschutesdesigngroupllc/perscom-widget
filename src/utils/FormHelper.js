@@ -19,9 +19,7 @@ export function componentForField(field, fieldObject) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
-          onChange={(state) => console.log(state)}
+          {...fieldObject}
         />
       )
     case 'country':
@@ -33,8 +31,7 @@ export function componentForField(field, fieldObject) {
           required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
+          {...fieldObject}
         >
           {countries.map((country) => {
             return (
@@ -53,8 +50,7 @@ export function componentForField(field, fieldObject) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
+          {...fieldObject}
         />
       )
     case 'code':
@@ -67,9 +63,8 @@ export function componentForField(field, fieldObject) {
           required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
           rows={4}
+          {...fieldObject}
         />
       )
     case 'select':
@@ -81,8 +76,7 @@ export function componentForField(field, fieldObject) {
           required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
+          {...fieldObject}
         >
           {!!field.options &&
             !!field.options.length &&
@@ -106,8 +100,7 @@ export function componentForField(field, fieldObject) {
           required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
+          {...fieldObject}
         >
           {timezones.map((timezone) => {
             return (
@@ -127,8 +120,7 @@ export function componentForField(field, fieldObject) {
           required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
-          fieldstate={fieldObject.fieldState}
-          formstate={fieldObject.formState}
+          {...fieldObject}
         />
       )
   }

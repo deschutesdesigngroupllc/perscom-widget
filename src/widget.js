@@ -9,14 +9,16 @@ const WRAPPER_ID = 'perscom_widget_wrapper'
  */
 class Widget {
   /**
-   * Initalize the widget
+   * Initialize the widget
    *
    * @param widget
+   * @param resourceAttribute
    * @param requiredAttributes
    * @param optionalAttributes
    */
-  init = (widget, requiredAttributes, optionalAttributes) => {
+  init = (widget, resourceAttribute = null, requiredAttributes = [], optionalAttributes = []) => {
     this.widget = widget ?? 'roster'
+    this.resourceAttribute = resourceAttribute
     this.requiredAttributes = requiredAttributes
     this.optionalAttributes = optionalAttributes
 
@@ -63,6 +65,10 @@ class Widget {
    */
   composeIframeUrl = () => {
     const url = new URL(`${config.app.WIDGET_URL}/${this.widget}`)
+
+    if (this.resourceAttribute) {
+      url.pathname += `/${this.resourceAttribute}`
+    }
 
     if (this.requiredAttributes) {
       for (let i = 0; i < this.requiredAttributes.length; i++) {
@@ -116,8 +122,8 @@ class Widget {
  * Initialze widget class
  */
 export default ((window, document) => {
-  const { widget, requiredAttributes, optionalAttributes } = findIncomingAttributes(document)
+  const { widget, resourceAttribute, requiredAttributes, optionalAttributes } = findIncomingAttributes(document)
 
   window.perscom = new Widget()
-  window.perscom.init(widget, requiredAttributes, optionalAttributes)
+  window.perscom.init(widget, resourceAttribute, requiredAttributes, optionalAttributes)
 })(window, document)
