@@ -69,7 +69,7 @@ function Calendar() {
                 handleWindowResize={true}
                 events={eventData}
                 timeZone={timezoneParameter}
-                height='1400'
+                //height='1400'
                 displayEventEnd={true}
                 buttonText={{
                   today: 'Today'

@@ -107,14 +107,11 @@ function renderProfile(
   currentAssignmentTab,
   setCurrentAssignmentTab
 ) {
-  // eslint-disable-next-line no-unused-vars
   const { name, rank, position, profile_photo_url, cover_photo_url, online, status, unit, specialty } = user
-  // eslint-disable-next-line no-unused-vars
   const { name: rank_name, abbreviation: rank_abbreviation } = rank ?? {}
   const { name: position_name } = position ?? {}
   const { name: specialty_name } = specialty ?? {}
   const { name: unit_name } = unit ?? {}
-  // eslint-disable-next-line no-unused-vars
   const { name: status_name, color: status_color } = status ?? {}
 
   return (
@@ -127,7 +124,7 @@ function renderProfile(
       <div className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4'>
         <Card className='md:w-1/3 w-full justify-start'>
           <div className='flex justify-between items-center'>
-            <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Personnel Profile</h5>
+            <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Personnel Profile</h5>
             {status && (
               <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>
             )}
@@ -145,7 +142,7 @@ function renderProfile(
         </Card>
         <Card className='md:w-2/3 w-full justify-start'>
           <div className='flex justify-between items-center'>
-            <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
+            <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
             {online ? (
               <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
             ) : (
@@ -187,7 +184,7 @@ function renderProfile(
 function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab) {
   return (
     <Card>
-      <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Assignments</h5>
+      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Assignments</h5>
       <Tabs onSelect={(index) => setCurrentAssignmentTab(index)} defaultIndex={currentAssignmentTab}>
         <TabList className='-mb-px flex space-x-8 overflow-scroll'>
           {assignmentTabs.map((tab, index) => (
@@ -246,7 +243,7 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAs
 function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab) {
   return (
     <Card>
-      <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Records</h5>
+      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Records</h5>
       <Tabs onSelect={(index) => setCurrentRecordTab(index)} defaultIndex={currentRecordTab}>
         <TabList className='-mb-px flex space-x-8 overflow-scroll'>
           {recordsTabs.map((tab, index) => (

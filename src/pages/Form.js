@@ -70,7 +70,7 @@ function renderForm(form, control, handleSubmit, onSubmit, onError, errors) {
 
   return (
     <Card>
-      <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{name}</h5>
+      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>{name}</h5>
       <form onSubmit={handleSubmit(onSubmit, onError)} className='mb-0'>
         <div className='flex flex-col gap-4 py-4 sm:py-0'>
           {errors && <Alert message={errors} type='danger' />}

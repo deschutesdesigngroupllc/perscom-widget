@@ -1,5 +1,5 @@
 .fc {
-    @apply mb-8 h-full;
+    @apply h-full drop-shadow-md;
 }
 
 .fc a {
@@ -7,7 +7,7 @@
 }
 
 .fc-theme-standard .fc-scrollgrid {
-    @apply border-gray-200
+    @apply border-none
 }
 
 .fc-theme-standard td, .fc-theme-standard th {
@@ -19,11 +19,11 @@
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-    @apply flex items-center justify-between px-4 py-2 lg:flex-none mb-0 border-t border-l border-r border-gray-200 bg-gray-50 rounded-t-md
+    @apply flex items-center justify-between px-4 py-2 lg:flex-none mb-0 bg-gray-50 dark:bg-gray-700 rounded-t-md uppercase
 }
 
 .fc .fc-toolbar-title {
-    @apply text-sm font-semibold leading-6 text-gray-900
+    @apply text-xs text-gray-700 dark:text-gray-400 font-bold
 }
 
 .fc .fc-daygrid-day {
