@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <div className='flex items-center mt-2 space-x-1'>
       <Logo className='w-16 h-6' />
-      <div id='perscom_footer' className='text-xs text-gray-400'>
+      <div className='text-xs text-gray-400'>
         Widget Provided By{' '}
         <a href='https://perscom.io' target='_blank' rel='noreferrer' className='underline'>
           PERSCOM.io
