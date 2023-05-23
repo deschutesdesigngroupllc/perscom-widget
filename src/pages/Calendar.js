@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useEffect, useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import dayjs from 'dayjs'
@@ -22,9 +22,9 @@ function Calendar() {
   const [eventData, setEventData] = useState([])
   const [searchParams] = useSearchParams()
 
-  const { data, loading, error } = useQuery({
+  const { data, loading, error } = useFetch({
     url: url,
-    queryParams: {
+    parameters: {
       key: 'include',
       value: 'calendar'
     }
@@ -69,7 +69,6 @@ function Calendar() {
                 handleWindowResize={true}
                 events={eventData}
                 timeZone={timezoneParameter}
-                //height='1400'
                 displayEventEnd={true}
                 buttonText={{
                   today: 'Today'

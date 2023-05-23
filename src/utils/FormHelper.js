@@ -33,9 +33,12 @@ export function componentForField(field, fieldObject) {
           helperText={<React.Fragment>{field.help}</React.Fragment>}
           {...fieldObject}
         >
+          <option disabled={true} value=''>
+            Choose an option
+          </option>
           {countries.map((country) => {
             return (
-              <option key={country.code} name={country.code}>
+              <option key={country.code} value={country.code}>
                 {country.name}
               </option>
             )
@@ -60,7 +63,6 @@ export function componentForField(field, fieldObject) {
           id={field.key}
           type={field.type}
           placeholder={field.placeholder}
-          required={field.required}
           readOnly={field.readonly}
           helperText={<React.Fragment>{field.help}</React.Fragment>}
           rows={4}
@@ -78,6 +80,9 @@ export function componentForField(field, fieldObject) {
           helperText={<React.Fragment>{field.help}</React.Fragment>}
           {...fieldObject}
         >
+          <option disabled={true} value=''>
+            Choose an option
+          </option>
           {!!field.options &&
             !!field.options.length &&
             field.options.map((value, key) => {
@@ -102,9 +107,12 @@ export function componentForField(field, fieldObject) {
           helperText={<React.Fragment>{field.help}</React.Fragment>}
           {...fieldObject}
         >
+          <option disabled={true} value=''>
+            Choose an option
+          </option>
           {timezones.map((timezone) => {
             return (
-              <option key={timezone} name={timezone}>
+              <option key={timezone} value={timezone}>
                 {timezone}
               </option>
             )

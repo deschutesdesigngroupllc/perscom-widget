@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
-import React, { useState } from 'react'
-import useQuery from '../api/APIUtils'
+import React, { useRef, useState } from 'react'
+import useFetch from '../hooks/useFetch'
 import { Alert } from '../components/Alert'
 import { Button, Card, Label } from 'flowbite-react'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
@@ -10,33 +10,44 @@ import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { componentForField } from '../utils/FormHelper'
+import { createRequest, createHeaders } from '../hooks/useFetch'
 
 function Form() {
   const { id } = useParams()
   const [url] = useState(config.forms.API_URL)
-  const [errors, setErrors] = useState()
+  const [validationError, setValidationError] = useState()
+  const [submitted, setSubmitted] = useState(false)
   const [searchParams] = useSearchParams()
+  const formRef = useRef(null)
 
-  const { data, loading, error } = useQuery({
+  const { data, loading, error } = useFetch({
     url: new URL(id, url).href
   })
 
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit, reset } = useForm()
   const onSubmit = (data) => {
-    fetch(config.forms.API_URL + `${id}` + '/submissions', {
-      method: 'POST',
-      headers: {
-        'X-Perscom-Id': searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null,
-        'X-Perscom-Widget': true,
-        Authorization: `Bearer ${searchParams.get('apikey') ?? config.app.API_KEY ?? null}`,
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    createRequest(config.forms.API_URL + `${id}` + '/submissions', 'POST', createHeaders(searchParams), data)
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((response) => {
+            throw new Error(response.error.message)
+          })
+        }
+        response.json()
+      })
+      .then(() => {
+        setValidationError()
+        setSubmitted(true)
+        reset()
+      })
+      .catch((error) => {
+        setSubmitted(false)
+        setValidationError(error.message)
+      })
+      .finally(() => {
+        formRef.current.scrollIntoView()
+      })
   }
-  const onError = (errors) => setErrors(errors)
 
   return (
     <>
@@ -55,7 +66,7 @@ function Form() {
                     Back to Forms
                   </Link>
                 </div>
-                {data && renderForm(data, control, handleSubmit, onSubmit, onError, errors)}
+                {data && renderForm(data, formRef, control, handleSubmit, onSubmit, validationError, submitted)}
               </div>
             </>
           )}
@@ -65,15 +76,18 @@ function Form() {
   )
 }
 
-function renderForm(form, control, handleSubmit, onSubmit, onError, errors) {
+function renderForm(form, formRef, control, handleSubmit, onSubmit, validationError, submitted) {
   const { name, fields, instructions } = form
 
   return (
     <Card>
-      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>{name}</h5>
-      <form onSubmit={handleSubmit(onSubmit, onError)} className='mb-0'>
+      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white' ref={formRef}>
+        {name}
+      </h5>
+      <form onSubmit={handleSubmit(onSubmit)} className='mb-0'>
         <div className='flex flex-col gap-4 py-4 sm:py-0'>
-          {errors && <Alert message={errors} type='danger' />}
+          {submitted && <Alert message={form.success_message ?? 'Your form has been successfully submitted.'} type='success' />}
+          {validationError && <Alert message={validationError} type='danger' />}
           {instructions && <div className='text-sm text-gray-600'>{instructions}</div>}
           {fields &&
             !!fields.length &&
@@ -83,7 +97,12 @@ function renderForm(form, control, handleSubmit, onSubmit, onError, errors) {
                   <div className='mb-2 block'>
                     <Label htmlFor={fieldObject.key} value={fieldObject.name} />
                   </div>
-                  <Controller render={({ field }) => componentForField(fieldObject, field)} name={fieldObject.key} control={control} />
+                  <Controller
+                    render={({ field }) => componentForField(fieldObject, field)}
+                    name={fieldObject.key}
+                    control={control}
+                    defaultValue={''}
+                  />
                 </div>
               )
             })}

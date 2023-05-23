@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
@@ -8,7 +8,7 @@ import { Link } from '../components/Link'
 import { Alert } from '../components/Alert'
 
 function Roster() {
-  const { data, loading, error } = useQuery({
+  const { data, loading, error } = useFetch({
     url: config.roster.API_URL
   })
 

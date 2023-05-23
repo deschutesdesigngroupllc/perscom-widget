@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Alert } from '../components/Alert'
 import { useNavigate } from 'react-router-dom'
 import { Loading } from '../components/Loading'
@@ -12,7 +12,7 @@ function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
   const navigate = useNavigate()
 
-  const { data, links, meta, loading, error } = useQuery({
+  const { data, links, meta, loading, error } = useFetch({
     url: url
   })
 

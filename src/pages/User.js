@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Link } from '../components/Link'
@@ -20,9 +20,9 @@ function User() {
     data: user,
     loading: loading,
     error
-  } = useQuery({
+  } = useFetch({
     url: new URL(id, url).href,
-    queryParams: {
+    parameters: {
       key: 'include',
       value: Array('position', 'rank', 'specialty', 'status', 'unit').join()
     }
@@ -33,9 +33,9 @@ function User() {
 
   let records = {}
   for (var i = 0; i < recordsTabs.length; i++) {
-    const { data: recordData } = useQuery({
+    const { data: recordData } = useFetch({
       url: new URL(id + '/' + recordsTabs[i].path, url).href,
-      queryParams: {
+      parameters: {
         key: 'include',
         value: recordsTabs[i].includes
       }
@@ -49,9 +49,9 @@ function User() {
 
   let assignments = {}
   for (var a = 0; a < assignmentTabs.length; a++) {
-    const { data: assignmentData } = useQuery({
+    const { data: assignmentData } = useFetch({
       url: new URL(id + '/' + assignmentTabs[a].path, url).href,
-      queryParams: {
+      parameters: {
         key: 'include',
         value: assignmentTabs[a].includes
       }

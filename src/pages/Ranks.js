@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Table } from '../components/Table'
@@ -9,9 +9,9 @@ import { Alert } from '../components/Alert'
 function Ranks() {
   const [url, setUrl] = useState(config.ranks.API_URL)
 
-  const { data, links, meta, loading, error } = useQuery({
+  const { data, links, meta, loading, error } = useFetch({
     url: url,
-    queryParams: {
+    parameters: {
       key: 'include',
       value: 'image'
     }
