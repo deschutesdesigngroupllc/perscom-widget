@@ -190,7 +190,7 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAs
           {assignmentTabs.map((tab, index) => (
             <Tab
               key={index}
-              className={cx('cursor-pointer whitespace-nowrap flex py-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
+              className={cx('cursor-pointer whitespace-nowrap flex p-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
                 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentAssignmentTab,
                 'active:border-transparent border-blue-600 text-blue-600': index === currentAssignmentTab
               })}
@@ -210,7 +210,7 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAs
         </TabList>
         {assignmentTabs.map((tab, index) => (
           <TabPanel key={index}>
-            <div className='py-4'>
+            <div className='pt-4'>
               {assignments && (
                 <DataTable
                   key={index}
@@ -222,6 +222,9 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAs
                   highlightOnHover={true}
                   defaultSortFieldId={1}
                   responsive={true}
+                  paginationComponentOptions={{
+                    noRowsPerPage: true
+                  }}
                   customStyles={{
                     cells: {
                       style: {
@@ -269,7 +272,7 @@ function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentR
         </TabList>
         {recordsTabs.map((tab, index) => (
           <TabPanel key={index}>
-            <div className='py-4'>
+            <div className='pt-4'>
               {records && (
                 <DataTable
                   key={index}
@@ -282,6 +285,9 @@ function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentR
                   defaultSortFieldId={1}
                   defaultSortAsc={false}
                   responsive={true}
+                  paginationComponentOptions={{
+                    noRowsPerPage: true
+                  }}
                   customStyles={{
                     cells: {
                       style: {
@@ -571,7 +577,7 @@ function createAssignmentTabs() {
 
 function DataTableLoading() {
   return (
-    <div className='pt-4 sm:pt-8'>
+    <div className='py-4 sm:py-8'>
       <Spinner />
     </div>
   )

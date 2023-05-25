@@ -1,21 +1,13 @@
 .fc {
-    @apply h-full drop-shadow-md;
+    @apply h-full;
 }
 
 .fc a {
     @apply text-gray-700 leading-6 text-xs
 }
 
-.fc-theme-standard .fc-scrollgrid {
-    @apply border-none
-}
-
 .fc-theme-standard td, .fc-theme-standard th {
-    @apply border-gray-200 bg-white
-}
-
-.fc .fc-media-screen {
-    @apply flex flex-col
+    @apply border-gray-200
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
