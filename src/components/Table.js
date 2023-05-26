@@ -10,7 +10,7 @@ const hash = require('object-hash')
 export function Table({ columns, rows, links, meta, tableClasses, wrapperClasses, onPaginationClick }) {
   return (
     <div className={cx(wrapperClasses)}>
-      <TableFlowbite className={cx(tableClasses)} striped={true}>
+      <TableFlowbite className={cx(tableClasses)}>
         <TableFlowbite.Head>
           {columns &&
             !!columns.length &&

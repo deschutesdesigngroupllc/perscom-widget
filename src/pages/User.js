@@ -578,7 +578,7 @@ function createAssignmentTabs() {
 function DataTableLoading() {
   return (
     <div className='py-4 sm:py-8'>
-      <Spinner />
+      <Spinner color='gray' />
     </div>
   )
 }

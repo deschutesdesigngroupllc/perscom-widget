@@ -1,15 +1,22 @@
 import React from 'react'
 import Table from './Table'
+import { Spinner } from 'flowbite-react'
 
 export function Loading() {
   return (
     <Table
-      wrapperClasses='animate-pulse'
       columns={[
         {
-          name: 'Loading...',
-          headerClasses: ['!text-center', '!text-gray-400'],
-          cellClasses: ['!py-8']
+          name: 'Loading',
+          hidden: true,
+          cellClasses: ['!py-8'],
+          cellContent: () => {
+            return (
+              <div className='flex justify-center items-center'>
+                <Spinner color='gray' />
+              </div>
+            )
+          }
         }
       ]}
       rows={[

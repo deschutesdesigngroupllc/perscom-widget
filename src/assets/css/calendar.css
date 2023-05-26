@@ -2,8 +2,16 @@
     @apply h-full;
 }
 
+.fc table, th, tr, td {
+    @apply !border-none
+}
+
 .fc a {
     @apply text-gray-700 leading-6 text-xs
+}
+
+.fc-theme-standard .fc-scrollgrid {
+    @apply border-none
 }
 
 .fc-theme-standard td, .fc-theme-standard th {
@@ -16,6 +24,10 @@
 
 .fc .fc-toolbar-title {
     @apply text-xs text-gray-700 dark:text-gray-400 font-bold
+}
+
+.fc .fc-col-header {
+    @apply bg-gray-100
 }
 
 .fc .fc-daygrid-day {
