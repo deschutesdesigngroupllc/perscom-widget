@@ -28,7 +28,7 @@ function Awards() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             renderAwards(data, links, meta, onPaginationClick)
           ) : (

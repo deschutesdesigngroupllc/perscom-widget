@@ -44,7 +44,7 @@ function App() {
             <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
           </Routes>
         ) : (
-          <Alert message='Please make sure all required widget parameters have been included.' type='danger' />
+          <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
         )}
         <Footer />
       </div>

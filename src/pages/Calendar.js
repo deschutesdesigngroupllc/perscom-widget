@@ -61,7 +61,7 @@ function Calendar() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : (
             data && (
               <div className='flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col'>

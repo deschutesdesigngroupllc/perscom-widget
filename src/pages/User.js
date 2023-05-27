@@ -67,7 +67,7 @@ function User() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : (
             <div className='flex flex-col space-y-4'>
               <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>

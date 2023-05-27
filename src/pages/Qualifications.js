@@ -28,7 +28,7 @@ function Qualifications() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             renderQualifications(data, links, meta, onPaginationClick)
           ) : (

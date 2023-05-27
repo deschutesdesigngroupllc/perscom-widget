@@ -28,7 +28,7 @@ function Ranks() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             renderRanks(data, links, meta, onPaginationClick)
           ) : (

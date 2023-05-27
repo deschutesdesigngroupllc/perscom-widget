@@ -27,7 +27,7 @@ function Forms() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             renderForms(data, links, meta, onPaginationClick, navigate)
           ) : (

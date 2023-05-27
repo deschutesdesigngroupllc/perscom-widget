@@ -19,7 +19,7 @@ function Roster() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             <div className='flex flex-col space-y-4'>{data.map((unit) => renderUnit(unit))}</div>
           ) : (

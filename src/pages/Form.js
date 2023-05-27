@@ -56,7 +56,7 @@ function Form() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : (
             <>
               <div className='flex flex-col space-y-4'>
@@ -87,7 +87,7 @@ function renderForm(form, formRef, control, handleSubmit, onSubmit, validationEr
       <form onSubmit={handleSubmit(onSubmit)} className='mb-0'>
         <div className='flex flex-col gap-4 py-4 sm:py-0'>
           {submitted && <Alert message={form.success_message ?? 'Your form has been successfully submitted.'} type='success' />}
-          {validationError && <Alert message={validationError} type='danger' />}
+          {validationError && <Alert message={validationError} type='failure' />}
           {instructions && <div className='text-sm text-gray-600'>{instructions}</div>}
           {fields &&
             !!fields.length &&
