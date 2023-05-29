@@ -2,15 +2,13 @@ import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
 import useFetch from '../hooks/useFetch'
 import { Alert } from '../components/Alert'
-import { useNavigate } from 'react-router-dom'
 import { Loading } from '../components/Loading'
 import { Table } from '../components/Table'
 import { config } from '../constants'
-import { Button } from 'flowbite-react'
+import { Button } from '../components/Button'
 
 function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
-  const navigate = useNavigate()
 
   const { data, links, meta, loading, error } = useFetch({
     url: url
@@ -29,7 +27,7 @@ function Forms() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            renderForms(data, links, meta, onPaginationClick, navigate)
+            renderForms(data, links, meta, onPaginationClick)
           ) : (
             <Alert message='No forms found. Please add an award.' />
           )}
@@ -39,7 +37,7 @@ function Forms() {
   )
 }
 
-function renderForms(forms, links, meta, onPaginationClick, navigate) {
+function renderForms(forms, links, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -57,7 +55,7 @@ function renderForms(forms, links, meta, onPaginationClick, navigate) {
                     <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
                   </div>
                   <div className='flex-shrink-0'>
-                    <Button onClick={() => navigate(String(id))} color='gray'>
+                    <Button href={String(id)} color='gray'>
                       Open Form
                     </Button>
                   </div>
