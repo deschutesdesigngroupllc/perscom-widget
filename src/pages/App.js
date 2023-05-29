@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Flowbite theme={theme}>
-      <div className='p-2'>
+      <div className='m-1'>
         {apiKey && perscomId ? (
           <Routes>
             <Route path='/' element={<Roster />}></Route>
