@@ -20,6 +20,9 @@ const constants = {
   events: {
     API_URL: process.env.REACT_APP_EVENTS_API_URL
   },
+  forms: {
+    API_URL: process.env.REACT_APP_FORMS_API_URL
+  },
   ranks: {
     API_URL: process.env.REACT_APP_RANKS_API_URL
   },

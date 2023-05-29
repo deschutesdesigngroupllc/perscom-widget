@@ -1,12 +1,17 @@
 const optionalAttributes = [
   {
+    attribute: 'data-include',
+    parameter: 'include',
+    value: ''
+  },
+  {
     attribute: 'data-limit',
     parameter: 'limit',
     value: ''
   },
   {
-    attribute: 'data-include',
-    parameter: 'include',
+    attribute: 'data-tags',
+    parameter: 'tags',
     value: ''
   },
   {
@@ -29,28 +34,71 @@ const requiredAttributes = [
   }
 ]
 
+/**
+ * Returns an array of optional API query parameters
+ *
+ * @returns {(string|*)[]}
+ */
 export function getOptionalApiParameters() {
   return optionalAttributes.map((attribute) => attribute.parameter)
 }
 
+/**
+ * Returns an array of required API query parameters
+ *
+ * @returns {(string|*)[]}
+ */
 export function getRequiredApiParameters() {
   return requiredAttributes.map((attribute) => attribute.parameter)
 }
 
+/**
+ * Finds and returns all optional and required incoming
+ * attributes specified in the perscom widget DOM.
+ *
+ * @param document
+ * @returns {{widget, requiredAttributes: *[], optionalAttributes: *[]}}
+ */
 export function findIncomingAttributes(document) {
   const perscomWidgetElement = document.getElementById('perscom_widget')
 
   const widgetAttribute = findWidgetAttribute(perscomWidgetElement)
+  const resourceAttribute = findResourceAttribute(perscomWidgetElement)
   const requiredAttributes = findRequiredIncomingAttributes(perscomWidgetElement)
   const optionalAttributes = findOptionalIncomingAttributes(perscomWidgetElement)
 
-  return { widget: widgetAttribute, requiredAttributes, optionalAttributes }
+  return { widget: widgetAttribute, resourceAttribute, requiredAttributes, optionalAttributes }
 }
 
+/**
+ * Finds the widget attribute that will determine which widget
+ * is to be displayed.
+ *
+ * @param perscomWidgetElement
+ * @returns {string}
+ */
 export function findWidgetAttribute(perscomWidgetElement) {
   return perscomWidgetElement.getAttribute('data-widget')
 }
 
+/**
+ * Finds the resource attribute to determine if the widget will
+ * be displaying a specific resource.
+ *
+ * @param perscomWidgetElement
+ * @returns {string}
+ */
+export function findResourceAttribute(perscomWidgetElement) {
+  return perscomWidgetElement.getAttribute('data-resource')
+}
+
+/**
+ * Finds and returns all optional incoming attributes specified
+ * in the perscom widget DOM.
+ *
+ * @param perscomWidgetElement
+ * @returns {*[]}
+ */
 export function findOptionalIncomingAttributes(perscomWidgetElement) {
   let attributes = []
   for (let i = 0; i < optionalAttributes.length; i++) {
@@ -65,6 +113,13 @@ export function findOptionalIncomingAttributes(perscomWidgetElement) {
   return attributes
 }
 
+/**
+ * Finds and returns all required incoming attributes specified
+ * in the perscom widget DOM.
+ *
+ * @param perscomWidgetElement
+ * @returns {*[]}
+ */
 export function findRequiredIncomingAttributes(perscomWidgetElement) {
   let attributes = []
   for (let i = 0; i < requiredAttributes.length; i++) {

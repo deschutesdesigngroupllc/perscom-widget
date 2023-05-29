@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Table } from '../components/Table'
@@ -9,9 +9,9 @@ import { Alert } from '../components/Alert'
 function Awards() {
   const [url, setUrl] = useState(config.awards.API_URL)
 
-  const { data, links, meta, loading, error } = useQuery({
+  const { data, links, meta, loading, error } = useFetch({
     url: url,
-    queryParams: {
+    parameters: {
       key: 'include',
       value: 'image'
     }
@@ -28,7 +28,7 @@ function Awards() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
             renderAwards(data, links, meta, onPaginationClick)
           ) : (
@@ -57,7 +57,7 @@ function renderAwards(awards, links, meta, onPaginationClick) {
                 {image_url ? (
                   <img className='w-28 block mx-auto' src={image_url} alt={name} />
                 ) : (
-                  <div className='text-center font-bold text-sm'>No Image</div>
+                  <div className='text-center font-medium'>No Image</div>
                 )}
               </>
             )
@@ -78,8 +78,8 @@ function renderAwards(awards, links, meta, onPaginationClick) {
                     <img className='w-20' src={image_url} alt={name} />
                   </div>
                 )}
-                <div className='font-semibold text-black mb-2'>{name}</div>
-                <div className='text-sm'>{description}</div>
+                <div className='text-sm font-medium text-gray-900 dark:text-white mb-2'>{name}</div>
+                <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
               </>
             )
           }

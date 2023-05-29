@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react'
 import React, { useEffect, useState } from 'react'
-import useQuery from '../api/APIUtils'
+import useFetch from '../hooks/useFetch'
 import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import dayjs from 'dayjs'
@@ -22,9 +22,9 @@ function Calendar() {
   const [eventData, setEventData] = useState([])
   const [searchParams] = useSearchParams()
 
-  const { data, loading, error } = useQuery({
+  const { data, loading, error } = useFetch({
     url: url,
-    queryParams: {
+    parameters: {
       key: 'include',
       value: 'calendar'
     }
@@ -61,20 +61,23 @@ function Calendar() {
       ) : (
         <>
           {error ? (
-            <Alert message={error} type='danger' />
+            <Alert message={error} type='failure' />
           ) : (
             data && (
-              <FullCalendar
-                plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
-                handleWindowResize={true}
-                events={eventData}
-                timeZone={timezoneParameter}
-                height='1400'
-                displayEventEnd={true}
-                buttonText={{
-                  today: 'Today'
-                }}
-              />
+              <div className='flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col'>
+                <div className='flex h-full flex-col justify-center gap-4'>
+                  <FullCalendar
+                    plugins={[dayGridPlugin, rrulePlugin, listPlugin]}
+                    handleWindowResize={true}
+                    events={eventData}
+                    timeZone={timezoneParameter}
+                    displayEventEnd={true}
+                    buttonText={{
+                      today: 'Today'
+                    }}
+                  />
+                </div>
+              </div>
             )
           )}
         </>
