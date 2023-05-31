@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.5...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.6...HEAD)
+
+## [v1.0.6](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.5...v1.0.6) - 2023-05-29
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.6 -->
+### What's Changed
+
+#### Added
+
+- New form widget by @JonErickson in https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/pull/29
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.5...v1.0.6
 
 ## [v1.0.5](https://github.com/DeschutesDesignGroupLLC/PERSCOM-3.0-Widget/compare/v1.0.4...v1.0.5) - 2023-05-17
 
