@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.6...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.7...HEAD)
+
+## [v1.0.7](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.6...v1.0.7) - 2023-06-13
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.7 -->
+### What's Changed
+
+#### Added
+
+- Adds support for new personnel file custom fields by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/30
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.6...v1.0.7
 
 ## [v1.0.6](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.5...v1.0.6) - 2023-05-29
 
