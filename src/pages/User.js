@@ -28,6 +28,10 @@ function User() {
     }
   })
 
+  const { data: additionalFields } = useFetch({
+    url: new URL(id + '/fields', url).href
+  })
+
   const recordsTabs = createRecordsTabs()
   const [currentRecordTab, setCurrentRecordTab] = useState(0)
 
@@ -79,6 +83,7 @@ function User() {
               {user &&
                 renderProfile(
                   user,
+                  additionalFields,
                   records,
                   recordsTabs,
                   currentRecordTab,
@@ -98,6 +103,7 @@ function User() {
 
 function renderProfile(
   user,
+  additionalFields,
   records,
   recordsTabs,
   currentRecordTab,
@@ -107,12 +113,7 @@ function renderProfile(
   currentAssignmentTab,
   setCurrentAssignmentTab
 ) {
-  const { name, rank, position, profile_photo_url, cover_photo_url, online, status, unit, specialty } = user
-  const { name: rank_name, abbreviation: rank_abbreviation } = rank ?? {}
-  const { name: position_name } = position ?? {}
-  const { name: specialty_name } = specialty ?? {}
-  const { name: unit_name } = unit ?? {}
-  const { name: status_name, color: status_color } = status ?? {}
+  const { cover_photo_url } = user
 
   return (
     <div className='flex flex-col space-y-4 min-h-fit'>
@@ -122,62 +123,111 @@ function renderProfile(
         </div>
       )}
       <div className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4'>
-        <Card className='md:w-1/3 w-full justify-start'>
-          <div className='flex justify-between items-center'>
-            <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Personnel Profile</h5>
-            {status && (
-              <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>
-            )}
-          </div>
-          <div className='py-4 flex flex-grow flex-col space-y-4 justify-center items-center'>
-            {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' />}
-            <div className='flex flex-col justify-center items-center text-center'>
-              <div className='font-bold'>
-                {rank_abbreviation} {name} {'  '}
-              </div>
-              {rank_name && <div className='text-gray-700 font-medium'>{rank_name}</div>}{' '}
-              {position_name && <div className='text-gray-500'>{position_name}</div>}
-            </div>
-          </div>
-        </Card>
-        <Card className='md:w-2/3 w-full justify-start'>
-          <div className='flex justify-between items-center'>
-            <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
-            {online ? (
-              <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
-            ) : (
-              <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
-            )}
-          </div>
-          <div className='flow-root'>
-            <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
-              <li className='py-2'>
-                <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Name</p>
-                <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{name}</p>
-              </li>
-              <li className='py-2'>
-                <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Rank</p>
-                <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{rank_name}</p>
-              </li>
-              <li className='py-2'>
-                <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Position</p>
-                <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{position_name}</p>
-              </li>
-              <li className='py-2'>
-                <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Specialty</p>
-                <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{specialty_name}</p>
-              </li>
-              <li className='py-2'>
-                <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Unit</p>
-                <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{unit_name}</p>
-              </li>
-            </ul>
-          </div>
-        </Card>
+        {renderPersonnelProfileCard(user)}
+        {renderDemographicsCard(user, additionalFields)}
+        {additionalFields && !!additionalFields.length && renderAdditionalFieldsCard(additionalFields)}
       </div>
       {renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab)}
       {renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab)}
     </div>
+  )
+}
+
+function renderPersonnelProfileCard(user) {
+  const { name, rank, position, profile_photo_url, status } = user
+  const { name: rank_name, abbreviation: rank_abbreviation } = rank ?? {}
+  const { name: position_name } = position ?? {}
+  const { name: status_name, color: status_color } = status ?? {}
+
+  return (
+    <Card className='md:w-1/3 w-full justify-start'>
+      <div className='flex justify-between items-center'>
+        <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Personnel Profile</h5>
+        {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>}
+      </div>
+      <div className='py-4 flex flex-grow flex-col space-y-4 justify-center items-center'>
+        {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' />}
+        <div className='flex flex-col justify-center items-center text-center'>
+          <div className='font-bold'>
+            {rank_abbreviation} {name} {'  '}
+          </div>
+          {rank_name && <div className='text-gray-700 font-medium'>{rank_name}</div>}{' '}
+          {position_name && <div className='text-gray-500'>{position_name}</div>}
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+function renderDemographicsCard(user, additionalFields) {
+  const { name, rank, position, online, unit, specialty } = user
+  const { name: rank_name } = rank ?? {}
+  const { name: position_name } = position ?? {}
+  const { name: specialty_name } = specialty ?? {}
+  const { name: unit_name } = unit ?? {}
+
+  return (
+    <Card
+      className={cx('w-full justify-start', {
+        'md:w-2/3': !(additionalFields && !!additionalFields.length),
+        'md:w-1/3': additionalFields && !!additionalFields.length
+      })}
+    >
+      <div className='flex justify-between items-center'>
+        <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
+        {online ? (
+          <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
+        ) : (
+          <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-sky-100 text-sky-600'>Offline</span>
+        )}
+      </div>
+      <div className='flow-root'>
+        <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+          <li className='py-2'>
+            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Name</p>
+            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{name}</p>
+          </li>
+          <li className='py-2'>
+            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Rank</p>
+            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{rank_name}</p>
+          </li>
+          <li className='py-2'>
+            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Position</p>
+            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{position_name}</p>
+          </li>
+          <li className='py-2'>
+            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Specialty</p>
+            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{specialty_name}</p>
+          </li>
+          <li className='py-2'>
+            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Unit</p>
+            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{unit_name}</p>
+          </li>
+        </ul>
+      </div>
+    </Card>
+  )
+}
+
+function renderAdditionalFieldsCard(additionalFields) {
+  return (
+    <Card className='md:w-1/3 w-full justify-start'>
+      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Additional Information</h5>
+      <div className='flow-root'>
+        <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+          {additionalFields &&
+            !!additionalFields.length &&
+            additionalFields.map(function (field) {
+              return (
+                <li key={field.key} className='py-2'>
+                  <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>{field.name}</p>
+                  {/*<p className='truncate text-sm text-gray-500 dark:text-gray-400'>{name}</p>*/}
+                </li>
+              )
+            })}
+        </ul>
+      </div>
+    </Card>
   )
 }
 
