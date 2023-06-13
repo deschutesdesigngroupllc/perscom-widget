@@ -11,6 +11,9 @@ import DataTable from 'react-data-table-component'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 import { Alert } from '../components/Alert'
 import { Card, Spinner } from 'flowbite-react'
+import { FieldValue } from '../components/Field'
+
+const get = require('lodash/get')
 
 function User() {
   const { id } = useParams()
@@ -124,9 +127,9 @@ function renderProfile(
       )}
       <div className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4'>
         {renderPersonnelProfileCard(user)}
-        {renderDemographicsCard(user, additionalFields)}
-        {additionalFields && !!additionalFields.length && renderAdditionalFieldsCard(additionalFields)}
+        {renderDemographicsCard(user)}
       </div>
+      {additionalFields && !!additionalFields.length && renderAdditionalFieldsCard(user, additionalFields)}
       {renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab)}
       {renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab)}
     </div>
@@ -159,7 +162,7 @@ function renderPersonnelProfileCard(user) {
   )
 }
 
-function renderDemographicsCard(user, additionalFields) {
+function renderDemographicsCard(user) {
   const { name, rank, position, online, unit, specialty } = user
   const { name: rank_name } = rank ?? {}
   const { name: position_name } = position ?? {}
@@ -167,12 +170,7 @@ function renderDemographicsCard(user, additionalFields) {
   const { name: unit_name } = unit ?? {}
 
   return (
-    <Card
-      className={cx('w-full justify-start', {
-        'md:w-2/3': !(additionalFields && !!additionalFields.length),
-        'md:w-1/3': additionalFields && !!additionalFields.length
-      })}
-    >
+    <Card className='w-full md:w-2/3 justify-start'>
       <div className='flex justify-between items-center'>
         <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
         {online ? (
@@ -209,9 +207,9 @@ function renderDemographicsCard(user, additionalFields) {
   )
 }
 
-function renderAdditionalFieldsCard(additionalFields) {
+function renderAdditionalFieldsCard(user, additionalFields) {
   return (
-    <Card className='md:w-1/3 w-full justify-start'>
+    <Card>
       <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Additional Information</h5>
       <div className='flow-root'>
         <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
@@ -221,7 +219,9 @@ function renderAdditionalFieldsCard(additionalFields) {
               return (
                 <li key={field.key} className='py-2'>
                   <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>{field.name}</p>
-                  {/*<p className='truncate text-sm text-gray-500 dark:text-gray-400'>{name}</p>*/}
+                  <p className='text-sm text-gray-500 dark:text-gray-400'>
+                    <FieldValue field={field} value={get(user, field.key, '')} />
+                  </p>
                 </li>
               )
             })}
@@ -357,7 +357,7 @@ function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentR
 }
 
 const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
+  return new Date(date).toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
 }
 
 function createRecordsTabs() {

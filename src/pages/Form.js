@@ -10,7 +10,7 @@ import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { createRequest, createHeaders } from '../hooks/useFetch'
-import { Field } from '../components/Field'
+import { FieldElement } from '../components/Field'
 
 function Form() {
   const { id } = useParams()
@@ -98,7 +98,7 @@ function renderForm(form, formRef, control, handleSubmit, onSubmit, validationEr
                     <Label htmlFor={fieldObject.key} value={fieldObject.name} />
                   </div>
                   <Controller
-                    render={({ field }) => <Field field={field} fieldObject={fieldObject} />}
+                    render={({ field }) => <FieldElement field={field} fieldObject={fieldObject} />}
                     name={fieldObject.key}
                     control={control}
                     defaultValue={''}

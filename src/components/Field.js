@@ -3,7 +3,7 @@ import { countries } from '../assets/js/countries'
 import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react'
 import PropTypes from 'prop-types'
 
-export const Field = React.forwardRef(({ field, fieldObject }, ref) => {
+export const FieldElement = React.forwardRef(({ field, fieldObject }, ref) => {
   const { onChange, value } = field
 
   switch (fieldObject.type) {
@@ -139,9 +139,54 @@ export const Field = React.forwardRef(({ field, fieldObject }, ref) => {
   }
 })
 
-Field.displayName = 'Field'
+FieldElement.displayName = 'FieldElement'
 
-Field.propTypes = {
+FieldElement.propTypes = {
   field: PropTypes.object,
   fieldObject: PropTypes.object
+}
+
+export const FieldValue = ({ field, value }) => {
+  switch (field.type) {
+    case 'boolean':
+      return value ? 'Yes' : 'No'
+    case 'code':
+      return <code>{value}</code>
+    case 'country':
+      var country = countries.find((country) => country.code === value)
+      return country.name ?? ''
+    case 'date':
+      return new Date(value).toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC'
+      })
+    case 'datetime-local':
+      return new Date(value).toLocaleTimeString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC'
+      })
+    case 'email':
+      return (
+        <a className='underline' href={`mailto:${value}`}>
+          {value}
+        </a>
+      )
+    case 'password':
+      return '******'
+    default:
+      return value
+  }
+}
+
+FieldValue.displayName = 'FieldValue'
+
+FieldValue.propTypes = {
+  field: PropTypes.object,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number, PropTypes.array])
 }
