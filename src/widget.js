@@ -1,5 +1,6 @@
 import { config } from './constants'
 import { findIncomingAttributes } from './utils/ParameterManager'
+import { parseDomain } from 'parse-domain'
 
 const IFRAME_ID = 'perscom_widget_iframe'
 const WRAPPER_ID = 'perscom_widget_wrapper'
@@ -80,6 +81,11 @@ class Widget {
       for (let i = 0; i < this.optionalAttributes.length; i++) {
         url.searchParams.append(this.optionalAttributes[i].parameter, this.optionalAttributes[i].value)
       }
+    }
+
+    const { domain } = parseDomain(window.location.hostname)
+    if (domain === 'perscom') {
+      url.searchParams.append('footer', 'false')
     }
 
     return url.href

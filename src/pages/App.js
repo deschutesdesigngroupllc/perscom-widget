@@ -12,6 +12,7 @@ import { Footer } from '../components/Footer'
 import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-router-dom'
 import { config } from '../constants'
 import { Flowbite } from 'flowbite-react'
+import Newsfeed from './Newsfeed'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -24,12 +25,23 @@ function App() {
       root: {
         base: 'bg-blue-700'
       }
+    },
+    card: {
+      root: {
+        base: 'flex rounded-lg bg-white shadow dark:bg-gray-800',
+        children: 'flex h-full flex-col justify-center gap-2 p-6'
+      }
+    },
+    table: {
+      root: {
+        shadow: 'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg shadow -z-10'
+      }
     }
   }
 
   return (
-    <Flowbite theme={theme}>
-      <div className='m-1'>
+    <Flowbite theme={{ theme }}>
+      <div className='m-0.5'>
         {apiKey && perscomId ? (
           <Routes>
             <Route path='/' element={<Roster />}></Route>
@@ -37,6 +49,7 @@ function App() {
             <Route path='/calendar' element={<Calendar />}></Route>
             <Route path='/forms' element={<Forms />}></Route>
             <Route path='/forms/:id' element={<Form />}></Route>
+            <Route path='/newsfeed' element={<Newsfeed />}></Route>
             <Route path='/qualifications' element={<Qualifications />}></Route>
             <Route path='/ranks' element={<Ranks />}></Route>
             <Route path='/roster' element={<Roster />}></Route>
@@ -46,8 +59,8 @@ function App() {
         ) : (
           <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
         )}
-        <Footer />
       </div>
+      <Footer />
     </Flowbite>
   )
 }

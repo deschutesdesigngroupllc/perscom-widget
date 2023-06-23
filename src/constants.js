@@ -23,6 +23,9 @@ const constants = {
   forms: {
     API_URL: process.env.REACT_APP_FORMS_API_URL
   },
+  newsfeed: {
+    API_URL: process.env.REACT_APP_NEWSFEED_API_URL
+  },
   ranks: {
     API_URL: process.env.REACT_APP_RANKS_API_URL
   },

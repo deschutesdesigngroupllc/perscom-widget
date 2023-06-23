@@ -1,11 +1,13 @@
 import React from 'react'
 import { config } from '../constants'
 import { Logo } from './Logo'
+import { useSearchParams } from 'react-router-dom'
 
 export function Footer() {
+  const [searchParams] = useSearchParams()
   const version = config.app.WIDGET_VERSION
 
-  return (
+  return searchParams.get('footer') !== 'false' ? (
     <div className='flex items-center mt-2 space-x-1'>
       <Logo className='w-16 h-6' />
       <div className='text-xs text-gray-400'>
@@ -17,5 +19,7 @@ export function Footer() {
         {version && <span className='md:inline hidden'>Version {version}.</span>}
       </div>
     </div>
+  ) : (
+    ''
   )
 }
