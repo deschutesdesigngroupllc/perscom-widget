@@ -10,12 +10,15 @@ import { Button } from '../components/Button'
 function Forms() {
   const [url, setUrl] = useState(config.forms.API_URL)
 
-  const { data, links, meta, loading, error } = useFetch({
+  const { data, meta, loading, error } = useFetch({
     url: url
   })
 
-  const onPaginationClick = (url) => {
-    setUrl(url)
+  const onPaginationClick = (page) => {
+    const newUrl = new URL(url)
+    newUrl.searchParams.set('page', page)
+
+    setUrl(newUrl.href)
   }
 
   return (
@@ -27,7 +30,7 @@ function Forms() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            renderForms(data, links, meta, onPaginationClick)
+            renderForms(data, meta, onPaginationClick)
           ) : (
             <Alert message='No forms found. Please add an award.' />
           )}
@@ -37,7 +40,7 @@ function Forms() {
   )
 }
 
-function renderForms(forms, links, meta, onPaginationClick) {
+function renderForms(forms, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -66,7 +69,6 @@ function renderForms(forms, links, meta, onPaginationClick) {
         }
       ]}
       rows={forms}
-      links={links}
       meta={meta}
       onPaginationClick={onPaginationClick}
     />

@@ -35,7 +35,7 @@ const useFetch = ({ url, parameters, method = 'GET', body = null }) => {
             setError('Too Many Requests: You have made too many requests to the PERSCOM.io API. Please wait a minute and try again.')
             break
           case 500:
-            setError('Error: We recevied an error while trying to communicate with PERSCOM.io.')
+            setError('Error: We received an error while trying to communicate with the PERSCOM.io API.')
             break
         }
 

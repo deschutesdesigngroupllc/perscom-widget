@@ -3,6 +3,15 @@
 
 The PERSCOM widget provides seamless external integration of your PERSCOM.io data into any website or content management system. Using a simple HTML code block, the widget can render and return your data in an elegant and non-obtrusive manner. The widget allows for full integration into your website through CSS customization.
 
+## Available Widgets
+- [Awards](https://docs.perscom.io/external-integration/widgets/awards)
+- [Calendar](https://docs.perscom.io/external-integration/widgets/calendar)
+- [Forms](https://docs.perscom.io/external-integration/widgets/forms)
+- [Newsfeed](https://docs.perscom.io/external-integration/widgets/newsfeed)
+- [Qualifications](https://docs.perscom.io/external-integration/widgets/qualifications)
+- [Ranks](https://docs.perscom.io/external-integration/widgets/ranks)
+- [Roster](https://docs.perscom.io/external-integration/widgets/roster)
+
 ## Using The Widget
 
 Place the following HTML code block on your website wherever you'd like the widget to display. Make sure to replace APIKEY and PERSCOMID with the appropriate values.
@@ -29,7 +38,7 @@ Your API key will need appropriate permissions based on the widget you are inten
 
 The following example demonstrates the widget embedded within an Invision Community website.
 
-![Invision Widget Preview](https://assets.perscom.io/images/widget-invision-preview-2.png)
+![Widget Preview](https://raw.githubusercontent.com/DeschutesDesignGroupLLC/perscom-widget/master/docs/roster-preview-1.png)
 
 ## Documentation
 
@@ -43,30 +52,24 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm start:widget`
+
+Runs a local web server that serves `widget.js` to be used in local development.
 
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder.
 
 ### `npm run build:widget`
 
-Builds the app to use as a widget with all output in one bundled .js and .css file.
+Builds the widget for production to the `dist` folder.\
+The build will be named `widget.js`.
 
 ### `npm run format`
 
