@@ -10,15 +10,12 @@ import User from './User'
 import { Alert } from '../components/Alert'
 import { Footer } from '../components/Footer'
 import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-router-dom'
-import { config } from '../constants'
 import { Flowbite } from 'flowbite-react'
 import Newsfeed from './Newsfeed'
+import CredentialService from '../services/CredentialService'
 
 function App() {
   const [searchParams] = useSearchParams()
-
-  const apiKey = searchParams.get('apikey') ?? config.app.API_KEY ?? null
-  const perscomId = searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null
 
   const theme = {
     accordion: {
@@ -33,7 +30,7 @@ function App() {
       }
     },
     pagination: {
-      base: 'ml-auto',
+      base: 'ml-auto mr-auto sm:mr-0',
       pages: {
         previous: {
           base: 'ml-0 rounded-l-lg shadow bg-white py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
@@ -56,7 +53,7 @@ function App() {
   return (
     <Flowbite theme={{ theme }}>
       <div className='m-0.5'>
-        {apiKey && perscomId ? (
+        {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
           <Routes>
             <Route path='/' element={<Roster />}></Route>
             <Route path='/awards' element={<Awards />}></Route>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { config } from '../constants'
 import { getOptionalApiParameters } from '../utils/ParameterManager'
+import CredentialService from '../services/CredentialService'
 
 /**
  * @param url
@@ -10,7 +10,7 @@ import { getOptionalApiParameters } from '../utils/ParameterManager'
  * @param body
  * @returns {{data, meta, links: *, loading: boolean, error: string, statusCode: undefined}}
  */
-const useFetch = ({ url, parameters, method = 'GET', body = null }) => {
+const useFetch = ({ url, parameters, method = 'GET', body = null, dependencies = null }) => {
   const [statusCode, setStatusCode] = useState()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -50,7 +50,7 @@ const useFetch = ({ url, parameters, method = 'GET', body = null }) => {
         setError('Error: We recevied an error while trying to communicate with PERSCOM.io.')
         setLoading(false)
       })
-  }, [url])
+  }, [url, dependencies])
 
   return { data: data.data, links: data.links, meta: data.meta, statusCode, loading, error }
 }
@@ -68,7 +68,7 @@ export const createRequest = (url, method = 'GET', headers = {}, body = null) =>
     headers: headers
   }
 
-  if (body && method === 'POST') {
+  if (body) {
     init.body = JSON.stringify(body)
   }
 
@@ -107,15 +107,12 @@ const createRequestUrl = (url, searchParams, parameters = null) => {
  * @returns {{Authorization: string, Accept: string, 'X-Perscom-Id': *|null, 'X-Perscom-Widget': boolean, 'Content-Type': string}}
  */
 export const createHeaders = (searchParams, additionalHeaders = {}) => {
-  const apiKey = searchParams.get('apikey') ?? config.app.API_KEY ?? null
-  const perscomId = searchParams.get('perscomid') ?? config.app.PERSCOM_ID ?? null
-
   return {
     ...additionalHeaders,
     ...{
-      'X-Perscom-Id': perscomId,
+      'X-Perscom-Id': CredentialService.getPerscomId(searchParams),
       'X-Perscom-Widget': true,
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${CredentialService.getApiKey(searchParams)}`,
       Accept: 'application/json',
       'Content-Type': 'application/json'
     }
