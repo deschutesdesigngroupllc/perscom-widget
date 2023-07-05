@@ -25,6 +25,9 @@ const useFetch = ({ url, parameters, method = 'GET', body = null, dependencies =
           case 401:
             setError('Unauthenticated: The API key provided is incorrect or there was none provided.')
             break
+          case 402:
+            setError('Payment Required: You must have a valid subscription and be subscribed to the Pro plan to access the widget.')
+            break
           case 403:
             setError('Forbidden: The API key you provided does not have access to the widget.')
             break
