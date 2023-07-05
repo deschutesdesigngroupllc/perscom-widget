@@ -64,7 +64,7 @@ function Calendar() {
             <Alert message={error} type='failure' />
           ) : (
             data && (
-              <div className='flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col'>
+              <div className='flex rounded-lg bg-white shadow dark:bg-gray-800 flex-col'>
                 <div className='flex h-full flex-col justify-center gap-4'>
                   <FullCalendar
                     plugins={[dayGridPlugin, rrulePlugin, listPlugin]}

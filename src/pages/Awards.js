@@ -9,7 +9,7 @@ import { Alert } from '../components/Alert'
 function Awards() {
   const [url, setUrl] = useState(config.awards.API_URL)
 
-  const { data, links, meta, loading, error } = useFetch({
+  const { data, meta, loading, error } = useFetch({
     url: url,
     parameters: {
       key: 'include',
@@ -17,8 +17,11 @@ function Awards() {
     }
   })
 
-  const onPaginationClick = (url) => {
-    setUrl(url)
+  const onPaginationClick = (page) => {
+    const newUrl = new URL(url)
+    newUrl.searchParams.set('page', page)
+
+    setUrl(newUrl.href)
   }
 
   return (
@@ -30,7 +33,7 @@ function Awards() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            renderAwards(data, links, meta, onPaginationClick)
+            renderAwards(data, meta, onPaginationClick)
           ) : (
             <Alert message='No awards found. Please add an award.' />
           )}
@@ -40,7 +43,7 @@ function Awards() {
   )
 }
 
-function renderAwards(awards, links, meta, onPaginationClick) {
+function renderAwards(awards, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -86,7 +89,6 @@ function renderAwards(awards, links, meta, onPaginationClick) {
         }
       ]}
       rows={awards}
-      links={links}
       meta={meta}
       onPaginationClick={onPaginationClick}
     />

@@ -9,7 +9,7 @@ import { Alert } from '../components/Alert'
 function Qualifications() {
   const [url, setUrl] = useState(config.qualifications.API_URL)
 
-  const { data, links, meta, loading, error } = useFetch({
+  const { data, meta, loading, error } = useFetch({
     url: url,
     parameters: {
       key: 'include',
@@ -17,8 +17,11 @@ function Qualifications() {
     }
   })
 
-  const onPaginationClick = (url) => {
-    setUrl(url)
+  const onPaginationClick = (page) => {
+    const newUrl = new URL(url)
+    newUrl.searchParams.set('page', page)
+
+    setUrl(newUrl.href)
   }
 
   return (
@@ -30,7 +33,7 @@ function Qualifications() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            renderQualifications(data, links, meta, onPaginationClick)
+            renderQualifications(data, meta, onPaginationClick)
           ) : (
             <Alert message='No qualifications found. Please add a qualification.' />
           )}
@@ -40,7 +43,7 @@ function Qualifications() {
   )
 }
 
-function renderQualifications(qualifications, links, meta, onPaginationClick) {
+function renderQualifications(qualifications, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -86,7 +89,6 @@ function renderQualifications(qualifications, links, meta, onPaginationClick) {
         }
       ]}
       rows={qualifications}
-      links={links}
       meta={meta}
       onPaginationClick={onPaginationClick}
     />

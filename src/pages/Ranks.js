@@ -9,7 +9,7 @@ import { Alert } from '../components/Alert'
 function Ranks() {
   const [url, setUrl] = useState(config.ranks.API_URL)
 
-  const { data, links, meta, loading, error } = useFetch({
+  const { data, meta, loading, error } = useFetch({
     url: url,
     parameters: {
       key: 'include',
@@ -17,8 +17,11 @@ function Ranks() {
     }
   })
 
-  const onPaginationClick = (url) => {
-    setUrl(url)
+  const onPaginationClick = (page) => {
+    const newUrl = new URL(url)
+    newUrl.searchParams.set('page', page)
+
+    setUrl(newUrl.href)
   }
 
   return (
@@ -30,7 +33,7 @@ function Ranks() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            renderRanks(data, links, meta, onPaginationClick)
+            renderRanks(data, meta, onPaginationClick)
           ) : (
             <Alert message='No ranks found. Please add a rank.' />
           )}
@@ -40,7 +43,7 @@ function Ranks() {
   )
 }
 
-function renderRanks(ranks, links, meta, onPaginationClick) {
+function renderRanks(ranks, meta, onPaginationClick) {
   return (
     <Table
       columns={[
@@ -86,7 +89,6 @@ function renderRanks(ranks, links, meta, onPaginationClick) {
         }
       ]}
       rows={ranks}
-      links={links}
       meta={meta}
       onPaginationClick={onPaginationClick}
     />

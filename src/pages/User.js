@@ -12,6 +12,7 @@ import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 import { Alert } from '../components/Alert'
 import { Card, Spinner } from 'flowbite-react'
 import { FieldValue } from '../components/Field'
+import Helpers from '../utils/Helpers'
 
 const get = require('lodash/get')
 
@@ -356,10 +357,6 @@ function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentR
   )
 }
 
-const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('en-us', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })
-}
-
 function createRecordsTabs() {
   return [
     {
@@ -370,7 +367,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
@@ -417,7 +414,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
@@ -462,7 +459,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
@@ -480,7 +477,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
@@ -526,7 +523,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
@@ -571,7 +568,7 @@ function createRecordsTabs() {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => Helpers.formatDate(row.created_at),
           sortable: true,
           maxWidth: '250px'
         },
