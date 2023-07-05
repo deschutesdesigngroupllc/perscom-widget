@@ -51,28 +51,30 @@ function App() {
   }
 
   return (
-    <Flowbite theme={{ theme }}>
-      <div className='m-0.5'>
-        {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
-          <Routes>
-            <Route path='/' element={<Roster />}></Route>
-            <Route path='/awards' element={<Awards />}></Route>
-            <Route path='/calendar' element={<Calendar />}></Route>
-            <Route path='/forms' element={<Forms />}></Route>
-            <Route path='/forms/:id' element={<Form />}></Route>
-            <Route path='/newsfeed' element={<Newsfeed />}></Route>
-            <Route path='/qualifications' element={<Qualifications />}></Route>
-            <Route path='/ranks' element={<Ranks />}></Route>
-            <Route path='/roster' element={<Roster />}></Route>
-            <Route path='/users/:id' element={<User />}></Route>
-            <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
-          </Routes>
-        ) : (
-          <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
-        )}
-      </div>
-      <Footer />
-    </Flowbite>
+    <div className='pb-2'>
+      <Flowbite theme={{ theme }}>
+        <div className='m-0.5'>
+          {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
+            <Routes>
+              <Route path='/' element={<Roster />}></Route>
+              <Route path='/awards' element={<Awards />}></Route>
+              <Route path='/calendar' element={<Calendar />}></Route>
+              <Route path='/forms' element={<Forms />}></Route>
+              <Route path='/forms/:id' element={<Form />}></Route>
+              <Route path='/newsfeed' element={<Newsfeed />}></Route>
+              <Route path='/qualifications' element={<Qualifications />}></Route>
+              <Route path='/ranks' element={<Ranks />}></Route>
+              <Route path='/roster' element={<Roster />}></Route>
+              <Route path='/users/:id' element={<User />}></Route>
+              <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
+            </Routes>
+          ) : (
+            <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
+          )}
+        </div>
+        <Footer />
+      </Flowbite>
+    </div>
   )
 }
 
