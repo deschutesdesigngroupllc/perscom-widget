@@ -2,6 +2,7 @@ import React from 'react'
 import { countries } from '../assets/js/countries'
 import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react'
 import PropTypes from 'prop-types'
+import Helpers from '../utils/Helpers'
 
 export const FieldElement = React.forwardRef(({ field, fieldObject }, ref) => {
   const { onChange, value } = field
@@ -156,21 +157,9 @@ export const FieldValue = ({ field, value }) => {
       var country = countries.find((country) => country.code === value)
       return country.name ?? ''
     case 'date':
-      return new Date(value).toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        timeZone: 'UTC'
-      })
+      return Helpers.formatDate(value)
     case 'datetime-local':
-      return new Date(value).toLocaleTimeString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        timeZone: 'UTC'
-      })
+      return Helpers.formatDate(value)
     case 'email':
       return (
         <a className='underline' href={`mailto:${value}`}>

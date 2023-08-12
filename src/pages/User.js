@@ -5,12 +5,10 @@ import { Loading } from '../components/Loading'
 import { config } from '../constants'
 import { Link } from '../components/Link'
 import { useParams } from 'react-router-dom'
-import cx from 'classnames'
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import DataTable from 'react-data-table-component'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
 import { Alert } from '../components/Alert'
-import { Card, Spinner } from 'flowbite-react'
+import { Card, Spinner, Tabs as FlowbiteTabs } from 'flowbite-react'
 import { FieldValue } from '../components/Field'
 import Helpers from '../utils/Helpers'
 
@@ -18,7 +16,7 @@ const get = require('lodash/get')
 
 function User() {
   const { id } = useParams()
-  const [url] = useState(config.users.API_URL)
+  const [url] = useState(config.app.API_URL + 'users/')
 
   const {
     data: user,
@@ -28,7 +26,18 @@ function User() {
     url: new URL(id, url).href,
     parameters: {
       key: 'include',
-      value: Array('position', 'rank', 'specialty', 'status', 'unit').join()
+      value: Array(
+        'position',
+        'rank',
+        'specialty',
+        'status',
+        'unit',
+        'service_records',
+        'combat_records',
+        'rank_records',
+        'qualification_records',
+        'assignment_records'
+      ).join()
     }
   })
 
@@ -37,7 +46,6 @@ function User() {
   })
 
   const recordsTabs = createRecordsTabs()
-  const [currentRecordTab, setCurrentRecordTab] = useState(0)
 
   let records = {}
   for (var i = 0; i < recordsTabs.length; i++) {
@@ -53,7 +61,6 @@ function User() {
   }
 
   const assignmentTabs = createAssignmentTabs()
-  const [currentAssignmentTab, setCurrentAssignmentTab] = useState(0)
 
   let assignments = {}
   for (var a = 0; a < assignmentTabs.length; a++) {
@@ -78,25 +85,13 @@ function User() {
             <Alert message={error} type='failure' />
           ) : (
             <div className='flex flex-col space-y-4'>
-              <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
+              <div className='flex flex-row items-center justify-start space-x-1 active:text-blue-600'>
                 <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
                 <Link href={'/roster'} className='text-sm'>
                   Back to Roster
                 </Link>
               </div>
-              {user &&
-                renderProfile(
-                  user,
-                  additionalFields,
-                  records,
-                  recordsTabs,
-                  currentRecordTab,
-                  setCurrentRecordTab,
-                  assignments,
-                  assignmentTabs,
-                  currentAssignmentTab,
-                  setCurrentAssignmentTab
-                )}
+              {user && renderProfile(user, additionalFields, records, recordsTabs, assignments, assignmentTabs)}
             </div>
           )}
         </>
@@ -105,18 +100,7 @@ function User() {
   )
 }
 
-function renderProfile(
-  user,
-  additionalFields,
-  records,
-  recordsTabs,
-  currentRecordTab,
-  setCurrentRecordTab,
-  assignments,
-  assignmentTabs,
-  currentAssignmentTab,
-  setCurrentAssignmentTab
-) {
+function renderProfile(user, additionalFields, records, recordsTabs, assignments, assignmentTabs) {
   const { cover_photo_url } = user
 
   return (
@@ -131,8 +115,8 @@ function renderProfile(
         {renderDemographicsCard(user)}
       </div>
       {additionalFields && !!additionalFields.length && renderAdditionalFieldsCard(user, additionalFields)}
-      {renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab)}
-      {renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab)}
+      {renderSecondaryAssignments(user, assignments, assignmentTabs)}
+      {renderRecords(user, records, recordsTabs)}
     </div>
   )
 }
@@ -146,7 +130,7 @@ function renderPersonnelProfileCard(user) {
   return (
     <Card className='md:w-1/3 w-full justify-start'>
       <div className='flex justify-between items-center'>
-        <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Personnel Profile</h5>
+        <h5 className='text-xl font-bold'>Personnel Profile</h5>
         {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>}
       </div>
       <div className='py-4 flex flex-grow flex-col space-y-4 justify-center items-center'>
@@ -155,8 +139,7 @@ function renderPersonnelProfileCard(user) {
           <div className='font-bold'>
             {rank_abbreviation} {name} {'  '}
           </div>
-          {rank_name && <div className='text-gray-700 font-medium'>{rank_name}</div>}{' '}
-          {position_name && <div className='text-gray-500'>{position_name}</div>}
+          {rank_name && <div className='font-medium'>{rank_name}</div>} {position_name && <div className='font-light'>{position_name}</div>}
         </div>
       </div>
     </Card>
@@ -173,7 +156,7 @@ function renderDemographicsCard(user) {
   return (
     <Card className='w-full md:w-2/3 justify-start'>
       <div className='flex justify-between items-center'>
-        <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Demographics</h5>
+        <h5 className='text-xl font-bold tracking-tight'>Demographics</h5>
         {online ? (
           <span className='inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-600'>Online</span>
         ) : (
@@ -183,24 +166,24 @@ function renderDemographicsCard(user) {
       <div className='flow-root'>
         <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
           <li className='py-2'>
-            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Name</p>
-            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{name}</p>
+            <p className='truncate text-sm font-semibold'>Name</p>
+            <p className='truncate text-sm'>{name}</p>
           </li>
           <li className='py-2'>
-            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Rank</p>
-            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{rank_name}</p>
+            <p className='truncate text-sm font-semibold'>Rank</p>
+            <p className='truncate text-sm'>{rank_name}</p>
           </li>
           <li className='py-2'>
-            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Position</p>
-            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{position_name}</p>
+            <p className='truncate text-sm font-semibold'>Primary Position</p>
+            <p className='truncate text-sm'>{position_name}</p>
           </li>
           <li className='py-2'>
-            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Specialty</p>
-            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{specialty_name}</p>
+            <p className='truncate text-sm font-semibold'>Primary Specialty</p>
+            <p className='truncate text-sm'>{specialty_name}</p>
           </li>
           <li className='py-2'>
-            <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>Primary Unit</p>
-            <p className='truncate text-sm text-gray-500 dark:text-gray-400'>{unit_name}</p>
+            <p className='truncate text-sm font-semibold'>Primary Unit</p>
+            <p className='truncate text-sm'>{unit_name}</p>
           </li>
         </ul>
       </div>
@@ -211,7 +194,7 @@ function renderDemographicsCard(user) {
 function renderAdditionalFieldsCard(user, additionalFields) {
   return (
     <Card>
-      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Additional Information</h5>
+      <h5 className='text-xl font-bold'>Additional Information</h5>
       <div className='flow-root'>
         <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
           {additionalFields &&
@@ -219,8 +202,8 @@ function renderAdditionalFieldsCard(user, additionalFields) {
             additionalFields.map(function (field) {
               return (
                 <li key={field.key} className='py-2'>
-                  <p className='truncate text-sm font-medium text-gray-900 dark:text-white'>{field.name}</p>
-                  <p className='text-sm text-gray-500 dark:text-gray-400'>
+                  <p className='truncate text-sm font-semibold'>{field.name}</p>
+                  <p className='text-sm'>
                     <FieldValue field={field} value={get(user, field.key, '')} />
                   </p>
                 </li>
@@ -232,127 +215,91 @@ function renderAdditionalFieldsCard(user, additionalFields) {
   )
 }
 
-function renderSecondaryAssignments(user, assignments, assignmentTabs, currentAssignmentTab, setCurrentAssignmentTab) {
+function renderSecondaryAssignments(user, assignments, assignmentTabs) {
   return (
-    <Card>
-      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Assignments</h5>
-      <Tabs onSelect={(index) => setCurrentAssignmentTab(index)} defaultIndex={currentAssignmentTab}>
-        <TabList className='-mb-px flex space-x-8 overflow-scroll'>
-          {assignmentTabs.map((tab, index) => (
-            <Tab
-              key={index}
-              className={cx('cursor-pointer whitespace-nowrap flex p-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
-                'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentAssignmentTab,
-                'active:border-transparent border-blue-600 text-blue-600': index === currentAssignmentTab
-              })}
-            >
-              {tab.name}
-              <span
-                aria-hidden='true'
-                className={cx('hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block', {
-                  'bg-blue-100 text-blue-600': index === currentAssignmentTab,
-                  'bg-gray-100 text-gray-900': index !== currentAssignmentTab
-                })}
-              >
-                {assignments[assignmentTabs[index].variable] ? assignments[assignmentTabs[index].variable].length : 0}
-              </span>
-            </Tab>
-          ))}
-        </TabList>
+    <Card
+      theme={{
+        root: {
+          children: 'flex h-full flex-col justify-center gap-4 p-6 pb-2'
+        }
+      }}
+    >
+      <h5 className='text-xl font-bold'>Assignments</h5>
+      <FlowbiteTabs.Group style='underline'>
         {assignmentTabs.map((tab, index) => (
-          <TabPanel key={index}>
+          <FlowbiteTabs.Item key={index} title={tab.name}>
             <div className='pt-4'>
-              {assignments && (
-                <DataTable
-                  key={index}
-                  columns={assignmentTabs[index].columns}
-                  data={assignments[assignmentTabs[index].variable]}
-                  pagination={true}
-                  progressPending={!assignments[assignmentTabs[index].variable]}
-                  progressComponent={DataTableLoading()}
-                  highlightOnHover={true}
-                  defaultSortFieldId={1}
-                  responsive={true}
-                  paginationComponentOptions={{
-                    noRowsPerPage: true
-                  }}
-                  customStyles={{
-                    cells: {
-                      style: {
-                        marginTop: '0.5rem',
-                        marginBottom: '0.5rem'
-                      }
+              <DataTable
+                key={index}
+                columns={assignmentTabs[index].columns}
+                data={assignments[assignmentTabs[index].variable]}
+                pagination={true}
+                progressPending={!assignments[assignmentTabs[index].variable]}
+                progressComponent={DataTableLoading()}
+                highlightOnHover={true}
+                defaultSortFieldId={1}
+                responsive={true}
+                paginationComponentOptions={{
+                  noRowsPerPage: true
+                }}
+                customStyles={{
+                  cells: {
+                    style: {
+                      marginTop: '0.5rem',
+                      marginBottom: '0.5rem'
                     }
-                  }}
-                />
-              )}
+                  }
+                }}
+              />
             </div>
-          </TabPanel>
+          </FlowbiteTabs.Item>
         ))}
-      </Tabs>
+      </FlowbiteTabs.Group>
     </Card>
   )
 }
 
-function renderRecords(user, records, recordsTabs, currentRecordTab, setCurrentRecordTab) {
+function renderRecords(user, records, recordsTabs) {
   return (
-    <Card>
-      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>Records</h5>
-      <Tabs onSelect={(index) => setCurrentRecordTab(index)} defaultIndex={currentRecordTab}>
-        <TabList className='-mb-px flex space-x-8 overflow-scroll'>
-          {recordsTabs.map((tab, index) => (
-            <Tab
-              key={index}
-              className={cx('cursor-pointer whitespace-nowrap flex py-4 px-1 focus-visible:outline-none border-b-2 font-medium text-sm', {
-                'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200': index !== currentRecordTab,
-                'active:border-transparent border-blue-600 text-blue-600': index === currentRecordTab
-              })}
-            >
-              {tab.name}
-              <span
-                aria-hidden='true'
-                className={cx('hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block', {
-                  'bg-blue-100 text-blue-600': index === currentRecordTab,
-                  'bg-gray-100 text-gray-900': index !== currentRecordTab
-                })}
-              >
-                {records[recordsTabs[index].variable] ? records[recordsTabs[index].variable].length : 0}
-              </span>
-            </Tab>
-          ))}
-        </TabList>
+    <Card
+      theme={{
+        root: {
+          children: 'flex h-full flex-col justify-center gap-4 p-6 pb-2'
+        }
+      }}
+    >
+      <h5 className='text-xl font-bold'>Records</h5>
+      <FlowbiteTabs.Group style='underline'>
         {recordsTabs.map((tab, index) => (
-          <TabPanel key={index}>
+          <FlowbiteTabs.Item key={index} title={tab.name}>
             <div className='pt-4'>
-              {records && (
-                <DataTable
-                  key={index}
-                  columns={recordsTabs[index].columns}
-                  data={records[recordsTabs[index].variable]}
-                  pagination={true}
-                  progressPending={!records[recordsTabs[index].variable]}
-                  progressComponent={DataTableLoading()}
-                  highlightOnHover={true}
-                  defaultSortFieldId={1}
-                  defaultSortAsc={false}
-                  responsive={true}
-                  paginationComponentOptions={{
-                    noRowsPerPage: true
-                  }}
-                  customStyles={{
-                    cells: {
-                      style: {
-                        marginTop: '0.5rem',
-                        marginBottom: '0.5rem'
-                      }
+              <DataTable
+                key={index}
+                columns={recordsTabs[index].columns}
+                data={records[recordsTabs[index].variable]}
+                pagination={true}
+                progressPending={!records[recordsTabs[index].variable]}
+                progressComponent={DataTableLoading()}
+                highlightOnHover={true}
+                defaultSortFieldId={1}
+                defaultSortAsc={false}
+                responsive={true}
+                paginationComponentOptions={{
+                  noRowsPerPage: true
+                }}
+                customStyles={{
+                  cells: {
+                    style: {
+                      marginTop: '0.5rem',
+                      marginBottom: '0.5rem'
                     }
-                  }}
-                />
-              )}
+                  }
+                }}
+              />
             </div>
-          </TabPanel>
+          </FlowbiteTabs.Item>
         ))}
-      </Tabs>
+      </FlowbiteTabs.Group>
     </Card>
   )
 }
@@ -384,7 +331,7 @@ function createRecordsTabs() {
                   {position_name}, {unit_name}
                 </div>
                 {specialty_name && <div className='text-xs'>{specialty_name}</div>}
-                {text && <div className='text-xs text-gray-400'>{text}</div>}
+                {text && <div className='text-xs'>{text}</div>}
               </div>
             )
           },
@@ -429,7 +376,7 @@ function createRecordsTabs() {
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
                 <div className='flex flex-col space-y-1 justify-center'>
                   {name && <div className='font-semibold'>{name}</div>}
-                  {text && <div className='text-xs text-gray-400'>{text}</div>}
+                  {text && <div className='text-xs'>{text}</div>}
                 </div>
               </div>
             )
@@ -492,7 +439,7 @@ function createRecordsTabs() {
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
                 <div className='flex flex-col space-y-1 justify-center'>
                   {name && <div className='font-semibold'>{name}</div>}
-                  {text && <div className='text-xs text-gray-400'>{text}</div>}
+                  {text && <div className='text-xs'>{text}</div>}
                 </div>
               </div>
             )
@@ -538,7 +485,7 @@ function createRecordsTabs() {
                 {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
                 <div className='flex flex-col space-y-1 justify-center'>
                   {name && <div className='font-semibold'>{name}</div>}
-                  {text && <div className='text-xs text-gray-400'>{text}</div>}
+                  {text && <div className='text-xs'>{text}</div>}
                 </div>
               </div>
             )

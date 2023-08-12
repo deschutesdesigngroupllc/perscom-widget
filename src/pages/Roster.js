@@ -6,10 +6,15 @@ import { Table } from '../components/Table'
 import { config } from '../constants'
 import { Link } from '../components/Link'
 import { Alert } from '../components/Alert'
+import { Card, Tabs } from 'flowbite-react'
 
 function Roster() {
   const { data, loading, error } = useFetch({
-    url: config.roster.API_URL
+    url: config.app.API_URL + 'groups/',
+    parameters: {
+      key: 'include',
+      value: 'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status'
+    }
   })
 
   return (
@@ -21,13 +26,37 @@ function Roster() {
           {error ? (
             <Alert message={error} type='failure' />
           ) : data && !!data.length ? (
-            <div className='flex flex-col space-y-4'>{data.map((unit) => renderUnit(unit))}</div>
+            renderTabs(data)
           ) : (
-            <Alert message='No units found. Please add a unit to view the roster.' />
+            <Alert message='No groups found. Please add a group and assign a unit to view the roster.' />
           )}
         </>
       )}
     </>
+  )
+}
+
+function renderTabs(groups) {
+  return (
+    <Card
+      theme={{
+        root: {
+          children: 'flex h-full flex-col justify-center gap-4 p-0'
+        }
+      }}
+    >
+      <Tabs.Group style='underline'>
+        {groups.map((group, index) => (
+          <Tabs.Item key={index} title={group.name}>
+            {group.units && !!group.units.length ? (
+              group.units.map((unit) => renderUnit(unit))
+            ) : (
+              <div className='flex justify-center items-center py-4 text-sm'>No Units Assigned To Group</div>
+            )}
+          </Tabs.Item>
+        ))}
+      </Tabs.Group>
+    </Card>
   )
 }
 
@@ -41,6 +70,7 @@ function renderUnit(unit) {
         {
           name: name,
           headerAttributes: { colSpan: '6' },
+          headerClasses: ['!rounded-none'],
           cellClasses: ['w-1/6', 'whitespace-normal', 'sm:whitespace-nowrap', '!py-3'],
           cellContent: (user) => {
             const { name, rank, position, id: user_id } = user
@@ -59,13 +89,10 @@ function renderUnit(unit) {
                   </div>
                 )}
                 <div className='flex flex-col ml-4'>
-                  <Link
-                    href={`/users/${user_id}`}
-                    className='text-sm font-medium text-gray-900 dark:text-white hover:text-gray-500 active:text-blue-600'
-                  >
+                  <Link href={`/users/${user_id}`} className='text-sm font-semibold hover:text-gray-600 active:text-blue-600'>
                     {name}
                   </Link>
-                  <div className='md:hidden text-xs text-gray-500 dark:text-gray-400'>{position_name}</div>
+                  <div className='md:hidden text-xs'>{position_name}</div>
                 </div>
               </div>
             )
@@ -114,22 +141,10 @@ function renderUnit(unit) {
               </>
             )
           }
-        },
-        {
-          name: 'Link',
-          hidden: true,
-          cellClasses: ['hidden', 'xl:table-cell', 'text-center', 'w-1/6', '!py-3'],
-          cellContent: (user) => {
-            const { name, id } = user
-            return (
-              <Link href={`/users/${id}`} className='text-gray-500 hover:text-gray-700 active:text-blue-600'>
-                Personnel Profile<span className='sr-only'>, {name}</span>
-              </Link>
-            )
-          }
         }
       ]}
       rows={users}
+      emptyRowsMessage='No Personnel Assigned To Unit'
     />
   )
 }

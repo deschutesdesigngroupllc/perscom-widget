@@ -11,7 +11,7 @@ export function Footer() {
     <div className='flex flex-row justify-center'>
       <div className='flex items-center mt-2 space-x-1'>
         <Logo className='w-16 h-6' />
-        <div className='text-xs text-gray-400'>
+        <div className='text-xs'>
           Widget Provided By{' '}
           <a href='https://perscom.io' target='_blank' rel='noreferrer' className='underline'>
             PERSCOM.io

@@ -14,7 +14,7 @@ import { FieldElement } from '../components/Field'
 
 function Form() {
   const { id } = useParams()
-  const [url] = useState(config.forms.API_URL)
+  const [url] = useState(config.app.API_URL + 'forms/')
   const [validationError, setValidationError] = useState()
   const [submitted, setSubmitted] = useState(false)
   const [searchParams] = useSearchParams()
@@ -26,7 +26,7 @@ function Form() {
 
   const { control, handleSubmit, reset } = useForm()
   const onSubmit = (data) => {
-    createRequest(config.forms.API_URL + `${id}` + '/submissions', 'POST', createHeaders(searchParams), data)
+    createRequest(url + `${id}` + '/submissions', 'POST', createHeaders(searchParams), data)
       .then((response) => {
         if (!response.ok) {
           return response.json().then((response) => {
@@ -60,7 +60,7 @@ function Form() {
           ) : (
             <>
               <div className='flex flex-col space-y-4'>
-                <div className='flex flex-row items-center justify-start space-x-1 text-gray-500 hover:text-gray-700 active:text-blue-600'>
+                <div className='flex flex-row items-center justify-start space-x-1 active:text-blue-600'>
                   <ChevronLeftIcon className='h-5 w-5' aria-hidden='true' />
                   <Link href={'/forms'} className='text-sm'>
                     Back to Forms
@@ -81,14 +81,14 @@ function renderForm(form, formRef, control, handleSubmit, onSubmit, validationEr
 
   return (
     <Card>
-      <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white' ref={formRef}>
+      <h5 className='text-xl font-bold' ref={formRef}>
         {name}
       </h5>
       <form onSubmit={handleSubmit(onSubmit)} className='mb-0'>
         <div className='flex flex-col gap-4 py-4 sm:py-0'>
           {submitted && <Alert message={form.success_message ?? 'Your form has been successfully submitted.'} type='success' />}
           {validationError && <Alert message={validationError} type='failure' />}
-          {instructions && <div className='text-sm text-gray-600'>{instructions}</div>}
+          {instructions && <div className='text-sm'>{instructions}</div>}
           {fields &&
             !!fields.length &&
             fields.map((fieldObject) => {

@@ -6,7 +6,7 @@ import { Pagination, Table as TableFlowbite } from 'flowbite-react'
 const get = require('lodash/get')
 const hash = require('object-hash')
 
-export function Table({ columns, rows, meta, tableClasses, wrapperClasses, onPaginationClick }) {
+export function Table({ columns, rows, meta, tableClasses, wrapperClasses, onPaginationClick, emptyRowsMessage }) {
   return (
     <div className={cx(wrapperClasses)}>
       <TableFlowbite className={cx(tableClasses)}>
@@ -24,21 +24,27 @@ export function Table({ columns, rows, meta, tableClasses, wrapperClasses, onPag
               })}
         </TableFlowbite.Head>
         <TableFlowbite.Body className='divide-y'>
-          {rows &&
-            !!rows.length &&
-            rows.map((row) => {
-              return (
-                <TableFlowbite.Row key={hash(row)}>
-                  {columns.map((column) => {
-                    return (
-                      <TableFlowbite.Cell className={cx(column.cellClasses)} key={hash(column)} {...column.cellAttributes}>
-                        {renderCellContent(row, column)}
-                      </TableFlowbite.Cell>
-                    )
-                  })}
+          {rows && !!rows.length
+            ? rows.map((row) => {
+                return (
+                  <TableFlowbite.Row key={hash(row)}>
+                    {columns.map((column) => {
+                      return (
+                        <TableFlowbite.Cell className={cx(column.cellClasses)} key={hash(column)} {...column.cellAttributes}>
+                          {renderCellContent(row, column)}
+                        </TableFlowbite.Cell>
+                      )
+                    })}
+                  </TableFlowbite.Row>
+                )
+              })
+            : emptyRowsMessage && (
+                <TableFlowbite.Row>
+                  <TableFlowbite.Cell>
+                    <div className='flex justify-center items-center text-sm'>{emptyRowsMessage}</div>
+                  </TableFlowbite.Cell>
                 </TableFlowbite.Row>
-              )
-            })}
+              )}
         </TableFlowbite.Body>
       </TableFlowbite>
       {meta?.current_page && meta?.last_page && meta?.last_page > 1 && (
@@ -68,7 +74,8 @@ Table.propTypes = {
   meta: PropTypes.object,
   tableClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
   wrapperClasses: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]),
-  onPaginationClick: PropTypes.func
+  onPaginationClick: PropTypes.func,
+  emptyRowsMessage: PropTypes.string
 }
 
 export default Table
