@@ -18,11 +18,6 @@ function App() {
   const [searchParams] = useSearchParams()
 
   const theme = {
-    accordion: {
-      root: {
-        base: 'bg-blue-700'
-      }
-    },
     card: {
       root: {
         base: 'flex rounded-lg bg-white shadow dark:bg-gray-800',
@@ -43,6 +38,15 @@ function App() {
         }
       }
     },
+    tab: {
+      base: 'flex flex-col gap-0',
+      tablist: {
+        tabitem: {
+          base: 'flex items-center justify-center p-4 rounded-t-lg text-sm font-medium first:ml-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 focus:outline-none'
+        }
+      },
+      tabpanel: 'py-0'
+    },
     table: {
       root: {
         shadow: 'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg shadow -z-10'
@@ -51,7 +55,7 @@ function App() {
   }
 
   return (
-    <div className='pb-2'>
+    <div className='font-sans text-gray-500 pb-2'>
       <Flowbite theme={{ theme }}>
         <div className='m-0.5'>
           {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (

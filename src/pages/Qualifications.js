@@ -7,7 +7,7 @@ import { Table } from '../components/Table'
 import { Alert } from '../components/Alert'
 
 function Qualifications() {
-  const [url, setUrl] = useState(config.qualifications.API_URL)
+  const [url, setUrl] = useState(config.app.API_URL + 'qualifications/')
 
   const { data, meta, loading, error } = useFetch({
     url: url,
@@ -81,8 +81,8 @@ function renderQualifications(qualifications, meta, onPaginationClick) {
                     <img className='w-20' src={image_url} alt={name} />
                   </div>
                 )}
-                <div className='text-sm font-medium text-gray-900 dark:text-white mb-2'>{name}</div>
-                <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
+                <div className='text-sm font-semibold mb-2'>{name}</div>
+                <div className='text-sm'>{description}</div>
               </>
             )
           }

@@ -18,7 +18,7 @@ function Calendar() {
   dayjs.extend(utc)
   dayjs.extend(timezone)
 
-  const [url] = useState(config.events.API_URL)
+  const [url] = useState(config.app.API_URL + 'events/')
   const [eventData, setEventData] = useState([])
   const [searchParams] = useSearchParams()
 

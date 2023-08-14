@@ -7,7 +7,6 @@ import { Alert } from '../components/Alert'
 import { Avatar, Card, Pagination, Tooltip } from 'flowbite-react'
 import TimeAgo from 'react-timeago'
 import cx from 'classnames'
-import AvatarGroup from 'flowbite-react/lib/esm/components/Avatar/AvatarGroup'
 import { FaceSmileIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { createRequest, createHeaders } from '../hooks/useFetch'
 import { useSearchParams } from 'react-router-dom'
@@ -15,7 +14,7 @@ import AuthService from '../services/AuthService'
 import Helpers from '../utils/Helpers'
 
 function Newsfeed() {
-  const [url, setUrl] = useState(config.newsfeed.API_URL)
+  const [url, setUrl] = useState(config.app.API_URL + 'newsfeed/')
   const [likes, setLikes] = useState()
   const [searchParams] = useSearchParams()
   const currentUserSub = AuthService.getSub(searchParams)
@@ -26,7 +25,7 @@ function Newsfeed() {
   })
 
   const onLikeClick = (id) => {
-    createRequest(config.newsfeed.API_URL + `${id}` + '/likes/attach', 'POST', createHeaders(searchParams), {
+    createRequest(url + `${id}` + '/likes/attach', 'POST', createHeaders(searchParams), {
       resources: [currentUserSub]
     })
       .then((response) => {
@@ -125,7 +124,7 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
 
   return (
     <div className='flex flex-col space-y-3' key={id}>
-      <div className='text-sm text-gray-500 px-1 flex flex-row items-center space-x-2'>
+      <div className='text-sm px-1 flex flex-row items-center space-x-2'>
         {author_profile_photo ? (
           <Avatar stacked rounded img={author_profile_photo} alt={author} size='xs' />
         ) : (
@@ -133,7 +132,7 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
         )}
         <div className='font-normal text-xs'>
           <span className='font-bold'>{author ?? 'User'}</span> {getTitle(event, type)} &#8226;{' '}
-          <span className='text-gray-400'>
+          <span className='font-light'>
             <TimeAgo date={created_at} />
           </span>
         </div>
@@ -161,7 +160,7 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
                   </>
                 )}
                 <h5
-                  className={cx('font-bold tracking-tight text-gray-900 dark:text-white', {
+                  className={cx('font-bold hover:text-gray-600', {
                     'text-blue-800': color === 'info',
                     'text-red-800': color === 'failure',
                     'text-green-800': color === 'success',
@@ -170,11 +169,11 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
                 >
                   {getHeadline(headline, description)}
                 </h5>
-                {url && <ArrowTopRightOnSquareIcon className='hidden sm:block text-gray-400 h-4 w-4' />}
+                {url && <ArrowTopRightOnSquareIcon className='hidden sm:block h-4 w-4' />}
               </div>
             </a>
             <div
-              className={cx('text-xs text-gray-400', {
+              className={cx('text-xs', {
                 'text-blue-700': color === 'info',
                 'text-red-700': color === 'failure',
                 'text-green-700': color === 'success',
@@ -185,9 +184,9 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
             </div>
           </div>
           <div className='flex flex-col space-y-4'>
-            {itemHtml && <div className='text-sm text-gray-600 font-medium' dangerouslySetInnerHTML={{ __html: itemHtml }}></div>}
+            {itemHtml && <div className='text-sm font-medium' dangerouslySetInnerHTML={{ __html: itemHtml }}></div>}
             <div
-              className={cx('text-sm text-gray-500', {
+              className={cx('text-sm', {
                 'text-blue-700': color === 'info',
                 'text-red-700': color === 'failure',
                 'text-green-700': color === 'success',
@@ -216,7 +215,7 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
                 </Tooltip>
               )}
               <div className='flex flex-row items-center space-x-2'>
-                <AvatarGroup className='flex flex-wrap gap-2'>
+                <Avatar.Group className='flex flex-wrap gap-2'>
                   {likes &&
                     !!likes.length &&
                     likes.slice(0, 5).map(function (user) {
@@ -228,8 +227,8 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
                         </>
                       )
                     })}
-                </AvatarGroup>
-                {likes && !!likes.length && <div className='text-xs text-gray-400'>{`${Helpers.pluralize(likes.length, 'like')}`}</div>}
+                </Avatar.Group>
+                {likes && !!likes.length && <div className='text-xs'>{`${Helpers.pluralize(likes.length, 'like')}`}</div>}
               </div>
             </div>
           </div>

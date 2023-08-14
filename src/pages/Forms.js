@@ -8,7 +8,7 @@ import { config } from '../constants'
 import { Button } from '../components/Button'
 
 function Forms() {
-  const [url, setUrl] = useState(config.forms.API_URL)
+  const [url, setUrl] = useState(config.app.API_URL + 'forms')
 
   const { data, meta, loading, error } = useFetch({
     url: url
@@ -54,8 +54,8 @@ function renderForms(forms, meta, onPaginationClick) {
               <>
                 <div className='flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 space-x-0 md:space-x-8'>
                   <div>
-                    <div className='text-sm font-medium text-gray-900 dark:text-white mb-2'>{name}</div>
-                    <div className='text-sm text-gray-500 dark:text-gray-400'>{description}</div>
+                    <div className='text-sm font-semibold mb-2'>{name}</div>
+                    <div className='text-sm'>{description}</div>
                   </div>
                   <div className='flex-shrink-0'>
                     <Button href={String(id)} color='gray'>
