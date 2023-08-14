@@ -221,7 +221,7 @@ function renderNewsfeedItem(item, onLikeClick, onUnlikeClick, currentUserSub) {
                     likes.slice(0, 5).map(function (user) {
                       return (
                         <>
-                          <Tooltip ey={user.id} content={user.name}>
+                          <Tooltip key={user.id} content={user.name}>
                             <Avatar key={user.id} stacked rounded alt={user.name} size='xs' />
                           </Tooltip>
                         </>
