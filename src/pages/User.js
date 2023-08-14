@@ -236,6 +236,7 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs) {
                 pagination={true}
                 progressPending={!assignments[assignmentTabs[index].variable]}
                 progressComponent={DataTableLoading()}
+                noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
                 defaultSortFieldId={1}
                 responsive={true}
@@ -280,6 +281,7 @@ function renderRecords(user, records, recordsTabs) {
                 pagination={true}
                 progressPending={!records[recordsTabs[index].variable]}
                 progressComponent={DataTableLoading()}
+                noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
                 defaultSortFieldId={1}
                 defaultSortAsc={false}
@@ -575,6 +577,10 @@ function DataTableLoading() {
       <Spinner color='gray' />
     </div>
   )
+}
+
+function DataTableEmpty() {
+  return <div className='text-grey-500 py-4 sm:py-8 text-sm'>There are no records to display.</div>
 }
 
 export default Sentry.withProfiler(User)

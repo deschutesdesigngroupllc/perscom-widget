@@ -1,9 +1,11 @@
+# Get Started with the PERSCOM Widget for React - Seamlessly Display Personnel Data
 
-# Getting Started With The PERSCOM Widget
+The PERSCOM Widget offers a simple and effective way to integrate your PERSCOM.io data externally into various websites and content management systems. By utilizing a straightforward HTML code snippet, the widget can elegantly render and present your data in a non-intrusive manner. Further, the widget can be fully customized using CSS to seamlessly blend with your website's aesthetics.
 
-The PERSCOM widget provides seamless external integration of your PERSCOM.io data into any website or content management system. Using a simple HTML code block, the widget can render and return your data in an elegant and non-obtrusive manner. The widget allows for full integration into your website through CSS customization.
+## Widget Options
 
-## Available Widgets
+Explore the variety of available widgets:
+
 - [Awards](https://docs.perscom.io/external-integration/widgets/awards)
 - [Calendar](https://docs.perscom.io/external-integration/widgets/calendar)
 - [Forms](https://docs.perscom.io/external-integration/widgets/forms)
@@ -12,71 +14,73 @@ The PERSCOM widget provides seamless external integration of your PERSCOM.io dat
 - [Ranks](https://docs.perscom.io/external-integration/widgets/ranks)
 - [Roster](https://docs.perscom.io/external-integration/widgets/roster)
 
-## Using The Widget
+## How to Use the Widget
 
-Place the following HTML code block on your website wherever you'd like the widget to display. Make sure to replace APIKEY and PERSCOMID with the appropriate values.
+Insert the following HTML code snippet into your website at the desired location for widget display. Remember to replace `APIKEY` and `PERSCOMID` with the appropriate values.
 
-    <!-- Place the code block where you would like the widget displayed on your website. !-->
-    <!-- Replace APIKEY and PERSCOMID with your API key and PERSCOM Account ID, respectively. !-->
+```html
+<!-- Place this code where you want the widget to appear on your website. -->
+<!-- Replace APIKEY and PERSCOMID with your actual API key and PERSCOM Account ID. -->
 
-    <div id="perscom_widget_wrapper">
-      <script
-        id="perscom_widget"
-        data-perscomid="PERSCOMID"
-        data-apikey="APIKEY"
-        data-widget="roster"
-        src="https://widget.perscom.io/widget.js"
-        type="text/javascript"
-      ></script>
-    </div>
+<div id="perscom_widget_wrapper">
+  <script
+    id="perscom_widget"
+    data-perscomid="PERSCOMID"
+    data-apikey="APIKEY"
+    data-widget="roster"
+    src="https://widget.perscom.io/widget.js"
+    type="text/javascript"
+  ></script>
+</div>
+```
 
-## Authentication and Authorization
+## Authentication and Permissions
 
-Your API key will need appropriate permissions based on the widget you are intending to display. Failure to assign the appropriate scopes to the API key will result in a 403 Forbidden error. Please visit our [documentation](https://docs.perscom.io) for further exaplanation and a list of permissions that are needed for each widget.
+To avoid a 403 Forbidden error, ensure that your API key possesses appropriate permissions for the chosen widget. Refer to our [documentation](https://docs.perscom.io) for detailed explanations and a permissions list for each widget.
 
 ## Example
 
-The following example demonstrates the widget embedded within an Invision Community website.
+Below is an example of the widget seamlessly integrated into an Invision Community website:
 
 ![Widget Preview](https://raw.githubusercontent.com/DeschutesDesignGroupLLC/perscom-widget/master/docs/roster-preview-1.png)
 
-## Documentation
+## Additional Resources
 
-Additional documentation can be found at [https://docs.perscom.io](https://docs.perscom.io).
+Find more comprehensive documentation at [https://docs.perscom.io](https://docs.perscom.io).
 
 ## Development
 
-### Available Scripts
+### Available Development Commands
 
-In the project directory, you can run:
+Navigate to the project directory and execute the following commands:
 
 ### `npm start`
 
-Runs the app in the development mode.
+Launches the application in development mode.
 
 ### `npm start:widget`
 
-Runs a local web server that serves `widget.js` to be used in local development.
+Initiates a local web server serving `widget.js` for local development.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.
+Activates the test runner in interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.
+Compiles the application for production into the `build` folder.
 
 ### `npm run build:widget`
 
-Builds the widget for production to the `dist` folder.\
-The build will be named `widget.js`.
+Compiles the widget for production into the `dist` folder.
+The compiled file will be named `widget.js`.
 
 ### `npm run format`
 
-Formats the application source code.\
-Should be run before any PR's and pushes to the repository.
+Formats the source code of the application.
+Run before pull requests and repository pushes.
 
 ### `npm run lint`
 
-Runs ESLint and checks source code for best practices and syntax errors.\
-Should be run before any PR's and pushes to the repository.
+Executes ESLint to ensure source code adheres to best practices and syntax rules.
+Run before pull requests and repository pushes.
