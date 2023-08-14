@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.8...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.9...HEAD)
+
+## [v1.0.9](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.8...v1.0.9) - 2023-08-14
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.9 -->
+### What's Changed
+
+#### Added
+
+- Support groups feature and refactored components by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/32
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.8...v1.0.9
 
 ## [v1.0.8](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.7...v1.0.8) - 2023-07-05
 
