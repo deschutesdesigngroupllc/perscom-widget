@@ -28,6 +28,7 @@ Insert the following HTML code snippet into your website at the desired location
     data-perscomid="PERSCOMID"
     data-apikey="APIKEY"
     data-widget="roster"
+    data-dark="false"
     src="https://widget.perscom.io/widget.js"
     type="text/javascript"
   ></script>

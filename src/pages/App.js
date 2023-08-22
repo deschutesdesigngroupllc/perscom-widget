@@ -10,7 +10,7 @@ import User from './User'
 import { Alert } from '../components/Alert'
 import { Footer } from '../components/Footer'
 import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-router-dom'
-import { Flowbite } from 'flowbite-react'
+import { DarkThemeToggle, Flowbite } from 'flowbite-react'
 import Newsfeed from './Newsfeed'
 import CredentialService from '../services/CredentialService'
 
@@ -49,7 +49,7 @@ function App() {
     },
     table: {
       root: {
-        shadow: 'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg shadow -z-10'
+        shadow: 'absolute bg-white dark:bg-gray-800 w-full h-full top-0 left-0 rounded-lg shadow -z-10'
       }
     }
   }
@@ -57,6 +57,7 @@ function App() {
   return (
     <div className='font-sans text-gray-500 pb-2'>
       <Flowbite theme={{ theme }}>
+        <DarkThemeToggle />
         <div className='m-0.5'>
           {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
             <Routes>

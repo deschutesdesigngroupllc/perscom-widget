@@ -125,7 +125,7 @@ class Widget {
 }
 
 /**
- * Initialze widget class
+ * Initialize widget class
  */
 export default ((window, document) => {
   const { widget, resourceAttribute, requiredAttributes, optionalAttributes } = findIncomingAttributes(document)
