@@ -72,7 +72,12 @@ export const FieldElement = React.forwardRef(({ field, fieldObject }, ref) => {
           {...field}
         />
       )
-    case 'select':
+    case 'select': {
+      const options = Object.entries(fieldObject.options).map(([key, value]) => ({
+        key: key,
+        value: value
+      }))
+
       return (
         <Select
           ref={ref}
@@ -87,17 +92,18 @@ export const FieldElement = React.forwardRef(({ field, fieldObject }, ref) => {
           <option disabled={true} value=''>
             Choose an option
           </option>
-          {!!fieldObject.options &&
-            !!fieldObject.options.length &&
-            fieldObject.options.map((value, key) => {
+          {!!options &&
+            !!options.length &&
+            options.map((option) => {
               return (
-                <option key={key} name={key}>
-                  {value}
+                <option key={option.key} name={option.key}>
+                  {option.value}
                 </option>
               )
             })}
         </Select>
       )
+    }
     case 'timezone':
       var timezones = Intl.supportedValuesOf('timeZone')
 
