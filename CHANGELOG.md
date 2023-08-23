@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.11...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.12...HEAD)
+
+## [v1.0.12](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.11...v1.0.12) - 2023-08-23
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.12 -->
+### What's Changed
+
+#### Fixed
+
+- Fix issue with select fields not showing options by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/35
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.11...v1.0.12
 
 ## [v1.0.11](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.10...v1.0.11) - 2023-08-23
 
