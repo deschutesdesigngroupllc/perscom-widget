@@ -21,7 +21,11 @@ function Form() {
   const formRef = useRef(null)
 
   const { data, loading, error } = useFetch({
-    url: new URL(id, url).href
+    url: new URL(id, url).href,
+    parameters: {
+      key: 'include',
+      value: 'fields'
+    }
   })
 
   const { control, handleSubmit, reset } = useForm()
