@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.10...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.11...HEAD)
+
+## [v1.0.11](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.10...v1.0.11) - 2023-08-23
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.11 -->
+### What's Changed
+
+#### Other
+
+- Updated Form component API call to include fields by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/33
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.10...v1.0.11
 
 ## [v1.0.10](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.9...v1.0.10) - 2023-08-14
 
