@@ -107,9 +107,12 @@ function renderProfile(user, recordsTabs, assignmentTabs) {
 
 function renderPersonnelProfileCard(user) {
   const { name, rank, position, profile_photo_url, status } = user
-  const { name: rank_name, abbreviation: rank_abbreviation, image_url: rank_image_url } = rank ?? {}
+  const { name: rank_name, abbreviation: rank_abbreviation, image: rank_image } = rank ?? {}
+  const { image_url: rank_image_url } = rank_image ?? {}
   const { name: position_name } = position ?? {}
   const { name: status_name, color: status_color } = status ?? {}
+
+  const profile_photo = profile_photo_url ?? rank_image_url ?? null
 
   return (
     <Card className='md:w-1/3 w-full justify-start'>
@@ -118,9 +121,7 @@ function renderPersonnelProfileCard(user) {
         {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>}
       </div>
       <div className='py-4 flex flex-grow flex-col space-y-4 justify-center items-center'>
-        {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' /> && (
-          <img src={rank_image_url} className='h-28 rounded' />
-        )}
+        {profile_photo && <img src={profile_photo} className='h-28 rounded' />}
         <div className='flex flex-col justify-center items-center text-center'>
           <div className='font-bold'>
             {rank_abbreviation} {name} {'  '}
