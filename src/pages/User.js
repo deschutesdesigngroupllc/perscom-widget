@@ -27,53 +27,37 @@ function User() {
     parameters: {
       key: 'include',
       value: Array(
+        'assignment_records',
+        'assignment_records.position',
+        'assignment_records.specialty',
+        'assignment_records.unit',
+        'award_records',
+        'award_records.award',
+        'award_records.award.image',
+        'combat_records',
+        'fields',
         'position',
+        'qualification_records',
+        'qualification_records.qualification',
+        'qualification_records.qualification.image',
         'rank',
+        'rank.image',
+        'rank_records',
+        'rank_records.rank',
+        'rank_records.rank.image',
+        'secondary_positions',
+        'secondary_specialties',
+        'secondary_units',
+        'service_records',
         'specialty',
         'status',
-        'unit',
-        'service_records',
-        'combat_records',
-        'rank_records',
-        'qualification_records',
-        'assignment_records'
+        'unit'
       ).join()
     }
   })
 
-  const { data: additionalFields } = useFetch({
-    url: new URL(id + '/fields', url).href
-  })
-
-  const recordsTabs = createRecordsTabs()
-
-  let records = {}
-  for (var i = 0; i < recordsTabs.length; i++) {
-    const { data: recordData } = useFetch({
-      url: new URL(id + '/' + recordsTabs[i].path, url).href,
-      parameters: {
-        key: 'include',
-        value: recordsTabs[i].includes
-      }
-    })
-
-    records[recordsTabs[i].variable] = recordData
-  }
-
-  const assignmentTabs = createAssignmentTabs()
-
-  let assignments = {}
-  for (var a = 0; a < assignmentTabs.length; a++) {
-    const { data: assignmentData } = useFetch({
-      url: new URL(id + '/' + assignmentTabs[a].path, url).href,
-      parameters: {
-        key: 'include',
-        value: assignmentTabs[a].includes
-      }
-    })
-
-    assignments[assignmentTabs[a].variable] = assignmentData
-  }
+  const recordsTabs = createRecordsTabs(user)
+  const assignmentTabs = createAssignmentTabs(user)
 
   return (
     <>
@@ -91,7 +75,7 @@ function User() {
                   Back to Roster
                 </Link>
               </div>
-              {user && renderProfile(user, additionalFields, records, recordsTabs, assignments, assignmentTabs)}
+              {user && renderProfile(user, recordsTabs, assignmentTabs)}
             </div>
           )}
         </>
@@ -100,7 +84,7 @@ function User() {
   )
 }
 
-function renderProfile(user, additionalFields, records, recordsTabs, assignments, assignmentTabs) {
+function renderProfile(user, recordsTabs, assignmentTabs) {
   const { cover_photo_url } = user
 
   return (
@@ -114,16 +98,16 @@ function renderProfile(user, additionalFields, records, recordsTabs, assignments
         {renderPersonnelProfileCard(user)}
         {renderDemographicsCard(user)}
       </div>
-      {additionalFields && !!additionalFields.length && renderAdditionalFieldsCard(user, additionalFields)}
-      {renderSecondaryAssignments(user, assignments, assignmentTabs)}
-      {renderRecords(user, records, recordsTabs)}
+      {user?.fields && !!user?.fields.length && renderAdditionalFieldsCard(user)}
+      {renderSecondaryAssignments(user, assignmentTabs)}
+      {renderRecords(user, recordsTabs)}
     </div>
   )
 }
 
 function renderPersonnelProfileCard(user) {
   const { name, rank, position, profile_photo_url, status } = user
-  const { name: rank_name, abbreviation: rank_abbreviation } = rank ?? {}
+  const { name: rank_name, abbreviation: rank_abbreviation, image_url: rank_image_url } = rank ?? {}
   const { name: position_name } = position ?? {}
   const { name: status_name, color: status_color } = status ?? {}
 
@@ -134,7 +118,9 @@ function renderPersonnelProfileCard(user) {
         {status && <span className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}>{status_name}</span>}
       </div>
       <div className='py-4 flex flex-grow flex-col space-y-4 justify-center items-center'>
-        {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' />}
+        {profile_photo_url && <img src={profile_photo_url} className='h-28 rounded' /> && (
+          <img src={rank_image_url} className='h-28 rounded' />
+        )}
         <div className='flex flex-col justify-center items-center text-center'>
           <div className='font-bold'>
             {rank_abbreviation} {name} {'  '}
@@ -191,15 +177,15 @@ function renderDemographicsCard(user) {
   )
 }
 
-function renderAdditionalFieldsCard(user, additionalFields) {
+function renderAdditionalFieldsCard(user) {
   return (
     <Card>
       <h5 className='text-xl font-bold'>Additional Information</h5>
       <div className='flow-root'>
         <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
-          {additionalFields &&
-            !!additionalFields.length &&
-            additionalFields.map(function (field) {
+          {user?.fields &&
+            !!user?.fields.length &&
+            user.fields.map(function (field) {
               return (
                 <li key={field.key} className='py-2'>
                   <p className='truncate text-sm font-semibold'>{field.name}</p>
@@ -215,7 +201,7 @@ function renderAdditionalFieldsCard(user, additionalFields) {
   )
 }
 
-function renderSecondaryAssignments(user, assignments, assignmentTabs) {
+function renderSecondaryAssignments(user, assignmentTabs) {
   return (
     <Card
       theme={{
@@ -232,9 +218,9 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs) {
               <DataTable
                 key={index}
                 columns={assignmentTabs[index].columns}
-                data={assignments[assignmentTabs[index].variable]}
+                data={assignmentTabs[index].data}
                 pagination={true}
-                progressPending={!assignments[assignmentTabs[index].variable]}
+                // progressPending={!assignments[assignmentTabs[index].variable]}
                 progressComponent={DataTableLoading()}
                 noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
@@ -260,7 +246,7 @@ function renderSecondaryAssignments(user, assignments, assignmentTabs) {
   )
 }
 
-function renderRecords(user, records, recordsTabs) {
+function renderRecords(user, recordsTabs) {
   return (
     <Card
       theme={{
@@ -277,9 +263,9 @@ function renderRecords(user, records, recordsTabs) {
               <DataTable
                 key={index}
                 columns={recordsTabs[index].columns}
-                data={records[recordsTabs[index].variable]}
+                data={recordsTabs[index].data}
                 pagination={true}
-                progressPending={!records[recordsTabs[index].variable]}
+                // progressPending={!records[recordsTabs[index].variable]}
                 progressComponent={DataTableLoading()}
                 noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
@@ -306,13 +292,11 @@ function renderRecords(user, records, recordsTabs) {
   )
 }
 
-function createRecordsTabs() {
+function createRecordsTabs(user) {
   return [
     {
       name: 'Assignment Records',
-      path: 'assignment-records',
-      includes: Array('position', 'specialty', 'unit').join(),
-      variable: 'assignmentRecordData',
+      data: user?.assignment_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -357,9 +341,7 @@ function createRecordsTabs() {
     },
     {
       name: 'Award Records',
-      path: 'award-records',
-      includes: Array('award', 'award.image').join(),
-      variable: 'awardRecordData',
+      data: user?.award_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -403,8 +385,7 @@ function createRecordsTabs() {
     },
     {
       name: 'Combat Records',
-      path: 'combat-records',
-      variable: 'combatRecordData',
+      data: user?.combat_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -420,9 +401,7 @@ function createRecordsTabs() {
     },
     {
       name: 'Qualification Records',
-      path: 'qualification-records',
-      includes: Array('qualification', 'qualification.image').join(),
-      variable: 'qualificationRecordData',
+      data: user?.qualification_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -466,9 +445,7 @@ function createRecordsTabs() {
     },
     {
       name: 'Rank Records',
-      path: 'rank-records',
-      includes: Array('rank', 'rank.image').join(),
-      variable: 'rankRecordData',
+      data: user?.rank_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -512,8 +489,7 @@ function createRecordsTabs() {
     },
     {
       name: 'Service Records',
-      path: 'service-records',
-      variable: 'serviceRecordData',
+      data: user?.service_records ?? [],
       columns: [
         {
           name: 'Date',
@@ -530,12 +506,11 @@ function createRecordsTabs() {
   ]
 }
 
-function createAssignmentTabs() {
+function createAssignmentTabs(user) {
   return [
     {
       name: 'Secondary Positions',
-      path: 'secondary-positions',
-      variable: 'secondaryPositions',
+      data: user?.secondary_positions ?? [],
       columns: [
         {
           name: 'Position',
@@ -546,8 +521,7 @@ function createAssignmentTabs() {
     },
     {
       name: 'Secondary Specialties',
-      path: 'secondary-specialties',
-      variable: 'secondarySpecialties',
+      data: user?.secondary_specialties ?? [],
       columns: [
         {
           name: 'Specialty',
@@ -558,8 +532,7 @@ function createAssignmentTabs() {
     },
     {
       name: 'Secondary Units',
-      path: 'secondary-units',
-      variable: 'secondaryUnits',
+      data: user?.secondary_units ?? [],
       columns: [
         {
           name: 'Unit',
