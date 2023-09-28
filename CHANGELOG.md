@@ -1,6 +1,25 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.12...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.13...HEAD)
+
+## [v1.0.13](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.12...v1.0.13) - 2023-09-28
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.13 -->
+### What's Changed
+
+#### Added
+
+- Add rank image to profile if no profile photo exists by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/41
+
+#### Changed
+
+- Add dependabot by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/39
+
+#### Fixed
+
+- Fixed alert string error by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/40
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.12...v1.0.13
 
 ## [v1.0.12](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.11...v1.0.12) - 2023-08-23
 
