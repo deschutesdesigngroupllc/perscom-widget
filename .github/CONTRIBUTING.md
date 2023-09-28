@@ -1,6 +1,6 @@
-# Contributing to the PERSCOM PHP SDK
+# Contributing to the PERSCOM Widget
 
-Thank you for your interest in contributing to PERSCOM PHP SDK! We welcome contributions from the community to help improve and grow this project. Please take a moment to read through the following guidelines to ensure a smooth contribution process.
+Thank you for your interest in contributing to PERSCOM Widget! We welcome contributions from the community to help improve and grow this project. Please take a moment to read through the following guidelines to ensure a smooth contribution process.
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
@@ -21,14 +21,14 @@ Thank you for your interest in contributing to PERSCOM PHP SDK! We welcome contr
 
 ### Fork the Repository
 
-To contribute to this project, you'll need to fork the repository to your own GitHub account. Click the "Fork" button on the top-right corner of the [repository page](https://github.com/DeschutesDesignGroupLLC/perscom-php-sdk).
+To contribute to this project, you'll need to fork the repository to your own GitHub account. Click the "Fork" button on the top-right corner of the [repository page](https://github.com/DeschutesDesignGroupLLC/perscom-widget).
 
 ### Clone Your Fork
 
 After forking, clone your forked repository to your local machine:
 
 ```shell
-git clone https://github.com/DeschutesDesignGroupLLC/perscom-php-sdk.git
+git clone https://github.com/DeschutesDesignGroupLLC/perscom-widget.git
 ```
 
 ### Set Up the Development Environment
@@ -63,7 +63,7 @@ Once your changes are ready, push your branch to your forked repository on GitHu
 git push origin feature/your-feature-name
 ```
 
-Then, navigate to the [original repository](https://github.com/DeschutesDesignGroupLLC/perscom-php-sdk) and create a pull request. Provide a clear title and description of your changes.
+Then, navigate to the [original repository](https://github.com/DeschutesDesignGroupLLC/perscom-widget) and create a pull request. Provide a clear title and description of your changes.
 
 ### Pull Request Checklist
 
@@ -79,5 +79,4 @@ Join our [community chat](https://community.deschutesdesigngroup.com) to stay co
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [project's license](https://github.com/DeschutesDesignGroupLLC/perscom-php-sdk).
-```
+By contributing to this project, you agree that your contributions will be licensed under the [project's license](https://github.com/DeschutesDesignGroupLLC/perscom-widget).
