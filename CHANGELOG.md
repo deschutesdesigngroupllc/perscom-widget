@@ -1,6 +1,29 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.13...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.14...HEAD)
+
+## [v1.0.14](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.13...v1.0.14) - 2023-09-29
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.14 -->
+### What's Changed
+
+#### Fixed
+
+- Fix records not sorting correctly by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/47
+
+#### Other
+
+- Bump eslint-plugin-react from 7.32.1 to 7.33.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/42
+- Bump @parcel/compressor-gzip from 2.8.3 to 2.9.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/43
+- Bump tailwindcss from 3.2.4 to 3.3.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/44
+- Bump flowbite-react from 0.5.0 to 0.6.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/45
+- Bump react-timeago from 7.1.0 to 7.2.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/46
+
+### New Contributors
+
+- @dependabot made their first contribution in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/42
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.13...v1.0.14
 
 ## [v1.0.13](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.12...v1.0.13) - 2023-09-28
 
