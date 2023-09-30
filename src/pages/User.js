@@ -221,7 +221,7 @@ function renderSecondaryAssignments(user, assignmentTabs) {
                 columns={assignmentTabs[index].columns}
                 data={assignmentTabs[index].data}
                 pagination={true}
-                // progressPending={!assignments[assignmentTabs[index].variable]}
+                progressPending={!assignmentTabs[index].data}
                 progressComponent={DataTableLoading()}
                 noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
@@ -266,7 +266,7 @@ function renderRecords(user, recordsTabs) {
                 columns={recordsTabs[index].columns}
                 data={recordsTabs[index].data}
                 pagination={true}
-                // progressPending={!records[recordsTabs[index].variable]}
+                progressPending={!recordsTabs[index].data}
                 progressComponent={DataTableLoading()}
                 noDataComponent={DataTableEmpty()}
                 highlightOnHover={true}
@@ -283,6 +283,22 @@ function renderRecords(user, recordsTabs) {
                       marginBottom: '0.5rem'
                     }
                   }
+                }}
+                sortFunction={(rows, selector, direction) => {
+                  return rows.sort((rowA, rowB) => {
+                    const aField = new Date(selector(rowA))
+                    const bField = new Date(selector(rowB))
+
+                    let comparison = 0
+
+                    if (aField > bField) {
+                      comparison = 1
+                    } else if (aField < bField) {
+                      comparison = -1
+                    }
+
+                    return direction === 'desc' ? comparison * -1 : comparison
+                  })
                 }}
               />
             </div>
