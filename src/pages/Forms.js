@@ -32,7 +32,7 @@ function Forms() {
           ) : data && !!data.length ? (
             renderForms(data, meta, onPaginationClick)
           ) : (
-            <Alert message='No forms found. Please add an award.' />
+            <Alert message='No forms found. Please add a form.' />
           )}
         </>
       )}
