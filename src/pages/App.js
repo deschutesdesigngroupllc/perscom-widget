@@ -55,7 +55,7 @@ function App() {
   }
 
   return (
-    <div className='font-sans text-gray-500 pb-2'>
+    <div className='font-sans text-gray-500 dark:text-gray-400 pb-2'>
       <Flowbite theme={{ theme }}>
         <DarkThemeToggle />
         <div className='m-0.5'>
