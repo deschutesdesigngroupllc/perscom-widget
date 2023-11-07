@@ -13,6 +13,7 @@ import { Navigate, Route, Routes, useSearchParams, useLocation } from 'react-rou
 import { Flowbite } from 'flowbite-react'
 import Newsfeed from './Newsfeed'
 import CredentialService from '../services/CredentialService'
+import * as Sentry from '@sentry/react'
 
 function App() {
   const [searchParams] = useSearchParams()
@@ -54,12 +55,14 @@ function App() {
     }
   }
 
+  const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
+
   return (
     <div className='font-sans text-gray-500 pb-2'>
       <Flowbite theme={{ theme }}>
         <div className='m-0.5'>
           {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
-            <Routes>
+            <SentryRoutes>
               <Route path='/' element={<Roster />}></Route>
               <Route path='/awards' element={<Awards />}></Route>
               <Route path='/calendar' element={<Calendar />}></Route>
@@ -71,7 +74,7 @@ function App() {
               <Route path='/roster' element={<Roster />}></Route>
               <Route path='/users/:id' element={<User />}></Route>
               <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
-            </Routes>
+            </SentryRoutes>
           ) : (
             <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
           )}
