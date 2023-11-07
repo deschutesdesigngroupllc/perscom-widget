@@ -1,6 +1,26 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.14...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.16...HEAD)
+
+## [v1.0.16](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.15...v1.0.16) - 2023-11-07
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.16 -->
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.15...v1.0.16
+
+## [v1.0.15](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.14...v1.0.15) - 2023-11-07
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.15 -->
+### What's Changed
+
+#### Other
+
+- Bump react-router-dom from 6.8.0 to 6.18.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/60
+- Bump @sentry/tracing from 7.34.0 to 7.77.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/59
+- Bump @testing-library/jest-dom from 5.16.5 to 6.1.4 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/53
+- Bump prettier from 2.8.3 to 3.0.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/51
+- Bump react-hook-form from 7.43.9 to 7.48.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/58
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.14...v1.0.15
 
 ## [v1.0.14](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.13...v1.0.14) - 2023-09-29
 
