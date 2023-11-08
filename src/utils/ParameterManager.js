@@ -21,7 +21,7 @@ const optionalAttributes = [
   },
   {
     attribute: 'data-dark',
-    parameter: '',
+    parameter: 'dark',
     value: false
   }
 ]

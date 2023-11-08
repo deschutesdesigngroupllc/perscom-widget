@@ -11,6 +11,7 @@ import { Alert } from '../components/Alert'
 import { Card, Spinner, Tabs as FlowbiteTabs } from 'flowbite-react'
 import { FieldValue } from '../components/Field'
 import Helpers from '../utils/Helpers'
+import '../assets/css/datatable.css'
 
 const get = require('lodash/get')
 
@@ -215,7 +216,7 @@ function renderSecondaryAssignments(user, assignmentTabs) {
       <FlowbiteTabs.Group style='underline'>
         {assignmentTabs.map((tab, index) => (
           <FlowbiteTabs.Item key={index} title={tab.name}>
-            <div className='pt-4'>
+            <div className='py-4'>
               <DataTable
                 key={index}
                 columns={assignmentTabs[index].columns}
@@ -260,7 +261,7 @@ function renderRecords(user, recordsTabs) {
       <FlowbiteTabs.Group style='underline'>
         {recordsTabs.map((tab, index) => (
           <FlowbiteTabs.Item key={index} title={tab.name}>
-            <div className='pt-4'>
+            <div className='py-4'>
               <DataTable
                 key={index}
                 columns={recordsTabs[index].columns}

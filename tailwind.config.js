@@ -11,7 +11,8 @@ module.exports = {
     colors: generateTailwindColors(),
     extend: {
       colors: {
-        cyan: colors.blue
+        cyan: colors.blue,
+        gray: colors.slate
       },
       fontFamily: {
         sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans]
@@ -40,6 +41,11 @@ module.exports = {
       addBase({ ':root': generateRootCSSVars() })
     }
   ],
+  variants: {
+    extend: {
+      dark: ['opacity']
+    }
+  },
   safelist: [
     'bg-sky-100',
     'text-sky-600',

@@ -3,5 +3,18 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      window.iFrameResizer = {
+        onMessage: function(message) {
+          if (message.hasOwnProperty('darkMode')) {
+            window.dispatchEvent(new CustomEvent('darkMode', {
+              detail: {
+                enabled: message.darkMode
+              }
+            }))
+          }
+        }
+      }
+    </script>
   </body>
 </html>

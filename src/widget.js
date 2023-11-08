@@ -35,18 +35,14 @@ class Widget {
    */
   setupIframeResizer = () => {
     if (document.getElementById(IFRAME_ID)) {
-      var iframe = document.getElementById(IFRAME_ID)
-
       const iframeResizerScript = document.createElement('script')
-      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.3/js/iframeResizer.min.js'
+      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js'
       iframeResizerScript.type = 'text/javascript'
-      iframe.before(iframeResizerScript)
+      iframeResizerScript.onload = () => {
+        window.iFrameResize({ log: false }, `#${IFRAME_ID}`)
+      }
 
-      const iframeResizerInitializer = document.createElement('script')
-      iframeResizerInitializer.type = 'text/javascript'
-      iframeResizerInitializer.text =
-        'var frame=document.getElementById("perscom_widget_iframe");frame.addEventListener("load",function(){iFrameResize({log:!1},"#perscom_widget_iframe")});'
-      iframe.after(iframeResizerInitializer)
+      document.body.appendChild(iframeResizerScript)
     }
   }
 

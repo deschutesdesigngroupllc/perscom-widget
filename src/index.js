@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/react'
 import './assets/css/widget.css'
 import { config } from './constants'
 import App from './pages/App'
-import 'iframe-resizer/js/iframeResizer.contentWindow'
+import 'iframe-resizer/js/iframeResizer.contentWindow.min'
 
 Sentry.init({
   dsn: config.sentry.SENTRY_DSN,
