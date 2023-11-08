@@ -18,6 +18,11 @@ const optionalAttributes = [
     attribute: 'data-timezone',
     parameter: 'timezone',
     value: 'UTC'
+  },
+  {
+    attribute: 'data-dark',
+    parameter: 'dark',
+    value: false
   }
 ]
 

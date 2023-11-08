@@ -8,6 +8,7 @@ import CredentialService from '../services/CredentialService'
  * @param parameters
  * @param method
  * @param body
+ * @param dependencies
  * @returns {{data, meta, links: *, loading: boolean, error: string, statusCode: undefined}}
  */
 const useFetch = ({ url, parameters, method = 'GET', body = null, dependencies = null }) => {
@@ -49,8 +50,8 @@ const useFetch = ({ url, parameters, method = 'GET', body = null, dependencies =
         setLoading(false)
       })
       .catch((e) => {
-        console.log(e)
-        setError('Error: We recevied an error while trying to communicate with PERSCOM.io.')
+        console.error(e)
+        setError('Error: We received an error while trying to communicate with the PERSCOM.io API.')
         setLoading(false)
       })
   }, [url, dependencies])

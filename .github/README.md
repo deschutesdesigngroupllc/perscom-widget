@@ -26,6 +26,7 @@ By utilizing a straightforward HTML code snippet, the widget can elegantly rende
     data-perscomid="PERSCOMID"
     data-apikey="APIKEY"
     data-widget="roster"
+    data-dark="false"
     src="https://widget.perscom.io/widget.js"
     type="text/javascript"
   ></script>

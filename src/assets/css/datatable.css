@@ -1,0 +1,23 @@
+.rdt_Table {
+    @apply dark:bg-gray-900 dark:text-gray-400 rounded-md
+}
+
+.rdt_TableHead {
+    @apply rounded-t-md
+}
+
+.rdt_TableHeadRow {
+    @apply bg-gray-50 dark:bg-gray-900 dark:text-gray-400 rounded-t-md
+}
+
+.rdt_TableRow {
+    @apply dark:bg-gray-700 dark:text-gray-400 hover:dark:text-gray-400 hover:dark:bg-gray-800 hover:dark:outline-none hover:dark:border-none
+}
+
+.rdt_Pagination {
+    @apply bg-gray-50 dark:bg-gray-900 dark:text-gray-400 rounded-b-md
+}
+
+.rdt_Pagination > svg, button {
+    @apply dark:disabled:fill-gray-400
+}

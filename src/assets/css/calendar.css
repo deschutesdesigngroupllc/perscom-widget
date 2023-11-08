@@ -7,7 +7,7 @@
 }
 
 .fc a {
-    @apply text-gray-700 leading-6 text-xs
+    @apply text-gray-700 dark:text-gray-400 leading-6 text-xs
 }
 
 .fc-theme-standard .fc-scrollgrid {
@@ -27,19 +27,19 @@
 }
 
 .fc .fc-col-header {
-    @apply bg-gray-100
+    @apply bg-gray-100 dark:bg-gray-900
 }
 
 .fc .fc-daygrid-day {
-    @apply bg-white px-3 py-2 h-20 sm:h-28 md:h-36 lg:h-48
+    @apply bg-white dark:bg-gray-800 px-3 py-2 h-20 sm:h-28 md:h-36 lg:h-48
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-    @apply bg-white
+    @apply bg-white dark:bg-gray-800/80
 }
 
 .fc .fc-day-other {
-    @apply bg-gray-50
+    @apply bg-gray-50 dark:bg-gray-800/60
 }
 
 .fc .fc-daygrid-day .fc-daygrid-day-top {

@@ -4,7 +4,7 @@ import Form from './Form'
 import Forms from './Forms'
 import Qualifications from './Qualifications'
 import Ranks from './Ranks'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Roster from './Roster'
 import User from './User'
 import { Alert } from '../components/Alert'
@@ -14,9 +14,11 @@ import { Flowbite } from 'flowbite-react'
 import Newsfeed from './Newsfeed'
 import CredentialService from '../services/CredentialService'
 import * as Sentry from '@sentry/react'
+import cx from 'classnames'
 
 function App() {
   const [searchParams] = useSearchParams()
+  const [darkMode, setDarkMode] = useState(searchParams.get('dark'))
 
   const theme = {
     card: {
@@ -50,37 +52,59 @@ function App() {
     },
     table: {
       root: {
-        shadow: 'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg shadow -z-10'
+        shadow: 'absolute bg-white dark:bg-gray-800 w-full h-full top-0 left-0 rounded-lg shadow -z-10'
       }
     }
   }
 
   const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
 
+  useEffect(() => {
+    window.addEventListener('darkMode', (event) => {
+      const darkModeEnabled = event.detail.enabled ?? false
+
+      if (document.documentElement.classList.contains('dark') && !darkModeEnabled) {
+        document.documentElement.classList.remove('dark')
+        setDarkMode('false')
+      }
+
+      if (!document.documentElement.classList.contains('dark') && darkModeEnabled) {
+        document.documentElement.classList.add('dark')
+        setDarkMode('true')
+      }
+    })
+  })
+
   return (
-    <div className='font-sans text-gray-500 pb-2'>
-      <Flowbite theme={{ theme }}>
-        <div className='m-0.5'>
-          {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
-            <SentryRoutes>
-              <Route path='/' element={<Roster />}></Route>
-              <Route path='/awards' element={<Awards />}></Route>
-              <Route path='/calendar' element={<Calendar />}></Route>
-              <Route path='/forms' element={<Forms />}></Route>
-              <Route path='/forms/:id' element={<Form />}></Route>
-              <Route path='/newsfeed' element={<Newsfeed />}></Route>
-              <Route path='/qualifications' element={<Qualifications />}></Route>
-              <Route path='/ranks' element={<Ranks />}></Route>
-              <Route path='/roster' element={<Roster />}></Route>
-              <Route path='/users/:id' element={<User />}></Route>
-              <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
-            </SentryRoutes>
-          ) : (
-            <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
-          )}
-        </div>
-        <Footer />
-      </Flowbite>
+    <div
+      className={cx('font-sans pb-2', {
+        dark: darkMode === 'true' || darkMode === '1'
+      })}
+    >
+      <div className='text-gray-500 dark:text-gray-400'>
+        <Flowbite theme={{ theme }}>
+          <div className='m-0.5'>
+            {CredentialService.getApiKey(searchParams) && CredentialService.getPerscomId(searchParams) ? (
+              <SentryRoutes>
+                <Route path='/' element={<Roster />}></Route>
+                <Route path='/awards' element={<Awards />}></Route>
+                <Route path='/calendar' element={<Calendar />}></Route>
+                <Route path='/forms' element={<Forms />}></Route>
+                <Route path='/forms/:id' element={<Form />}></Route>
+                <Route path='/newsfeed' element={<Newsfeed />}></Route>
+                <Route path='/qualifications' element={<Qualifications />}></Route>
+                <Route path='/ranks' element={<Ranks />}></Route>
+                <Route path='/roster' element={<Roster />}></Route>
+                <Route path='/users/:id' element={<User />}></Route>
+                <Route path='*' element={<Navigate to={`/${useLocation().search}`} />}></Route>
+              </SentryRoutes>
+            ) : (
+              <Alert message='Please make sure all required widget parameters have been included.' type='failure' />
+            )}
+          </div>
+          <Footer />
+        </Flowbite>
+      </div>
     </div>
   )
 }
