@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.16...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.17...HEAD)
+
+## [v1.0.17](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.16...v1.0.17) - 2023-11-07
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.17 -->
+### What's Changed
+
+#### Other
+
+- Dark mode by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/34
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.16...v1.0.17
 
 ## [v1.0.16](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.15...v1.0.16) - 2023-11-07
 
