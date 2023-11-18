@@ -1,5 +1,5 @@
 import CredentialService from './CredentialService'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 
 const decodeTokenPayload = (searchParams) => {
   return jwtDecode(CredentialService.getApiKey(searchParams))
