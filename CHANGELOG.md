@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.17...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.19...HEAD)
+
+## [v1.0.19](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.17...v1.0.19) - 2023-11-17
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.19 -->
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.18...v1.0.19
 
 ## [v1.0.17](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.16...v1.0.17) - 2023-11-07
 
