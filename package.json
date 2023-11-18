@@ -36,7 +36,7 @@
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.14",
     "@parcel/compressor-brotli": "^2.8.3",
-    "@parcel/compressor-gzip": "^2.9.3",
+    "@parcel/compressor-gzip": "^2.10.2",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^13.4.0",
