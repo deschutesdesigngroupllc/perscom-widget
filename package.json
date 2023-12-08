@@ -53,11 +53,11 @@
     "node-static": "^0.7.11",
     "object-hash": "^3.0.0",
     "parcel": "^2.10",
-    "parcel-namer-rewrite": "^2.0.0-rc.3",
     "postcss": "^8.4.21",
     "prettier": "^3.1.0",
     "process": "^0.11.10",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "vm-browserify": "^1.1.2"
   },
   "eslintConfig": {
     "extends": [
@@ -76,14 +76,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "parcel-namer-rewrite": {
-    "chain": "@parcel/namer-default",
-    "hashing": "never",
-    "rules": {
-      "index.js": "app.js",
-      "index.css": "app.css",
-      "loader.js": "widget.js"
-    }
   }
 }
