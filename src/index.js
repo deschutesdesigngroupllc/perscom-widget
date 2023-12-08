@@ -22,7 +22,7 @@ Sentry.init({
     new Sentry.Replay()
   ],
   tracesSampleRate: config.sentry.SENTRY_SAMPLE_RATE,
-  tracePropagationTargets: ['lvh.me', /^https:\/\/widget.perscom\.io/, /^https:\/\/staging-widget.perscom\.io/],
+  tracePropagationTargets: ['lvh.me', /^https:\/\/widget.perscom.io/, /^https:\/\/widget.staging.perscom.io/],
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0
 })

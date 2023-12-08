@@ -46,7 +46,7 @@ jobs:
         env:
           REACT_APP_WIDGET_ENVIRONMENT: 'staging'
           REACT_APP_WIDGET_VERSION: ${{ steps.tag_version.outputs.new_tag }}
-          REACT_APP_WIDGET_URL: https://staging-widget.perscom.io
+          REACT_APP_WIDGET_URL: https://widget.staging.perscom.io
           REACT_APP_API_URL: https://api.staging.perscom.io/v1/
           REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REACT_APP_SENTRY_SAMPLE_RATE: '1.0'
