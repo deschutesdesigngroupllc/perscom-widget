@@ -9,6 +9,7 @@ import 'iframe-resizer/js/iframeResizer.contentWindow.min'
 
 Sentry.init({
   dsn: config.sentry.SENTRY_DSN,
+  release: config.app.WIDGET_VERSION,
   integrations: [
     new Sentry.BrowserTracing({
       routingInstrumentation: Sentry.reactRouterV6Instrumentation(

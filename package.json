@@ -9,9 +9,7 @@
     "build:widget": "parcel build src/widget.js",
     "test": "react-scripts test",
     "lint": "eslint --fix 'src/**/*.js' './*.js'",
-    "format": "prettier 'src/**/*.{js,json}' './*.{js,json}' --write --config ./.prettierrc",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./build && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget ./build",
-    "sentry:sourcemaps:widget": "sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./dist && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget ./dist"
+    "format": "prettier 'src/**/*.{js,json}' './*.{js,json}' --write --config ./.prettierrc"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
