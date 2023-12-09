@@ -213,7 +213,7 @@ function renderSecondaryAssignments(user, assignmentTabs) {
       }}
     >
       <h5 className='text-xl font-bold'>Assignments</h5>
-      <FlowbiteTabs.Group style='underline'>
+      <FlowbiteTabs style='underline'>
         {assignmentTabs.map((tab, index) => (
           <FlowbiteTabs.Item key={index} title={tab.name}>
             <div className='py-4'>
@@ -243,7 +243,7 @@ function renderSecondaryAssignments(user, assignmentTabs) {
             </div>
           </FlowbiteTabs.Item>
         ))}
-      </FlowbiteTabs.Group>
+      </FlowbiteTabs>
     </Card>
   )
 }
@@ -258,7 +258,7 @@ function renderRecords(user, recordsTabs) {
       }}
     >
       <h5 className='text-xl font-bold'>Records</h5>
-      <FlowbiteTabs.Group style='underline'>
+      <FlowbiteTabs style='underline'>
         {recordsTabs.map((tab, index) => (
           <FlowbiteTabs.Item key={index} title={tab.name}>
             <div className='py-4'>
@@ -305,7 +305,7 @@ function renderRecords(user, recordsTabs) {
             </div>
           </FlowbiteTabs.Item>
         ))}
-      </FlowbiteTabs.Group>
+      </FlowbiteTabs>
     </Card>
   )
 }

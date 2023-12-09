@@ -45,7 +45,7 @@ function renderTabs(groups) {
         }
       }}
     >
-      <Tabs.Group style='underline'>
+      <Tabs style='underline'>
         {groups.map((group, index) => (
           <Tabs.Item key={index} title={group.name}>
             {group.units && !!group.units.length ? (
@@ -55,7 +55,7 @@ function renderTabs(groups) {
             )}
           </Tabs.Item>
         ))}
-      </Tabs.Group>
+      </Tabs>
     </Card>
   )
 }
