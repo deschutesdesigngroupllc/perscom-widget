@@ -10,6 +10,11 @@ const optionalAttributes = [
     value: ''
   },
   {
+    attribute: 'data-page',
+    parameter: 'page',
+    value: ''
+  },
+  {
     attribute: 'data-tags',
     parameter: 'tags',
     value: ''

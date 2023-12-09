@@ -6,7 +6,9 @@ import { CheckCircleIcon } from '@heroicons/react/20/solid'
 import { ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { Alert as FlowbiteAlert } from 'flowbite-react'
 
-export function Alert({ message, type = 'info' }) {
+// eslint-disable-next-line react/prop-types
+export function Alert({ message, type = 'info', error }) {
+  console.log(error)
   const renderIcon = () => {
     switch (type) {
       case 'info':
