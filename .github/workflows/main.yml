@@ -70,9 +70,8 @@ jobs:
       - name: Upload Sentry Sourcemaps
         run: |
           sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./build && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget --release ${{ steps.tag_version.outputs.new_tag }} ./build
-          sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./dist && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget --release ${{ steps.tag_version.outputs.new_tag }} ./dist
         env:
-            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
