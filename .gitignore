@@ -21,6 +21,9 @@
 .env.production
 .env.staging
 
+# Next
+.next
+
 # parcel
 .cache
 .parcel-cache

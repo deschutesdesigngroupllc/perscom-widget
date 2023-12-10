@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "next start",
     "start:widget": "node widget-server.js",
-    "build": "react-scripts build",
-    "build:widget": "parcel build src/widget.js",
+    "dev": "next dev",
+    "build": "next build",
+    "build:widget": "parcel build widget.js",
     "test": "react-scripts test",
-    "lint": "eslint --fix 'src/**/*.js' './*.js'",
-    "format": "prettier 'src/**/*.{js,json}' './*.{js,json}' --write --config ./.prettierrc"
+    "lint": "next lint",
+    "format": "prettier '{api,app,components,lib,utils}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -21,6 +22,8 @@
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.7",
     "jwt-decode": "^4.0.0",
+    "next": "^14.0.4",
+    "next-themes": "^0.2.1",
     "parse-domain": "^8.0.1",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.3",
@@ -31,6 +34,7 @@
     "react-scripts": "^5.0.1",
     "react-tabs": "^6.0.0",
     "react-timeago": "^7.2.0",
+    "swr": "^2.2.4",
     "web-vitals": "^3.5.0"
   },
   "devDependencies": {
@@ -45,8 +49,8 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
     "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "iframe-resizer": "4.3.6",
@@ -56,6 +60,7 @@
     "parcel": "^2.10",
     "postcss": "^8.4.21",
     "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.9",
     "process": "^0.11.10",
     "tailwindcss": "^3.3.3",
     "vm-browserify": "^1.1.2"
