@@ -3,7 +3,7 @@
  */
 import { expect, it, describe, beforeEach, beforeAll, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
-import Layout from '../app/layout'
+import Layout from '../app/layout';
 import Newsfeed from '../app/newsfeed/page';
 import Roster from '../app/roster/page';
 
@@ -11,10 +11,10 @@ jest.mock('next/navigation', () => ({
   useRouter() {
     return {
       prefetch: () => jest.fn()
-    }
+    };
   },
   usePathname() {
-    return 'test.com'
+    return 'test.com';
   }
 }));
 
@@ -24,9 +24,9 @@ const searchParams = {
 };
 
 beforeAll(() => {
-  Object.defineProperty(window, "matchMedia", {
+  Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: jest.fn().mockImplementation((query) => ({
       matches: false,
       media: query,
       onchange: null,
@@ -34,7 +34,7 @@ beforeAll(() => {
       removeListener: jest.fn(), // Deprecated
       addEventListener: jest.fn(),
       removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      dispatchEvent: jest.fn()
     }))
   });
 });
@@ -70,9 +70,11 @@ describe('Roster', () => {
   });
 
   it('can render', async () => {
-    const {container} = render(Layout({
-      children: await Roster(searchParams)
-    }));
+    const { container } = render(
+      Layout({
+        children: await Roster(searchParams)
+      })
+    );
 
     expect(screen.getByTestId('unit foobar')).toBeInTheDocument();
     expect(screen.getByTestId('user foobar')).toBeInTheDocument();
@@ -83,25 +85,27 @@ describe('Roster', () => {
 describe('Newsfeed', () => {
   beforeEach(() => {
     global.fetch = jest.fn(() =>
-        Promise.resolve({
-          status: 200,
-          json: () =>
-              Promise.resolve({
-                data: [
-                  {
-                    id: 1,
-                    headline: 'newsfeed foobar',
-                  }
-                ]
-              })
-        })
+      Promise.resolve({
+        status: 200,
+        json: () =>
+          Promise.resolve({
+            data: [
+              {
+                id: 1,
+                headline: 'newsfeed foobar'
+              }
+            ]
+          })
+      })
     );
   });
 
   it('can render', async () => {
-    const {container} = render(Layout({
-      children: await Newsfeed(searchParams)
-    }));
+    const { container } = render(
+      Layout({
+        children: await Newsfeed(searchParams)
+      })
+    );
 
     expect(screen.getByTestId('newsfeed foobar')).toBeInTheDocument();
     expect(container).toMatchSnapshot();

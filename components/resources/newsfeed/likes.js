@@ -11,7 +11,8 @@ export function Likes({ likes, currentUser }) {
 
   const newsfeedItemIsLiked = (id) => {
     return (
-      likes && likes.filter(function (user) {
+      likes &&
+      likes.filter(function (user) {
         return String(user.id) === String(id);
       }).length > 0
     );

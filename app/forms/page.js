@@ -23,7 +23,7 @@ export default async function Page({ searchParams }) {
           {forms.data.map((form) => {
             return (
               <TableRow key={form.id} data-testid={form.name}>
-                <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
+                <TableCell>
                   <div className="flex flex-col items-start justify-between space-x-0 space-y-4 md:flex-row md:items-center md:space-x-8 md:space-y-0">
                     <div>
                       <div className="mb-2 text-sm font-semibold">{form.name}</div>

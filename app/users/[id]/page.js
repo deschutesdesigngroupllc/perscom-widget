@@ -2,11 +2,12 @@ import Auth from '../../../api/auth';
 import Client from '../../../api/client';
 import Link from 'next/link';
 import Image from 'next/image';
+import get from 'lodash/get';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Card } from '../../../components/card';
-// import { FieldValue } from '../../../src.old/components/Field';
 import { SecondaryAssignments } from './_components/secondaryAssignments';
 import { Records } from './_components/records';
+import { Value } from '../../../components/value';
 
 export default async function Page({ searchParams, params }) {
   const { id } = params;
@@ -44,7 +45,6 @@ export default async function Page({ searchParams, params }) {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="bg-white-100 text-black-600 bg-gray-100 bg-green-100 bg-red-100 bg-sky-100 bg-yellow-100 text-gray-600 text-green-600 text-red-600 text-sky-600 text-yellow-600" />
       <div className="flex flex-row items-center justify-start space-x-1 active:text-blue-600">
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
         <Link href={'/roster'} className="text-sm">
@@ -174,7 +174,7 @@ function AdditionalFields({ fields }) {
                   <li key={field.key} className="py-2">
                     <p className="truncate text-sm font-semibold">{field.name}</p>
                     <p className="text-sm">
-                      {/*<FieldValue field={field} value={get(user, field.key, '')} />*/}
+                      <Value field={field} value={get(user, field.key, '')} />
                     </p>
                   </li>
                 );

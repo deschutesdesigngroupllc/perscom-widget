@@ -99,6 +99,17 @@ export default class Client {
   }
 
   /**
+   * Get a form
+   *
+   * @param id
+   * @param {object|array} params
+   * @returns {Promise<*>}
+   */
+  async getForm(id, params = { include: 'fields', limit: 100 }) {
+    return await this.request(`forms/${id}?${this.formatQueryParameters(params)}`);
+  }
+
+  /**
    * Get a list of groups
    *
    * @param {object|array} params
@@ -107,7 +118,8 @@ export default class Client {
   async getGroups(
     params = {
       include:
-        'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status'
+        'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status',
+      limit: 100
     }
   ) {
     return await this.request(`groups?${this.formatQueryParameters(params)}`);

@@ -1,6 +1,6 @@
 import { Nunito_Sans } from 'next/font/google';
 import { ThemeProvider } from './providers';
-import { IframeResizer } from '../components/iframe';
+import { IframeResizer } from './iframe';
 import './globals.css';
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] });
