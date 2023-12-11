@@ -22,7 +22,7 @@ export default async function Page({ searchParams }) {
         <TableBody>
           {awards.data.map((award) => {
             return (
-              <TableRow key={award.id}>
+              <TableRow key={award.id} data-testid={award.name}>
                 <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                   {award.image?.image_url ? (
                     <Image

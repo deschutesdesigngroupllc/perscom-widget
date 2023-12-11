@@ -46,7 +46,7 @@ function NewsfeedItem({ item, currentUser }) {
   } = item;
 
   return (
-    <div className="flex flex-col space-y-3" key={id}>
+    <div className="flex flex-col space-y-3" key={id} data-testid={headline}>
       <div className="flex flex-row items-center space-x-2 px-1 text-sm">
         {author_profile_photo ? (
           <Avatar stacked rounded img={author_profile_photo} alt={author} size="xs" />

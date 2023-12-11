@@ -6,6 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 export function Pagination({ meta, searchParams }) {
   const router = useRouter();
   const pathname = usePathname();
+
   const onPageChange = (page) => {
     const current = new URLSearchParams(searchParams);
     current.set('page', page);

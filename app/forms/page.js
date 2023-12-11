@@ -22,7 +22,7 @@ export default async function Page({ searchParams }) {
         <TableBody>
           {forms.data.map((form) => {
             return (
-              <TableRow key={form.id}>
+              <TableRow key={form.id} data-testid={form.name}>
                 <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                   <div className="flex flex-col items-start justify-between space-x-0 space-y-4 md:flex-row md:items-center md:space-x-8 md:space-y-0">
                     <div>

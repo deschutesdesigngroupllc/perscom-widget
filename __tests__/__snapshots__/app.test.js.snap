@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Newsfeed can render 1`] = `
+<div>
+  <html
+    lang="en"
+  >
+    <body
+      class="className"
+      style="margin: 0.2rem;"
+    >
+      <script>
+        !function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';c.add('dark')}else{d.style.colorScheme = 'light';c.add('light')}}else if(e){c.add(e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()
+      </script>
+      <div
+        class="text-gray-500 dark:text-gray-400"
+      >
+        <div
+          class="flex flex-col space-y-2"
+        >
+          <div
+            class="flex flex-col space-y-6"
+          >
+            <div
+              class="flex flex-col space-y-3"
+              data-testid="newsfeed foobar"
+            >
+              <div
+                class="flex flex-row items-center space-x-2 px-1 text-sm"
+              >
+                <div
+                  class="flex justify-center items-center space-x-4 rounded"
+                  data-testid="flowbite-avatar"
+                >
+                  <div
+                    class="relative"
+                  >
+                    <div
+                      class="rounded-full ring-2 ring-gray-300 dark:ring-gray-500 w-6 h-6 relative overflow-hidden bg-gray-100 dark:bg-gray-600"
+                      data-testid="flowbite-avatar-img"
+                    >
+                      <svg
+                        class="absolute w-auto h-auto text-gray-400 -bottom-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          clip-rule="evenodd"
+                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="text-xs font-normal"
+                >
+                  <span
+                    class="font-bold"
+                  >
+                    User
+                  </span>
+                   
+                  added a new message
+                   •
+                   
+                  <span
+                    class="font-light"
+                  />
+                </div>
+              </div>
+              <div
+                class="flex rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800 flex-col gap-2 p-6"
+                data-testid="flowbite-card"
+                target="_blank"
+              >
+                <div
+                  class="flex h-full flex-col justify-center gap-4 p-0"
+                >
+                  <div
+                    class="flex flex-col space-y-4"
+                  >
+                    <div
+                      class="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0"
+                    >
+                      <a
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <div
+                          class="flex flex-row items-center space-x-2"
+                        >
+                          <h5
+                            class="font-bold hover:text-gray-600"
+                          >
+                            newsfeed foobar
+                          </h5>
+                        </div>
+                      </a>
+                      <div
+                        class="text-xs"
+                      >
+                        Invalid Date
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-col space-y-4"
+                    >
+                      <div
+                        class="text-sm"
+                      >
+                        No content exists for this item.
+                      </div>
+                      <div
+                        class="flex flex-row items-center space-x-2"
+                      >
+                        <div
+                          class="w-fit"
+                          data-testid="flowbite-tooltip-target"
+                        >
+                          <div
+                            class="w-7.5 flex cursor-pointer items-center rounded-full border border-gray-300 bg-gray-100 p-0.5 hover:bg-gray-200"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              class="h-6 w-6 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div
+                          class="absolute inline-block z-10 rounded-lg py-2 px-3 text-sm font-medium shadow-sm transition-opacity duration-300 invisible opacity-0 bg-gray-900 text-white dark:bg-gray-700"
+                          data-testid="flowbite-tooltip"
+                          id=":r1:"
+                          role="tooltip"
+                          style="position: absolute; top: 0px; left: 0px;"
+                          tabindex="-1"
+                        >
+                          <div
+                            class="relative z-20"
+                          >
+                            Like
+                          </div>
+                          <div
+                            class="absolute z-10 h-2 w-2 rotate-45 bg-gray-900 dark:bg-gray-700"
+                            data-testid="flowbite-tooltip-arrow"
+                            style="bottom: -4px;"
+                          >
+                             
+                          </div>
+                        </div>
+                        <div
+                          class="flex flex-row items-center space-x-2"
+                        >
+                          <div
+                            class="-space-x-4 flex flex-wrap gap-2"
+                            data-testid="avatar-group-element"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+</div>
+`;
+
+exports[`Roster can render 1`] = `
+<div>
+  <html
+    lang="en"
+  >
+    <body
+      class="className"
+      style="margin: 0.2rem;"
+    >
+      <script>
+        !function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';c.add('dark')}else{d.style.colorScheme = 'light';c.add('light')}}else if(e){c.add(e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()
+      </script>
+      <div
+        class="text-gray-500 dark:text-gray-400"
+      >
+        <div
+          class="flex rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800 flex-col"
+          data-testid="flowbite-card"
+        >
+          <div
+            class="flex h-full flex-col justify-center gap-4 p-0"
+          >
+            <div>
+              test 123
+            </div>
+            <div
+              class="flex flex-col gap-0"
+            >
+              <div
+                aria-label="Tabs"
+                class="flex text-center flex-wrap -mb-px border-b border-gray-200 dark:border-gray-700"
+                role="tablist"
+              >
+                <button
+                  aria-controls=":r0:-tabpanel-0"
+                  aria-selected="true"
+                  class="flex items-center justify-center p-4 first:rounded-tl-md text-sm font-medium first:ml-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 focus:outline-none text-cyan-600 rounded-t-lg border-b-2 border-cyan-600 active dark:text-cyan-500 dark:border-cyan-500"
+                  id=":r0:-tab-0"
+                  role="tab"
+                  style="z-index: 1;"
+                  tabindex="-1"
+                  type="button"
+                >
+                  group foobar
+                </button>
+              </div>
+              <div
+                class=""
+              >
+                <div
+                  aria-labelledby=":r0:-tab-0"
+                  class="py-0"
+                  id=":r0:-tabpanel-0"
+                  role="tabpanel"
+                  tabindex="0"
+                >
+                  <div
+                    class="relative"
+                    data-testid="table-element"
+                  >
+                    <div
+                      class="absolute bg-white dark:bg-gray-800 w-full h-full top-0 left-0 rounded-lg shadow -z-10"
+                    />
+                    <table
+                      class="w-full text-left text-sm text-gray-500 dark:text-gray-400"
+                    >
+                      <thead
+                        class="group/head text-xs uppercase text-gray-700 dark:text-gray-400"
+                      >
+                        <tr>
+                          <th
+                            class="group-first/head:first:rounded-tl-lg bg-gray-50 dark:bg-gray-700 px-6 py-3 group-first/head:last:rounded-tl-none group-first/head:last:rounded-tr-none"
+                            colspan="6"
+                            data-testid="unit foobar"
+                          >
+                            unit foobar
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="group/body"
+                      >
+                        <tr
+                          class="group/row"
+                          data-testid="user foobar"
+                        >
+                          <td
+                            class="group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4 w-1/6 whitespace-normal !py-3 sm:whitespace-nowrap"
+                          >
+                            <div
+                              class="flex items-center"
+                            >
+                              <div
+                                class="ml-4 flex flex-col"
+                              >
+                                <a
+                                  class="text-sm font-semibold hover:text-gray-600 active:text-blue-600"
+                                  href="/users/1"
+                                >
+                                  user foobar
+                                </a>
+                                <div
+                                  class="text-xs md:hidden"
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td
+                            class="group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4 hidden w-1/6 whitespace-normal !py-3 md:table-cell lg:whitespace-nowrap"
+                          />
+                          <td
+                            class="group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4 hidden w-1/6 whitespace-normal !py-3 md:table-cell lg:whitespace-nowrap"
+                          />
+                          <td
+                            class="group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4 w-1/12 whitespace-nowrap !py-3 text-right md:text-center"
+                          />
+                          <td
+                            class="group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4 hidden w-1/12 !py-3 text-center lg:table-cell"
+                          >
+                            <span
+                              class="inline-flex rounded-full bg-sky-100 px-2 text-xs font-semibold leading-5 text-sky-600"
+                            >
+                              Offline
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+</div>
+`;
