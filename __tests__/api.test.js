@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { expect, jest, it, describe } from '@jest/globals';
+import { expect, jest, it, describe, beforeEach } from '@jest/globals';
 import Auth from '../api/auth';
-import ApiClient from '../api/client';
+import Client from '../api/client';
 import jwt from 'jsonwebtoken';
 
 const searchParams = {
@@ -11,7 +11,7 @@ const searchParams = {
   perscomid: 'bar'
 };
 const auth = new Auth(searchParams);
-const client = new ApiClient(auth);
+const client = new Client(auth);
 
 describe('Auth', () => {
   it('can get the API key', () => {
@@ -50,5 +50,117 @@ describe('Client', () => {
     expect(searchParamsObject.toString()).toStrictEqual('include=test');
     expect(searchParamsArray).toBeInstanceOf(URLSearchParams);
     expect(searchParamsArray.toString()).toStrictEqual('test1=test1&test2=test2');
+  });
+});
+
+describe('Successful Client Requests', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 200,
+        json: () =>
+          Promise.resolve({
+            data: {
+              foo: 'bar'
+            }
+          })
+      })
+    );
+  });
+
+  it('can make an awards request', async () => {
+    const results = await client.getAwards();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a forms request', async () => {
+    const results = await client.getForms();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a groups request', async () => {
+    const results = await client.getGroups();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a newsfeed request', async () => {
+    const results = await client.getNewsfeed();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a qualifications request', async () => {
+    const results = await client.getQualifications();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a ranks request', async () => {
+    const results = await client.getRanks();
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+
+  it('can make a user request', async () => {
+    const results = await client.getUser(1);
+
+    expect(results).toStrictEqual({
+      data: {
+        foo: 'bar'
+      }
+    });
+  });
+});
+
+describe('Failed Client Requests', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 401,
+        json: () =>
+          Promise.resolve({
+            error: {
+              message: 'foo bar'
+            }
+          })
+      })
+    );
+  });
+
+  it('will throw an error on a bad request response ', async () => {
+    try {
+      const results = await client.getAwards();
+
+      expect(results).toThrowError(Error);
+    } catch (e) {
+      expect(e.message).toBe('401: foo bar');
+    }
   });
 });

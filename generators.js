@@ -21,7 +21,7 @@ const toRGBString = (hexCode) => {
 
 const colors = { primary: twColors.sky, ...twColors, gray: twColors.slate };
 
-const except = omit(colors, ['sky', 'stone', 'neutral', 'gray', 'slate']);
+const except = omit(colors, ['lightBlue', 'warmGray', 'trueGray', 'coolGray', 'blueGray']);
 
 function generateRootCSSVars() {
   return Object.fromEntries(

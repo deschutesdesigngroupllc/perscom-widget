@@ -1,4 +1,4 @@
-import ApiClient from '../../api/client';
+import Client from '../../api/client';
 import { Avatar } from 'flowbite-react';
 import { Card } from '../../components/card';
 import { TimeAgo } from '../../components/timeago';
@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function Page({ searchParams }) {
   const auth = new Auth(searchParams);
-  const newsfeed = await new ApiClient(auth).getNewsfeed();
+  const newsfeed = await new Client(auth).getNewsfeed();
 
   return (
     <div className="flex flex-col space-y-2">

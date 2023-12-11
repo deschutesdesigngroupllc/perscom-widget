@@ -1,4 +1,4 @@
-import ApiClient from '../../api/client';
+import Client from '../../api/client';
 import Auth from '../../api/auth';
 import Image from 'next/image';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 export default async function Page({ searchParams }) {
-  const ranks = await new ApiClient(new Auth(searchParams)).getRanks();
+  const ranks = await new Client(new Auth(searchParams)).getRanks();
 
   return (
     <Card>

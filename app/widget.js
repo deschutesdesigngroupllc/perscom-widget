@@ -1,5 +1,5 @@
-import { config } from './lib/constants';
-import { findIncomingAttributes } from './utils/parameters';
+import { config } from '../lib/constants';
+import { findIncomingAttributes } from '../utils/parameters';
 import { parseDomain } from 'parse-domain';
 
 const IFRAME_ID = 'perscom_widget_iframe';
@@ -40,7 +40,7 @@ class Widget {
         'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js';
       iframeResizerScript.type = 'text/javascript';
       iframeResizerScript.onload = () => {
-        window.iFrameResize({ log: false }, `#${IFRAME_ID}`);
+        window.iFrameResize({ log: true }, `#${IFRAME_ID}`);
       };
 
       document.body.appendChild(iframeResizerScript);

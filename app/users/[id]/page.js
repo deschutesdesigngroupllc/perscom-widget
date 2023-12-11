@@ -1,20 +1,17 @@
 import Auth from '../../../api/auth';
-import ApiClient from '../../../api/client';
+import Client from '../../../api/client';
 import Link from 'next/link';
 import Image from 'next/image';
-import get from 'lodash/get';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Card } from '../../../components/card';
-import { FieldValue } from '../../../src.old/components/Field';
-import { TabItem } from 'flowbite-react';
-import { Tabs } from '../../../components/tabs';
-import { Datatable } from '../../../components/datatable';
-import { AssignmentRecordDateColumn } from '../../../components/resources/datatables/assignmentRecordDateColumn';
+// import { FieldValue } from '../../../src.old/components/Field';
+import { SecondaryAssignments } from './_components/secondaryAssignments';
+import { Records } from './_components/records';
 
 export default async function Page({ searchParams, params }) {
   const { id } = params;
   const auth = new Auth(searchParams);
-  const userData = await new ApiClient(auth).getUser(id, {
+  const userData = await new Client(auth).getUser(id, {
     include: Array(
       'assignment_records',
       'assignment_records.position',
@@ -47,6 +44,7 @@ export default async function Page({ searchParams, params }) {
 
   return (
     <div className="flex flex-col space-y-4">
+      <div className="bg-white-100 text-black-600 bg-gray-100 bg-green-100 bg-red-100 bg-sky-100 bg-yellow-100 text-gray-600 text-green-600 text-red-600 text-sky-600 text-yellow-600" />
       <div className="flex flex-row items-center justify-start space-x-1 active:text-blue-600">
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
         <Link href={'/roster'} className="text-sm">
@@ -75,9 +73,6 @@ function Profile({ user }) {
       <AdditionalFields fields={user?.fields} />
       <SecondaryAssignments user={user} />
       <Records user={user} />
-      {/*{user?.fields && !!user?.fields.length && renderAdditionalFieldsCard(user)}*/}
-      {/*{renderSecondaryAssignments(user, assignmentTabs)}*/}
-      {/*{renderRecords(user, recordsTabs)}*/}
     </div>
   );
 }
@@ -133,7 +128,7 @@ function Demographics({ user }) {
             Online
           </span>
         ) : (
-          <span className="bg-sky-100 text-sky-600 inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+          <span className="inline-flex rounded-full bg-sky-100 px-2 text-xs font-semibold leading-5 text-sky-600">
             Offline
           </span>
         )}
@@ -179,7 +174,7 @@ function AdditionalFields({ fields }) {
                   <li key={field.key} className="py-2">
                     <p className="truncate text-sm font-semibold">{field.name}</p>
                     <p className="text-sm">
-                      <FieldValue field={field} value={get(user, field.key, '')} />
+                      {/*<FieldValue field={field} value={get(user, field.key, '')} />*/}
                     </p>
                   </li>
                 );
@@ -189,348 +184,5 @@ function AdditionalFields({ fields }) {
         </Card>
       )}
     </>
-  );
-}
-
-function SecondaryAssignments({ user }) {
-  const tabs = [
-    {
-      name: 'Secondary Positions',
-      data: user?.secondary_positions ?? [],
-      emptyMessage: 'There are no secondary positions to display.',
-      columns: [
-        {
-          name: 'Position',
-          selector: 'name',
-          sortable: true
-        }
-      ]
-    },
-    {
-      name: 'Secondary Specialties',
-      data: user?.secondary_specialties ?? [],
-      emptyMessage: 'There are no secondary specialties to display.',
-      columns: [
-        {
-          name: 'Specialty',
-          selector: 'name',
-          sortable: true
-        }
-      ]
-    },
-    {
-      name: 'Secondary Units',
-      data: user?.secondary_units ?? [],
-      emptyMessage: 'There are no secondary units to display.',
-      columns: [
-        {
-          name: 'Unit',
-          selector: 'name',
-          sortable: true
-        }
-      ]
-    }
-  ];
-
-  return (
-    <Card className="p-6">
-      <h5 className="text-xl font-bold">Assignments</h5>
-      <Tabs style="underline">
-        {tabs.map((tab, index) => (
-          <TabItem key={index} title={tab.name}>
-            <div className="py-4">
-              <Datatable
-                key={index}
-                columns={tabs[index].columns}
-                data={tabs[index].data}
-                pagination={true}
-                progressPending={!tabs[index].data}
-                highlightOnHover={true}
-                defaultSortFieldId={1}
-                responsive={true}
-                paginationComponentOptions={{
-                  noRowsPerPage: true
-                }}
-                emptyMessage={tabs[index].emptyMessage}
-                customStyles={{
-                  cells: {
-                    style: {
-                      marginTop: '0.5rem',
-                      marginBottom: '0.5rem'
-                    }
-                  }
-                }}
-              />
-            </div>
-          </TabItem>
-        ))}
-      </Tabs>
-    </Card>
-  );
-}
-
-function Records({ user }) {
-  const tabs = [
-    {
-      name: 'Assignment Records',
-      data: user?.assignment_records ?? [],
-      columns: [
-        {
-          name: 'Date',
-          selector: <AssignmentRecordDateColumn />,
-          sortable: true,
-          maxWidth: '250px'
-        },
-        {
-          name: 'Assignment',
-          // selector: (row) => {
-          //   const { unit, position, specialty, text } = row
-          //   const { name: unit_name } = unit ?? {}
-          //   const { name: position_name } = position ?? {}
-          //   const { name: specialty_name } = specialty ?? {}
-          //   return (
-          //       <div className='flex flex-col space-y-1 justify-center'>
-          //         <div className='font-semibold'>
-          //           {position_name}, {unit_name}
-          //         </div>
-          //         {specialty_name && <div className='text-xs'>{specialty_name}</div>}
-          //         {text && <div className='text-xs'>{text}</div>}
-          //       </div>
-          //   )
-          // },
-          sortable: true
-          // sortFunction: (rowA, rowB) => {
-          //   const a = rowA.position?.name ?? ''
-          //   const b = rowB.position?.name ?? ''
-          //
-          //   if (a > b) {
-          //     return 1
-          //   }
-          //
-          //   if (b > a) {
-          //     return -1
-          //   }
-          //
-          //   return 0
-          // }
-        }
-      ]
-    }
-    // {
-    //   name: 'Award Records',
-    //   data: user?.award_records ?? [],
-    //   columns: [
-    //     {
-    //       name: 'Date',
-    //       selector: (row) => Helpers.formatDate(row.created_at),
-    //       sortable: true,
-    //       maxWidth: '250px'
-    //     },
-    //     {
-    //       name: 'Award',
-    //       selector: (row) => {
-    //         const { award, text } = row
-    //         const { image, name } = award ?? {}
-    //         const { image_url } = image ?? {}
-    //         return (
-    //             <div className='flex space-x-4'>
-    //               {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-    //               <div className='flex flex-col space-y-1 justify-center'>
-    //                 {name && <div className='font-semibold'>{name}</div>}
-    //                 {text && <div className='text-xs'>{text}</div>}
-    //               </div>
-    //             </div>
-    //         )
-    //       },
-    //       sortable: true,
-    //       sortFunction: (rowA, rowB) => {
-    //         const a = rowA.award?.name ?? ''
-    //         const b = rowB.award?.name ?? ''
-    //
-    //         if (a > b) {
-    //           return 1
-    //         }
-    //
-    //         if (b > a) {
-    //           return -1
-    //         }
-    //
-    //         return 0
-    //       }
-    //     }
-    //   ]
-    // },
-    // {
-    //   name: 'Combat Records',
-    //   data: user?.combat_records ?? [],
-    //   columns: [
-    //     {
-    //       name: 'Date',
-    //       selector: (row) => Helpers.formatDate(row.created_at),
-    //       sortable: true,
-    //       maxWidth: '250px'
-    //     },
-    //     {
-    //       name: 'Record',
-    //       selector: (row) => row.text
-    //     }
-    //   ]
-    // },
-    // {
-    //   name: 'Qualification Records',
-    //   data: user?.qualification_records ?? [],
-    //   columns: [
-    //     {
-    //       name: 'Date',
-    //       selector: (row) => Helpers.formatDate(row.created_at),
-    //       sortable: true,
-    //       maxWidth: '250px'
-    //     },
-    //     {
-    //       name: 'Qualification',
-    //       selector: (row) => {
-    //         const { qualification, text } = row
-    //         const { image, name } = qualification ?? {}
-    //         const { image_url } = image ?? {}
-    //         return (
-    //             <div className='flex space-x-4'>
-    //               {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-    //               <div className='flex flex-col space-y-1 justify-center'>
-    //                 {name && <div className='font-semibold'>{name}</div>}
-    //                 {text && <div className='text-xs'>{text}</div>}
-    //               </div>
-    //             </div>
-    //         )
-    //       },
-    //       sortable: true,
-    //       sortFunction: (rowA, rowB) => {
-    //         const a = rowA.qualification?.name ?? ''
-    //         const b = rowB.qualification?.name ?? ''
-    //
-    //         if (a > b) {
-    //           return 1
-    //         }
-    //
-    //         if (b > a) {
-    //           return -1
-    //         }
-    //
-    //         return 0
-    //       }
-    //     }
-    //   ]
-    // },
-    // {
-    //   name: 'Rank Records',
-    //   data: user?.rank_records ?? [],
-    //   columns: [
-    //     {
-    //       name: 'Date',
-    //       selector: (row) => Helpers.formatDate(row.created_at),
-    //       sortable: true,
-    //       maxWidth: '250px'
-    //     },
-    //     {
-    //       name: 'Rank',
-    //       selector: (row) => {
-    //         const { rank, text } = row
-    //         const { image, name } = rank ?? {}
-    //         const { image_url } = image ?? {}
-    //         return (
-    //             <div className='flex space-x-4'>
-    //               {image_url && <img className='w-6 sm:w-8 font-bold' src={image_url} alt={name} />}
-    //               <div className='flex flex-col space-y-1 justify-center'>
-    //                 {name && <div className='font-semibold'>{name}</div>}
-    //                 {text && <div className='text-xs'>{text}</div>}
-    //               </div>
-    //             </div>
-    //         )
-    //       },
-    //       sortable: true,
-    //       sortFunction: (rowA, rowB) => {
-    //         const a = rowA.rank?.name ?? ''
-    //         const b = rowB.rank?.name ?? ''
-    //
-    //         if (a > b) {
-    //           return 1
-    //         }
-    //
-    //         if (b > a) {
-    //           return -1
-    //         }
-    //
-    //         return 0
-    //       }
-    //     }
-    //   ]
-    // },
-    // {
-    //   name: 'Service Records',
-    //   data: user?.service_records ?? [],
-    //   columns: [
-    //     {
-    //       name: 'Date',
-    //       selector: (row) => Helpers.formatDate(row.created_at),
-    //       sortable: true,
-    //       maxWidth: '250px'
-    //     },
-    //     {
-    //       name: 'Record',
-    //       selector: (row) => row.text
-    //     }
-    //   ]
-    // }
-  ];
-
-  return (
-    <Card className="p-6">
-      <h5 className="text-xl font-bold">Records</h5>
-      <Tabs style="underline">
-        {tabs.map((tab, index) => (
-          <TabItem key={index} title={tab.name}>
-            <div className="py-4">
-              <Datatable
-                key={index}
-                columns={tabs[index].columns}
-                data={tabs[index].data}
-                pagination={true}
-                progressPending={!tabs[index].data}
-                highlightOnHover={true}
-                defaultSortFieldId={1}
-                defaultSortAsc={false}
-                responsive={true}
-                paginationComponentOptions={{
-                  noRowsPerPage: true
-                }}
-                customStyles={{
-                  cells: {
-                    style: {
-                      marginTop: '0.5rem',
-                      marginBottom: '0.5rem'
-                    }
-                  }
-                }}
-                // sortFunction={(rows, selector, direction) => {
-                //   return rows.sort((rowA, rowB) => {
-                //     const aField = new Date(selector(rowA))
-                //     const bField = new Date(selector(rowB))
-                //
-                //     let comparison = 0
-                //
-                //     if (aField > bField) {
-                //       comparison = 1
-                //     } else if (aField < bField) {
-                //       comparison = -1
-                //     }
-                //
-                //     return direction === 'desc' ? comparison * -1 : comparison
-                //   })
-                // }}
-              />
-            </div>
-          </TabItem>
-        ))}
-      </Tabs>
-    </Card>
   );
 }

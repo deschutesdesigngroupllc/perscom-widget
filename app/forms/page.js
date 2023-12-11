@@ -1,4 +1,4 @@
-import ApiClient from '../../api/client';
+import Client from '../../api/client';
 import Auth from '../../api/auth';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
 import { Pagination } from '../../components/pagination';
@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 export default async function Page({ searchParams }) {
-  const forms = await new ApiClient(new Auth(searchParams)).getForms();
+  const forms = await new Client(new Auth(searchParams)).getForms();
 
   return (
     <Card>

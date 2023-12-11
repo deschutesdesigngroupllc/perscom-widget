@@ -1,9 +1,9 @@
 const { generateTailwindColors, generateRootCSSVars } = require('./generators');
 const colors = require('tailwindcss/colors');
-const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -16,9 +16,6 @@ module.exports = {
       colors: {
         cyan: colors.blue,
         gray: colors.slate
-      },
-      fontFamily: {
-        sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         xxs: '11px'

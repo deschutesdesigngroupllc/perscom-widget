@@ -1,7 +1,7 @@
 import { config } from '../lib/constants';
 import { getOptionalApiParameters } from '../utils/parameters';
 
-export default class ApiClient {
+export default class Client {
   /**
    * @param {Auth} auth
    */

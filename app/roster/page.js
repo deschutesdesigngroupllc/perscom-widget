@@ -1,4 +1,4 @@
-import ApiClient from '../../api/client';
+import Client from '../../api/client';
 import Auth from '../../api/auth';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 export default async function Page({ searchParams }) {
-  const groups = await new ApiClient(new Auth(searchParams)).getGroups();
+  const groups = await new Client(new Auth(searchParams)).getGroups();
 
   return (
     <Card>
@@ -36,12 +36,13 @@ export default async function Page({ searchParams }) {
 }
 
 function Unit({ unit }) {
-  const { id, name, users } = unit;
+  const { name, users } = unit;
 
   return (
     <Table>
       <TableHead>
         <TableHeadCell
+          data-testid={name}
           colSpan="6"
           className="group-first/head:last:rounded-tl-none group-first/head:last:rounded-tr-none"
         >
@@ -57,7 +58,7 @@ function Unit({ unit }) {
           const { name: specialty_name } = specialty ?? {};
 
           return (
-            <TableRow key={user.id}>
+            <TableRow key={user.id} data-testid={name}>
               <TableCell className="w-1/6 whitespace-normal !py-3 sm:whitespace-nowrap">
                 <div className="flex items-center">
                   {rank && (
@@ -104,7 +105,7 @@ function Unit({ unit }) {
                       Online
                     </span>
                   ) : (
-                    <span className="bg-sky-100 text-sky-600 inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                    <span className="inline-flex rounded-full bg-sky-100 px-2 text-xs font-semibold leading-5 text-sky-600">
                       Offline
                     </span>
                   )}

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import DataTable from 'react-data-table-component';
-import get from 'lodash/get';
 import { Spinner } from 'flowbite-react';
 
 export function Datatable(props) {
@@ -13,16 +12,6 @@ export function Datatable(props) {
       noDataComponent={
         <DataTableEmpty emptyMessage={props.emptyMessage ?? 'There are no records to display.'} />
       }
-      columns={props.columns.map((column) => {
-        return {
-          ...column,
-          selector: async (row) => {
-            return column.selector?.$$typeof === Symbol.for('react.lazy')
-              ? await { ...column.selector, props: { ...column.selector.props, row } }
-              : get(row, column.selector);
-          }
-        };
-      })}
     />
   );
 }
