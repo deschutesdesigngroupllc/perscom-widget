@@ -17,7 +17,7 @@
     "@fullcalendar/list": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/rrule": "^6.1.8",
-    "@sentry/react": "^7.84.0",
+    "@sentry/react": "^7.86.0",
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.7",
     "jwt-decode": "^4.0.0",
