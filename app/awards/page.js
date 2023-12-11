@@ -1,6 +1,7 @@
-import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
 import ApiClient from '../../api/client';
 import Auth from '../../api/auth';
+import Image from 'next/image';
+import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
 import { Pagination } from '../../components/pagination';
 import { Table } from '../../components/table';
 import { Card } from '../../components/card';
@@ -24,7 +25,7 @@ export default async function Page({ searchParams }) {
               <TableRow key={award.id}>
                 <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                   {award.image?.image_url ? (
-                    <img
+                    <Image
                       className="mx-auto block w-28"
                       src={award.image.image_url}
                       alt={award.name}
@@ -37,7 +38,7 @@ export default async function Page({ searchParams }) {
                   <>
                     {award.image?.image_url && (
                       <div className="mb-2 flex sm:hidden">
-                        <img className="w-20" src={award.image.image_url} alt={award.name} />
+                        <Image className="w-20" src={award.image.image_url} alt={award.name} />
                       </div>
                     )}
                     <div className="mb-2 text-sm font-semibold">{award.name}</div>

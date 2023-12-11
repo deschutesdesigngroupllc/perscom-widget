@@ -1,6 +1,7 @@
 import ApiClient from '../../api/client';
 import Auth from '../../api/auth';
 import Link from 'next/link';
+import Image from 'next/image';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell, TabItem } from 'flowbite-react';
 import { Card } from '../../components/card';
 import { Table } from '../../components/table';
@@ -62,7 +63,7 @@ function Unit({ unit }) {
                   {rank && (
                     <div className="flex w-6 flex-shrink-0 items-center sm:w-8">
                       {image_url ? (
-                        <img className="w-6 font-bold sm:w-8" src={image_url} alt={rank_name} />
+                        <Image className="w-6 font-bold sm:w-8" src={image_url} alt={rank_name} />
                       ) : (
                         <div className="text-sm font-bold">{abbreviation}</div>
                       )}

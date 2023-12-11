@@ -8,9 +8,11 @@
     "dev": "next dev",
     "build": "next build",
     "build:widget": "parcel build widget.js",
-    "test": "react-scripts test",
     "lint": "next lint",
-    "format": "prettier '{api,app,components,lib,utils}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js"
+    "format": "prettier '{api,app,components,lib,utils,__tests__}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -54,6 +56,9 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "iframe-resizer": "4.3.6",
+    "jest": "29.6.4",
+    "jest-environment-jsdom": "29.6.4",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "node-static": "^0.7.11",
     "object-hash": "^3.0.0",

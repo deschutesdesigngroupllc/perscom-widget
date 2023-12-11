@@ -55,58 +55,102 @@ export default class ApiClient {
   }
 
   /**
+   * Formats query parameters into a URLSearchParams object
+   *
+   * @param {object|array} params
+   * @returns {module:url.URLSearchParams}
+   */
+  formatQueryParameters(params) {
+    let searchParams = new URLSearchParams();
+
+    if (Array.isArray(params)) {
+      params.forEach(([key, value]) => {
+        searchParams.append(key, value);
+      });
+    } else {
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          searchParams.append(key, params[key]);
+        }
+      }
+    }
+
+    return searchParams;
+  }
+
+  /**
    * Get a list of awards
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getAwards() {
-    return await this.request('awards?include=image');
+  async getAwards(params = { include: 'image' }) {
+    return await this.request(`awards?${this.formatQueryParameters(params)}`);
   }
 
   /**
    * Get a list of forms
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getForms() {
-    return await this.request('forms');
+  async getForms(params = {}) {
+    return await this.request(`forms?${this.formatQueryParameters(params)}`);
   }
 
   /**
    * Get a list of groups
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getGroups() {
-    return await this.request(
-      'groups?include=units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status'
-    );
+  async getGroups(
+    params = {
+      include:
+        'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status'
+    }
+  ) {
+    return await this.request(`groups?${this.formatQueryParameters(params)}`);
   }
 
   /**
    * Get the newsfeed
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getNewsfeed() {
-    return await this.request('newsfeed');
+  async getNewsfeed(params = {}) {
+    return await this.request(`newsfeed${this.formatQueryParameters(params)}`);
   }
 
   /**
    * Get a list of qualifications
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getQualifications() {
-    return await this.request('qualifications?include=image');
+  async getQualifications(params = { include: 'image' }) {
+    return await this.request(`qualifications?${this.formatQueryParameters(params)}`);
   }
 
   /**
    * Get a list of ranks
    *
+   * @param {object|array} params
    * @returns {Promise<*>}
    */
-  async getRanks() {
-    return await this.request('ranks?include=image');
+  async getRanks(params = { include: 'image' }) {
+    return await this.request(`ranks?${this.formatQueryParameters(params)}`);
+  }
+
+  /**
+   * Get a user
+   *
+   * @param id
+   * @param {object|array} params
+   * @returns {Promise<*>}
+   */
+  async getUser(id, params = {}) {
+    return await this.request(`users/${id}?${this.formatQueryParameters(params)}`);
   }
 }

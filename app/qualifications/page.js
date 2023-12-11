@@ -1,5 +1,6 @@
 import ApiClient from '../../api/client';
 import Auth from '../../api/auth';
+import Image from 'next/image';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
 import { Pagination } from '../../components/pagination';
 import { Table } from '../../components/table';
@@ -24,7 +25,7 @@ export default async function Page({ searchParams }) {
               <TableRow key={qualification.id}>
                 <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                   {qualification.image?.image_url ? (
-                    <img
+                    <Image
                       className="mx-auto block w-28"
                       src={qualification.image.image_url}
                       alt={qualification.name}
@@ -37,7 +38,7 @@ export default async function Page({ searchParams }) {
                   <>
                     {qualification.image?.image_url && (
                       <div className="mb-2 flex sm:hidden">
-                        <img
+                        <Image
                           className="w-20"
                           src={qualification.image.image_url}
                           alt={qualification.name}
