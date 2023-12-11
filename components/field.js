@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import get from 'lodash/get';
 import { Countries } from '../resources/countries';
-import { Datepicker, FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react';
+import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react';
 
 export function Field(props) {
   const { field, formValues, setFormValues } = props;
