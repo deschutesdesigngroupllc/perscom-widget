@@ -1,6 +1,6 @@
 'use client';
 
-import { Label } from 'flowbite-react';
+import { Label } from './label';
 import { Field } from './field';
 import { Card } from './card';
 import { Alert } from './alert';

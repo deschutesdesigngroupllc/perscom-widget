@@ -10,8 +10,11 @@ export function Tabs(props) {
           tabitem: {
             base: 'flex items-center justify-center p-4 first:rounded-tl-md rounded-t-none text-sm font-medium first:ml-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 focus:outline-none',
             styles: {
-              default: {
-                base: 'first:rounded-tl-md rounded-t-none'
+              underline: {
+                base: 'first:rounded-tl-md rounded-t-none',
+                active: {
+                  off: 'border-b-2 border-transparent text-gray-500 hover:border-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-500'
+                }
               }
             }
           }

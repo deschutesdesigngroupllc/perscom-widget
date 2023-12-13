@@ -7,7 +7,22 @@ export function Value({ field, value }) {
     case 'boolean':
       return value ? 'Yes' : 'No';
     case 'code':
-      return <SyntaxHighlighter showLineNumbers={true}>{value}</SyntaxHighlighter>;
+      return (
+        <SyntaxHighlighter
+          codeTagProps={{
+            style: {
+              textShadow: 'none'
+            }
+          }}
+          customStyle={{
+            textShadow: 'none'
+          }}
+          className="rounded !bg-gray-50 !font-sans !text-sm !text-gray-500 ring-1 ring-gray-200 dark:!bg-gray-700 dark:!text-gray-300 dark:ring-gray-900"
+          showLineNumbers={true}
+        >
+          {value}
+        </SyntaxHighlighter>
+      );
     case 'color':
       return <input type="color" value={value} readOnly={true} disabled={true} />;
     case 'country':

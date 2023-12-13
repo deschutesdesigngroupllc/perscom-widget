@@ -25,11 +25,14 @@ export default async function Page({ searchParams }) {
               <TableRow key={qualification.id}>
                 <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                   {qualification.image?.image_url ? (
-                    <Image
-                      className="mx-auto block w-28"
-                      src={qualification.image.image_url}
-                      alt={qualification.name}
-                    />
+                    <div className="relative mx-auto h-20 w-28">
+                      <Image
+                        src={qualification.image.image_url}
+                        alt={qualification.name}
+                        fill
+                        objectFit="contain"
+                      />
+                    </div>
                   ) : (
                     <div className="text-center font-medium">No Image</div>
                   )}
@@ -37,11 +40,13 @@ export default async function Page({ searchParams }) {
                 <TableCell className="!whitespace-normal break-normal !py-4">
                   <>
                     {qualification.image?.image_url && (
-                      <div className="mb-2 flex sm:hidden">
+                      <div className="relative mb-2 flex h-12 sm:hidden">
                         <Image
-                          className="w-20"
+                          className="!w-auto"
                           src={qualification.image.image_url}
                           alt={qualification.name}
+                          fill
+                          objectFit="contain"
                         />
                       </div>
                     )}

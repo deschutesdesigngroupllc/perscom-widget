@@ -1,10 +1,10 @@
 import Auth from '../../../api/auth';
 import Client from '../../../api/client';
-import Link from 'next/link';
 import Image from 'next/image';
 import get from 'lodash/get';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Card } from '../../../components/card';
+import { Link } from '../../../components/link';
 import { SecondaryAssignments } from './_components/secondaryAssignments';
 import { Records } from './_components/records';
 import { Value } from '../../../components/value';
@@ -62,8 +62,8 @@ function Profile({ user }) {
   return (
     <div className="flex min-h-fit flex-col space-y-4">
       {cover_photo_url && (
-        <div className="flex max-h-80 items-center justify-center overflow-hidden">
-          <Image src={cover_photo_url} className="w-full object-cover" alt={name} />
+        <div className="relative h-24 w-auto items-center justify-center overflow-hidden sm:h-36 md:h-48 lg:h-60 xl:h-80">
+          <Image src={cover_photo_url} alt={name} fill objectFit="contain" />
         </div>
       )}
       <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
@@ -99,7 +99,11 @@ function Information({ user }) {
         )}
       </div>
       <div className="flex flex-grow flex-col items-center justify-center space-y-4 py-4">
-        {profile_photo && <Image src={profile_photo} className="h-28 rounded" alt={name} />}
+        {profile_photo && (
+          <div className="relative h-28 w-28">
+            <Image src={profile_photo} alt={name} fill objectFit="contain" />
+          </div>
+        )}
         <div className="flex flex-col items-center justify-center text-center">
           <div className="font-bold">
             {rank_abbreviation} {name} {'  '}

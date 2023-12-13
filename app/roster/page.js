@@ -1,8 +1,8 @@
 import Client from '../../api/client';
 import Auth from '../../api/auth';
-import Link from 'next/link';
 import Image from 'next/image';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell, TabItem } from 'flowbite-react';
+import { Link } from '../../components/link';
 import { Card } from '../../components/card';
 import { Table } from '../../components/table';
 import { Tabs } from '../../components/tabs';
@@ -64,17 +64,16 @@ function Unit({ unit }) {
                   {rank && (
                     <div className="flex w-6 flex-shrink-0 items-center sm:w-8">
                       {image_url ? (
-                        <Image className="w-6 font-bold sm:w-8" src={image_url} alt={rank_name} />
+                        <div className="relative h-8 w-8">
+                          <Image src={image_url} alt={rank_name} fill objectFit="contain" />
+                        </div>
                       ) : (
                         <div className="text-sm font-bold">{abbreviation}</div>
                       )}
                     </div>
                   )}
                   <div className="ml-4 flex flex-col">
-                    <Link
-                      href={`/users/${user_id}`}
-                      className="text-sm font-semibold hover:text-gray-600 active:text-blue-600"
-                    >
+                    <Link href={`/users/${user_id}`} className="text-sm font-semibold">
                       {name}
                     </Link>
                     <div className="text-xs md:hidden">{position_name}</div>

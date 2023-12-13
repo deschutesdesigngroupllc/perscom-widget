@@ -74,7 +74,11 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && (
+                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
+                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  </div>
+                )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}
@@ -136,7 +140,11 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && (
+                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
+                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  </div>
+                )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}
@@ -181,7 +189,11 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && (
+                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
+                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  </div>
+                )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}

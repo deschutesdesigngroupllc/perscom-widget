@@ -1,8 +1,8 @@
 import Auth from '../../../api/auth';
 import Client from '../../../api/client';
-import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Form } from '../../../components/form';
+import { Link } from '../../../components/link';
 
 export default async function Page(props) {
   const { searchParams, params } = props;
