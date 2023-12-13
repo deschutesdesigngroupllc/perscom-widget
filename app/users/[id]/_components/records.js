@@ -1,6 +1,6 @@
 'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 import { TabItem } from 'flowbite-react';
 import { Card } from '../../../../components/card';
 import { Tabs } from '../../../../components/tabs';

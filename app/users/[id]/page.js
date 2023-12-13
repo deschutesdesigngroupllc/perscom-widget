@@ -70,7 +70,7 @@ function Profile({ user }) {
         <Information user={user} />
         <Demographics user={user} />
       </div>
-      <AdditionalFields fields={user?.fields} />
+      <AdditionalFields user={user} />
       <SecondaryAssignments user={user} />
       <Records user={user} />
     </div>
@@ -161,7 +161,9 @@ function Demographics({ user }) {
   );
 }
 
-function AdditionalFields({ fields }) {
+function AdditionalFields({ user }) {
+  const { fields } = user;
+
   return (
     <>
       {fields && !!fields.length && (
@@ -173,9 +175,9 @@ function AdditionalFields({ fields }) {
                 return (
                   <li key={field.key} className="py-2">
                     <p className="truncate text-sm font-semibold">{field.name}</p>
-                    <p className="text-sm">
+                    <div className="text-sm">
                       <Value field={field} value={get(user, field.key, '')} />
-                    </p>
+                    </div>
                   </li>
                 );
               })}
