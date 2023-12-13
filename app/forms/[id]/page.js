@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Form } from '../../../components/form';
 
-export default async function Page({ searchParams, params }) {
+export default async function Page(props) {
+  const { searchParams, params } = props;
   const { id } = params;
-  const auth = new Auth(searchParams);
-  const formData = await new Client(auth).getForm(id);
-  const form = formData.data;
+  const client = new Client(new Auth(searchParams));
+  const form = await client.getForm(id);
 
   return (
     <div className="flex flex-col space-y-4">
@@ -18,7 +18,7 @@ export default async function Page({ searchParams, params }) {
           Back to Forms
         </Link>
       </div>
-      <Form form={form} />
+      <Form form={form.data} {...props} />
     </div>
   );
 }

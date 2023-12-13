@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import { config } from '../lib/constants';
 import { jwtDecode } from 'jwt-decode';
 
@@ -32,8 +33,8 @@ export default class Auth {
    *
    * @returns {string | undefined}
    */
-  getAuthIdentifier() {
-    return jwtDecode(this.getApiKey())?.sub;
+  getAuthIdentifier(claim = 'sub') {
+    return get(jwtDecode(String(this.getApiKey())), claim);
   }
 
   /**

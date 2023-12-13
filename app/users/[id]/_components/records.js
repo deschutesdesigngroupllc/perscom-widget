@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { TabItem } from 'flowbite-react';
 import { Card } from '../../../../components/card';
 import { Tabs } from '../../../../components/tabs';
@@ -73,7 +74,7 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <img className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}
@@ -135,7 +136,7 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <img className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}
@@ -180,7 +181,7 @@ export function Records({ user }) {
             const { image_url } = image ?? {};
             return (
               <div className="flex space-x-4">
-                {image_url && <img className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
+                {image_url && <Image className="w-6 font-bold sm:w-8" src={image_url} alt={name} />}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
                   {text && <div className="text-xs">{text}</div>}

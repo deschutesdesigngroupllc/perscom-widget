@@ -1,20 +1,33 @@
 'use server'
 
-export async function submitForm(previousState, formData) {
-    console.log(formData)
+import Client from "../api/client";
+import Auth from "../api/auth";
 
-    // const rawFormData = {
-    //     customerId: formData.get('test'),
-    // }
+/**
+ * Submit a form
+ *
+ * @param {int} formId
+ * @param {object} searchParams
+ * @param {object} previousState
+ * @param {FormData} formData
+ * @returns {Promise<{success: boolean, finished: boolean, message: string}|{finished: boolean, error: boolean, message: (*|string)}>}
+ */
+export async function submitForm(formId, searchParams, previousState, formData) {
+    let data = {}
+    formData.forEach((value, key) => data[key] = value)
 
-    //console.log(rawFormData)
-
-    // return {
-    //     error: true,
-    //     message: 'There was an error!'
-    // }
+    try {
+        await new Client(new Auth(searchParams)).postSubmission(formId, data);
+    } catch (error) {
+        return {
+            finished:true,
+            error: true,
+            message: error.response?.error?.message ?? error.message ?? 'There was an error with your form submission. Please try again.'
+        }
+    }
 
     return {
+        finished: true,
         success: true,
         message: 'Your form has been successfully submitted.'
     }

@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import get from 'lodash/get';
 import { Countries } from '../resources/countries';
 import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react';
 
-export function Field(props) {
-  const { field, formValues, setFormValues } = props;
+export function Field({ field }) {
+  const [toggleValues, setToggleValues] = useState({});
 
-  const handleChange = (e) => {
-    console.log(e.target.id, e.target.value);
-    setFormValues({ ...formValues, [e.target.id]: e.target.value });
+  const handleToggle = (key, value) => {
+    setToggleValues({ ...toggleValues, [key]: value });
   };
 
   switch (field.type) {
@@ -16,12 +15,12 @@ export function Field(props) {
       return (
         <ToggleSwitch
           key={field.key}
-          checked={get(formValues, field.key, false)}
+          checked={get(toggleValues, field.key, false)}
           id={field.key}
+          name={field.key}
           required={field.required}
           readOnly={field.readonly}
-          value={get(formValues, field.key, false)}
-          onChange={(value) => setFormValues({ ...formValues, [field.key]: value })}
+          onChange={(checked) => handleToggle(field.key, checked)}
         />
       );
     case 'color':
@@ -29,13 +28,12 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="color"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'country':
@@ -43,11 +41,10 @@ export function Field(props) {
         <Select
           key={field.key}
           id={field.key}
+          name={field.key}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         >
           <option disabled={true} value="">
             Choose an option
@@ -66,13 +63,12 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="date"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'datetime-local':
@@ -80,13 +76,12 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="datetime-local"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'email':
@@ -94,13 +89,12 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="email"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'file':
@@ -108,6 +102,7 @@ export function Field(props) {
         <FileInput
           key={field.key}
           id={field.key}
+          name={field.key}
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
@@ -118,13 +113,12 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="number"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'password':
@@ -132,13 +126,13 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           type="password"
+          autoComplete="current-password"
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
     case 'code':
@@ -147,13 +141,12 @@ export function Field(props) {
         <Textarea
           key={field.key}
           id={field.key}
+          name={field.key}
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
+          helperText={field.help}
           rows={4}
-          onChange={handleChange}
         />
       );
     case 'select': {
@@ -166,12 +159,11 @@ export function Field(props) {
         <Select
           key={field.key}
           id={field.key}
+          name={field.key}
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         >
           <option disabled={true} value="">
             Choose an option
@@ -195,12 +187,11 @@ export function Field(props) {
         <Select
           key={field.key}
           id={field.key}
+          name={field.key}
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onSelect={handleChange}
+          helperText={field.help}
         >
           <option disabled={true} value="">
             Choose an option
@@ -219,12 +210,11 @@ export function Field(props) {
         <TextInput
           key={field.key}
           id={field.key}
+          name={field.key}
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<Fragment>{field.help}</Fragment>}
-          value={get(formValues, field.key, '')}
-          onChange={handleChange}
+          helperText={field.help}
         />
       );
   }
