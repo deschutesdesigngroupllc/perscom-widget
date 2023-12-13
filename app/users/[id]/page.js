@@ -5,8 +5,8 @@ import get from 'lodash/get';
 import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Card } from '../../../components/card';
 import { Link } from '../../../components/link';
-import { SecondaryAssignments } from './_components/secondaryAssignments';
-import { Records } from './_components/records';
+import { SecondaryAssignments } from '../_components/secondaryAssignments';
+import { Records } from '../_components/records';
 import { Value } from '../../../components/value';
 
 export default async function Page({ searchParams, params }) {

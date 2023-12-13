@@ -1,9 +1,9 @@
 'use client';
 
 import { TabItem } from 'flowbite-react';
-import { Card } from '../../../../components/card';
-import { Tabs } from '../../../../components/tabs';
-import { Datatable } from '../../../../components/datatable';
+import { Card } from '../../../components/card';
+import { Tabs } from '../../../components/tabs';
+import { Datatable } from '../../../components/datatable';
 
 export function SecondaryAssignments({ user }) {
   const tabs = [

@@ -4,7 +4,7 @@ import { Card } from '../../components/card';
 import { TimeAgo } from '../../components/timeago';
 import cx from 'classnames';
 import Auth from '../../api/auth';
-import { Likes } from '../../components/resources/newsfeed/likes';
+import { Likes } from './_components/likes';
 import { formatDate } from '../../utils/helpers';
 
 export const metadata = {
