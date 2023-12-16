@@ -3,6 +3,7 @@ import { ThemeProvider } from './providers';
 import { IframeResizer } from './iframe';
 import './globals.css';
 import { Footer } from '../components/footer';
+import cx from 'classnames';
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] });
 
@@ -15,13 +16,13 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <IframeResizer />
       <body
-        className={nunitoSans.className}
+        className={cx('text-gray-500 dark:text-gray-400', nunitoSans.className)}
         style={{
           margin: '0.2rem'
         }}
       >
         <ThemeProvider>
-          <main className="text-gray-500 dark:text-gray-400">{children}</main>
+          <main>{children}</main>
         </ThemeProvider>
         <Footer />
       </body>

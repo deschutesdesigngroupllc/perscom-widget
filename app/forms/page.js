@@ -2,7 +2,7 @@ import Client from '../../api/client';
 import Auth from '../../api/auth';
 import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
 import { Pagination } from '../../components/pagination';
-import { Button } from '../../components/button';
+import { ButtonLink } from '../../components/buttonlink';
 import { Table } from '../../components/table';
 import { Card } from '../../components/card';
 
@@ -30,9 +30,9 @@ export default async function Page({ searchParams }) {
                       <div className="text-sm">{form.description}</div>
                     </div>
                     <div className="flex-shrink-0">
-                      <Button href={`forms/${form.id}`} color="gray">
+                      <ButtonLink href={`forms/${form.id}`} color="gray">
                         Open Form
-                      </Button>
+                      </ButtonLink>
                     </div>
                   </div>
                 </TableCell>

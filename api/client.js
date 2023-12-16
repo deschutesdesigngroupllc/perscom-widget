@@ -74,6 +74,16 @@ export default class Client {
   }
 
   /**
+   * Get a list of events
+   *
+   * @param {object|array} params
+   * @returns {Promise<*>}
+   */
+  async getEvents(params = { include: 'calendar', limit: '100' }) {
+    return await this.request('events', 'GET', null, params);
+  }
+
+  /**
    * Get a list of forms
    *
    * @param {object|array} params
