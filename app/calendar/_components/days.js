@@ -31,6 +31,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       timeEnd: dayjs(event.end).tz('UTC').format('hA'),
       color: event?.calendar?.color,
       allDay: event.all_day,
+      calendar: event.calendar?.name,
       location: event.location,
       details: event.content
     };
