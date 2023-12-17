@@ -5,10 +5,6 @@ import { FaceSmileIcon } from '@heroicons/react/24/outline';
 import { pluralize } from '../../../utils/helpers';
 
 export function Likes({ likes, currentUser }) {
-  const onLikeClick = (id) => {};
-
-  const onUnlikeClick = (id) => {};
-
   const newsfeedItemIsLiked = (id) => {
     return (
       likes &&
@@ -35,7 +31,7 @@ export function Likes({ likes, currentUser }) {
             className="w-7.5 flex cursor-pointer items-center rounded-full border border-gray-300 bg-gray-100 p-0.5 hover:bg-gray-200"
             onClick={() => onLikeClick(id)}
           >
-            <FaceSmileIcon className="h-6 w-6 text-gray-400" />
+            <FaceSmileIcon className="h-6 w-6 text-gray-400 dark:text-gray-700" />
           </div>
         </Tooltip>
       )}

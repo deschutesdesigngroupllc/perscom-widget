@@ -162,6 +162,30 @@ export default class Client {
   }
 
   /**
+   * Create a like
+   *
+   * @param id
+   * @param {object|null} body
+   * @param {object|array} params
+   * @returns {Promise<*>}
+   */
+  async postLike(id, body = null, params = {}) {
+    return await this.request(`newsfeed/${id}/likes/attach`, 'POST', body, params);
+  }
+
+  /**
+   * Remove a like
+   *
+   * @param id
+   * @param {object|null} body
+   * @param {object|array} params
+   * @returns {Promise<*>}
+   */
+  async postUnlike(id, body = null, params = {}) {
+    return await this.request(`newsfeed/${id}/likes/detach`, 'DELETE', body, params);
+  }
+
+  /**
    * Create a submission
    *
    * @param id
