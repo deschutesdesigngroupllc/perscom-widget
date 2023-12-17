@@ -72,7 +72,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
   }, [currentMonth]);
 
   return (
-    <div className="flex bg-gray-200 text-xs leading-6 dark:bg-gray-700 lg:flex-auto">
+    <div className="flex rounded-b-lg bg-gray-200 text-xs leading-6 dark:bg-gray-700 lg:flex-auto">
       <div
         className={cx('hidden w-full lg:grid lg:grid-cols-7 lg:gap-px', {
           'lg:grid-rows-5': arrayOfWeeks.length === 5,
@@ -81,56 +81,62 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
         })}
       >
         {arrayOfWeeks &&
+          !!arrayOfWeeks.length &&
           arrayOfWeeks.map((week, weekIndex) => (
             <Fragment key={weekIndex}>
-              {week.dates.map((day, dayIndex) => (
-                <div
-                  key={dayIndex}
-                  className={cx('relative min-h-40 px-3 py-2', {
-                    'bg-white dark:bg-gray-800': day.isCurrentMonth,
-                    'bg-gray-50 dark:bg-gray-700': !day.isCurrentMonth
-                  })}
-                >
-                  <time
-                    dateTime={day.date}
-                    className={cx({
-                      'flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white':
-                        day.isCurrentDay
+              {week.dates &&
+                !!week.dates.length &&
+                week.dates.map((day, dayIndex) => (
+                  <div
+                    key={dayIndex}
+                    className={cx('relative min-h-40 px-3 py-2', {
+                      'bg-white dark:bg-gray-800': day.isCurrentMonth,
+                      'bg-gray-50 dark:bg-gray-700': !day.isCurrentMonth,
+                      'rounded-bl-lg': dayIndex === 0 && weekIndex === arrayOfWeeks.length - 1,
+                      'rounded-br-lg':
+                        dayIndex === week.dates.length - 1 && weekIndex === arrayOfWeeks.length - 1
                     })}
                   >
-                    {day.day}
-                  </time>
-                  {day.events && !!day.events.length && (
-                    <ol className="mt-2">
-                      {day.events.map((event) => (
-                        <li key={event.id}>
-                          <button
-                            onClick={() => handleDayEventSelect(day, event, true)}
-                            className="group my-1 flex w-full cursor-pointer items-center justify-between rounded px-2 shadow hover:opacity-90 focus-visible:outline-none"
-                            style={{
-                              backgroundColor: event.color
-                            }}
-                          >
-                            <p className="truncate font-medium text-white group-hover:text-gray-200">
-                              {event.name}
-                            </p>
-                            {!event.allDay && (
-                              <>
-                                <time
-                                  dateTime={event.start}
-                                  className="ml-3 hidden flex-none text-white group-hover:text-gray-200 xl:block"
-                                >
-                                  {event.timeStart}
-                                </time>
-                              </>
-                            )}
-                          </button>
-                        </li>
-                      ))}
-                    </ol>
-                  )}
-                </div>
-              ))}
+                    <time
+                      dateTime={day.date}
+                      className={cx({
+                        'flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white':
+                          day.isCurrentDay
+                      })}
+                    >
+                      {day.day}
+                    </time>
+                    {day.events && !!day.events.length && (
+                      <ol className="mt-2">
+                        {day.events.map((event) => (
+                          <li key={event.id}>
+                            <button
+                              onClick={() => handleDayEventSelect(day, event, true)}
+                              className="group my-1 flex w-full cursor-pointer items-center justify-between rounded px-2 shadow hover:opacity-90 focus-visible:outline-none"
+                              style={{
+                                backgroundColor: event.color
+                              }}
+                            >
+                              <p className="truncate font-medium text-white group-hover:text-gray-200">
+                                {event.name}
+                              </p>
+                              {!event.allDay && (
+                                <>
+                                  <time
+                                    dateTime={event.start}
+                                    className="ml-3 hidden flex-none text-white group-hover:text-gray-200 xl:block"
+                                  >
+                                    {event.timeStart}
+                                  </time>
+                                </>
+                              )}
+                            </button>
+                          </li>
+                        ))}
+                      </ol>
+                    )}
+                  </div>
+                ))}
             </Fragment>
           ))}
       </div>
@@ -142,6 +148,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
         })}
       >
         {arrayOfWeeks &&
+          !!arrayOfWeeks.length &&
           arrayOfWeeks.map((week, weekIndex) => (
             <Fragment key={weekIndex}>
               {week.dates.map((day, dayIndex) => (

@@ -49,13 +49,14 @@ export function Field({ field }) {
           <option disabled={true} value="">
             Choose an option
           </option>
-          {Countries.map((country) => {
-            return (
-              <option key={country.code} value={country.code}>
-                {country.name}
-              </option>
-            );
-          })}
+          {!!Countries.length &&
+            Countries.map((country) => {
+              return (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              );
+            })}
         </Select>
       );
     case 'date':
@@ -196,13 +197,14 @@ export function Field({ field }) {
           <option disabled={true} value="">
             Choose an option
           </option>
-          {timezones.map((timezone) => {
-            return (
-              <option key={timezone} value={timezone}>
-                {timezone}
-              </option>
-            );
-          })}
+          {!!timezones.length &&
+            timezones.map((timezone) => {
+              return (
+                <option key={timezone} value={timezone}>
+                  {timezone}
+                </option>
+              );
+            })}
         </Select>
       );
     default:

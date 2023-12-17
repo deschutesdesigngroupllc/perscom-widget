@@ -11,7 +11,7 @@ import {
 export function Events({ selectedDay, selectedEvent, modalState, setModalState }) {
   return (
     <>
-      {selectedDay?.events?.length > 0 && (
+      {selectedDay.events && !!selectedDay.events.length && (
         <div className="px-4 py-10 sm:px-6 lg:hidden">
           <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5 dark:divide-gray-700 dark:bg-gray-800">
             {selectedDay.events.map((event) => (

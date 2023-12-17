@@ -23,16 +23,34 @@ export function Records({ user }) {
         {
           name: 'Assignment',
           selector: (row) => {
-            const { unit, position, specialty, text } = row;
+            const { unit, position, specialty, status, text } = row;
             const { name: unit_name } = unit ?? {};
             const { name: position_name } = position ?? {};
             const { name: specialty_name } = specialty ?? {};
+            const { name: status_name } = status ?? {};
+
             return (
               <div className="flex flex-col justify-center space-y-1">
-                <div className="font-semibold">
-                  {position_name}, {unit_name}
-                </div>
-                {specialty_name && <div className="text-xs">{specialty_name}</div>}
+                {position_name && (
+                  <div className="first:font-semibold [&:not(:first-child)]:text-xs">
+                    {position_name}
+                  </div>
+                )}
+                {specialty_name && (
+                  <div className="first:font-semibold [&:not(:first-child)]:text-xs">
+                    {specialty_name}
+                  </div>
+                )}
+                {unit_name && (
+                  <div className="first:font-semibold [&:not(:first-child)]:text-xs">
+                    {unit_name}
+                  </div>
+                )}
+                {status_name && (
+                  <div className="first:font-semibold [&:not(:first-child)]:text-xs">
+                    {status_name}
+                  </div>
+                )}
                 {text && <div className="text-xs">{text}</div>}
               </div>
             );

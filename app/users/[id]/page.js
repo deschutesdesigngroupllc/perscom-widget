@@ -18,6 +18,7 @@ export default async function Page({ searchParams, params }) {
       'assignment_records.position',
       'assignment_records.specialty',
       'assignment_records.unit',
+      'assignment_records.status',
       'award_records',
       'award_records.award',
       'award_records.award.image',

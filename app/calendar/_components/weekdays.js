@@ -9,6 +9,7 @@ export function Weekdays({ now }) {
   return (
     <div className="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold dark:border-gray-700 dark:bg-gray-700 lg:flex-none">
       {weekDays &&
+        !!weekDays.length &&
         weekDays.map((weekDay) => {
           return (
             <div key={weekDay.format('d')} className="bg-white py-2 dark:bg-gray-800">

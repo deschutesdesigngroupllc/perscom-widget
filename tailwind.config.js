@@ -7,6 +7,7 @@ module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './styles/**/*.css',
     'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   darkMode: 'class',

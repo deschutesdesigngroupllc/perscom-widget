@@ -18,9 +18,13 @@ export default async function Page({ searchParams }) {
   return (
     <div className="flex flex-col space-y-2">
       <div className="flex flex-col space-y-6">
-        {newsfeed.data.map((item) => {
-          return <NewsfeedItem key={item.id} item={item} currentUser={auth.getAuthIdentifier()} />;
-        })}
+        {newsfeed.data &&
+          !!newsfeed.data.length &&
+          newsfeed.data.map((item) => {
+            return (
+              <NewsfeedItem key={item.id} item={item} currentUser={auth.getAuthIdentifier()} />
+            );
+          })}
       </div>
     </div>
   );
