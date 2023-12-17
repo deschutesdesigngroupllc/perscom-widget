@@ -7,8 +7,7 @@
 /coverage
 
 # production
-/build
-/dist
+/public/widget.*
 
 # misc
 .idea
@@ -35,3 +34,4 @@ yarn-error.log*
 
 # Sentry Config File
 .sentryclirc
+.vercel

@@ -7,7 +7,7 @@
     "start:widget": "node widget-server.js",
     "dev": "next dev",
     "build": "next build",
-    "build:widget": "parcel build app/widget.js",
+    "build:widget": "parcel build app/widget.js --dist-dir public",
     "lint": "next lint",
     "format": "prettier '{api,app,components,lib,utils,__tests__}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js",
     "test": "jest",
