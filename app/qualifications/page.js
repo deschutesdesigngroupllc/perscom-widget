@@ -6,6 +6,7 @@ import { Pagination } from '../../components/pagination';
 import { Table } from '../../components/table';
 import { Card } from '../../components/card';
 
+export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Qualifications'
 };

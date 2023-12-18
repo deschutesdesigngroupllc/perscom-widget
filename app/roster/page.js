@@ -7,6 +7,7 @@ import { Card } from '../../components/card';
 import { Table } from '../../components/table';
 import { Tabs } from '../../components/tabs';
 
+export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Roster'
 };

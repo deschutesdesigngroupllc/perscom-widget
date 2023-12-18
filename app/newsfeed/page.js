@@ -2,6 +2,7 @@ import Client from '../../api/client';
 import Auth from '../../api/auth';
 import { Item } from './_components/item';
 
+export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Newsfeed'
 };
