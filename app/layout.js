@@ -1,9 +1,10 @@
+import './globals.css';
+import cx from 'classnames';
 import { Nunito_Sans } from 'next/font/google';
 import { ThemeProvider } from './providers';
 import { IframeResizer } from './iframe';
-import './globals.css';
 import { Footer } from '../components/footer';
-import cx from 'classnames';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
         }}
       >
         <ThemeProvider>
-          <main>{children}</main>
+          <main>
+            {children}
+            <SpeedInsights />
+          </main>
         </ThemeProvider>
         <Footer />
       </body>
