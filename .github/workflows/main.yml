@@ -43,7 +43,7 @@ jobs:
           default_bump: patch
           default_prerelease_bump: prerelease
           release_branches: master
-          pre_release_branches: '.*'
+          pre_release_branches: staging
           append_to_pre_release_tag: prerelease
           dry_run: ${{ env.PREVENT_TAG_CREATION }}
 
