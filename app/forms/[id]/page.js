@@ -4,6 +4,11 @@ import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Form } from '../../../components/form';
 import { Link } from '../../../components/link';
 
+export const dynamic = 'force-dynamic';
+export const metadata = {
+  title: 'Form'
+};
+
 export default async function Page(props) {
   const { searchParams, params } = props;
   const { id } = params;
