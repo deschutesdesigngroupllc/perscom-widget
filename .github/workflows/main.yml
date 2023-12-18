@@ -29,7 +29,7 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Determine Should Create Tag
-        run: echo "PREVENT_TAG_CREATION=$( [ \"$GITHUB_REF\" != 'refs/heads/master' ] && [ \"$GITHUB_REF\" != 'refs/heads/staging' ] && echo 'true' || echo 'false' )" >>
+        run: echo "PREVENT_TAG_CREATION=$( [ \"$GITHUB_REF\" != 'refs/heads/master' ] && [ \"$GITHUB_REF\" != 'refs/heads/staging' ] && echo 'true' || echo 'false' )" >> $GITHUB_ENV
 
       - name: Bump Application Version and Tag
         id: tag_version
@@ -84,6 +84,14 @@ jobs:
       - name: Deploy Project Artifacts to Vercel Production
         if: github.ref == 'refs/heads/master'
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Add PR Commend
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            **Vercel Deployment**
+            <br>
+            Deployment Preview URL: Test
 
       - name: Create Sentry Release Staging
         if: github.ref == 'refs/heads/staging'
