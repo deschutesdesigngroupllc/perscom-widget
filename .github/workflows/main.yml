@@ -52,6 +52,7 @@ jobs:
           echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add SENTRY_RELEASE preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Set Version Environment Variable Production
+        if: github.ref == 'refs/heads/master'
         run: |
           echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add WIDGET_VERSION production --token=${{ secrets.VERCEL_TOKEN }}
           echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add SENTRY_RELEASE production --token=${{ secrets.VERCEL_TOKEN }}
