@@ -1,14 +1,14 @@
-const nodeStatic = require('node-static')
-const files = new nodeStatic.Server('./dist')
+const nodeStatic = require('node-static');
+const files = new nodeStatic.Server('./public');
 
 require('http')
   .createServer(function (request, response) {
     request
       .addListener('end', function () {
-        files.serve(request, response)
+        files.serve(request, response);
       })
-      .resume()
+      .resume();
   })
   .listen(8000, 'localhost', () => {
-    console.log(`Local widget.js server is running...`)
-  })
+    console.log(`Local widget.js server is running...`);
+  });
