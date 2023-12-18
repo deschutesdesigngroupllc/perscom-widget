@@ -1,5 +1,4 @@
 const { withSentryConfig } = require('@sentry/nextjs');
-const { config } = require('./lib/constants');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -9,13 +8,13 @@ const nextConfig = {
       'perscom-staging.s3.amazonaws.com',
       'perscom.s3.amazonaws.com'
     ]
-  },
+  }
 };
 
 const sentryWebpackPluginOptions = {
-  org: config.sentry.SENTRY_ORG,
-  project: config.sentry.SENTRY_PROJECT,
-  authToken: config.sentry.SENTRY_AUTH_TOKEN,
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: true
 };
 
