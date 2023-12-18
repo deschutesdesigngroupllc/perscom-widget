@@ -41,8 +41,7 @@ jobs:
           append_to_pre_release_tag: prerelease
           dry_run: true
 
-      - name: Bump Application Version and Tag Production
-        if: github.ref == 'refs/heads/master'
+      - name: Bump Application Version and Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
         with:
@@ -52,6 +51,7 @@ jobs:
           release_branches: master
           pre_release_branches: '/^(?!master$).*/'
           append_to_pre_release_tag: prerelease
+          dry_run: ${{ github.ref != 'refs/heads/master' && github.ref == 'refs/heads/staging' }}
 
       - name: Setup Vercel Preview
         if: github.ref != 'refs/heads/master'
