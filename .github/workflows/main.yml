@@ -83,11 +83,11 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel Preview
         if: github.ref != 'refs/heads/master'
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        run: echo "DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
 
       - name: Deploy Project Artifacts to Vercel Production
         if: github.ref == 'refs/heads/master'
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: echo "DEPLOYMENT_URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_ENV
 
       - name: Add PR Comment
         uses: mshick/add-pr-comment@v2
@@ -95,7 +95,7 @@ jobs:
           message: |
             **Vercel Deployment**
             
-            ✅ Deployment Preview URL: [https://preview.widget.perscom.io](https://preview.widget.perscom.io)
+            ✅ Deployment Preview URL: [${{ env.DEPLOYMENT_URL }}](${{ env.DEPLOYMENT_URL }})
 
       - name: Create Sentry Release Staging
         if: github.ref == 'refs/heads/staging'
