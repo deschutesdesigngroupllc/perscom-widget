@@ -28,9 +28,13 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
+      - name: Determine Should Create Tag
+        run: echo "PREVENT_TAG_CREATION=$( [ \"$GITHUB_REF\" != 'refs/heads/master' ] && [ \"$GITHUB_REF\" != 'refs/heads/staging' ] && echo 'true' || echo 'false' )" >>
+
       - name: Bump Application Version and Tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
+        env:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: patch
@@ -38,7 +42,7 @@ jobs:
           release_branches: master
           pre_release_branches: '^(?!master$).*'
           append_to_pre_release_tag: prerelease
-          dry_run: ${{ github.ref != 'refs/heads/master' && github.ref == 'refs/heads/staging' }}
+          dry_run: ${{ env.PREVENT_TAG_CREATION }}
 
       - name: Setup Vercel Preview
         if: github.ref != 'refs/heads/master'
