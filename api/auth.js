@@ -1,5 +1,4 @@
 import get from 'lodash/get';
-import { config } from '../lib/constants';
 import { jwtDecode } from 'jwt-decode';
 
 export default class Auth {
@@ -16,7 +15,7 @@ export default class Auth {
    * @returns {*|string}
    */
   getApiKey() {
-    return this.getSearchParams().get('apikey') ?? config.app.API_KEY ?? null;
+    return this.getSearchParams().get('apikey') ?? process.env.API_KEY ?? null;
   }
 
   /**
@@ -25,7 +24,7 @@ export default class Auth {
    * @returns {*|string}
    */
   getPerscomId() {
-    return this.getSearchParams().get('perscomid') ?? config.app.PERSCOM_ID ?? null;
+    return this.getSearchParams().get('perscomid') ?? process.env.PERSCOM_ID ?? null;
   }
 
   /**

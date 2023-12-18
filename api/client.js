@@ -1,5 +1,4 @@
 import { RequestError } from '../lib/errors/requestError';
-import { config } from '../lib/constants';
 import { getOptionalApiParameters } from '../utils/parameters';
 
 export default class Client {
@@ -35,7 +34,7 @@ export default class Client {
       init.body = JSON.stringify(body);
     }
 
-    const url = new URL(config.app.API_URL + endpoint);
+    const url = new URL(process.env.API_URL + endpoint);
 
     if (params) {
       const additionalParams = new URLSearchParams(params);

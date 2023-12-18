@@ -1,8 +1,7 @@
-import { config } from '../lib/constants';
 import { Logo } from './logo';
 
 export function Footer() {
-  const version = config.app.WIDGET_VERSION;
+  const version = process.env.WIDGET_VERSION;
 
   return (
     <footer className="flex flex-row justify-center">

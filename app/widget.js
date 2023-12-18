@@ -1,4 +1,3 @@
-import { config } from '../lib/constants';
 import { findIncomingAttributes } from '../utils/parameters';
 import { parseDomain } from 'parse-domain';
 
@@ -62,7 +61,7 @@ class Widget {
    * @returns {string}
    */
   composeIframeUrl = () => {
-    const url = new URL(`${config.app.WIDGET_URL}/${this.widget}`);
+    const url = new URL(`${process.env.WIDGET_URL}/${this.widget}`);
 
     if (this.resourceAttribute) {
       url.pathname += `/${this.resourceAttribute}`;
