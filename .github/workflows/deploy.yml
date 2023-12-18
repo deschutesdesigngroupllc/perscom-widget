@@ -46,8 +46,8 @@ jobs:
         if: github.ref == 'refs/heads/staging'
         run: |
           vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
-          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} --short "$GITHUB_SHA") >> .vercel/.env.preview.local
-          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} --short "$GITHUB_SHA") >> .vercel/.env.preview.local
+          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.preview.local
+          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.preview.local
 
       - name: Setup Vercel Production
         if: github.ref == 'refs/heads/master'
