@@ -9,6 +9,11 @@ import { SecondaryAssignments } from '../_components/secondaryAssignments';
 import { Records } from '../_components/records';
 import { Value } from '../../../components/value';
 
+export const dynamic = 'force-dynamic';
+export const metadata = {
+  title: 'User'
+};
+
 export default async function Page({ searchParams, params }) {
   const { id } = params;
   const auth = new Auth(searchParams);

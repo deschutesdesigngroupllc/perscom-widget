@@ -6,6 +6,7 @@ import { ButtonLink } from '../../components/buttonlink';
 import { Table } from '../../components/table';
 import { Card } from '../../components/card';
 
+export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Forms'
 };
