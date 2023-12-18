@@ -67,29 +67,6 @@ jobs:
       - name: Deploy Project to Vercel Production
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Bump Application Version and Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: patch
-          default_prerelease_bump: prerelease
-          release_branches: master
-          pre_release_branches: staging
-          append_to_pre_release_tag: prerelease
-
-      - name: Install Sentry CLI
-        run: npm install -g @sentry/cli
-
-      - name: Upload Sentry Sourcemaps
-        run: |
-          sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./build && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget --release ${{ steps.tag_version.outputs.new_tag }} ./build
-          sentry-cli sourcemaps inject --org deschutes-design-group-llc --project perscom-widget ./dist && sentry-cli sourcemaps upload --org deschutes-design-group-llc --project perscom-widget --release ${{ steps.tag_version.outputs.new_tag }} ./dist
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-
       - name: Create Sentry Release Staging
         if: github.ref == 'refs/heads/staging'
         uses: getsentry/action-release@v1
