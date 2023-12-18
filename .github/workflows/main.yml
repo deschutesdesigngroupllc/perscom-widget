@@ -28,7 +28,8 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Bump Application Version and Tag
+      - name: Bump Application Version and Tag Preview
+        if: github.ref != 'refs/heads/master'
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
         with:
@@ -36,10 +37,24 @@ jobs:
           default_bump: patch
           default_prerelease_bump: prerelease
           release_branches: master
-          pre_release_branches: staging
+          pre_release_branches: '/^(?!master$).*/'
+          append_to_pre_release_tag: prerelease
+          dry_run: true
+
+      - name: Bump Application Version and Tag Production
+        if: github.ref == 'refs/heads/master'
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          default_prerelease_bump: prerelease
+          release_branches: master
+          pre_release_branches: '/^(?!master$).*/'
           append_to_pre_release_tag: prerelease
 
       - name: Setup Vercel Preview
+        if: github.ref != 'refs/heads/master'
         run: |
           vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.preview.local
