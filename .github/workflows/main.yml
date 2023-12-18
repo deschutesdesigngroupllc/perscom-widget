@@ -41,14 +41,14 @@ jobs:
 
       - name: Pull Vercel Environment Information Preview
         run: |
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          vercel pull .env --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.preview.local
           echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.preview.local
 
       - name: Pull Vercel Environment Information Production
         if: github.ref == 'refs/heads/master'
         run: |
-          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel pull .env --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.production.local
           echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .vercel/.env.production.local
 
@@ -66,11 +66,11 @@ jobs:
 
       - name: Build Project Artifacts Preview
         if: github.ref != 'refs/heads/master'
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --yes --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts Production
         if: github.ref == 'refs/heads/master'
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project to Vercel Preview
         if: github.ref != 'refs/heads/master'
