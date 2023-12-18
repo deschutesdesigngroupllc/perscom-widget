@@ -8,6 +8,9 @@ const nextConfig = {
       'perscom-staging.s3.amazonaws.com',
       'perscom.s3.amazonaws.com'
     ]
+  },
+  sentry: {
+    hideSourceMaps: true
   }
 };
 
