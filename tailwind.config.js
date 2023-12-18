@@ -1,11 +1,15 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
-const { generateRootCSSVars, generateTailwindColors } = require('./generators')
+const { generateTailwindColors, generateRootCSSVars } = require('./generators');
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: 'jit',
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './styles/**/*.css',
+    'node_modules/flowbite-react/lib/esm/**/*.js'
+  ],
   darkMode: 'class',
   theme: {
     colors: generateTailwindColors(),
@@ -13,9 +17,6 @@ module.exports = {
       colors: {
         cyan: colors.blue,
         gray: colors.slate
-      },
-      fontFamily: {
-        sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         xxs: '11px'
@@ -38,7 +39,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('flowbite/plugin'),
     function ({ addBase }) {
-      addBase({ ':root': generateRootCSSVars() })
+      addBase({ ':root': generateRootCSSVars() });
     }
   ],
   variants: {
@@ -60,4 +61,4 @@ module.exports = {
     'bg-yellow-100',
     'text-yellow-600'
   ]
-}
+};

@@ -7,8 +7,7 @@
 /coverage
 
 # production
-/build
-/dist
+/public/widget.*
 
 # misc
 .idea
@@ -21,6 +20,10 @@
 .env.production
 .env.staging
 
+# Next
+.next
+.swc
+
 # parcel
 .cache
 .parcel-cache
@@ -28,3 +31,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Sentry Config File
+.sentryclirc
+.vercel
+.env*.local

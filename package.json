@@ -3,61 +3,66 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "next start",
     "start:widget": "node widget-server.js",
-    "build": "react-scripts build",
-    "build:widget": "parcel build src/widget.js",
-    "test": "react-scripts test",
-    "lint": "eslint --fix 'src/**/*.js' './*.js'",
-    "format": "prettier 'src/**/*.{js,json}' './*.{js,json}' --write --config ./.prettierrc"
+    "dev": "next dev",
+    "build": "next build",
+    "build:widget": "parcel build app/widget.js --dist-dir public",
+    "lint": "next lint",
+    "format": "prettier '{api,app,components,lib,utils,__tests__}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
-    "@fullcalendar/core": "^6.1.8",
-    "@fullcalendar/daygrid": "^6.1.8",
-    "@fullcalendar/list": "^6.1.8",
-    "@fullcalendar/react": "^6.1.8",
-    "@fullcalendar/rrule": "^6.1.8",
-    "@sentry/react": "^7.84.0",
-    "flowbite": "^2.2.0",
-    "flowbite-react": "^0.7",
-    "jwt-decode": "^4.0.0",
-    "parse-domain": "^8.0.1",
+    "next": "^14.0.4",
+    "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-router-dom": "^6.19.0",
-    "react-scripts": "^5.0.1",
-    "react-tabs": "^6.0.0",
-    "react-timeago": "^7.2.0",
-    "web-vitals": "^3.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "react-timeago": "^7.2.0"
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.14",
     "@parcel/compressor-brotli": "^2.10.3",
     "@parcel/compressor-gzip": "^2.10.2",
+    "@sentry/nextjs": "^7.88.0",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
+    "autoprefixer": "^10.4.16",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
     "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "flowbite": "^2.2.0",
+    "flowbite-react": "^0.7",
     "iframe-resizer": "4.3.6",
+    "jest": "29.6.4",
+    "jest-environment-jsdom": "29.6.4",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "node-static": "^0.7.11",
-    "object-hash": "^3.0.0",
     "parcel": "^2.10",
-    "parcel-namer-rewrite": "^2.0.0-rc.3",
+    "parse-domain": "^8.0.1",
     "postcss": "^8.4.21",
     "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.9",
     "process": "^0.11.10",
-    "tailwindcss": "^3.3.3"
+    "styled-components": "^5.3.11",
+    "swc": "^1.0.11",
+    "tailwindcss": "^3.3.3",
+    "vm-browserify": "^1.1.2",
+    "web-vitals": "^3.5.0"
   },
   "eslintConfig": {
     "extends": [
@@ -76,14 +81,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "parcel-namer-rewrite": {
-    "chain": "@parcel/namer-default",
-    "hashing": "never",
-    "rules": {
-      "index.js": "app.js",
-      "index.css": "app.css",
-      "loader.js": "widget.js"
-    }
   }
 }
