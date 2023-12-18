@@ -41,8 +41,8 @@ jobs:
 
       - name: Set Version Environment Variable Preview
         run: |
-          echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add WIDGET_VERSION preview 
-          echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add SENTRY_RELEASE preview
+          echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add WIDGET_VERSION preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo ${{ steps.tag_version.outputs.new_tag }} | vercel env add SENTRY_RELEASE preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Set Version Environment Variable Production
         run: |
