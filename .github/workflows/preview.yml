@@ -41,12 +41,15 @@ jobs:
           dry_run: true
 
       - name: Setup Vercel
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
+
+      - name: Setup Environment Variables
         run: |
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
-          echo API_KEY=${{ secrets.VERCEL_PREVIEW_API_KEY }} >> .vercel/.env.preview.local
-          echo PERSCOM_ID=${{ secrets.VERCEL_PREVIEW_PERSCOM_ID }} >> .vercel/.env.preview.local
-          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .vercel/.env.preview.local
-          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .vercel/.env.preview.local
+          vercel env pull .env.local --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo API_KEY=${{ secrets.VERCEL_PREVIEW_API_KEY }} >> .env.local
+          echo PERSCOM_ID=${{ secrets.VERCEL_PREVIEW_PERSCOM_ID }} >> .env.local
+          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .env.local
+          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .env.local
 
       - name: Build Widget
         run: npm run build:widget
