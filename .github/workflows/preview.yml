@@ -41,8 +41,7 @@ jobs:
           dry_run: true
 
       - name: Setup Vercel
-        run: |
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
 
       - name: Setup Environment Variables
         run: |
