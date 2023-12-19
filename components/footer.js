@@ -1,7 +1,7 @@
 import { Logo } from './logo';
 
 export function Footer() {
-  const version = process.env.NEXT_PUBLIC_WIDGET_VERSION;
+  const version = process.env.WIDGET_VERSION;
 
   return (
     <footer className="flex flex-row justify-center">
