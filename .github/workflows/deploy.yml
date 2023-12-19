@@ -55,14 +55,14 @@ jobs:
         run: |
           vercel env pull .env.local --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
+          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
 
       - name: Setup Environment Variables Production
         if: github.ref == 'refs/heads/master'
         run: |
           vercel env pull .env.local --environment=production --token=${{ secrets.VERCEL_TOKEN }}
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
+          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
 
       - name: Build Widget Staging
         if: github.ref == 'refs/heads/staging'
