@@ -10,7 +10,12 @@ const nextConfig = {
     ]
   },
   sentry: {
-    hideSourceMaps: true
+    hideSourceMaps: true,
+    widenClientFileUpload: true,
+    transpileClientSDK: true,
+    tunnelRoute: '/monitoring',
+    disableLogger: true,
+    automaticVercelMonitors: true
   }
 };
 
