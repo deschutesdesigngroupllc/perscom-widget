@@ -3,6 +3,9 @@ name: Deploy Widget
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+  SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
 on:
   push:
@@ -95,10 +98,6 @@ jobs:
       - name: Create Sentry Release Staging
         if: github.ref == 'refs/heads/staging'
         uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: staging
           version: ${{ steps.tag_version.outputs.new_tag }}
@@ -107,10 +106,6 @@ jobs:
       - name: Create Sentry Release Production
         if: github.ref == 'refs/heads/master'
         uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
           version: ${{ steps.tag_version.outputs.new_tag }}
