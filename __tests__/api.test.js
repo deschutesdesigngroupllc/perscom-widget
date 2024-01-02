@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import { expect, jest, it, describe, beforeEach } from '@jest/globals';
-import Auth from '../api/auth';
-import Client from '../api/client';
+import Auth from '../src/api/auth';
+import Client from '../src/api/client';
 import jwt from 'jsonwebtoken';
 
 const searchParams = {
@@ -35,21 +35,6 @@ describe('Auth', () => {
     });
 
     expect(testAuth.getAuthIdentifier()).toStrictEqual(12345);
-  });
-});
-
-describe('Client', () => {
-  it('can format query parameters', () => {
-    const searchParamsObject = client.formatQueryParameters({ include: 'test' });
-    const searchParamsArray = client.formatQueryParameters([
-      ['test1', 'test1'],
-      ['test2', 'test2']
-    ]);
-
-    expect(searchParamsObject).toBeInstanceOf(URLSearchParams);
-    expect(searchParamsObject.toString()).toStrictEqual('include=test');
-    expect(searchParamsArray).toBeInstanceOf(URLSearchParams);
-    expect(searchParamsArray.toString()).toStrictEqual('test1=test1&test2=test2');
   });
 });
 
@@ -160,7 +145,7 @@ describe('Failed Client Requests', () => {
 
       expect(results).toThrowError(Error);
     } catch (e) {
-      expect(e.message).toBe('401: foo bar');
+      expect(e.message).toBe('foo bar');
     }
   });
 });

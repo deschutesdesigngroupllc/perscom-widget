@@ -28,8 +28,8 @@ export default async function Page({ searchParams }) {
                     return <Unit key={unit.id} unit={unit} />;
                   })
                 ) : (
-                  <div className="flex items-center justify-center py-4 text-sm">
-                    No Units Assigned To Group
+                  <div className="flex items-center justify-center p-8 text-sm">
+                    There are no units assigned to this group.
                   </div>
                 )}
               </>
@@ -120,13 +120,9 @@ function Unit({ unit }) {
             );
           })
         ) : (
-          <TableRow>
-            <TableCell colSpan="6">
-              <div className="flex items-center justify-center text-sm">
-                No Personnel Assigned To Unit
-              </div>
-            </TableCell>
-          </TableRow>
+          <div className="flex items-center justify-center p-8 text-sm">
+            There are no personnel assigned to this unit.
+          </div>
         )}
       </TableBody>
     </Table>

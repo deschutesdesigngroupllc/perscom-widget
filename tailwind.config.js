@@ -5,9 +5,9 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   mode: 'jit',
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './styles/**/*.css',
+    './src/app/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/styles/**/*.css',
     'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   darkMode: 'class',

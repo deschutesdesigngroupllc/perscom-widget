@@ -8,30 +8,29 @@ import { Card } from '../../components/card';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
-  title: 'Ranks'
+  title: 'Qualifications'
 };
 
 export default async function Page({ searchParams }) {
-  const ranks = await new Client(new Auth(searchParams)).getRanks();
+  const qualifications = await new Client(new Auth(searchParams)).getQualifications();
 
   return (
     <Card>
       <Table>
         <TableHead className="text-center">
-          <TableHeadCell colSpan="2">Ranks</TableHeadCell>
+          <TableHeadCell colSpan="2">Qualifications</TableHeadCell>
         </TableHead>
         <TableBody>
-          {ranks.data &&
-            !!ranks.data.length &&
-            ranks.data.map((rank) => {
+          {qualifications.data && !!qualifications.data.length ? (
+            qualifications.data.map((qualification) => {
               return (
-                <TableRow key={rank.id}>
+                <TableRow key={qualification.id}>
                   <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
-                    {rank.image?.image_url ? (
-                      <div className="relative mx-auto h-20">
+                    {qualification.image?.image_url ? (
+                      <div className="relative mx-auto h-20 w-28">
                         <Image
-                          src={rank.image.image_url}
-                          alt={rank.name}
+                          src={qualification.image.image_url}
+                          alt={qualification.name}
                           fill
                           objectFit="contain"
                         />
@@ -42,27 +41,32 @@ export default async function Page({ searchParams }) {
                   </TableCell>
                   <TableCell className="!whitespace-normal break-normal !py-4">
                     <>
-                      {rank.image?.image_url && (
+                      {qualification.image?.image_url && (
                         <div className="relative mb-2 flex h-12 sm:hidden">
                           <Image
                             className="!w-auto"
-                            src={rank.image.image_url}
-                            alt={rank.name}
+                            src={qualification.image.image_url}
+                            alt={qualification.name}
                             fill
                             objectFit="contain"
                           />
                         </div>
                       )}
-                      <div className="mb-2 text-sm font-semibold">{rank.name}</div>
-                      <div className="text-sm">{rank.description}</div>
+                      <div className="mb-2 text-sm font-semibold">{qualification.name}</div>
+                      <div className="text-sm">{qualification.description}</div>
                     </>
                   </TableCell>
                 </TableRow>
               );
-            })}
+            })
+          ) : (
+            <div className="flex items-center justify-center p-8 text-sm">
+              There are no qualifications to view.
+            </div>
+          )}
         </TableBody>
       </Table>
-      <Pagination meta={ranks.meta} searchParams={searchParams} />
+      <Pagination meta={qualifications.meta} searchParams={searchParams} />
     </Card>
   );
 }

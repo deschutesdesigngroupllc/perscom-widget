@@ -21,8 +21,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell colSpan="2">Awards</TableHeadCell>
         </TableHead>
         <TableBody>
-          {awards.data &&
-            !!awards.data.length &&
+          {awards.data && !!awards.data.length ? (
             awards.data.map((award) => {
               return (
                 <TableRow key={award.id} data-testid={award.name}>
@@ -59,7 +58,12 @@ export default async function Page({ searchParams }) {
                   </TableCell>
                 </TableRow>
               );
-            })}
+            })
+          ) : (
+            <div className="flex items-center justify-center p-8 text-sm">
+              There are no awards to view.
+            </div>
+          )}
         </TableBody>
       </Table>
       <Pagination meta={awards.meta} searchParams={searchParams} />

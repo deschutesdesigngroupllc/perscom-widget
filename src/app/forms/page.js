@@ -21,8 +21,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell>Forms</TableHeadCell>
         </TableHead>
         <TableBody>
-          {forms.data &&
-            !!forms.data.length &&
+          {forms.data && !!forms.data.length ? (
             forms.data.map((form) => {
               return (
                 <TableRow key={form.id} data-testid={form.name}>
@@ -41,7 +40,12 @@ export default async function Page({ searchParams }) {
                   </TableCell>
                 </TableRow>
               );
-            })}
+            })
+          ) : (
+            <div className="flex items-center justify-center p-8 text-sm">
+              There are no forms to view.
+            </div>
+          )}
         </TableBody>
       </Table>
       <Pagination meta={forms.meta} searchParams={searchParams} />

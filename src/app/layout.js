@@ -4,7 +4,7 @@ import { Nunito_Sans } from 'next/font/google';
 import { ThemeProvider } from './providers';
 import { IframeResizer } from './iframe';
 import { Footer } from '../components/footer';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+//import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] });
 
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <main>
             {children}
-            <SpeedInsights />
+            {/*<SpeedInsights />*/}
           </main>
         </ThemeProvider>
         <Footer />
