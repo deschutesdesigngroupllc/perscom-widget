@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { expect, it, describe, beforeEach, beforeAll, jest } from '@jest/globals';
+import { beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import Layout from '../src/app/layout';
 import Newsfeed from '../src/app/newsfeed/page';

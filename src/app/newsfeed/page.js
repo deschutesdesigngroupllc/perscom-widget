@@ -1,5 +1,5 @@
-import Client from '../../api/client';
 import Auth from '../../api/auth';
+import Client from '../../api/client';
 import { Item } from './_components/item';
 
 export const dynamic = 'force-dynamic';

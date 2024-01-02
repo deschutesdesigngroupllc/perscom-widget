@@ -1,7 +1,7 @@
 'use client';
 
-import dayjs from 'dayjs';
 import cx from 'classnames';
+import dayjs from 'dayjs';
 import { Fragment, useEffect, useState } from 'react';
 
 export function Days({ currentMonth, handleDayEventSelect, events }) {

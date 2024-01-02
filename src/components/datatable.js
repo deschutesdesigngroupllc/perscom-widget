@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import { Spinner } from 'flowbite-react';
 import DataTable from 'react-data-table-component';
 import '../styles/datatable.css';
-import { Spinner } from 'flowbite-react';
 
 export function Datatable(props) {
   return (

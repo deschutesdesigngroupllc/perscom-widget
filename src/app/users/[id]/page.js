@@ -1,13 +1,13 @@
+import { ChevronLeftIcon } from '@heroicons/react/20/solid';
+import get from 'lodash/get';
+import Image from 'next/image';
 import Auth from '../../../api/auth';
 import Client from '../../../api/client';
-import Image from 'next/image';
-import get from 'lodash/get';
-import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Card } from '../../../components/card';
 import { Link } from '../../../components/link';
-import { SecondaryAssignments } from '../_components/secondaryAssignments';
-import { Records } from '../_components/records';
 import { Value } from '../../../components/value';
+import { Records } from '../_components/records';
+import { SecondaryAssignments } from '../_components/secondaryAssignments';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {

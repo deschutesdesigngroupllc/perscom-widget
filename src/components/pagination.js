@@ -1,7 +1,7 @@
 'use client';
 
 import { Pagination as FlowbitePagination } from 'flowbite-react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export function Pagination({ meta, searchParams }) {
   const router = useRouter();

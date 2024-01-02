@@ -1,5 +1,5 @@
-import get from 'lodash/get';
 import { jwtDecode } from 'jwt-decode';
+import get from 'lodash/get';
 
 export default class Auth {
   /**

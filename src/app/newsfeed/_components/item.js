@@ -1,11 +1,10 @@
 'use client';
 
 import cx from 'classnames';
-import TimeAgo from 'react-timeago';
 import { Avatar } from 'flowbite-react';
+import TimeAgo from 'react-timeago';
 import { Card } from '../../../components/card';
 import { formatDate } from '../../../utils/helpers';
-import { Likes } from './likes';
 
 export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
   const {

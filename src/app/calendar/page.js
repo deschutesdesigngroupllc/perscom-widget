@@ -1,6 +1,6 @@
-import { Calendar } from './_components/calendar';
-import Client from '../../api/client';
 import Auth from '../../api/auth';
+import Client from '../../api/client';
+import { Calendar } from './_components/calendar';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {

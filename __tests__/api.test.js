@@ -1,10 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-import { expect, jest, it, describe, beforeEach } from '@jest/globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import jwt from 'jsonwebtoken';
 import Auth from '../src/api/auth';
 import Client from '../src/api/client';
-import jwt from 'jsonwebtoken';
 
 const searchParams = {
   apikey: 'foo',

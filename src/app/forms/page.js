@@ -1,10 +1,10 @@
-import Client from '../../api/client';
+import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Auth from '../../api/auth';
-import { TableHead, TableHeadCell, TableBody, TableRow, TableCell } from 'flowbite-react';
-import { Pagination } from '../../components/pagination';
+import Client from '../../api/client';
 import { ButtonLink } from '../../components/buttonlink';
-import { Table } from '../../components/table';
 import { Card } from '../../components/card';
+import { Pagination } from '../../components/pagination';
+import { Table } from '../../components/table';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {

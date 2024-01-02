@@ -1,6 +1,6 @@
+import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import Auth from '../../../api/auth';
 import Client from '../../../api/client';
-import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Form } from '../../../components/form';
 import { Link } from '../../../components/link';
 

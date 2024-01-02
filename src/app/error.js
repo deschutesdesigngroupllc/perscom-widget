@@ -1,9 +1,9 @@
 'use client';
 
 import * as Sentry from '@sentry/nextjs';
-import { RequestError } from '../lib/errors/requestError';
-import { Alert } from '../components/alert';
 import { useEffect } from 'react';
+import { Alert } from '../components/alert';
+import { RequestError } from '../lib/errors/requestError';
 
 export default function Error({ error, reset }) {
   useEffect(() => {

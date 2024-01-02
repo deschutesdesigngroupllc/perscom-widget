@@ -1,6 +1,6 @@
-import { formatDate } from '../utils/helpers';
-import { Countries } from '../resources/countries';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Countries } from '../resources/countries';
+import { formatDate } from '../utils/helpers';
 
 export function Value({ field, value }) {
   switch (field.type) {

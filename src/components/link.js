@@ -1,7 +1,7 @@
 'use client';
 
-import NextLink from 'next/link';
 import cx from 'classnames';
+import NextLink from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 export function Link(props) {

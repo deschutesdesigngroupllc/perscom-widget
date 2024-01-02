@@ -1,9 +1,9 @@
-import './globals.css';
 import cx from 'classnames';
 import { Nunito_Sans } from 'next/font/google';
-import { ThemeProvider } from './providers';
-import { IframeResizer } from './iframe';
 import { Footer } from '../components/footer';
+import './globals.css';
+import { IframeResizer } from './iframe';
+import { ThemeProvider } from './providers';
 //import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] });

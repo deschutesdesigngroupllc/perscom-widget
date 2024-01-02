@@ -1,7 +1,9 @@
-import { InformationCircleIcon } from '@heroicons/react/20/solid';
-import { XCircleIcon } from '@heroicons/react/20/solid';
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
-import { ExclamationTriangleIcon } from '@heroicons/react/20/solid';
+import {
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  InformationCircleIcon,
+  XCircleIcon
+} from '@heroicons/react/20/solid';
 import { Alert as FlowbiteAlert } from 'flowbite-react';
 
 export function Alert({ message, type = 'info', error }) {

@@ -1,12 +1,12 @@
 'use client';
 
-import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 import {
   CalendarDaysIcon,
   ClockIcon,
   InformationCircleIcon,
   MapIcon
 } from '@heroicons/react/20/solid';
+import { Modal, ModalBody, ModalHeader } from 'flowbite-react';
 
 export function Events({ selectedDay, selectedEvent, modalState, setModalState }) {
   return (

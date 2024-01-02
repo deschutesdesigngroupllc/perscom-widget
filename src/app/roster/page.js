@@ -1,9 +1,9 @@
-import Client from '../../api/client';
-import Auth from '../../api/auth';
+import { TabItem, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Image from 'next/image';
-import { TableHead, TableHeadCell, TableBody, TableRow, TableCell, TabItem } from 'flowbite-react';
-import { Link } from '../../components/link';
+import Auth from '../../api/auth';
+import Client from '../../api/client';
 import { Card } from '../../components/card';
+import { Link } from '../../components/link';
 import { Table } from '../../components/table';
 import { Tabs } from '../../components/tabs';
 

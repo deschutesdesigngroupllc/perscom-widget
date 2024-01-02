@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { TabItem } from 'flowbite-react';
+import Image from 'next/image';
 import { Card } from '../../../components/card';
-import { Tabs } from '../../../components/tabs';
 import { Datatable } from '../../../components/datatable';
+import { Tabs } from '../../../components/tabs';
 import { formatDate } from '../../../utils/helpers';
 
 export function Records({ user }) {

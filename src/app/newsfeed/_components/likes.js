@@ -1,7 +1,7 @@
 'use client';
 
-import { Avatar, AvatarGroup, Tooltip } from 'flowbite-react';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
+import { Avatar, AvatarGroup, Tooltip } from 'flowbite-react';
 import { pluralize } from '../../../utils/helpers';
 
 export function Likes({ likes, currentUser }) {

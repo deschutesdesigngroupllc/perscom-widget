@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import get from 'lodash/get';
-import { Countries } from '../resources/countries';
 import { FileInput, Select, Textarea, TextInput, ToggleSwitch } from 'flowbite-react';
+import get from 'lodash/get';
+import { useState } from 'react';
+import { Countries } from '../resources/countries';
 
 export function Field({ field }) {
   const [toggleValues, setToggleValues] = useState({});

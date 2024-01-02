@@ -2,8 +2,8 @@
 
 import { TabItem } from 'flowbite-react';
 import { Card } from '../../../components/card';
-import { Tabs } from '../../../components/tabs';
 import { Datatable } from '../../../components/datatable';
+import { Tabs } from '../../../components/tabs';
 
 export function SecondaryAssignments({ user }) {
   const tabs = [

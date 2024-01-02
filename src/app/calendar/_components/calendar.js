@@ -1,17 +1,17 @@
 'use client';
 
 import dayjs, { locale } from 'dayjs';
-import weekdayPlugin from 'dayjs/plugin/weekday';
-import objectPlugin from 'dayjs/plugin/toObject';
 import isTodayPlugin from 'dayjs/plugin/isToday';
-import utcPlugin from 'dayjs/plugin/utc';
 import timezonePlugin from 'dayjs/plugin/timezone';
+import objectPlugin from 'dayjs/plugin/toObject';
+import utcPlugin from 'dayjs/plugin/utc';
+import weekdayPlugin from 'dayjs/plugin/weekday';
 import { useState } from 'react';
 import { Card } from '../../../components/card';
 import { Days } from './days';
 import { Events } from './events';
-import { Weekdays } from './weekdays';
 import { Header } from './header';
+import { Weekdays } from './weekdays';
 
 export function Calendar({ events }) {
   dayjs.extend(weekdayPlugin);
