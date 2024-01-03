@@ -77,7 +77,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: npm run build:widget
         env:
-          WIDGET_URL: https://widget.perscm.io
+          WIDGET_URL: https://widget.perscom.io
 
       - name: Build Project Artifacts Staging
         if: github.ref == 'refs/heads/staging'
