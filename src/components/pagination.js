@@ -20,7 +20,7 @@ export function Pagination({ meta }) {
       {meta.current_page && meta?.last_page && meta?.last_page > 1 && (
         <FlowbitePagination
           theme={{
-            base: 'dark:bg-gray-700 bg-gray-50 rounded-b-md',
+            base: 'dark:bg-gray-700 bg-gray-50 rounded-b-md border-t border-gray-200 dark:border-gray-900',
             pages: {
               base: 'inline-flex items-center justify-center -space-x-px w-full',
               previous: {

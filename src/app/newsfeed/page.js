@@ -2,6 +2,7 @@ import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbi
 import Auth from '../../api/auth';
 import Client from '../../api/client';
 import { Card } from '../../components/card';
+import { Pagination } from '../../components/pagination';
 import { Table } from '../../components/table';
 import { Item } from './_components/item';
 
@@ -20,7 +21,7 @@ export default async function Page({ searchParams }) {
         <TableHead className="text-center">
           <TableHeadCell>Newsfeed</TableHeadCell>
         </TableHead>
-        <TableBody className="divide-y divide-gray-200">
+        <TableBody className="divide-y divide-gray-200 dark:divide-gray-900">
           {newsfeed.data && !!newsfeed.data.length ? (
             newsfeed.data.map((item) => {
               return (
@@ -38,6 +39,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
+      <Pagination meta={newsfeed.meta} />
     </Card>
   );
 }

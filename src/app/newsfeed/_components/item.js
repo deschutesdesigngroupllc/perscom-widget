@@ -134,7 +134,7 @@ export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
             .format('dddd, MMM D, YYYY')}
         </time>
       </div>
-      <div className="!-my-4 -mx-6 border-t border-gray-100 bg-gray-50 last:rounded-b">
+      <div className="!-my-4 -mx-6 border-t border-gray-100 bg-gray-50 last:rounded-b dark:border-gray-900 dark:bg-gray-700">
         <div className="flex flex-row items-center space-x-2 px-6 py-4 text-sm">
           {author_profile_photo ? (
             <Avatar stacked rounded img={author_profile_photo} alt={author} size="xs" />
