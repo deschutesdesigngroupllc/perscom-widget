@@ -27,7 +27,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
     const clonedObject = { ...date.toObject() };
 
     return {
-      date: date.format('MM-DD-YYYY'),
+      date: date.format('YYYY-MM-DD'),
       day: clonedObject.date,
       month: clonedObject.months,
       year: clonedObject.years,
@@ -47,12 +47,6 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
         .isSame(dayjs(event.end), 'day')
         ? dayjs(event.end)
         : null,
-      timeStart: dayjs(event.start)
-        .tz(searchParams.get('timezone') ?? 'UTC')
-        .format('h:mm A'),
-      timeEnd: dayjs(event.end)
-        .tz(searchParams.get('timezone') ?? 'UTC')
-        .format('h:mm A'),
       color: event?.calendar?.color,
       allDay: event.all_day,
       repeats: event.repeats,
@@ -171,10 +165,10 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                               {!event.allDay && (
                                 <>
                                   <time
-                                    dateTime={event.start}
+                                    dateTime={event.start.format('YYYY-MM-DD HH:mm')}
                                     className="ml-3 hidden flex-none text-white group-hover:text-gray-200 xl:block"
                                   >
-                                    {event.timeStart}
+                                    {event.start.format('h:mm A')}
                                   </time>
                                 </>
                               )}

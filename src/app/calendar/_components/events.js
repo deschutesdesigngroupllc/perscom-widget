@@ -23,14 +23,25 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
                   <div className="flex flex-col space-y-2">
                     <div className="font-bold">{event.name}</div>
                     {event.description && <div>{event.description}</div>}
-                    <div className="flex items-center">
-                      <ClockIcon
-                        className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500"
-                        aria-hidden="true"
-                      />
-                      <time dateTime={event.start}>{event.timeStart}</time>
-                      {event.end && <time dateTime={event.end}> - {event.timeEnd}</time>}
-                    </div>
+                    {!event.allDay && (
+                      <div className="flex items-center ">
+                        <ClockIcon
+                          className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500"
+                          aria-hidden="true"
+                        />
+                        {event.start && (
+                          <time dateTime={event.start.format('YYYY-MM-DD HH:mm:ss')}>
+                            {event.start.format('h:mm A')}
+                          </time>
+                        )}
+                        {event.end && (
+                          <>
+                            &nbsp;-&nbsp;
+                            <time dateTime={event.end}>{event.end.format('h:mm A')}</time>
+                          </>
+                        )}
+                      </div>
+                    )}
                     {event.calendar && (
                       <div className="flex items-center">
                         <CalendarDaysIcon
@@ -70,13 +81,27 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
         <ModalBody>
           <div className="flex flex-col space-y-2 text-sm">
             {selectedEvent.description && <div>{selectedEvent.description}</div>}
-            <div className="flex items-center ">
-              <ClockIcon className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500" aria-hidden="true" />
-              <time dateTime={selectedEvent.start}>{selectedEvent.timeStart}</time>
-              {selectedEvent.end && (
-                <time dateTime={selectedEvent.end}> - {selectedEvent.timeEnd}</time>
-              )}
-            </div>
+            {!selectedEvent.allDay && (
+              <div className="flex items-center ">
+                <ClockIcon
+                  className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500"
+                  aria-hidden="true"
+                />
+                {selectedEvent.start && (
+                  <time dateTime={selectedEvent.start.format('YYYY-MM-DD HH:mm')}>
+                    {selectedEvent.start.format('h:mm A')}
+                  </time>
+                )}
+                {selectedEvent.end && (
+                  <>
+                    &nbsp;-&nbsp;
+                    <time dateTime={selectedEvent.end.format('YYYY-MM-DD HH:mm')}>
+                      {selectedEvent.end.format('h:mm A')}
+                    </time>
+                  </>
+                )}
+              </div>
+            )}
             {selectedEvent.calendar && (
               <div className="flex items-center">
                 <CalendarDaysIcon
