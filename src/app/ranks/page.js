@@ -66,7 +66,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
-      <Pagination meta={ranks.meta} searchParams={searchParams} />
+      <Pagination meta={ranks.meta} />
     </Card>
   );
 }

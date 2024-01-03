@@ -2,10 +2,25 @@
 
 import cx from 'classnames';
 import dayjs from 'dayjs';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
+import { useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 export function Days({ currentMonth, handleDayEventSelect, events }) {
+  const searchParams = useSearchParams();
+
+  dayjs.extend(utcPlugin);
+  dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+
   const [arrayOfWeeks, setArrayOfWeeks] = useState([]);
+  const [selectedDay, setSelectedDay] = useState({});
+
+  const handleDaySelect = (day, event, openModal) => {
+    setSelectedDay(day);
+    handleDayEventSelect(day, event, openModal);
+  };
 
   const formatDateObject = (date) => {
     const clonedObject = { ...date.toObject() };
@@ -27,8 +42,12 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       description: event.description,
       start: event.start,
       end: dayjs(event.start).isSame(dayjs(event.end), 'day') ? event.end : null,
-      timeStart: dayjs(event.start).tz('UTC').format('hA'),
-      timeEnd: dayjs(event.end).tz('UTC').format('hA'),
+      timeStart: dayjs(event.start)
+        .tz(searchParams.get('timezone') ?? 'UTC')
+        .format('h:m A'),
+      timeEnd: dayjs(event.end)
+        .tz(searchParams.get('timezone') ?? 'UTC')
+        .format('h:m A'),
       color: event?.calendar?.color,
       allDay: event.all_day,
       calendar: event.calendar?.name,
@@ -39,7 +58,10 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
 
   const getAllDays = () => {
     const parsedEvents = events.data && events.data.map((event) => formatEvent(event));
-    let currentDate = currentMonth.startOf('month').weekday(0);
+    let currentDate = currentMonth
+      .startOf('month')
+      .weekday(0)
+      .tz(searchParams.get('timezone') ?? 'UTC');
     const nextMonth = currentMonth.add(1, 'month').month();
 
     let allDates = [];
@@ -63,6 +85,8 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       weekCounter++;
       currentDate = currentDate.add(1, 'day');
     }
+
+    console.log(allDates);
 
     setArrayOfWeeks(allDates);
   };
@@ -111,7 +135,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                         {day.events.map((event) => (
                           <li key={event.id}>
                             <button
-                              onClick={() => handleDayEventSelect(day, event, true)}
+                              onClick={() => handleDaySelect(day, event, true)}
                               className="group my-1 flex w-full cursor-pointer items-center justify-between rounded px-2 shadow hover:opacity-90 focus-visible:outline-none"
                               style={{
                                 backgroundColor: event.color
@@ -162,10 +186,18 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                       'bg-gray-50 dark:bg-gray-700': !day.isCurrentMonth,
                       'font-semibold': day.isSelected || day.isCurrentDay,
                       'text-white': day.isSelected,
-                      'text-blue-600': !day.isSelected && day.isCurrentDay
+                      'text-blue-600': !day.isSelected && day.isCurrentDay,
+                      'rounded-bl-md':
+                        dayIndex === 0 &&
+                        weekIndex === arrayOfWeeks.length - 1 &&
+                        !selectedDay?.events?.length,
+                      'rounded-br-md':
+                        dayIndex === week.dates.length - 1 &&
+                        weekIndex === arrayOfWeeks.length - 1 &&
+                        !selectedDay?.events?.length
                     }
                   )}
-                  onClick={() => handleDayEventSelect(day, {}, false)}
+                  onClick={() => handleDaySelect(day, {}, false)}
                 >
                   <time
                     dateTime={day.date}

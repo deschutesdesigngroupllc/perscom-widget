@@ -1,9 +1,10 @@
 'use client';
 
 import { Pagination as FlowbitePagination } from 'flowbite-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export function Pagination({ meta, searchParams }) {
+export function Pagination({ meta }) {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -19,7 +20,7 @@ export function Pagination({ meta, searchParams }) {
       {meta.current_page && meta?.last_page && meta?.last_page > 1 && (
         <FlowbitePagination
           theme={{
-            base: 'bg-gray-50 rounded-b-md',
+            base: 'dark:bg-gray-700 bg-gray-50 rounded-b-md',
             pages: {
               base: 'inline-flex items-center justify-center -space-x-px w-full',
               previous: {

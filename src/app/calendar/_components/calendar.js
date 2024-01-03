@@ -1,5 +1,6 @@
 'use client';
 
+import cx from 'classnames';
 import dayjs, { locale } from 'dayjs';
 import isTodayPlugin from 'dayjs/plugin/isToday';
 import timezonePlugin from 'dayjs/plugin/timezone';
@@ -19,6 +20,7 @@ export function Calendar({ events }) {
   dayjs.extend(isTodayPlugin);
   dayjs.extend(utcPlugin);
   dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault('UTC');
 
   const now = dayjs().locale({
     ...locale()
@@ -75,7 +77,11 @@ export function Calendar({ events }) {
       <div className="rounded-md bg-gray-50 dark:bg-gray-700">
         <div className="lg:flex lg:h-full lg:flex-col">
           <Header {...headerProps} />
-          <div className="border-b border-gray-200 shadow-sm dark:border-gray-600 lg:flex lg:flex-auto lg:flex-col lg:border-none">
+          <div
+            className={cx('shadow-sm lg:flex lg:flex-auto lg:flex-col lg:border-none', {
+              'border-b border-gray-200 dark:border-gray-600': selectedDay?.events?.length
+            })}
+          >
             <Weekdays now={now} />
             <Days {...dayProps} />
           </div>
