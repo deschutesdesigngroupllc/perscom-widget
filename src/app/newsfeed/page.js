@@ -21,7 +21,7 @@ export default async function Page({ searchParams }) {
         <TableHead className="text-center">
           <TableHeadCell>Newsfeed</TableHeadCell>
         </TableHead>
-        <TableBody className="divide-y divide-gray-200">
+        <TableBody className="divide-y divide-gray-200 dark:divide-gray-900">
           {newsfeed.data && !!newsfeed.data.length ? (
             newsfeed.data.map((item) => {
               return (
