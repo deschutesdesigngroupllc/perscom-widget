@@ -1,5 +1,8 @@
+import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Auth from '../../api/auth';
 import Client from '../../api/client';
+import { Card } from '../../components/card';
+import { Table } from '../../components/table';
 import { Item } from './_components/item';
 
 export const dynamic = 'force-dynamic';
@@ -12,14 +15,29 @@ export default async function Page({ searchParams }) {
   const newsfeed = await new Client(auth).getNewsfeed();
 
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="flex flex-col space-y-6">
-        {newsfeed.data &&
-          !!newsfeed.data.length &&
-          newsfeed.data.map((item) => {
-            return <Item key={item.id} item={item} currentUser={auth.getAuthIdentifier()} />;
-          })}
-      </div>
-    </div>
+    <Card>
+      <Table striped={false}>
+        <TableHead className="text-center">
+          <TableHeadCell>Newsfeed</TableHeadCell>
+        </TableHead>
+        <TableBody className="divide-y divide-gray-200">
+          {newsfeed.data && !!newsfeed.data.length ? (
+            newsfeed.data.map((item) => {
+              return (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    <Item item={item} currentUser={auth.getAuthIdentifier()} />
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          ) : (
+            <div className="flex items-center justify-center p-8 text-sm">
+              There are no newsfeed items to view.
+            </div>
+          )}
+        </TableBody>
+      </Table>
+    </Card>
   );
 }

@@ -1,13 +1,22 @@
 'use client';
 
+import dayjs from 'dayjs';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
 import { TabItem } from 'flowbite-react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../components/card';
 import { Datatable } from '../../../components/datatable';
 import { Tabs } from '../../../components/tabs';
-import { formatDate } from '../../../utils/helpers';
 
 export function Records({ user }) {
+  const searchParams = useSearchParams();
+
+  dayjs.extend(utcPlugin);
+  dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+
   const tabs = [
     {
       name: 'Assignment Records',
@@ -16,7 +25,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },
@@ -80,7 +95,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },
@@ -129,7 +150,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },
@@ -146,7 +173,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },
@@ -195,7 +228,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },
@@ -244,7 +283,13 @@ export function Records({ user }) {
       columns: [
         {
           name: 'Date',
-          selector: (row) => formatDate(row.created_at),
+          selector: (row) => {
+            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+
+            return (
+              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+            );
+          },
           sortable: true,
           maxWidth: '250px'
         },

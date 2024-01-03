@@ -1,12 +1,20 @@
 'use client';
 
 import cx from 'classnames';
+import dayjs from 'dayjs';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
 import { Avatar } from 'flowbite-react';
+import { useSearchParams } from 'next/navigation';
 import TimeAgo from 'react-timeago';
-import { Card } from '../../../components/card';
-import { formatDate } from '../../../utils/helpers';
 
 export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
+  const searchParams = useSearchParams();
+
+  dayjs.extend(utcPlugin);
+  dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+
   const {
     id,
     author,
@@ -44,102 +52,105 @@ export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
 
   return (
     <div className="flex flex-col space-y-4" key={id} data-testid={headline}>
-      <div className="flex flex-row items-center space-x-2 px-1 text-sm">
-        {author_profile_photo ? (
-          <Avatar stacked rounded img={author_profile_photo} alt={author} size="xs" />
-        ) : (
-          <Avatar stacked rounded alt={author} size="xs" />
-        )}
-        <div className="text-sm font-normal">
-          <span className="font-bold">{author ?? 'User'}</span> {getTitle(event, type)} &#8226;{' '}
-          <span className="font-light">
-            <TimeAgo date={created_at} />
-          </span>
-        </div>
-      </div>
-      <Card
-        target="_blank"
-        className={cx('!gap-2 p-6', {
-          'bg-blue-50 ring-1 ring-blue-600': color === 'info',
-          'bg-red-50 ring-1 ring-red-600': color === 'failure',
-          'bg-green-50 ring-1 ring-green-600': color === 'success',
-          'bg-yellow-50 ring-1 ring-yellow-400': color === 'warning'
-        })}
-      >
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-            <a href={url} target="_blank" rel="noreferrer">
-              <div className="flex flex-row items-center space-x-2">
-                {recipient && (
-                  <>
-                    {recipient_profile_photo ? (
-                      <Avatar
-                        stacked
-                        rounded
-                        img={recipient_profile_photo}
-                        alt={recipient}
-                        size="xs"
-                      />
-                    ) : (
-                      <Avatar stacked rounded alt={recipient} size="xs" />
-                    )}
-                  </>
-                )}
-                <h5
-                  className={cx('text-sm font-semibold uppercase sm:leading-6', {
-                    'text-blue-800': color === 'info',
-                    'text-red-800': color === 'failure',
-                    'text-green-800': color === 'success',
-                    'text-yellow-800': color === 'warning',
-                    'hover:text-gray-600': url,
-                    'cursor-default': !url
-                  })}
-                >
-                  {getHeadline(headline, description)}
-                </h5>
-              </div>
-            </a>
-            <div
-              className={cx('hidden text-xs text-gray-400 dark:text-gray-500 md:block', {
-                'text-blue-700': color === 'info',
-                'text-red-700': color === 'failure',
-                'text-green-700': color === 'success',
-                'text-yellow-700': color === 'warning'
-              })}
-            >
-              {formatDate(created_at)}
+      <div className="mb-10 mt-2 flex flex-col space-y-2">
+        <div className="flex flex-col items-start justify-start space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+          <a href={url} target="_blank" rel="noreferrer">
+            <div className="flex flex-row items-center space-x-2">
+              {recipient && (
+                <>
+                  {recipient_profile_photo ? (
+                    <Avatar
+                      stacked
+                      rounded
+                      img={recipient_profile_photo}
+                      alt={recipient}
+                      size="xs"
+                    />
+                  ) : (
+                    <Avatar stacked rounded alt={recipient} size="xs" />
+                  )}
+                </>
+              )}
+              <h5
+                className={cx('text-sm font-semibold uppercase sm:leading-6', {
+                  'text-blue-800': color === 'info',
+                  'text-red-800': color === 'failure',
+                  'text-green-800': color === 'success',
+                  'text-yellow-800': color === 'warning',
+                  'hover:text-gray-600': url,
+                  'cursor-default': !url
+                })}
+              >
+                {getHeadline(headline, description)}
+              </h5>
             </div>
-          </div>
-          <div>
-            {itemHtml && (
-              <div
-                className="my-2 text-sm font-medium"
-                dangerouslySetInnerHTML={{ __html: itemHtml }}
-              ></div>
-            )}
-            <div
-              className={cx('text-sm', {
-                'text-blue-700': color === 'info',
-                'text-red-700': color === 'failure',
-                'text-green-700': color === 'success',
-                'text-yellow-700': color === 'warning'
-              })}
-              dangerouslySetInnerHTML={{ __html: getText(text, description) }}
-            ></div>
-          </div>
-          <div
-            className={cx('block text-xs text-gray-400 dark:text-gray-500 md:hidden', {
+          </a>
+          <time
+            className={cx('hidden text-xs text-gray-400 dark:text-gray-500 md:block', {
               'text-blue-700': color === 'info',
               'text-red-700': color === 'failure',
               'text-green-700': color === 'success',
               'text-yellow-700': color === 'warning'
             })}
+            dateTime={dayjs(created_at)
+              .tz(searchParams.get('timezone') ?? 'UTC')
+              .format('YYYY-MM-DD')}
           >
-            {formatDate(created_at)}
+            {dayjs(created_at)
+              .tz(searchParams.get('timezone') ?? 'UTC')
+              .format('dddd, MMM D, YYYY')}
+          </time>
+        </div>
+        <div>
+          {itemHtml && (
+            <div
+              className="my-2 text-sm font-medium"
+              dangerouslySetInnerHTML={{ __html: itemHtml }}
+            ></div>
+          )}
+          <div
+            className={cx('text-sm', {
+              'text-blue-700': color === 'info',
+              'text-red-700': color === 'failure',
+              'text-green-700': color === 'success',
+              'text-yellow-700': color === 'warning'
+            })}
+            dangerouslySetInnerHTML={{ __html: getText(text, description) }}
+          ></div>
+        </div>
+        <time
+          className={cx('block text-xs text-gray-400 dark:text-gray-500 md:hidden', {
+            'text-blue-700': color === 'info',
+            'text-red-700': color === 'failure',
+            'text-green-700': color === 'success',
+            'text-yellow-700': color === 'warning'
+          })}
+          dateTime={dayjs(created_at)
+            .tz(searchParams.get('timezone') ?? 'UTC')
+            .format('YYYY-MM-DD')}
+        >
+          {dayjs(created_at)
+            .tz(searchParams.get('timezone') ?? 'UTC')
+            .format('dddd, MMM D, YYYY')}
+        </time>
+      </div>
+      <div className="!-my-4 -mx-6 border-t border-gray-100 bg-gray-50 last:rounded-b">
+        <div className="flex flex-row items-center space-x-2 px-6 py-4 text-sm">
+          {author_profile_photo ? (
+            <Avatar stacked rounded img={author_profile_photo} alt={author} size="xs" />
+          ) : (
+            <Avatar stacked rounded alt={author} size="xs" />
+          )}
+          <div className="text-xs font-normal text-gray-400">
+            <span className="font-bold">{author ?? 'User'}</span> {getTitle(event, type)} &#8226;{' '}
+            <span className="font-light">
+              <TimeAgo date={created_at} />
+            </span>
           </div>
         </div>
-        {/*<Likes likes={likes} currentUser={currentUser} />*/}
-      </Card>
+      </div>
+
+      {/*<Likes likes={likes} currentUser={currentUser} />*/}
     </div>
   );
 }

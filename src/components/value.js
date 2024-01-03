@@ -1,9 +1,20 @@
+'use client';
+
+import dayjs from 'dayjs';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
+import { useSearchParams } from 'next/navigation';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Countries } from '../resources/countries';
-import { formatDate } from '../utils/helpers';
 
 export function Value({ field, value }) {
-  switch (field.type) {
+  const searchParams = useSearchParams();
+
+  dayjs.extend(utcPlugin);
+  dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+
+  switch (String(field.type).toLowerCase()) {
     case 'boolean':
       return value ? 'Yes' : 'No';
     case 'code':
@@ -28,10 +39,26 @@ export function Value({ field, value }) {
     case 'country':
       const country = Countries.find((country) => country.code === value);
       return country?.name ?? '';
-    case 'date':
-      return value ? <time dateTime={value}>{formatDate(value)}</time> : '';
-    case 'datetime-local':
-      return value ? <time dateTime={value}>{formatDate(value)}</time> : '';
+    case 'date': {
+      const date = value ? dayjs(value).tz(searchParams.get('timezone') ?? 'UTC') : null;
+
+      return date ? (
+        <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
+      ) : (
+        ''
+      );
+    }
+    case 'datetime-local': {
+      const date = value ? dayjs(value).tz(searchParams.get('timezone') ?? 'UTC') : null;
+
+      return date ? (
+        <time dateTime={date.format('YYYY-MM-DD HH:mm:ss')}>
+          {date.format('dddd, MMM D, YYYY hh:mm A')}
+        </time>
+      ) : (
+        ''
+      );
+    }
     case 'email':
       return (
         <a className="underline" href={`mailto:${value}`}>

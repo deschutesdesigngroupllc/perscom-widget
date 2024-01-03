@@ -6,8 +6,7 @@ export function Table(props) {
       {...props}
       theme={{
         root: {
-          shadow:
-            'absolute bg-white dark:bg-gray-800 w-full h-full top-0 left-0 rounded-lg shadow -z-10'
+          shadow: 'absolute bg-white dark:bg-gray-800 w-full h-full top-0 left-0 rounded-lg -z-10'
         }
       }}
     >
