@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.23...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.24...HEAD)
+
+## [v1.0.24](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.23...v1.0.24) - 2024-01-03
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.24 -->
+### What's Changed
+
+#### Fixed
+
+* Fix specialty not showing on roster by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/98
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.23...v1.0.24
 
 ## [v1.0.23](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.22...v1.0.23) - 2024-01-03
 
