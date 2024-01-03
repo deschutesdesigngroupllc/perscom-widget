@@ -2,6 +2,7 @@ import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbi
 import Auth from '../../api/auth';
 import Client from '../../api/client';
 import { Card } from '../../components/card';
+import { Pagination } from '../../components/pagination';
 import { Table } from '../../components/table';
 import { Item } from './_components/item';
 
@@ -38,6 +39,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
+      <Pagination meta={newsfeed.meta} />
     </Card>
   );
 }
