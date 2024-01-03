@@ -6,6 +6,7 @@ import timezonePlugin from 'dayjs/plugin/timezone';
 import utcPlugin from 'dayjs/plugin/utc';
 import { useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
+import { rrulestr } from 'rrule';
 
 export function Days({ currentMonth, handleDayEventSelect, events }) {
   const searchParams = useSearchParams();
@@ -40,16 +41,22 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       id: event.id,
       name: event.name,
       description: event.description,
-      start: event.start,
-      end: dayjs(event.start).isSame(dayjs(event.end), 'day') ? event.end : null,
+      start: dayjs(event.start).tz(searchParams.get('timezone') ?? 'UTC'),
+      end: dayjs(event.start)
+        .tz(searchParams.get('timezone') ?? 'UTC')
+        .isSame(dayjs(event.end), 'day')
+        ? dayjs(event.end)
+        : null,
       timeStart: dayjs(event.start)
         .tz(searchParams.get('timezone') ?? 'UTC')
-        .format('h:m A'),
+        .format('h:mm A'),
       timeEnd: dayjs(event.end)
         .tz(searchParams.get('timezone') ?? 'UTC')
-        .format('h:m A'),
+        .format('h:mm A'),
       color: event?.calendar?.color,
       allDay: event.all_day,
+      repeats: event.repeats,
+      rrule: event.repeats ? rrulestr(event.rrule) : null,
       calendar: event.calendar?.name,
       location: event.location,
       details: event.content
@@ -57,12 +64,31 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
   };
 
   const getAllDays = () => {
-    const parsedEvents = events.data && events.data.map((event) => formatEvent(event));
+    const parsedSingleEvents =
+      events.data &&
+      events.data.filter((event) => !event.repeats).map((event) => formatEvent(event));
+    const parsedRepeatingEvents =
+      events.data &&
+      events.data
+        .filter((event) => event.repeats && event.rrule)
+        .map((event) => formatEvent(event));
+
+    let parsedEvents = parsedSingleEvents;
     let currentDate = currentMonth
       .startOf('month')
       .weekday(0)
       .tz(searchParams.get('timezone') ?? 'UTC');
     const nextMonth = currentMonth.add(1, 'month').month();
+
+    parsedRepeatingEvents.forEach(function (event) {
+      parsedEvents.push(
+        ...event.rrule
+          .between(currentDate.toDate(), currentDate.add(45, 'day').toDate())
+          .map(function (occurrence) {
+            return { ...event, start: dayjs(occurrence) };
+          })
+      );
+    });
 
     let allDates = [];
     let weekDates = [];
@@ -85,8 +111,6 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       weekCounter++;
       currentDate = currentDate.add(1, 'day');
     }
-
-    console.log(allDates);
 
     setArrayOfWeeks(allDates);
   };
