@@ -90,7 +90,7 @@ function Unit({ unit }) {
                   {position_name}
                 </TableCell>
                 <TableCell className="hidden w-1/6 whitespace-normal !py-3 md:table-cell lg:whitespace-nowrap">
-                  {position_name}
+                  {specialty_name}
                 </TableCell>
                 <TableCell className="w-1/12 whitespace-nowrap !py-3 text-right md:text-center">
                   <>
