@@ -106,11 +106,11 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
       currentDate = currentDate.add(1, 'day');
     }
 
-    setArrayOfWeeks(allDates);
+    return allDates;
   };
 
   useEffect(() => {
-    getAllDays();
+    setArrayOfWeeks(getAllDays());
   }, [currentMonth]);
 
   return (
