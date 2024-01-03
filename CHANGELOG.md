@@ -1,6 +1,36 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.20...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.21...HEAD)
+
+## [v1.0.21](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.20...v1.0.21) - 2024-01-03
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.21 -->
+### What's Changed
+
+#### Added
+
+* Upgrade to NextJS by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/82
+
+#### Fixed
+
+* Force dynamic pages by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/88
+* Make widget version env var public by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/89
+* Fix link click not keeping query params by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/90
+
+#### Other
+
+* Bump eslint from 8.53.0 to 8.54.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/66
+* Bump react-router-dom from 6.18.0 to 6.19.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/70
+* Bump @testing-library/react from 13.4.0 to 14.1.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/69
+* Bump @parcel/compressor-brotli from 2.8.3 to 2.10.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/68
+* Bump eslint-config-prettier from 8.6.0 to 9.0.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/67
+* Bump @sentry/react from 7.77.0 to 7.84.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/76
+* Bump @testing-library/user-event from 13.5.0 to 14.5.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/75
+* Bump parse-domain from 7.0.1 to 8.0.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/72
+* Bump flowbite from 1.8.1 to 2.2.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/74
+* Bump flowbite-react from 0.5.0 to 0.7.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/71
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.18...v1.0.21
 
 ## [v1.0.20](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.19...v1.0.20) - 2024-01-03
 
