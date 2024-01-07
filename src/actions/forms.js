@@ -1,7 +1,7 @@
 'use server';
 
-import Auth from '../api/auth';
-import Client from '../api/client';
+import Auth from '../lib/auth';
+import Client from '../lib/client';
 
 /**
  * Submit a form
