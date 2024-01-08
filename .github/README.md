@@ -6,7 +6,7 @@
 
 The PERSCOM Widget offers a simple and effective way to integrate your PERSCOM.io data externally into various websites and content management systems.
 
-[![Deployment](https://github.com/DeschutesDesignGroupLLC/perscom-widget/actions/workflows/main.yml/badge.svg)](https://github.com/DeschutesDesignGroupLLC/perscom-widget/actions/workflows/main.yml)
+[![Deployment](https://github.com/DeschutesDesignGroupLLC/perscom-widget/actions/workflows/deploy.yml/badge.svg)](https://github.com/DeschutesDesignGroupLLC/perscom-widget/actions/workflows/deploy.yml)
 
 [Documentation](https://docs.perscom.io)
 
