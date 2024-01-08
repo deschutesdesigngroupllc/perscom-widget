@@ -6,7 +6,11 @@ export function Information({ user }) {
   const { name: rank_name, abbreviation: rank_abbreviation, image: rank_image } = rank ?? {};
   const { image_url: rank_image_url } = rank_image ?? {};
   const { name: position_name } = position ?? {};
-  const { name: status_name, color: status_color } = status ?? {};
+  const {
+    name: status_name,
+    text_color: status_text_color,
+    bg_color: status_bg_color
+  } = status ?? {};
 
   const profile_photo = profile_photo_url ?? rank_image_url ?? null;
 
@@ -16,7 +20,11 @@ export function Information({ user }) {
         <h5 className="text-xl font-bold">Personnel Profile</h5>
         {status && (
           <span
-            className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status_color}`}
+            className="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
+            style={{
+              color: status_text_color,
+              backgroundColor: status_bg_color
+            }}
           >
             {status_name}
           </span>

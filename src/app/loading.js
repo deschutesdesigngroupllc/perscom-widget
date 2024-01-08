@@ -1,5 +1,5 @@
-import { Spinner } from 'flowbite-react';
 import { Card } from '../components/card';
+import { Spinner } from '../components/spinner';
 
 export default function Loading() {
   return (
