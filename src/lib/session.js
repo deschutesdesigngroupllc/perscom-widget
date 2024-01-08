@@ -6,7 +6,8 @@
 export const defaultSession = {
   apiKey: '',
   perscomId: '',
-  isLoggedIn: false
+  isLoggedIn: false,
+  returnTo: '/'
 };
 
 /**

@@ -7,9 +7,10 @@ export const dynamic = 'force-dynamic';
 export async function POST(request) {
   const session = await getIronSession(cookies(), sessionOptions);
 
-  const { perscomId = '', apiKey = '' } = await request.json();
+  const { perscomId = '', apiKey = '', returnTo = '/' } = await request.json();
 
   session.isLoggedIn = true;
+  session.returnTo = returnTo;
   session.perscomId = perscomId;
   session.apiKey = apiKey;
 

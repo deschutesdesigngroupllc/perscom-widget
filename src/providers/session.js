@@ -1,28 +1,29 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import useSession from '../hooks/use-session';
 
 export function SessionProvider({ children }) {
+  const { isLoading, update } = useSession();
   const router = useRouter();
-  const pathname = usePathname();
+  const returnTo = usePathname();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState(true);
-  const [getPathname, setPathname] = useState(pathname);
   const perscomId = searchParams.get('perscomid');
   const apiKey = searchParams.get('apikey');
 
   useEffect(() => {
     if (perscomId && apiKey) {
-      setPathname(pathname);
+      update(
+        { perscomId, apiKey, returnTo },
+        {
+          optimisticData: {
+            isLoggedIn: true
+          }
+        }
+      );
 
-      fetch('/api/session', {
-        method: 'POST',
-        body: JSON.stringify({ perscomId, apiKey }),
-        cache: 'no-store'
-      }).finally(() => router.push(getPathname));
-    } else {
-      setIsLoading(false);
+      router.push(returnTo);
     }
   }, [apiKey, perscomId]);
 

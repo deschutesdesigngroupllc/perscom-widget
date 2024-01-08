@@ -3,7 +3,7 @@ import { Tabs as FlowbiteTabs } from 'flowbite-react';
 export function Tabs(props) {
   return (
     <FlowbiteTabs
-      {...props}
+      {...(({ children, ...o }) => o)(props)}
       theme={{
         base: 'flex flex-col gap-0',
         tablist: {

@@ -14,14 +14,14 @@ async function fetchJson(input, init) {
   }).then((r) => r.json());
 }
 
-function doLogin(url, arg) {
+function doUpdateSession(url, arg) {
   return fetchJson(url, {
     method: 'POST',
     body: JSON.stringify(arg.arg)
   });
 }
 
-function doLogout(url) {
+function doDestroySession(url) {
   return fetchJson(url, {
     method: 'DELETE'
   });
@@ -32,10 +32,10 @@ export default function useSession() {
     fallbackData: defaultSession
   });
 
-  const { trigger: login } = useSWRMutation(sessionApiRoute, doLogin, {
+  const { trigger: update } = useSWRMutation(sessionApiRoute, doUpdateSession, {
     revalidate: false
   });
-  const { trigger: logout } = useSWRMutation(sessionApiRoute, doLogout);
+  const { trigger: destroy } = useSWRMutation(sessionApiRoute, doDestroySession);
 
-  return { session, logout, login, isLoading };
+  return { session, destroy, update, isLoading };
 }
