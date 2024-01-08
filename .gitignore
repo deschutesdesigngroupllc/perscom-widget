@@ -10,6 +10,7 @@
 /public/widget.*
 
 # misc
+ssl
 .idea
 .DS_Store
 .env
@@ -23,7 +24,6 @@
 # Next
 .next
 .swc
-.ssl
 
 # parcel
 .cache

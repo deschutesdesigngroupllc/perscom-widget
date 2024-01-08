@@ -1,9 +1,11 @@
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
+import { Alert } from '../../../components/alert';
 import { Card } from '../../../components/card';
 import { Pagination } from '../../../components/pagination';
 import { Table } from '../../../components/table';
 import Auth from '../../../lib/auth';
 import Client from '../../../lib/client';
+import { RequestError } from '../../../lib/request-error';
 import { Item } from './_components/item';
 
 export const dynamic = 'force-dynamic';
@@ -11,9 +13,16 @@ export const metadata = {
   title: 'Newsfeed'
 };
 
-export default async function Page({ searchParams }) {
-  const auth = new Auth(searchParams);
-  const newsfeed = await new Client(auth).getNewsfeed();
+export default async function Page() {
+  const auth = new Auth();
+  let newsfeed = {};
+  try {
+    newsfeed = await new Client().getNewsfeed();
+  } catch (error) {
+    if (error instanceof RequestError) {
+      return <Alert type="failure">{error.message}</Alert>;
+    }
+  }
 
   return (
     <Card>

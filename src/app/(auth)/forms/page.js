@@ -1,18 +1,26 @@
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import { ButtonLink } from '../../../components/buttonlink';
+import { Alert } from '../../../components/alert';
+import { ButtonLink } from '../../../components/button-link';
 import { Card } from '../../../components/card';
 import { Pagination } from '../../../components/pagination';
 import { Table } from '../../../components/table';
-import Auth from '../../../lib/auth';
 import Client from '../../../lib/client';
+import { RequestError } from '../../../lib/request-error';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Forms'
 };
 
-export default async function Page({ searchParams }) {
-  const forms = await new Client(new Auth(searchParams)).getForms();
+export default async function Page() {
+  let forms = {};
+  try {
+    forms = await new Client().getForms();
+  } catch (error) {
+    if (error instanceof RequestError) {
+      return <Alert type="failure">{error.message}</Alert>;
+    }
+  }
 
   return (
     <Card>

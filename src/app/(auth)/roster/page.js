@@ -1,10 +1,12 @@
 import { TabItem, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Image from 'next/image';
+import { Alert } from '../../../components/alert';
 import { Card } from '../../../components/card';
 import { Link } from '../../../components/link';
 import { Table } from '../../../components/table';
 import { Tabs } from '../../../components/tabs';
 import Client from '../../../lib/client';
+import { RequestError } from '../../../lib/request-error';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
@@ -12,7 +14,14 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const groups = await new Client().getGroups();
+  let groups = {};
+  try {
+    groups = await new Client().getGroups();
+  } catch (error) {
+    if (error instanceof RequestError) {
+      return <Alert type="failure">{error.message}</Alert>;
+    }
+  }
 
   return (
     <Card>

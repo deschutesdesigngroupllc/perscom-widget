@@ -32,7 +32,7 @@ export function ThemeProvider({ children }) {
         setUserTheme('dark');
       }
     });
-  }, [theme, preferredTheme]);
+  }, [theme, preferredTheme, searchParams]);
 
   return (
     <NextThemeProvider attribute="class" forcedTheme={theme || userTheme}>

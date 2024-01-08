@@ -25,7 +25,7 @@ export function SessionProvider({ children }) {
 
       router.push(returnTo);
     }
-  }, [apiKey, perscomId]);
+  }, [apiKey, perscomId, returnTo, router, update]);
 
   if (isLoading) {
     return <></>;
