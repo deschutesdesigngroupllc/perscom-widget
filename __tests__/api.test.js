@@ -3,8 +3,8 @@
  */
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import jwt from 'jsonwebtoken';
-import Auth from '../src/api/auth';
-import Client from '../src/api/client';
+import Auth from '../src/lib/auth';
+import Client from '../src/lib/client';
 
 const searchParams = {
   apikey: 'foo',

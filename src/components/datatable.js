@@ -7,7 +7,7 @@ import '../styles/datatable.css';
 export function Datatable(props) {
   return (
     <DataTable
-      {...props}
+      {...(({ noProgressComponent, noDataComponent, ...o }) => o)(props)}
       progressComponent={<DataTableLoading />}
       noDataComponent={
         <DataTableEmpty emptyMessage={props.emptyMessage ?? 'There are no records to display.'} />

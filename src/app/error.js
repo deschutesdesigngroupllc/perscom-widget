@@ -3,7 +3,7 @@
 import * as Sentry from '@sentry/nextjs';
 import { useEffect } from 'react';
 import { Alert } from '../components/alert';
-import { RequestError } from '../lib/errors/requestError';
+import { RequestError } from '../lib/request-error';
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -11,8 +11,8 @@ export default function Error({ error, reset }) {
   });
 
   if (error instanceof RequestError) {
-    return <Alert message={`${error.status}: ${error.message}`} type="failure" />;
+    return <Alert type="failure">{`${error.status}: ${error.message}`}</Alert>;
   }
 
-  return <Alert message={error.message} type="failure" />;
+  return <Alert type="failure">{error.message}</Alert>;
 }

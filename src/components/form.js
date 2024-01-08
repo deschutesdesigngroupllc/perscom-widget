@@ -27,22 +27,18 @@ export function Form({ form, searchParams }) {
     <Card className="p-6">
       <h5 className="text-xl font-bold">{form.name}</h5>
       <form action={formAction} className="mb-0" ref={formRef}>
-        <div className="flex flex-col gap-4 py-4 sm:py-0">
+        <div className="flex flex-col gap-4 pt-4">
           {formState?.success && (
-            <Alert
-              message={
-                form.success_message ??
+            <Alert type="success">
+              {form.success_message ??
                 formState.message ??
-                'Your form has been successfully submitted.'
-              }
-              type="success"
-            />
+                'Your form has been successfully submitted.'}
+            </Alert>
           )}
           {formState?.error && (
-            <Alert
-              message={formState.message ?? 'There was an error submitting the form.'}
-              type="failure"
-            />
+            <Alert type="failure">
+              {formState.message ?? 'There was an error submitting the form.'}
+            </Alert>
           )}
           {form?.instructions && <div className="text-sm">{form.instructions}</div>}
           {form?.fields &&

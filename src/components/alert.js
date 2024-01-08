@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { Alert as FlowbiteAlert } from 'flowbite-react';
 
-export function Alert({ message, type = 'info', error }) {
+export function Alert({ children, type = 'info', error }) {
   const icon = () => {
     switch (type) {
       case 'info':
@@ -23,7 +23,7 @@ export function Alert({ message, type = 'info', error }) {
   return (
     <FlowbiteAlert color={type} icon={icon}>
       <span>
-        <p>{message}</p>
+        <p>{children}</p>
       </span>
     </FlowbiteAlert>
   );

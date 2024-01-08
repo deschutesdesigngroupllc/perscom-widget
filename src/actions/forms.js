@@ -1,7 +1,6 @@
 'use server';
 
-import Auth from '../api/auth';
-import Client from '../api/client';
+import Client from '../lib/client';
 
 /**
  * Submit a form
@@ -17,7 +16,7 @@ export async function submitForm(formId, searchParams, previousState, formData) 
   formData.forEach((value, key) => (data[key] = value));
 
   try {
-    await new Client(new Auth(searchParams)).postSubmission(formId, data);
+    await new Client().postSubmission(formId, data);
   } catch (error) {
     return {
       finished: true,

@@ -3,9 +3,9 @@
  */
 import { beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
+import Newsfeed from '../src/app/(auth)/newsfeed/page';
+import Roster from '../src/app/(auth)/roster/page';
 import Layout from '../src/app/layout';
-import Newsfeed from '../src/app/newsfeed/page';
-import Roster from '../src/app/roster/page';
 
 jest.mock('next/navigation', () => ({
   useRouter() {

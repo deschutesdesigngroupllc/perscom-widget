@@ -3,7 +3,7 @@ import { Card as FlowbiteCard } from 'flowbite-react';
 export function Card(props) {
   return (
     <FlowbiteCard
-      {...props}
+      {...(({ children, ...o }) => o)(props)}
       theme={{
         root: {
           base: 'flex rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800',

@@ -26,4 +26,8 @@ const sentryWebpackPluginOptions = {
   silent: true
 };
 
-module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+});
+
+module.exports = withSentryConfig(withBundleAnalyzer(nextConfig), sentryWebpackPluginOptions);
