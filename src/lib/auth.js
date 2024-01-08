@@ -2,6 +2,7 @@ import { getIronSession } from 'iron-session';
 import { jwtDecode } from 'jwt-decode';
 import get from 'lodash/get';
 import { cookies } from 'next/headers';
+import { decompressString } from './gzip';
 import { sessionOptions } from './session';
 
 export default class Auth {
@@ -11,9 +12,13 @@ export default class Auth {
    * @returns {*|string}
    */
   async getApiKey() {
-    const session = await getIronSession(cookies(), sessionOptions);
+    let { apiKey } = await getIronSession(cookies(), sessionOptions);
 
-    return session.apiKey ?? process.env.API_KEY ?? null;
+    if (apiKey) {
+      apiKey = await decompressString(apiKey);
+    }
+
+    return apiKey ?? process.env.API_KEY ?? null;
   }
 
   /**
@@ -22,9 +27,9 @@ export default class Auth {
    * @returns {*|string}
    */
   async getPerscomId() {
-    const session = await getIronSession(cookies(), sessionOptions);
+    const { perscomId } = await getIronSession(cookies(), sessionOptions);
 
-    return session.perscomId ?? process.env.PERSCOM_ID ?? null;
+    return perscomId ?? process.env.PERSCOM_ID ?? null;
   }
 
   /**
