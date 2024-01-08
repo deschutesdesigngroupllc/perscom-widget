@@ -4,8 +4,8 @@ import { defaultSession } from '../lib/session';
 
 const sessionApiRoute = '/api/session';
 
-async function fetchJson(input, init) {
-  return fetch(input, {
+async function fetchJson(url, init) {
+  return fetch(url, {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json'
@@ -35,7 +35,9 @@ export default function useSession() {
   const { trigger: update } = useSWRMutation(sessionApiRoute, doUpdateSession, {
     revalidate: false
   });
-  const { trigger: destroy } = useSWRMutation(sessionApiRoute, doDestroySession);
+  const { trigger: destroy } = useSWRMutation(sessionApiRoute, doDestroySession, {
+    optimisticData: defaultSession
+  });
 
   return { session, destroy, update, isLoading };
 }

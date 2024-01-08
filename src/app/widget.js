@@ -39,7 +39,7 @@ class Widget {
         'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js';
       iframeResizerScript.type = 'text/javascript';
       iframeResizerScript.onload = () => {
-        window.iFrameResize({ log: true }, `#${IFRAME_ID}`);
+        window.iFrameResize({ log: false }, `#${IFRAME_ID}`);
       };
 
       document.body.appendChild(iframeResizerScript);

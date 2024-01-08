@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "next start",
+    "start": "node server.js",
     "start:widget": "node widget-server.js",
     "dev": "next dev",
     "build": "next build",

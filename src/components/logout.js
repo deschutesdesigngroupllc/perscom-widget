@@ -9,11 +9,7 @@ export default function Logout() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    destroy(null, {
-      optimisticData: {
-        isLoggedIn: false
-      }
-    });
+    destroy(null);
   };
 
   if (!session.isLoggedIn) {

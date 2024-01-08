@@ -23,6 +23,7 @@
 # Next
 .next
 .swc
+.ssl
 
 # parcel
 .cache
