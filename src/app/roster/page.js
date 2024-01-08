@@ -96,7 +96,11 @@ function Unit({ unit }) {
                   <>
                     {status && (
                       <span
-                        className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${status.color}`}
+                        className="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
+                        style={{
+                          color: status.text_color,
+                          backgroundColor: status.bg_color
+                        }}
                       >
                         {status.name}
                       </span>
