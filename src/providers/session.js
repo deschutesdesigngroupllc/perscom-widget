@@ -13,7 +13,7 @@ export function SessionProvider({ children }) {
   const apiKey = searchParams.get('apikey');
 
   useEffect(() => {
-    if (perscomId && apiKey) {
+    if (perscomId || apiKey) {
       const forwardedParams = new URLSearchParams(searchParams);
       forwardedParams.delete('apikey');
       forwardedParams.delete('perscomid');
@@ -33,7 +33,7 @@ export function SessionProvider({ children }) {
     }
   }, [apiKey, perscomId, pathname, router, update]);
 
-  if (isLoading) {
+  if (isLoading || searchParams.has('perscomid') || searchParams.has('apikey')) {
     return <></>;
   }
 
