@@ -27,7 +27,7 @@ export function Form({ form, searchParams }) {
     <Card className="p-6">
       <h5 className="text-xl font-bold">{form.name}</h5>
       <form action={formAction} className="mb-0" ref={formRef}>
-        <div className="flex flex-col gap-4 py-4 sm:py-0">
+        <div className="flex flex-col gap-4 pt-4">
           {formState?.success && (
             <Alert type="success">
               {form.success_message ??

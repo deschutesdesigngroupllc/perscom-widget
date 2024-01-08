@@ -2,6 +2,7 @@ import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Alert } from '../../../../components/alert';
 import { Form } from '../../../../components/form';
 import { Link } from '../../../../components/link';
+import Client from '../../../../lib/client';
 import { RequestError } from '../../../../lib/request-error';
 
 export const dynamic = 'force-dynamic';
@@ -9,10 +10,11 @@ export const metadata = {
   title: 'Form'
 };
 
-export default async function Page({ params }) {
+export default async function Page(props) {
+  const { params } = props;
   const { id } = params;
 
-  let form = {};
+  let form;
   try {
     form = await new Client().getForm(id);
   } catch (error) {
