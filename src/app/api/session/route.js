@@ -1,5 +1,6 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
+import { compressString, decompressString } from '../../../lib/gzip';
 import { defaultSession, sessionOptions } from '../../../lib/session';
 
 export const dynamic = 'force-dynamic';
@@ -9,10 +10,15 @@ export async function POST(request) {
 
   const { perscomId = '', apiKey = '', returnTo = '/' } = await request.json();
 
+  let compressedApiKey = '';
+  if (apiKey) {
+    compressedApiKey = await compressString(apiKey);
+  }
+
   session.isLoggedIn = true;
   session.returnTo = returnTo;
   session.perscomId = perscomId;
-  session.apiKey = apiKey;
+  session.apiKey = compressedApiKey;
 
   await session.save();
 
@@ -20,10 +26,16 @@ export async function POST(request) {
 }
 
 export async function GET() {
-  const session = await getIronSession(cookies(), sessionOptions);
+  let session = await getIronSession(cookies(), sessionOptions);
 
   if (session.isLoggedIn !== true) {
     return Response.json(defaultSession);
+  }
+
+  let decompressedApiKey = '';
+  if (session.apiKey) {
+    decompressedApiKey = await decompressString(session.apiKey);
+    session.apiKey = decompressedApiKey;
   }
 
   return Response.json(session);
