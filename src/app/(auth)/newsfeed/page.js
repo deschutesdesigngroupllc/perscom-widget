@@ -13,11 +13,11 @@ export const metadata = {
   title: 'Newsfeed'
 };
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
   const auth = new Auth();
   let newsfeed = {};
   try {
-    newsfeed = await new Client().getNewsfeed();
+    newsfeed = await new Client().getNewsfeed(searchParams);
   } catch (error) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;

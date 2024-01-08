@@ -12,10 +12,10 @@ export const metadata = {
   title: 'Ranks'
 };
 
-export default async function Page() {
+export default async function Page({ searchParams }) {
   let ranks = {};
   try {
-    ranks = await new Client().getRanks();
+    ranks = await new Client().getRanks(searchParams);
   } catch (error) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;

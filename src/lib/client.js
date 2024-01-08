@@ -45,12 +45,6 @@ export default class Client {
       additionalParams.forEach((value, key) => url.searchParams.set(key, value));
     }
 
-    // getOptionalApiParameters().forEach((parameter) => {
-    //   if (this.auth.getSearchParams().has(parameter)) {
-    //     url.searchParams.set(parameter, this.auth.getSearchParams().get(parameter));
-    //   }
-    // });
-
     const response = await fetch(url.href, init);
     const json = await response.json();
 
@@ -69,27 +63,30 @@ export default class Client {
   /**
    * Get a list of awards
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getAwards(params = { include: 'image' }) {
-    return await this.request('awards', 'GET', null, params);
+  async getAwards(params = {}) {
+    return await this.request('awards', 'GET', null, { ...params, ...{ include: 'image' } });
   }
 
   /**
    * Get a list of events
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getEvents(params = { include: 'calendar', limit: '100' }) {
-    return await this.request('events', 'GET', null, params);
+  async getEvents(params = {}) {
+    return await this.request('events', 'GET', null, {
+      ...params,
+      ...{ include: 'calendar', limit: '100' }
+    });
   }
 
   /**
    * Get a list of forms
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async getForms(params = {}) {
@@ -100,33 +97,37 @@ export default class Client {
    * Get a form
    *
    * @param id
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getForm(id, params = { include: 'fields', limit: 100 }) {
-    return await this.request(`forms/${id}`, 'GET', null, params);
+  async getForm(id, params = {}) {
+    return await this.request(`forms/${id}`, 'GET', null, {
+      ...params,
+      ...{ include: 'fields', limit: 100 }
+    });
   }
 
   /**
    * Get a list of groups
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getGroups(
-    params = {
-      include:
-        'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status',
-      limit: 100
-    }
-  ) {
-    return await this.request('groups', 'GET', null, params);
+  async getGroups(params = {}) {
+    return await this.request('groups', 'GET', null, {
+      ...params,
+      ...{
+        include:
+          'units,units.users,units.users.position,units.users.rank,units.users.rank.image,units.users.specialty,units.users.status',
+        limit: 100
+      }
+    });
   }
 
   /**
    * Get the newsfeed
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async getNewsfeed(params = {}) {
@@ -136,28 +137,34 @@ export default class Client {
   /**
    * Get a list of qualifications
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getQualifications(params = { include: 'image' }) {
-    return await this.request('qualifications', 'GET', null, params);
+  async getQualifications(params = {}) {
+    return await this.request('qualifications', 'GET', null, {
+      ...params,
+      ...{ include: 'image' }
+    });
   }
 
   /**
    * Get a list of ranks
    *
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
-  async getRanks(params = { include: 'image' }) {
-    return await this.request('ranks', 'GET', null, params);
+  async getRanks(params = {}) {
+    return await this.request('ranks', 'GET', null, {
+      ...params,
+      ...{ include: 'image' }
+    });
   }
 
   /**
    * Get a user
    *
    * @param id
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async getUser(id, params = {}) {
@@ -169,7 +176,7 @@ export default class Client {
    *
    * @param id
    * @param {object|null} body
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async postLike(id, body = null, params = {}) {
@@ -181,7 +188,7 @@ export default class Client {
    *
    * @param id
    * @param {object|null} body
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async postUnlike(id, body = null, params = {}) {
@@ -193,7 +200,7 @@ export default class Client {
    *
    * @param id
    * @param {object|null} body
-   * @param {object|array} params
+   * @param {object} params
    * @returns {Promise<*>}
    */
   async postSubmission(id, body = null, params = {}) {
