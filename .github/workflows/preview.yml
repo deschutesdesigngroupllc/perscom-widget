@@ -52,7 +52,7 @@ jobs:
           echo API_KEY=${{ secrets.VERCEL_PREVIEW_API_KEY }} >> .env.local
           echo PERSCOM_ID=${{ secrets.VERCEL_PREVIEW_PERSCOM_ID }} >> .env.local
           echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .env.local
-          echo WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .env.local
+          echo NEXT_PUBLIC_WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }}-preview.$(git rev-parse --short "$GITHUB_SHA") >> .env.local
 
       - name: Build Widget
         run: npm run build:widget

@@ -1,7 +1,15 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import { Logo } from './logo';
 
 export function Footer() {
-  const version = process.env.WIDGET_VERSION;
+  const searchParams = useSearchParams();
+  const version = process.env.NEXT_PUBLIC_WIDGET_VERSION;
+
+  if (searchParams.get('footer') === 'false') {
+    return <></>;
+  }
 
   return (
     <footer className="flex flex-row justify-center">
