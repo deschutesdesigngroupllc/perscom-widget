@@ -115,6 +115,10 @@ class Widget {
       iframe.style.overflow = 'hidden';
       iframe.style.display = 'block';
       iframe.style.outline = 'none';
+      iframe.setAttribute(
+        'sandbox',
+        'allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals'
+      );
       this.iframe = iframe;
     }
   };
