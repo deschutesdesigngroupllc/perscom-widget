@@ -1,7 +1,7 @@
 import { getIronSession } from 'iron-session';
 import { jwtDecode } from 'jwt-decode';
 import get from 'lodash/get';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { decompressString } from './gzip';
 import { sessionOptions } from './session';
 
@@ -18,7 +18,7 @@ export default class Auth {
       apiKey = await decompressString(apiKey);
     }
 
-    return apiKey ?? process.env.API_KEY ?? null;
+    return headers().get('x-perscom-apikey') ?? apiKey ?? process.env.API_KEY ?? null;
   }
 
   /**
@@ -29,7 +29,7 @@ export default class Auth {
   async getPerscomId() {
     const { perscomId } = await getIronSession(cookies(), sessionOptions);
 
-    return perscomId ?? process.env.PERSCOM_ID ?? null;
+    return headers().get('x-perscom-id') ?? perscomId ?? process.env.PERSCOM_ID ?? null;
   }
 
   /**

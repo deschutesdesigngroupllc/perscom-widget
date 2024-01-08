@@ -1,14 +1,20 @@
-'use client';
+import { getIronSession } from 'iron-session';
+import { cookies, headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { sessionOptions } from '../lib/session';
 
-import { useRouter } from 'next/navigation';
-import useSession from '../hooks/use-session';
+export async function getSession(shouldSleep = true) {
+  return await getIronSession(cookies(), sessionOptions);
+}
 
-export default function AuthWrapper(props) {
-  const router = useRouter();
-  const { session } = useSession();
+export default async function AuthWrapper(props) {
+  const session = await getSession();
 
-  if (!session.isLoggedIn) {
-    return router.push('/');
+  if (
+    !session.isLoggedIn &&
+    (!headers().has('x-perscom-id') || !headers().has('x-perscom-apikey'))
+  ) {
+    return redirect('/');
   }
 
   return <>{props.children}</>;
