@@ -24,6 +24,8 @@ export default async function Page({ searchParams }) {
     }
   }
 
+  const currentUserId = await auth.getAuthIdentifier();
+
   return (
     <Card>
       <Table striped={false}>
@@ -36,7 +38,7 @@ export default async function Page({ searchParams }) {
               return (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <Item item={item} currentUser={auth.getAuthIdentifier()} />
+                    <Item item={item} currentUser={currentUserId} />
                   </TableCell>
                 </TableRow>
               );
