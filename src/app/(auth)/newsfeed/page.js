@@ -22,8 +22,9 @@ export default async function Page({ searchParams }) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;
     }
-    console.log(error)
   }
+
+  const currentUserId = await auth.getAuthIdentifier();
 
   return (
     <Card>
@@ -37,7 +38,7 @@ export default async function Page({ searchParams }) {
               return (
                 <TableRow key={item.id}>
                   <TableCell>
-                    <Item item={item} currentUser={auth.getAuthIdentifier()} />
+                    <Item item={item} currentUser={currentUserId} />
                   </TableCell>
                 </TableRow>
               );

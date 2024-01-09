@@ -38,6 +38,6 @@ export default class Auth {
    * @returns {string | undefined}
    */
   async getAuthIdentifier(claim = 'sub') {
-    return await get(jwtDecode(String(this.getApiKey())), claim);
+    return await get(jwtDecode(String(await this.getApiKey())), claim);
   }
 }
