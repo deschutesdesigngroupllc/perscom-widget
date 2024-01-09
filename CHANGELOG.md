@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.25...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.26...HEAD)
+
+## [v1.0.26](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.25...v1.0.26) - 2024-01-09
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.26 -->
+### What's Changed
+
+#### Fixed
+
+* Fix connection closed error on newsfeed by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/105
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.25...v1.0.26
 
 ## [v1.0.25](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.24...v1.0.25) - 2024-01-08
 
