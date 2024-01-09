@@ -22,6 +22,7 @@ export default async function Page({ searchParams }) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;
     }
+    console.log(error)
   }
 
   return (
