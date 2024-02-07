@@ -6,7 +6,7 @@ export function Card(props) {
       {...(({ children, ...o }) => o)(props)}
       theme={{
         root: {
-          base: 'flex rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800',
+          base: 'flex rounded-lg bg-white shadow dark:border-gray-700 dark:bg-gray-800',
           children: 'flex h-full flex-col justify-center p-0'
         }
       }}
