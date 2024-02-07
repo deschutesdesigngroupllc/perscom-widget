@@ -1,6 +1,25 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.26...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.27...HEAD)
+
+## [v1.0.27](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.26...v1.0.27) - 2024-02-07
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.27 -->
+### What's Changed
+
+#### Changed
+
+* Remove widget border and shorten margin by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/110
+
+#### Other
+
+* Bump react-router-dom from 6.20.1 to 6.22.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/109
+* Bump styled-components from 5.3.11 to 6.1.8 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/107
+* Bump tailwindcss from 3.3.6 to 3.4.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/103
+* Bump jest from 29.6.4 to 29.7.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/94
+* Bump @heroicons/react from 2.0.18 to 2.1.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/92
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.26...v1.0.27
 
 ## [v1.0.26](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.25...v1.0.26) - 2024-01-09
 
