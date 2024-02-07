@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       <body
         className={cx('text-gray-500 dark:text-gray-400', nunitoSans.className)}
         style={{
-          margin: '0.1rem'
+          margin: '0.2rem 0.1rem'
         }}
       >
         <SessionProvider>
