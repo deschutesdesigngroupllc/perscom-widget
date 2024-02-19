@@ -32,7 +32,7 @@
     "@heroicons/react": "^2.1.1",
     "@next/bundle-analyzer": "^14.0.4",
     "@parcel/compressor-brotli": "^2.10.3",
-    "@parcel/compressor-gzip": "^2.10.2",
+    "@parcel/compressor-gzip": "^2.11.0",
     "@sentry/nextjs": "^7.100.1",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^6.4.2",
