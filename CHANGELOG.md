@@ -1,6 +1,30 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.27...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.28...HEAD)
+
+## [v1.0.28](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.27...v1.0.28) - 2024-02-19
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.28 -->
+### What's Changed
+
+#### Added
+
+* Support secondary assignments by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/121
+
+#### Other
+
+* Bump prettier from 3.1.1 to 3.2.5 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/115
+* Bump @sentry/nextjs from 7.89.0 to 7.100.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/114
+* Bump classnames from 2.3.2 to 2.5.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/113
+* Bump @testing-library/jest-dom from 6.1.5 to 6.4.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/112
+* Bump eslint-config-next from 14.0.4 to 14.1.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/111
+* Bump @parcel/compressor-gzip from 2.10.3 to 2.11.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/120
+* Bump @next/bundle-analyzer from 14.0.4 to 14.1.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/119
+* Bump react-data-table-component from 7.5.4 to 7.6.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/118
+* Bump jest-environment-jsdom from 29.6.4 to 29.7.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/117
+* Bump flowbite from 2.2.0 to 2.3.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/116
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.27...v1.0.28
 
 ## [v1.0.27](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.26...v1.0.27) - 2024-02-07
 
