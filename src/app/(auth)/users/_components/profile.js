@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { AdditionalFields } from './additional-fields';
+import { Assignment } from './assignment';
 import { Demographics } from './demographics';
 import { Information } from './information';
 import { Records } from './records';
-import { SecondaryAssignments } from './secondary-assignments';
 
 export function Profile({ user }) {
   const { name, cover_photo_url } = user;
@@ -20,7 +20,7 @@ export function Profile({ user }) {
         <Demographics user={user} />
       </div>
       <AdditionalFields user={user} />
-      <SecondaryAssignments user={user} />
+      <Assignment user={user} />
       <Records user={user} />
     </div>
   );

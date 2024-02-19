@@ -323,8 +323,14 @@ export function Records({ user }) {
                 }}
                 emptyMessage={tabs[index].emptyMessage}
                 customStyles={{
+                  headCells: {
+                    style: {
+                      color: 'rgb(100 116 139 / var(--tw-text-opacity))'
+                    }
+                  },
                   cells: {
                     style: {
+                      color: 'rgb(100 116 139 / var(--tw-text-opacity))',
                       marginTop: '0.5rem',
                       marginBottom: '0.5rem'
                     }
