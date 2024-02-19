@@ -3,7 +3,7 @@
 import dayjs from 'dayjs';
 import timezonePlugin from 'dayjs/plugin/timezone';
 import utcPlugin from 'dayjs/plugin/utc';
-import { TabItem } from 'flowbite-react';
+import { Badge, TabItem } from 'flowbite-react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../../components/card';
@@ -34,6 +34,17 @@ export function Records({ user }) {
           },
           sortable: true,
           maxWidth: '250px'
+        },
+        {
+          name: 'Type',
+          selector: (row) => {
+            return row.type === 'primary' ? (
+              <Badge color="success">Primary</Badge>
+            ) : (
+              <Badge color="info">Secondary</Badge>
+            );
+          },
+          maxWidth: '200px'
         },
         {
           name: 'Assignment',
