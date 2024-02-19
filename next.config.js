@@ -7,6 +7,14 @@ const nextConfig = {
       'perscom-development.s3.amazonaws.com',
       'perscom-staging.s3.amazonaws.com',
       'perscom.s3.amazonaws.com'
+    ],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '9000',
+        pathname: '/perscom-local/**/**'
+      }
     ]
   },
   sentry: {

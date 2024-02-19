@@ -1,11 +1,23 @@
+'use client';
+
+import dayjs from 'dayjs';
+import timezonePlugin from 'dayjs/plugin/timezone';
+import utcPlugin from 'dayjs/plugin/utc';
+import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../../components/card';
 
 export function Demographics({ user }) {
-  const { name, rank, position, online, unit, specialty } = user;
-  const { name: rank_name } = rank ?? {};
-  const { name: position_name } = position ?? {};
-  const { name: specialty_name } = specialty ?? {};
-  const { name: unit_name } = unit ?? {};
+  const { name, created_at, updated_at, last_seen_at, online } = user;
+
+  const searchParams = useSearchParams();
+
+  dayjs.extend(utcPlugin);
+  dayjs.extend(timezonePlugin);
+  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+
+  const createdAt = dayjs(created_at).tz(searchParams.get('timezone') ?? 'UTC');
+  const updatedAt = dayjs(updated_at).tz(searchParams.get('timezone') ?? 'UTC');
+  const lastSeenAt = dayjs(last_seen_at).tz(searchParams.get('timezone') ?? 'UTC');
 
   return (
     <Card className="w-full justify-start p-6 md:w-2/3">
@@ -28,20 +40,28 @@ export function Demographics({ user }) {
             <p className="truncate text-sm">{name}</p>
           </li>
           <li className="py-2">
-            <p className="truncate text-sm font-semibold">Rank</p>
-            <p className="truncate text-sm">{rank_name}</p>
+            <p className="truncate text-sm font-semibold">Joined At</p>
+            <p className="truncate text-sm">
+              <time dateTime={createdAt.format('YYYY-MM-DD')}>
+                {createdAt.format('dddd, MMM D, YYYY')}
+              </time>
+            </p>
           </li>
           <li className="py-2">
-            <p className="truncate text-sm font-semibold">Primary Position</p>
-            <p className="truncate text-sm">{position_name}</p>
+            <p className="truncate text-sm font-semibold">Last Updated At</p>
+            <p className="truncate text-sm">
+              <time dateTime={updatedAt.format('YYYY-MM-DD')}>
+                {updatedAt.format('dddd, MMM D, YYYY')}
+              </time>
+            </p>
           </li>
           <li className="py-2">
-            <p className="truncate text-sm font-semibold">Primary Specialty</p>
-            <p className="truncate text-sm">{specialty_name}</p>
-          </li>
-          <li className="py-2">
-            <p className="truncate text-sm font-semibold">Primary Unit</p>
-            <p className="truncate text-sm">{unit_name}</p>
+            <p className="truncate text-sm font-semibold">Last Online At</p>
+            <p className="truncate text-sm">
+              <time dateTime={lastSeenAt.format('YYYY-MM-DD')}>
+                {lastSeenAt.format('dddd, MMM D, YYYY')}
+              </time>
+            </p>
           </li>
         </ul>
       </div>
