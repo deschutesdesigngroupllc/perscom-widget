@@ -1,6 +1,22 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.28...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.29...HEAD)
+
+## [v1.0.29](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.28...v1.0.29) - 2024-04-21
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.29 -->
+### What's Changed
+
+#### Other
+
+* Bump @sentry/nextjs from 7.100.1 to 7.110.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/144
+* Bump @testing-library/react from 14.1.2 to 15.0.2 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/143
+* Bump next from 14.0.4 to 14.2.1 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/142
+* Bump react-hook-form from 7.49.0 to 7.51.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/141
+* Bump eslint from 8.55.0 to 9.1.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/145
+* Update deps by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/146
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.28...v1.0.29
 
 ## [v1.0.28](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.27...v1.0.28) - 2024-02-19
 
