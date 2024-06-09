@@ -1,6 +1,22 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.29...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.30...HEAD)
+
+## [v1.0.30](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.29...v1.0.30) - 2024-06-09
+
+<!-- Release notes generated using configuration in .github/release.yml at v1.0.30 -->
+### What's Changed
+
+#### Other
+
+* Bump eslint-config-next from 14.1.0 to 14.2.3 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/153
+* Bump parcel from 2.11.0 to 2.12.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/151
+* Bump @parcel/compressor-gzip from 2.11.0 to 2.12.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/149
+* Bump @parcel/compressor-brotli from 2.11.0 to 2.12.0 by @dependabot in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/148
+* Convert description fields to allow HTML by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/159
+* Implement new roster sorting by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/160
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.29...v1.0.30
 
 ## [v1.0.29](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.28...v1.0.29) - 2024-04-21
 
