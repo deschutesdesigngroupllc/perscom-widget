@@ -110,11 +110,12 @@ export default class Client {
   /**
    * Get a list of groups
    *
-   * @param {object} params
+   * @param body
+   * @param params
    * @returns {Promise<*>}
    */
-  async getGroups(params = {}) {
-    return await this.request('groups', 'GET', null, {
+  async getGroups(body = null, params = {}) {
+    return await this.request('groups/search', 'POST', body, {
       ...params,
       ...{
         include:
