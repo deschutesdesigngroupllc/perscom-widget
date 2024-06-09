@@ -61,7 +61,10 @@ export default async function Page({ searchParams }) {
                         </div>
                       )}
                       <div className="mb-2 text-sm font-semibold">{rank.name}</div>
-                      <div className="text-sm">{rank.description}</div>
+                      <div
+                        className="text-sm"
+                        dangerouslySetInnerHTML={{ __html: rank.description }}
+                      ></div>
                     </>
                   </TableCell>
                 </TableRow>
