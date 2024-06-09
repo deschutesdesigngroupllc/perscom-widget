@@ -14,7 +14,13 @@ export const metadata = {
 export default async function Page() {
   let groups = {};
   try {
-    groups = await new Client().getGroups();
+    groups = await new Client().getGroups({
+      scopes: [
+        {
+          name: 'orderForRoster'
+        }
+      ]
+    });
   } catch (error) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;
