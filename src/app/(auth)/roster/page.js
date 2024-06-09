@@ -24,8 +24,7 @@ export default async function Page() {
   return (
     <Card>
       <Tabs style="underline">
-        {groups.data &&
-          !!groups.data.length &&
+        {groups.data && !!groups.data.length ? (
           groups.data.map((group, index) => (
             <TabItem key={index} title={group.name}>
               <>
@@ -40,7 +39,14 @@ export default async function Page() {
                 )}
               </>
             </TabItem>
-          ))}
+          ))
+        ) : (
+          <TabItem key="none" title="No Groups">
+            <div className="flex items-center justify-center p-8 text-sm">
+              There are no groups to view.
+            </div>
+          </TabItem>
+        )}
       </Tabs>
     </Card>
   );
