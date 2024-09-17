@@ -41,7 +41,10 @@ export function Form({ form, searchParams }) {
             </Alert>
           )}
           {form?.instructions && (
-            <div className="text-xs text-gray-700 dark:text-gray-400">{form.instructions}</div>
+            <div
+              className="text-xs text-gray-700 dark:text-gray-400"
+              dangerouslySetInnerHTML={{ __html: form.instructions }}
+            ></div>
           )}
           {form?.fields &&
             !!form.fields.length &&

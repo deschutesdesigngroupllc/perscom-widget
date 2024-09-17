@@ -1,0 +1,243 @@
+<html lang="us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PERSCOM Widget Examples</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100...900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .font-inter {
+        font-family: 'Inter', sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body
+    class="font-inter bg-zinc-50 dark:bg-[#09090B]"
+    x-data="{tab: new URLSearchParams(location.search).get('tab') ?? 'light'}"
+    x-init="$watch('tab', (value) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', value);
+    history.pushState(null, document.title, url.toString());
+    window.location.reload();
+  })"
+  >
+    <nav class="bg-white shadow dark:bg-zinc-900">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 justify-between">
+          <div class="flex">
+            <div class="flex flex-shrink-0 items-center">
+              <a href="/index.html">
+                <svg
+                  version="1.2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 215 50"
+                  width="215"
+                  height="50"
+                  class="h-6 w-auto sm:h-8"
+                >
+                  <title>PERSCOM</title>
+                  <g id="background-logo">
+                    <path id="Layer" d="m-45-102.3h366.9v292.6h-366.9z" style="fill: none"></path>
+                  </g>
+                  <g id="text-logo-path-group">
+                    <g id="Layer">
+                      <g id="text-logo-path-0">
+                        <path
+                          id="Layer"
+                          fill-rule="evenodd"
+                          d="m81.9 39.3l-7.2 1.4q4.3-18.7 5.8-29.1 4.5-1.3 6.7-1.3 2.2 0 3.5 0.6 1.2 0.6 2 1.7 1.5 1.9 1.5 5.5 0 2.2-0.9 4.4-0.8 2.2-2.2 3.8-1.5 1.7-3.3 2.7-1.9 1-3.8 1h-0.5q-0.8 3.3-1.6 9.3zm2.5-13.7q1.4-0.3 2.7-2.3 1.3-2.2 1.3-4.9 0-1.5-0.7-2.3-0.6-0.8-1.4-0.8-1.1 5.8-1.9 10.3zm19.8 13.1l-13.4 2 5.4-29.2 13.1-1.2q-0.3 1-0.5 1.8-0.2 0.9-0.4 1.7-0.2 0.9-0.3 1.5-1.2 0.1-3.3 0.1h-2.8l-1.5 7.4q2.2-0.1 3.7-0.1 1.5-0.1 2-0.1-0.2 1.2-0.3 2.3-0.2 1.1-0.4 2.2-0.4 0.1-1.3 0.1-1 0-2 0.1-1 0-2.2 0l-1.4 7.6 6-0.9zm7.2 0.3l-6.7 1.7q4.2-20.2 5.1-28.7 4.7-1.4 10.5-1.4 4.4 0 5.2 3 0.2 0.9 0.2 2.3 0 1.3-0.5 2.9-0.6 1.6-1.6 3.1-2 2.9-4.9 4.5 1.6 3.4 2.8 6.3 1 2.4 1.7 4.2l2.9-5.8q0.6 1.1 2.2 2 1.6 1 2.4 1 0.9 0 1.4-0.2 0.5-0.1 1-0.4 1-0.8 1-1.8 0-1-0.7-1.9-0.6-0.8-1.5-1.6-1-0.7-2.1-1.5-1.1-0.8-2-1.7-2.3-2-2.3-4.2 0-2.2 1.3-4.1 1.2-1.8 3.2-3.2 1.9-1.3 4.2-2.1 2.2-0.8 3.8-0.8 1.6 0 2.6 0.3 1 0.3 1.7 0.8 1.6 1.3 1.6 3.8 0 0.6-0.1 1.2-0.1 0.5-0.2 1.2l-6 1.8q0.2-0.8 0.2-1.7 0-0.9-0.4-1.5-0.5-0.5-1-0.5-0.5 0-1 0.2-0.5 0.3-0.9 0.7-1.2 0.9-1.2 2 0 1 0.6 1.7 0.6 0.7 1.4 1.2 0.8 0.6 1.8 1.2 0.9 0.6 1.8 1.5 1.9 2.3 1.9 6 0 4.5-3.3 7.5-3.1 2.8-7.9 2.8-3.4 0-6.1-3.3 0 0.2 0.1 0.3l-6.4 2.2q-3.2-10.9-3.3-12.4l-0.5 0.2q-1.3 7.4-2 11.2zm4.4-22.7l-1.4 6.6q1.7-0.2 4.1-2.1 2.6-1.9 2.6-3.1 0-1.2-2.3-1.4-0.6 0-1.2 0zm27.5 22.1q-1.6-2.5-1.6-6.6 0-4 1-7.8 1.1-3.8 3-6.8 2-3 4.6-4.8 2.7-1.9 5.9-1.9 2.1 0 3.5 1.6 1.4 1.6 1.4 4.2v0.5q0 0.3 0 0.6l-5.4 1.4q-0.5-1-1.2-1-0.6 0-1.4 0.8-0.7 0.7-1.4 1.9-0.7 1.3-1.3 2.8-0.7 1.5-1.2 3-1.1 3.4-1.1 5.4 0 2.1 1.3 2.1 1 0 2.1-1.2 1.1-1.3 1.4-2.7l4.8 1.9q-1.9 4.2-4.8 6.7-2.6 2.2-5.4 2.2-2.5 0-4.2-2.3zm14.7-6q0-4.6 2.2-9.9 2.1-5.3 5.6-8.9 3.7-3.7 7.8-3.7 3.4 0 5 2.7 1.2 2.2 1.2 6.7 0 2.5-0.7 5.4-0.7 3-1.9 5.5-1.2 2.5-2.8 4.5-1.6 1.9-3.3 3.3-3.6 2.8-6.9 2.8-2.8 0-4.4-2-1.8-2.2-1.8-6.4zm6.2-1.1q0 1.6 1.3 2.4 0.4 0.3 1 0.3 1.8 0 3.2-1.3 1.5-1.2 2.4-3.1 1-1.8 1.5-3.9 0.5-2.1 0.5-3.9 0-3.3-1.9-3.3-2.5 0-4.5 2.4-1.5 1.9-2.7 5.3-0.8 2.7-0.8 5.1zm18.2 8.7l-6.8 0.4q6.6-19.8 8.9-28.9 2.3 0 4.3-0.3 2-0.2 4.4-0.4-0.2 0.9-0.3 2-0.1 1.1-0.3 2.4-0.2 1.2-0.4 2.5-0.2 1.3-0.5 3.4-0.3 2.1-0.8 5.2h0.6q4.6-12.5 6.1-15.6 2.1-0.2 3.4-0.4 1.3-0.3 2.2-0.4 0.9-0.1 2-0.3-2 11.6-3.3 29.4l-7.2 1.2q0-1.4 0.4-4.6l0.5-4.8q0.4-3.7 0.8-5.7h-0.4q-0.5 1.7-1.2 3.6-0.8 1.9-1.5 3.9-0.7 2-1.4 3.9-0.7 1.9-1.2 3.6-1.5 0.1-2.5 0.1l-2.4 0.2 1.3-15.3h-0.6q-0.1 0.5-0.4 1.8-0.4 1.2-0.8 2.9-0.4 1.6-0.9 3.3-0.5 1.8-1 3.3-0.7 2.6-1 3.6z"
+                          style="
+                            fill: rgb(100, 100, 100);
+                            stroke: rgb(255, 255, 255);
+                            stroke-width: 0;
+                          "
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                  <g id="shape-4ba72ef2-936a-49d3-93b3-1ec8e54791af">
+                    <g id="Layer">
+                      <g id="path-1">
+                        <path
+                          id="Layer"
+                          d="m51.2 14.9l-3 17.9c-0.8 4.9-3.6 9.2-7.6 11.5l-4.3 2.5-4.3-2.5c-4-2.3-6.9-6.6-7.7-11.5l-3-17.9 15-5.8zm-4.3-7.1l-0.9-0.9 1.3-0.2 0.5-1.1 0.6 1.1 1.3 0.2-0.9 0.9 0.2 1.3-1.2-0.6-1.1 0.6zm-12-4.3l-1.4-1.3 1.9-0.2 0.8-1.7 0.8 1.7 1.8 0.2-1.3 1.3 0.3 1.8-1.6-0.8-1.7 0.8zm-11.2 4.3l-0.9-0.9 1.3-0.2 0.5-1.1 0.6 1.1 1.3 0.2-0.9 0.9 0.2 1.3-1.2-0.6-1.1 0.6z"
+                          style="fill: rgb(217, 217, 217)"
+                        ></path>
+                      </g>
+                      <g id="path-2">
+                        <path
+                          id="Layer"
+                          fill-rule="evenodd"
+                          d="m52.3 22.9l-0.3 1.4 15.2-4.7-4.3 7.7-12 3.7-0.2 1.4 11.4-3.6-4.3 7.7-9.4 2.9c-1.6 2.9-3.9 5.3-6.7 6.9l-5.4 3.2-5.5-3.2c-2.7-1.6-5-4-6.6-6.9l-9.4-2.9-4.3-7.7 11.4 3.6-0.3-1.4-12-3.7-4.3-7.7 15.2 4.7-0.2-1.4-15.9-4.9-4.2-7.7 19 5.9-0.5-2.8 17.6-6.8 17.5 6.8-0.4 2.8 19-5.9-4.3 7.7zm-2.8 10.1l3.2-18.9-16.4-6.3-16.4 6.3 3.2 18.9c0.9 5.3 4 9.9 8.3 12.4l4.9 2.8 4.9-2.8c4.3-2.5 7.4-7.1 8.3-12.4z"
+                          style="fill: rgb(217, 217, 217)"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </a>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <!-- Current: "border-blue-600 text-zinc-900", Default: "border-transparent text-zinc-500 hover:border-zinc-300 hover:text-zinc-700" -->
+              <a
+                @click="tab = 'light'"
+                x-bind:class="{'text-zinc-950 dark:text-white font-semibold border-blue-600' : tab === 'light', 'font-medium text-zinc-700 hover:border-zinc-300 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300 border-transparent' : tab !== 'light'}"
+                href="#"
+                class="inline-flex items-center border-b-2 px-1 pt-1 text-sm"
+                >Light</a
+              >
+              <a
+                @click="tab = 'dark'"
+                x-bind:class="{'text-zinc-950 dark:text-white font-semibold border-blue-600' : tab === 'dark', 'font-medium text-zinc-700 hover:border-zinc-300 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300 border-transparent' : tab !== 'dark'}"
+                href="#"
+                class="inline-flex items-center border-b-2 px-1 pt-1 text-sm"
+                >Dark</a
+              >
+            </div>
+          </div>
+          <div class="-mr-2 flex items-center sm:hidden">
+            <!-- Mobile menu button -->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                      Icon when menu is closed.
+
+                      Menu open: "hidden", Menu closed: "block"
+                    -->
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+                      Icon when menu is open.
+
+                      Menu open: "block", Menu closed: "hidden"
+                    -->
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 pb-3 pt-2">
+          <!-- Current: "bg-blue-50 border-blue-600 text-blue-700", Default: "border-transparent text-zinc-500 hover:bg-zinc-50 hover:border-zinc-300 hover:text-zinc-700" -->
+          <a
+            href="#"
+            class="block border-l-4 border-blue-600 bg-blue-50 py-2 pl-3 pr-4 text-base font-medium text-blue-700"
+            >Light</a
+          >
+          <a
+            href="#"
+            class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-zinc-500 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-700"
+            >Dark</a
+          >
+        </div>
+        <div class="border-t border-zinc-200 pb-3 pt-4">
+          <div class="flex items-center px-4">
+            <div class="flex-shrink-0">
+              <img
+                class="h-10 w-10 rounded-full"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt=""
+              />
+            </div>
+            <div class="ml-3">
+              <div class="text-base font-medium text-zinc-800">Tom Cook</div>
+              <div class="text-sm font-medium text-zinc-500">tom@example.com</div>
+            </div>
+            <button
+              type="button"
+              class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-zinc-400 hover:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="mt-3 space-y-1">
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800"
+              >Your Profile</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800"
+              >Settings</a
+            >
+            <a
+              href="#"
+              class="block px-4 py-2 text-base font-medium text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800"
+              >Sign out</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <!-- This is an example of adding the widget to your website. -->
+      <!-- You can copy and paste below. -->
+      <!-- Remove the data-environment and data-dark attributes when copying. -->
+      <!-- See the docs at https://docs.perscom.io for more help on customizing and implementing the widget. -->
+      <div id="perscom_widget_wrapper">
+        <script
+          id="perscom_widget"
+          data-apikey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6IkRlbW8gVXNlciIsImlhdCI6MTUxNjIzOTAyMiwidGVuYW50IjoxLCJzY29wZXMiOlsiKiJdfQ.aMwoZx5KkOCh3MYFWEH5UV9RyOuAxKIp94AGEkd6mk8"
+          data-environment="demo"
+          x-bind:data-dark="tab === 'dark'"
+          src="https://widget.perscom.io/widget.js"
+          type="text/javascript"
+          defer
+        ></script>
+      </div>
+    </main>
+  </body>
+</html>

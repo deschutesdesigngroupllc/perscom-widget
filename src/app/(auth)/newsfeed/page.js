@@ -33,7 +33,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell>Newsfeed</TableHeadCell>
         </TableHead>
         <TableBody className="divide-y divide-gray-100 dark:divide-gray-900">
-          {newsfeed.data && !!newsfeed.data.length ? (
+          {newsfeed?.data && !!newsfeed.data.length ? (
             newsfeed.data.map((item) => {
               return (
                 <TableRow key={item.id}>
@@ -50,7 +50,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
-      <Pagination meta={newsfeed.meta} />
+      {newsfeed?.meta && <Pagination meta={newsfeed.meta} />}
     </Card>
   );
 }

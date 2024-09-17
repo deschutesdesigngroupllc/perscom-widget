@@ -30,7 +30,7 @@ export default async function Page() {
   return (
     <Card>
       <Tabs style="underline">
-        {groups.data && !!groups.data.length ? (
+        {groups?.data && !!groups.data.length ? (
           groups.data.map((group, index) => (
             <TabItem key={index} title={group.name}>
               <>

@@ -5,6 +5,11 @@ const optionalAttributes = [
     value: ''
   },
   {
+    attribute: 'data-environment',
+    parameter: 'environment',
+    value: ''
+  },
+  {
     attribute: 'data-limit',
     parameter: 'limit',
     value: ''

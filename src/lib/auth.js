@@ -29,4 +29,13 @@ export default class Auth {
   async getAuthIdentifier(claim = 'sub') {
     return await get(jwtDecode(String(await this.getApiKey())), claim);
   }
+
+  /**
+   * Get the API environment being requested
+   *
+   * @returns {*|string}
+   */
+  async getEnvironment() {
+    return headers().get('x-perscom-environment') ?? process.env.API_ENV ?? 'production';
+  }
 }

@@ -29,7 +29,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell>Forms</TableHeadCell>
         </TableHead>
         <TableBody>
-          {forms.data && !!forms.data.length ? (
+          {forms?.data && !!forms.data.length ? (
             forms.data.map((form) => {
               return (
                 <TableRow key={form.id} data-testid={form.name}>
@@ -63,7 +63,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
-      <Pagination meta={forms.meta} />
+      {forms?.meta && <Pagination meta={forms.meta} />}
     </Card>
   );
 }

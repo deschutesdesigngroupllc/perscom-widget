@@ -9,6 +9,10 @@ export function middleware(request) {
     requestHeaders.set('x-perscom-apikey', request.nextUrl.searchParams.get('apikey'));
   }
 
+  if (request.nextUrl.searchParams.has('environment')) {
+    requestHeaders.set('x-perscom-environment', request.nextUrl.searchParams.get('environment'));
+  }
+
   return NextResponse.next({
     request: {
       headers: requestHeaders

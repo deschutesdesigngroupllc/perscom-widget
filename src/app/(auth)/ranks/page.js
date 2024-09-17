@@ -29,7 +29,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell colSpan="2">Ranks</TableHeadCell>
         </TableHead>
         <TableBody>
-          {ranks.data && !!ranks.data.length ? (
+          {ranks?.data && !!ranks.data.length ? (
             ranks.data.map((rank) => {
               return (
                 <TableRow key={rank.id}>
@@ -83,7 +83,7 @@ export default async function Page({ searchParams }) {
           )}
         </TableBody>
       </Table>
-      <Pagination meta={ranks.meta} />
+      {ranks?.meta && <Pagination meta={ranks.meta} />}
     </Card>
   );
 }

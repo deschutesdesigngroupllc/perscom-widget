@@ -10,7 +10,7 @@
     "build": "next build",
     "build:widget": "parcel build src/app/widget.js --dist-dir public",
     "lint": "next lint",
-    "format": "prettier '{src,__tests__}/**/*.{js,json}' './*.{js,json}' --write --config ./prettier.config.js",
+    "format": "prettier '{src,__tests__,examples}/**/*.{js,json,html}' './*.{js,json}' --write --config ./prettier.config.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci"
