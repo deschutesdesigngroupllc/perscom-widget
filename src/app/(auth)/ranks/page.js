@@ -29,7 +29,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell colSpan="2">Ranks</TableHeadCell>
         </TableHead>
         <TableBody>
-          {ranks.data && !!ranks.data.length ? (
+          {ranks?.data && !!ranks.data.length ? (
             ranks.data.map((rank) => {
               return (
                 <TableRow key={rank.id}>
@@ -44,7 +44,9 @@ export default async function Page({ searchParams }) {
                         />
                       </div>
                     ) : (
-                      <div className="text-center font-medium">No Image</div>
+                      <div className="text-center text-xs font-medium text-gray-700 dark:text-gray-400">
+                        No Image
+                      </div>
                     )}
                   </TableCell>
                   <TableCell className="!whitespace-normal break-normal !py-4">
@@ -60,24 +62,28 @@ export default async function Page({ searchParams }) {
                           />
                         </div>
                       )}
-                      <div className="mb-2 text-sm font-semibold">{rank.name}</div>
-                      <div
-                        className="text-sm"
-                        dangerouslySetInnerHTML={{ __html: rank.description }}
-                      ></div>
+                      <div className="text-sm font-semibold text-gray-950 dark:text-white">
+                        {rank.name}
+                      </div>
+                      {rank.description && (
+                        <div
+                          className="mt-2 text-xs text-gray-700 dark:text-gray-400"
+                          dangerouslySetInnerHTML={{ __html: rank.description }}
+                        ></div>
+                      )}
                     </>
                   </TableCell>
                 </TableRow>
               );
             })
           ) : (
-            <div className="flex items-center justify-center p-8 text-sm">
+            <div className="flex items-center justify-center p-8 text-xs text-gray-700 dark:text-gray-400">
               There are no ranks to view.
             </div>
           )}
         </TableBody>
       </Table>
-      <Pagination meta={ranks.meta} />
+      {ranks?.meta && <Pagination meta={ranks.meta} />}
     </Card>
   );
 }

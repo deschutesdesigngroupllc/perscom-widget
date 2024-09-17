@@ -14,26 +14,29 @@ The PERSCOM Widget offers a simple and effective way to integrate your PERSCOM.i
 
 ## Introduction
 
-By utilizing a straightforward HTML code snippet, the widget can elegantly render and present your data in a non-intrusive manner. Further, the widget can be fully customized using CSS to seamlessly blend with your website's aesthetics.
+By using a straightforward HTML code snippet, the widget can elegantly render and present your data in a non-intrusive manner. Further, the widget can be fully customized using CSS to seamlessly blend with your website's aesthetics.
 
 ```html
 <!-- Place this code where you want the widget to appear on your website. -->
-<!-- Replace APIKEY and PERSCOMID with your actual API key and PERSCOM Account ID. -->
+<!-- Replace APIKEY with your actual API key. -->
 
 <div id="perscom_widget_wrapper">
-  <script
-    id="perscom_widget"
-    data-perscomid="PERSCOMID"
-    data-apikey="APIKEY"
-    data-widget="roster"
-    data-dark="false"
-    src="https://widget.perscom.io/widget.js"
-    type="text/javascript"
-  ></script>
+    <script
+        id="perscom_widget"
+        data-apikey="APIKEY"
+        data-widget="roster"
+        data-dark="false"
+        src="https://widget.perscom.io/widget.js"
+        type="text/javascript"
+    ></script>
 </div>
 ```
 
-## Getting Started      
+## Demo / Example
+
+A live version of the widget can be viewed [here](https://deschutesdesigngroupllc.github.io/perscom-widget/). This demo uses data straight from our demo organization available at [https://demo.perscom.io](https://demo.perscom.io).
+
+## Getting Started
 
 Explore the variety of available widgets:
 

@@ -11,12 +11,11 @@ export default function Login() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const perscomId = formData.get('perscomId');
     const apiKey = formData.get('apiKey');
 
-    if (perscomId && apiKey) {
+    if (apiKey) {
       update(
-        { perscomId, apiKey },
+        { apiKey },
         {
           optimisticData: {
             isLoggedIn: true
@@ -32,10 +31,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit} method="POST" className="grid grid-cols-1 gap-6 sm:grid-cols-6">
-      <div className="col-span-full sm:col-span-2">
-        <TextInput type="number" name="perscomId" id="perscomId" placeholder="PERSCOM ID" />
-      </div>
-      <div className="col-span-full sm:col-span-4">
+      <div className="col-span-full">
         <TextInput
           type="password"
           name="apiKey"

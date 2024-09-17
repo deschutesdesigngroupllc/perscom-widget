@@ -1,6 +1,7 @@
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Image from 'next/image';
 import { Link } from '../../../../components/link';
+import { Status } from '../../../../components/status';
 import { Table } from '../../../../components/table';
 
 export function Unit({ unit }) {
@@ -37,49 +38,38 @@ export function Unit({ unit }) {
                             <Image src={image_url} alt={rank_name} fill objectFit="contain" />
                           </div>
                         ) : (
-                          <div className="text-sm font-bold">{abbreviation}</div>
+                          <div className="text-xs font-bold">{abbreviation}</div>
                         )}
                       </div>
                     )}
                     <div className="ml-4 flex flex-col">
-                      <Link href={`/users/${user_id}`} className="text-sm font-semibold">
+                      <Link
+                        href={`/users/${user_id}`}
+                        className="text-xs text-gray-950 dark:text-white dark:hover:text-gray-300"
+                      >
                         {name}
                       </Link>
-                      <div className="text-xs md:hidden">{position_name}</div>
+                      <div className="text-xs text-gray-700 dark:text-gray-400 md:hidden">
+                        {position_name}
+                      </div>
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="hidden w-1/6 whitespace-normal !py-3 md:table-cell lg:whitespace-nowrap">
+                <TableCell className="hidden w-1/6 whitespace-normal !py-3 text-xs md:table-cell lg:whitespace-nowrap">
                   {position_name}
                 </TableCell>
-                <TableCell className="hidden w-1/6 whitespace-normal !py-3 md:table-cell lg:whitespace-nowrap">
+                <TableCell className="hidden w-1/6 whitespace-normal !py-3 text-xs md:table-cell lg:whitespace-nowrap">
                   {specialty_name}
                 </TableCell>
                 <TableCell className="w-1/12 whitespace-nowrap !py-3 text-right md:text-center">
-                  <>
-                    {status && (
-                      <span
-                        className="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
-                        style={{
-                          color: status.text_color,
-                          backgroundColor: status.bg_color
-                        }}
-                      >
-                        {status.name}
-                      </span>
-                    )}
-                  </>
+                  <>{status && <Status text={status.name} color={status.color} />}</>
                 </TableCell>
                 <TableCell className="hidden w-1/12 !py-3 text-center lg:table-cell">
                   <>
                     {online ? (
-                      <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-600">
-                        Online
-                      </span>
+                      <Status text={'Online'} color={'#16a34a'} />
                     ) : (
-                      <span className="inline-flex rounded-full bg-sky-100 px-2 text-xs font-semibold leading-5 text-sky-600">
-                        Offline
-                      </span>
+                      <Status text={'Offline'} color={'#0284c7'} />
                     )}
                   </>
                 </TableCell>
@@ -87,7 +77,7 @@ export function Unit({ unit }) {
             );
           })
         ) : (
-          <div className="flex items-center justify-center p-8 text-sm">
+          <div className="flex items-center justify-center p-8 text-xs">
             There are no personnel assigned to this unit.
           </div>
         )}

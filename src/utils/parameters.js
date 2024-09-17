@@ -5,6 +5,11 @@ const optionalAttributes = [
     value: ''
   },
   {
+    attribute: 'data-environment',
+    parameter: 'environment',
+    value: ''
+  },
+  {
     attribute: 'data-limit',
     parameter: 'limit',
     value: ''
@@ -35,11 +40,6 @@ const requiredAttributes = [
   {
     attribute: 'data-apikey',
     parameter: 'apikey',
-    value: ''
-  },
-  {
-    attribute: 'data-perscomid',
-    parameter: 'perscomid',
     value: ''
   }
 ];

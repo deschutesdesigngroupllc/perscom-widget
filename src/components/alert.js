@@ -23,7 +23,7 @@ export function Alert({ children, type = 'info', error }) {
   return (
     <FlowbiteAlert color={type} icon={icon}>
       <span>
-        <p>{children}</p>
+        <p className="text-xs">{children}</p>
       </span>
     </FlowbiteAlert>
   );

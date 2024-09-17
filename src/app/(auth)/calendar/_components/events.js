@@ -22,7 +22,9 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
                 <a href="#">
                   <div className="flex flex-col space-y-2">
                     <div className="font-bold">{event.name}</div>
-                    {event.description && <div>{event.description}</div>}
+                    {event.description && (
+                      <div dangerouslySetInnerHTML={{ __html: event.description }}></div>
+                    )}
                     {!event.allDay && (
                       <div className="flex items-center ">
                         <ClockIcon
@@ -80,7 +82,9 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
         <ModalHeader>{selectedEvent.name}</ModalHeader>
         <ModalBody>
           <div className="flex flex-col space-y-2 text-sm">
-            {selectedEvent.description && <div>{selectedEvent.description}</div>}
+            {selectedEvent.description && (
+              <div dangerouslySetInnerHTML={{ __html: selectedEvent.description }}></div>
+            )}
             {!selectedEvent.allDay && (
               <div className="flex items-center ">
                 <ClockIcon

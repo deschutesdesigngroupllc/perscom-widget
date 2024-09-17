@@ -20,17 +20,17 @@ export function Pagination({ meta }) {
       {meta.current_page && meta?.last_page && meta?.last_page > 1 && (
         <FlowbitePagination
           theme={{
-            base: 'dark:bg-gray-700 bg-gray-50 rounded-b-md border-t border-gray-200 dark:border-gray-900',
+            base: 'dark:bg-[#09090B] bg-gray-50 rounded-b-md dark:border-gray-900',
             pages: {
               base: 'inline-flex items-center justify-center -space-x-px w-full',
               previous: {
-                base: 'ml-0 py-3 px-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                base: 'ml-0 py-3 px-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-850 dark:hover:text-white'
               },
               next: {
-                base: 'py-3 px-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                base: 'py-3 px-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-850 dark:hover:text-white'
               },
               selector: {
-                base: 'w-12 py-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                base: 'w-12 py-3 leading-tight text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:white dark:hover:bg-gray-700 dark:hover:text-white'
               }
             }
           }}

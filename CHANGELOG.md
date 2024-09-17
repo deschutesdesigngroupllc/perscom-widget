@@ -1,6 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.30...HEAD)
+## [Unreleased](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.4...HEAD)
 
 ## [v1.0.30](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.29...v1.0.30) - 2024-06-09
 
@@ -423,3 +423,27 @@
 ### Changed
 
 - Made table more responsive for the roster by @JonErickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/20
+
+## [v1.1.4](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.3...v1.1.4) - 2024-09-17
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.3...v1.1.4
+
+## [v1.1.3](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.2...v1.1.3) - 2024-09-17
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.2...v1.1.3
+
+## [v1.1.2](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.1...v1.1.2) - 2024-09-17
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.1...v1.1.2
+
+## [v1.1.1](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.0...v1.1.1) - 2024-09-17
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.1.0...v1.1.1
+
+## [v1.1.0](https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.38...v1.1.0) - 2024-09-17
+
+### What's Changed
+
+* Support for PERSCOM v2 by @jonerickson in https://github.com/DeschutesDesignGroupLLC/perscom-widget/pull/176
+
+**Full Changelog**: https://github.com/DeschutesDesignGroupLLC/perscom-widget/compare/v1.0.30...v1.1.0

@@ -29,7 +29,7 @@ export default async function Page({ searchParams }) {
           <TableHeadCell colSpan="2">Qualifications</TableHeadCell>
         </TableHead>
         <TableBody>
-          {qualifications.data && !!qualifications.data.length ? (
+          {qualifications?.data && !!qualifications.data.length ? (
             qualifications.data.map((qualification) => {
               return (
                 <TableRow key={qualification.id}>
@@ -44,7 +44,9 @@ export default async function Page({ searchParams }) {
                         />
                       </div>
                     ) : (
-                      <div className="text-center font-medium">No Image</div>
+                      <div className="text-center text-xs font-medium text-gray-700 dark:text-gray-400">
+                        No Image
+                      </div>
                     )}
                   </TableCell>
                   <TableCell className="!whitespace-normal break-normal !py-4">
@@ -60,24 +62,28 @@ export default async function Page({ searchParams }) {
                           />
                         </div>
                       )}
-                      <div className="mb-2 text-sm font-semibold">{qualification.name}</div>
-                      <div
-                        className="text-sm"
-                        dangerouslySetInnerHTML={{ __html: qualification.description }}
-                      ></div>
+                      <div className="text-sm font-semibold text-gray-950 dark:text-white">
+                        {qualification.name}
+                      </div>
+                      {qualification.description && (
+                        <div
+                          className="mt-2 text-xs text-gray-700 dark:text-gray-400"
+                          dangerouslySetInnerHTML={{ __html: qualification.description }}
+                        ></div>
+                      )}
                     </>
                   </TableCell>
                 </TableRow>
               );
             })
           ) : (
-            <div className="flex items-center justify-center p-8 text-sm">
+            <div className="flex items-center justify-center p-8 text-xs text-gray-700 dark:text-gray-400">
               There are no qualifications to view.
             </div>
           )}
         </TableBody>
       </Table>
-      <Pagination meta={qualifications.meta} />
+      {qualifications?.meta && <Pagination meta={qualifications.meta} />}
     </Card>
   );
 }

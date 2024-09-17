@@ -16,8 +16,13 @@ class Widget {
    * @param requiredAttributes
    * @param optionalAttributes
    */
-  init = (widget, resourceAttribute = null, requiredAttributes = [], optionalAttributes = []) => {
-    this.widget = widget ?? 'roster';
+  init = (
+    widget = null,
+    resourceAttribute = null,
+    requiredAttributes = [],
+    optionalAttributes = []
+  ) => {
+    this.widget = widget;
     this.resourceAttribute = resourceAttribute;
     this.requiredAttributes = requiredAttributes;
     this.optionalAttributes = optionalAttributes;
@@ -61,7 +66,11 @@ class Widget {
    * @returns {string}
    */
   composeIframeUrl = () => {
-    const url = new URL(`${process.env.WIDGET_URL}/${this.widget}`);
+    let url = new URL(process.env.WIDGET_URL);
+
+    if (this.widget) {
+      url = new URL(`${process.env.WIDGET_URL}/${this.widget}`);
+    }
 
     if (this.resourceAttribute) {
       url.pathname += `/${this.resourceAttribute}`;

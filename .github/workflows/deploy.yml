@@ -8,19 +8,44 @@ env:
   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - master
-      - staging
+    tags:
+      - '*'
 
 jobs:
-  deploy:
-    name: Deploy to Vercel
+  setup:
+    name: Setup Deployment
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    outputs:
+      branch: ${{ steps.check_step.outputs.branch }}
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get Current Branch
+        id: check_step
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo "branch=${branch}" >> $GITHUB_OUTPUT          
+          echo "Branch is $branch."
+
+  production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: setup
+    if: contains(needs.setup.outputs.branch, 'master')
+    environment: 'production'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Get Version
+        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -34,89 +59,82 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Bump Application Version and Tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: patch
-          default_prerelease_bump: prerelease
-          release_branches: master
-          pre_release_branches: staging
-          append_to_pre_release_tag: prerelease
-
-      - name: Setup Vercel Staging
-        if: github.ref == 'refs/heads/staging'
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
-
       - name: Setup Vercel Production
-        if: github.ref == 'refs/heads/master'
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
 
-      - name: Setup Environment Variables Staging
-        if: github.ref == 'refs/heads/staging'
-        run: |
-          vercel env pull .env.local --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
-
-      - name: Setup Environment Variables Production
-        if: github.ref == 'refs/heads/master'
+      - name: Setup Environment Variables
         run: |
           vercel env pull .env.local --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          echo SENTRY_RELEASE=${{ steps.tag_version.outputs.new_tag }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ steps.tag_version.outputs.new_tag }} >> .env.local
+          echo SENTRY_RELEASE=${{ env.VERSION }} >> .env.local
+          echo NEXT_PUBLIC_WIDGET_VERSION=${{ env.VERSION }} >> .env.local
 
-      - name: Build Widget Staging
-        if: github.ref == 'refs/heads/staging'
-        run: npm run build:widget
-        env:
-          WIDGET_URL: https://widget.staging.perscom.io
-
-      - name: Build Widget Production
-        if: github.ref == 'refs/heads/master'
+      - name: Build Widget
         run: npm run build:widget
         env:
           WIDGET_URL: https://widget.perscom.io
 
-      - name: Build Project Artifacts Staging
-        if: github.ref == 'refs/heads/staging'
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Build Project Artifacts Production
-        if: github.ref == 'refs/heads/master'
+      - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy Project Artifacts to Vercel Staging
-        if: github.ref == 'refs/heads/staging'
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Project Artifacts to Vercel Production
-        if: github.ref == 'refs/heads/master'
+      - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Create Sentry Release Staging
-        if: github.ref == 'refs/heads/staging'
-        uses: getsentry/action-release@v1
-        with:
-          environment: staging
-          version: ${{ steps.tag_version.outputs.new_tag }}
-          sourcemaps: ./dist ./build/static/js
-
       - name: Create Sentry Release Production
-        if: github.ref == 'refs/heads/master'
         uses: getsentry/action-release@v1
         with:
           environment: production
-          version: ${{ steps.tag_version.outputs.new_tag }}
+          version: ${{ env.VERSION }}
           sourcemaps: ./dist ./build/static/js
 
-      - name: Create Github Release
-        uses: ncipollo/release-action@v1
-        if: github.ref == 'refs/heads/master'
+  staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: setup
+    if: contains(needs.setup.outputs.branch, 'staging')
+    environment: 'staging'
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Get Version
+        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: ${{ steps.tag_version.outputs.new_tag }}
-          generateReleaseNotes: true
-          makeLatest: true
-          token: ${{ secrets.RELEASE_TOKEN }}
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Setup Vercel
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
+
+      - name: Setup Environment Variables
+        run: |
+          vercel env pull .env.local --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          echo SENTRY_RELEASE=${{ env.VERSION }} >> .env.local
+          echo NEXT_PUBLIC_WIDGET_VERSION=${{ env.VERSION }} >> .env.local
+
+      - name: Build Widget
+        run: npm run build:widget
+        env:
+          WIDGET_URL: https://widget.staging.perscom.io
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Create Sentry Release
+        uses: getsentry/action-release@v1
+        with:
+          environment: staging
+          version: ${{ env.VERSION }}
+          sourcemaps: ./dist ./build/static/js

@@ -30,7 +30,7 @@ export default async function Page() {
   return (
     <Card>
       <Tabs style="underline">
-        {groups.data && !!groups.data.length ? (
+        {groups?.data && !!groups.data.length ? (
           groups.data.map((group, index) => (
             <TabItem key={index} title={group.name}>
               <>
@@ -39,7 +39,7 @@ export default async function Page() {
                     return <Unit key={unit.id} unit={unit} />;
                   })
                 ) : (
-                  <div className="flex items-center justify-center p-8 text-sm">
+                  <div className="flex items-center justify-center p-8 text-xs text-gray-700 dark:text-gray-400">
                     There are no units assigned to this group.
                   </div>
                 )}
@@ -48,7 +48,7 @@ export default async function Page() {
           ))
         ) : (
           <TabItem key="none" title="No Groups">
-            <div className="flex items-center justify-center p-8 text-sm">
+            <div className="flex items-center justify-center p-8 text-xs text-gray-700 dark:text-gray-400">
               There are no groups to view.
             </div>
           </TabItem>

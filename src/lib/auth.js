@@ -22,22 +22,20 @@ export default class Auth {
   }
 
   /**
-   * Get the current PERSCOM ID being used
-   *
-   * @returns {*|string}
-   */
-  async getPerscomId() {
-    const { perscomId } = await getIronSession(cookies(), sessionOptions);
-
-    return headers().get('x-perscom-id') ?? perscomId ?? process.env.PERSCOM_ID ?? null;
-  }
-
-  /**
    * Get the current user ID via the API key
    *
    * @returns {string | undefined}
    */
   async getAuthIdentifier(claim = 'sub') {
     return await get(jwtDecode(String(await this.getApiKey())), claim);
+  }
+
+  /**
+   * Get the API environment being requested
+   *
+   * @returns {*|string}
+   */
+  async getEnvironment() {
+    return headers().get('x-perscom-environment') ?? process.env.API_ENV ?? 'production';
   }
 }

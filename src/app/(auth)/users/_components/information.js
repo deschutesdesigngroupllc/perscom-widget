@@ -1,34 +1,21 @@
 import Image from 'next/image';
 import { Card } from '../../../../components/card';
+import { Status } from '../../../../components/status';
 
 export function Information({ user }) {
   const { name, rank, position, profile_photo_url, status } = user;
   const { name: rank_name, abbreviation: rank_abbreviation, image: rank_image } = rank ?? {};
   const { image_url: rank_image_url } = rank_image ?? {};
   const { name: position_name } = position ?? {};
-  const {
-    name: status_name,
-    text_color: status_text_color,
-    bg_color: status_bg_color
-  } = status ?? {};
+  const { name: status_name, color: status_color } = status ?? {};
 
   const profile_photo = profile_photo_url ?? rank_image_url ?? null;
 
   return (
     <Card className="w-full justify-start p-6 md:w-1/3">
       <div className="flex items-center justify-between">
-        <h5 className="text-xl font-bold">Personnel Profile</h5>
-        {status && (
-          <span
-            className="inline-flex rounded-full px-2 text-xs font-semibold leading-5"
-            style={{
-              color: status_text_color,
-              backgroundColor: status_bg_color
-            }}
-          >
-            {status_name}
-          </span>
-        )}
+        <h5 className="text-xl font-bold text-gray-950 dark:text-white">Personnel Profile</h5>
+        {status && <Status text={status_name} color={status_color} />}
       </div>
       <div className="flex flex-grow flex-col items-center justify-center space-y-4 py-4">
         {profile_photo && (
@@ -37,11 +24,17 @@ export function Information({ user }) {
           </div>
         )}
         <div className="flex flex-col items-center justify-center text-center">
-          <div className="font-bold">
+          <div className="font-bold text-gray-950 dark:text-white">
             {rank_abbreviation} {name} {'  '}
           </div>
-          {rank_name && <div className="font-medium">{rank_name}</div>}{' '}
-          {position_name && <div className="font-light">{position_name}</div>}
+          {rank_name && (
+            <div className="text-xs font-bold text-gray-700 dark:text-gray-400">{rank_name}</div>
+          )}{' '}
+          {position_name && (
+            <div className="text-xs font-light text-gray-700 dark:text-gray-400">
+              {position_name}
+            </div>
+          )}
         </div>
       </div>
     </Card>

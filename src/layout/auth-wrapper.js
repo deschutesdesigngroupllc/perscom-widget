@@ -10,10 +10,7 @@ export async function getSession(shouldSleep = true) {
 export default async function AuthWrapper(props) {
   const session = await getSession();
 
-  if (
-    !session.isLoggedIn &&
-    (!headers().has('x-perscom-id') || !headers().has('x-perscom-apikey'))
-  ) {
+  if (!session.isLoggedIn && !headers().has('x-perscom-apikey')) {
     return redirect('/');
   }
 

@@ -19,14 +19,13 @@ export default class Client {
    * @returns {Promise<any>}
    */
   async request(endpoint, method = 'GET', body = null, params = null) {
-    const perscomId = await this.auth.getPerscomId();
     const apiKey = await this.auth.getApiKey();
+    const environment = await this.auth.getEnvironment();
 
     let init = {
       cache: 'no-store',
       method: method,
       headers: {
-        'X-Perscom-Id': perscomId,
         'X-Perscom-Widget': true,
         Authorization: `Bearer ${apiKey}`,
         Accept: 'application/json',
@@ -38,7 +37,23 @@ export default class Client {
       init.body = JSON.stringify(body);
     }
 
-    const url = new URL(process.env.API_URL + endpoint);
+    const apiUrl = () => {
+      switch (environment) {
+        case 'local':
+          return 'https://api.perscom-app.test/v2/';
+        case 'demo':
+          return 'https://api.demo.perscom.io/v2/';
+        case 'staging':
+          return 'https://api.staging.perscom.io/v2/';
+        default:
+          return 'https://api.perscom.io/v2/';
+      }
+    };
+
+    console.debug('API Url: ' + environment);
+    console.debug('API Key: ' + apiKey);
+
+    const url = new URL(apiUrl() + endpoint);
 
     if (params) {
       const additionalParams = new URLSearchParams(params);
