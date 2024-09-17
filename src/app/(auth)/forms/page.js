@@ -36,12 +36,15 @@ export default async function Page({ searchParams }) {
                   <TableCell>
                     <div className="flex flex-col items-start justify-between space-x-0 space-y-4 md:flex-row md:items-center md:space-x-8 md:space-y-0">
                       <div>
-                        <div className="mb-2 text-sm font-semibold text-gray-950 dark:text-white">
+                        <div className="text-sm font-semibold text-gray-950 dark:text-white">
                           {form.name}
                         </div>
-                        <div className="text-xs text-gray-700 dark:text-gray-400">
-                          {form.description}
-                        </div>
+                        {form.description && (
+                          <div
+                            className="mt-2 text-xs text-gray-700 dark:text-gray-400"
+                            dangerouslySetInnerHTML={{ __html: form.description }}
+                          ></div>
+                        )}
                       </div>
                       <div className="flex-shrink-0">
                         <ButtonLink href={`forms/${form.id}`} color="gray">
@@ -54,7 +57,7 @@ export default async function Page({ searchParams }) {
               );
             })
           ) : (
-            <div className="flex items-center justify-center p-8 text-sm">
+            <div className="flex items-center justify-center p-8 text-xs text-gray-700 dark:text-gray-400">
               There are no forms to view.
             </div>
           )}
