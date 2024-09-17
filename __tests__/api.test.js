@@ -6,11 +6,7 @@ import jwt from 'jsonwebtoken';
 import Auth from '../src/lib/auth';
 import Client from '../src/lib/client';
 
-const searchParams = {
-  apikey: 'foo',
-  perscomid: 'bar'
-};
-const auth = new Auth(searchParams);
+const auth = new Auth();
 const client = new Client(auth);
 
 describe('Auth', () => {
@@ -18,21 +14,9 @@ describe('Auth', () => {
     expect(auth.getApiKey()).toBe('foo');
   });
 
-  it('can get the PERSCOM id', () => {
-    expect(auth.getPerscomId()).toBe('bar');
-  });
-
-  it('can get the search parameters', () => {
-    expect(auth.getSearchParams()).toBeInstanceOf(URLSearchParams);
-    expect(auth.getSearchParams()).toStrictEqual(new URLSearchParams(searchParams));
-  });
-
   it('can decode a JWT token', () => {
     const token = jwt.sign({ sub: 12345 }, 'password');
-    const testAuth = new Auth({
-      apikey: token,
-      perscomid: 1
-    });
+    const testAuth = new Auth();
 
     expect(testAuth.getAuthIdentifier()).toStrictEqual(12345);
   });

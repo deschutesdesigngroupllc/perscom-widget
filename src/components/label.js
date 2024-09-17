@@ -6,7 +6,7 @@ export function Label(props) {
       theme={{
         root: {
           colors: {
-            default: 'text-gray-500 dark:text-gray-400'
+            default: 'text-gray-700 dark:text-gray-400'
           }
         }
       }}

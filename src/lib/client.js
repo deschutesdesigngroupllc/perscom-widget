@@ -19,14 +19,12 @@ export default class Client {
    * @returns {Promise<any>}
    */
   async request(endpoint, method = 'GET', body = null, params = null) {
-    const perscomId = await this.auth.getPerscomId();
     const apiKey = await this.auth.getApiKey();
 
     let init = {
       cache: 'no-store',
       method: method,
       headers: {
-        'X-Perscom-Id': perscomId,
         'X-Perscom-Widget': true,
         Authorization: `Bearer ${apiKey}`,
         Accept: 'application/json',
@@ -45,19 +43,23 @@ export default class Client {
       additionalParams.forEach((value, key) => url.searchParams.set(key, value));
     }
 
-    const response = await fetch(url.href, init);
-    const json = await response.json();
+    try {
+      const response = await fetch(url.href, init);
+      const json = await response.json();
 
-    if (response.status < 200 || response.status >= 300) {
-      throw new RequestError({
-        status: response.status,
-        response: json,
-        message:
-          json.error?.message ?? 'There was an error with the last request. Please try again.'
-      });
+      if (response.status < 200 || response.status >= 300) {
+        throw new RequestError({
+          status: response.status,
+          response: json,
+          message:
+            json.error?.message ?? 'There was an error with the last request. Please try again.'
+        });
+      }
+
+      return json;
+    } catch (error) {
+      console.error(error);
     }
-
-    return json;
   }
 
   /**

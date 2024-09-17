@@ -36,11 +36,6 @@ const requiredAttributes = [
     attribute: 'data-apikey',
     parameter: 'apikey',
     value: ''
-  },
-  {
-    attribute: 'data-perscomid',
-    parameter: 'perscomid',
-    value: ''
   }
 ];
 

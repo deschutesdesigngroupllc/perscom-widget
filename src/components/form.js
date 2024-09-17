@@ -25,7 +25,7 @@ export function Form({ form, searchParams }) {
 
   return (
     <Card className="p-6">
-      <h5 className="text-xl font-bold">{form.name}</h5>
+      <h5 className="text-xl font-bold text-gray-950 dark:text-white">{form.name}</h5>
       <form action={formAction} className="mb-0" ref={formRef}>
         <div className="flex flex-col gap-4 pt-4">
           {formState?.success && (
@@ -40,7 +40,9 @@ export function Form({ form, searchParams }) {
               {formState.message ?? 'There was an error submitting the form.'}
             </Alert>
           )}
-          {form?.instructions && <div className="text-sm">{form.instructions}</div>}
+          {form?.instructions && (
+            <div className="text-xs text-gray-700 dark:text-gray-400">{form.instructions}</div>
+          )}
           {form?.fields &&
             !!form.fields.length &&
             form.fields.map((field) => {

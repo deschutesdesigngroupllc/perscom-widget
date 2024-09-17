@@ -11,11 +11,15 @@
 }
 
 .rdt_TableHeadRow {
-    @apply bg-gray-50 dark:bg-gray-900 dark:text-gray-400 rounded-t-md
+    @apply bg-gray-50 dark:bg-[#09090B] dark:text-white text-gray-950 rounded-t-md
 }
 
 .rdt_TableRow {
-    @apply dark:bg-gray-700 dark:text-gray-400 hover:dark:text-gray-400 hover:dark:bg-gray-800 hover:dark:outline-none hover:dark:border-none
+    @apply dark:bg-gray-900 dark:text-gray-400 hover:dark:text-gray-400 hover:dark:bg-gray-800 hover:dark:outline-none hover:dark:border-none
+}
+
+.rdt_TableCell {
+    @apply text-xs
 }
 
 .rdt_Pagination {

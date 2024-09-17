@@ -314,7 +314,7 @@ export function Records({ user }) {
 
   return (
     <Card className="p-6">
-      <h5 className="text-xl font-bold">Records</h5>
+      <h5 className="text-xl font-bold text-gray-950 dark:text-white">Records</h5>
       <Tabs style="underline">
         {tabs.map((tab, index) => (
           <TabItem key={index} title={tab.name}>
@@ -336,12 +336,12 @@ export function Records({ user }) {
                 customStyles={{
                   headCells: {
                     style: {
-                      color: 'rgb(100 116 139 / var(--tw-text-opacity))'
+                      color: 'rgb(255 255 255/ var(--tw-text-opacity))'
                     }
                   },
                   cells: {
                     style: {
-                      color: 'rgb(100 116 139 / var(--tw-text-opacity))',
+                      color: 'rgb(161 161 170 / var(--tw-text-opacity))',
                       marginTop: '0.5rem',
                       marginBottom: '0.5rem'
                     }

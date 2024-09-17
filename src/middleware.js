@@ -9,10 +9,6 @@ export function middleware(request) {
     requestHeaders.set('x-perscom-apikey', request.nextUrl.searchParams.get('apikey'));
   }
 
-  if (request.nextUrl.searchParams.has('perscomid')) {
-    requestHeaders.set('x-perscom-id', request.nextUrl.searchParams.get('perscomid'));
-  }
-
   return NextResponse.next({
     request: {
       headers: requestHeaders

@@ -10,10 +10,7 @@ export function Link(props) {
   return (
     <NextLink
       href={{ pathname: props.href, search: params?.toString() }}
-      className={cx(
-        props.className,
-        'hover:text-gray-600 active:text-blue-600 dark:hover:text-gray-500 dark:active:text-blue-600'
-      )}
+      className={cx(props.className, 'text-gray-950 hover:text-gray-700 active:text-blue-600')}
     >
       {props.children}
     </NextLink>

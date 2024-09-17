@@ -33,34 +33,46 @@ export function Assignment({ user }) {
 
   return (
     <Card className="p-6">
-      <h5 className="text-xl font-bold">Assignment</h5>
+      <h5 className="text-xl font-bold text-gray-950 dark:text-white">Assignment</h5>
       <Tabs style="underline">
         <TabItem key="primary-assignment" title="Primary Assignment">
           <div className="flow-root">
             <ul className="mt-4 divide-y divide-gray-200 dark:divide-gray-700">
               <li className="py-2">
-                <p className="truncate text-sm font-semibold">Position</p>
-                <p className="truncate text-sm">{position_name}</p>
+                <p className="truncate text-xs font-semibold text-gray-950 dark:text-white">
+                  Position
+                </p>
+                <p className="truncate text-xs text-gray-700 dark:text-gray-400">{position_name}</p>
               </li>
               <li className="py-2">
-                <p className="truncate text-sm font-semibold">Specialty</p>
-                <p className="truncate text-sm">{specialty_name}</p>
+                <p className="truncate text-xs font-semibold text-gray-950 dark:text-white">
+                  Specialty
+                </p>
+                <p className="truncate text-xs text-gray-700 dark:text-gray-400">
+                  {specialty_name}
+                </p>
               </li>
               <li className="py-2">
-                <p className="truncate text-sm font-semibold">Unit</p>
-                <p className="truncate text-sm">{unit_name}</p>
+                <p className="truncate text-xs font-semibold text-gray-950 dark:text-white">Unit</p>
+                <p className="truncate text-xs text-gray-700 dark:text-gray-400">{unit_name}</p>
               </li>
               <li className="py-2">
-                <p className="truncate text-sm font-semibold">Last Assignment Change Date</p>
-                <p className="truncate text-sm">
+                <p className="truncate text-xs font-semibold text-gray-950 dark:text-white">
+                  Last Assignment Change Date
+                </p>
+                <p className="truncate text-xs text-gray-700 dark:text-gray-400">
                   <time dateTime={lastAssignmentChangeDate.format('YYYY-MM-DD')}>
                     {lastAssignmentChangeDate.format('dddd, MMM D, YYYY')}
                   </time>
                 </p>
               </li>
               <li className="py-2">
-                <p className="truncate text-sm font-semibold">Time In Assignment</p>
-                <p className="truncate text-sm">{timeInAssignment}</p>
+                <p className="truncate text-xs font-semibold text-gray-950 dark:text-white">
+                  Time In Assignment
+                </p>
+                <p className="truncate text-xs text-gray-700 dark:text-gray-400">
+                  {timeInAssignment}
+                </p>
               </li>
             </ul>
           </div>
@@ -122,12 +134,12 @@ export function Assignment({ user }) {
               customStyles={{
                 headCells: {
                   style: {
-                    color: 'rgb(100 116 139 / var(--tw-text-opacity))'
+                    color: 'rgb(255 255 255 / var(--tw-text-opacity))'
                   }
                 },
                 cells: {
                   style: {
-                    color: 'rgb(100 116 139 / var(--tw-text-opacity))',
+                    color: 'rgb(161 161 170 / var(--tw-text-opacity))',
                     marginTop: '0.5rem',
                     marginBottom: '0.5rem'
                   }

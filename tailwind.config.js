@@ -1,4 +1,3 @@
-const { generateTailwindColors, generateRootCSSVars } = require('./generators');
 const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
@@ -12,11 +11,10 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    colors: generateTailwindColors(),
     extend: {
       colors: {
         cyan: colors.blue,
-        gray: colors.slate
+        gray: colors.zinc
       },
       fontSize: {
         xxs: '11px'
@@ -35,13 +33,7 @@ module.exports = {
       width: (theme) => theme('spacing')
     }
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('flowbite/plugin'),
-    function ({ addBase }) {
-      addBase({ ':root': generateRootCSSVars() });
-    }
-  ],
+  plugins: [require('@tailwindcss/forms'), require('flowbite/plugin')],
   variants: {
     extend: {
       dark: ['opacity']
