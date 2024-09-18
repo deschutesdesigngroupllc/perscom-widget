@@ -24,7 +24,7 @@ export function Form({ form, searchParams }) {
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <h5 className="text-xl font-bold text-gray-950 dark:text-white">{form.name}</h5>
       <form action={formAction} className="mb-0" ref={formRef}>
         <div className="flex flex-col gap-4 pt-4">
@@ -50,7 +50,7 @@ export function Form({ form, searchParams }) {
             !!form.fields.length &&
             form.fields.map((field) => {
               return (
-                <div key={field.key}>
+                <div key={field.key} className="text-xs">
                   <div className="mb-2 block">
                     <Label htmlFor={field.key} value={field.name} />
                   </div>

@@ -1,7 +1,7 @@
 export function Status({ text, color = '#2563eb' }) {
   return (
     <span
-      className="inline-flex rounded-full px-2 text-xs font-normal leading-5 text-white"
+      className="inline-flex text-nowrap rounded-full px-2 text-xs font-normal leading-5 text-white"
       style={{
         backgroundColor: color
       }}

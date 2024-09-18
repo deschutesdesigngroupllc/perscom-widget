@@ -21,7 +21,7 @@ export function Demographics({ user }) {
   const lastSeenAt = dayjs(last_seen_at).tz(searchParams.get('timezone') ?? 'UTC');
 
   return (
-    <Card className="w-full justify-start p-6 md:w-2/3">
+    <Card className="w-full justify-start p-4 sm:p-6 md:w-2/3">
       <div className="flex items-center justify-between">
         <h5 className="text-xl font-bold tracking-tight text-gray-950 dark:text-white">
           Demographics

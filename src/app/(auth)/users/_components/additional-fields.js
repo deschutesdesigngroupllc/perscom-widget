@@ -8,7 +8,7 @@ export function AdditionalFields({ user }) {
   return (
     <>
       {fields && !!fields.length && (
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <h5 className="text-xl font-bold text-gray-950 dark:text-white">
             Additional Information
           </h5>

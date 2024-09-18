@@ -21,6 +21,7 @@ export function Field({ field }) {
           required={field.required}
           readOnly={field.readonly}
           onChange={(checked) => handleToggle(field.key, checked)}
+          sizing="sm"
         />
       );
     case 'color':
@@ -33,7 +34,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'country':
@@ -44,7 +46,8 @@ export function Field({ field }) {
           name={field.key}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         >
           <option disabled={true} value="">
             Choose an option
@@ -69,7 +72,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'datetime-local':
@@ -82,7 +86,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'email':
@@ -95,7 +100,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'file':
@@ -107,6 +113,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
+          sizing="sm"
         />
       );
     case 'number':
@@ -119,7 +126,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'password':
@@ -133,7 +141,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
     case 'code':
@@ -146,8 +155,9 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
           rows={4}
+          sizing="sm"
         />
       );
     case 'select': {
@@ -164,7 +174,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         >
           <option disabled={true} value="">
             Choose an option
@@ -192,7 +203,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         >
           <option disabled={true} value="">
             Choose an option
@@ -216,7 +228,8 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={field.help}
+          helperText={<div className="text-xs">{field.help}</div>}
+          sizing="sm"
         />
       );
   }

@@ -313,7 +313,7 @@ export function Records({ user }) {
   ];
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <h5 className="text-xl font-bold text-gray-950 dark:text-white">Records</h5>
       <Tabs style="underline">
         {tabs.map((tab, index) => (
@@ -333,20 +333,6 @@ export function Records({ user }) {
                   noRowsPerPage: true
                 }}
                 emptyMessage={tabs[index].emptyMessage}
-                customStyles={{
-                  headCells: {
-                    style: {
-                      color: 'rgb(255 255 255/ var(--tw-text-opacity))'
-                    }
-                  },
-                  cells: {
-                    style: {
-                      color: 'rgb(161 161 170 / var(--tw-text-opacity))',
-                      marginTop: '0.5rem',
-                      marginBottom: '0.5rem'
-                    }
-                  }
-                }}
                 sortFunction={(rows, selector, direction) => {
                   return rows.sort((rowA, rowB) => {
                     const aField = new Date(selector(rowA));
