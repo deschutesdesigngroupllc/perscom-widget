@@ -1,6 +1,6 @@
 'use client';
 
-import 'iframe-resizer/js/iframeResizer.contentWindow.min';
+import '@iframe-resizer/child';
 
 export function IframeResizerProvider() {
   return <></>;

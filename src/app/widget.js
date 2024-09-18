@@ -40,11 +40,10 @@ class Widget {
   setupIframeResizer = () => {
     if (document.getElementById(IFRAME_ID)) {
       const iframeResizerScript = document.createElement('script');
-      iframeResizerScript.src =
-        'https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.6/js/iframeResizer.min.js';
+      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/@iframe-resizer/parent';
       iframeResizerScript.type = 'text/javascript';
       iframeResizerScript.onload = () => {
-        window.iFrameResize({ log: false }, `#${IFRAME_ID}`);
+        window.iframeResize({ log: false, license: 'GPLv3' }, `#${IFRAME_ID}`);
       };
 
       document.body.appendChild(iframeResizerScript);
