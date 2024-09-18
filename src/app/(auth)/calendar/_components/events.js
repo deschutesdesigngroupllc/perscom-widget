@@ -26,7 +26,7 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
                       <div dangerouslySetInnerHTML={{ __html: event.description }}></div>
                     )}
                     {!event.allDay && (
-                      <div className="flex items-center ">
+                      <div className="flex items-center">
                         <ClockIcon
                           className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500"
                           aria-hidden="true"
@@ -86,7 +86,7 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
               <div dangerouslySetInnerHTML={{ __html: selectedEvent.description }}></div>
             )}
             {!selectedEvent.allDay && (
-              <div className="flex items-center ">
+              <div className="flex items-center">
                 <ClockIcon
                   className="mr-2 h-5 w-5 flex-shrink-0 text-gray-500"
                   aria-hidden="true"

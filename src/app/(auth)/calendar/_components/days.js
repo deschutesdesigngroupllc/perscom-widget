@@ -111,7 +111,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
 
   useEffect(() => {
     setArrayOfWeeks(getAllDays());
-  }, [currentMonth]);
+  }, [currentMonth]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex rounded-b-lg bg-gray-200 text-xs leading-6 dark:bg-gray-700 lg:flex-auto">
