@@ -30,7 +30,7 @@ export function Unit({ unit }) {
             return (
               <TableRow key={user.id} data-testid={name}>
                 <TableCell className="w-1/2 whitespace-normal !py-3 sm:whitespace-nowrap">
-                  <div className="flex items-center text-xs">
+                  <div className="flex items-center space-x-1 text-xs sm:space-x-2">
                     {rank && (
                       <div className="flex w-8 flex-shrink-0 items-center">
                         {image_url ? (
@@ -51,7 +51,7 @@ export function Unit({ unit }) {
                       </Link>
                       <div className="flex flex-row items-center space-x-0.5 sm:space-x-1">
                         {specialty_name && (
-                          <div className="text-nowrap font-medium text-gray-700">
+                          <div className="text-nowrap font-medium text-gray-700 dark:text-gray-400">
                             {specialty_name}
                           </div>
                         )}
