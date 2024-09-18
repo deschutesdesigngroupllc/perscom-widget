@@ -6,6 +6,7 @@ const nextConfig = {
     domains: [
       'perscom-development.s3.amazonaws.com',
       'perscom-staging.s3.amazonaws.com',
+      'perscom-demo.s3.amazonaws.com',
       'perscom.s3.amazonaws.com',
       'ui-avatars.com',
       'localhost'

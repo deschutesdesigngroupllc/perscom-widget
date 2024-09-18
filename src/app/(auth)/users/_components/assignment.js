@@ -32,7 +32,7 @@ export function Assignment({ user }) {
     .fromNow(true);
 
   return (
-    <Card className="p-6">
+    <Card className="p-4 sm:p-6">
       <h5 className="text-xl font-bold text-gray-950 dark:text-white">Assignment</h5>
       <Tabs style="underline">
         <TabItem key="primary-assignment" title="Primary Assignment">
@@ -131,20 +131,6 @@ export function Assignment({ user }) {
                 noRowsPerPage: true
               }}
               emptyMessage="There are no secondary assignments to display."
-              customStyles={{
-                headCells: {
-                  style: {
-                    color: 'rgb(255 255 255 / var(--tw-text-opacity))'
-                  }
-                },
-                cells: {
-                  style: {
-                    color: 'rgb(161 161 170 / var(--tw-text-opacity))',
-                    marginTop: '0.5rem',
-                    marginBottom: '0.5rem'
-                  }
-                }
-              }}
             />
           </div>
         </TabItem>

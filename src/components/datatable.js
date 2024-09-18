@@ -25,5 +25,7 @@ function DataTableLoading() {
 }
 
 function DataTableEmpty({ emptyMessage }) {
-  return <div className="py-4 text-sm text-gray-500 sm:py-8">{emptyMessage}</div>;
+  return (
+    <div className="py-4 text-xs text-gray-700 dark:text-gray-400 sm:py-8">{emptyMessage}</div>
+  );
 }

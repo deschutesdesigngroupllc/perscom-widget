@@ -10,11 +10,11 @@ export default function Page() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-50 px-4 py-20 dark:bg-[#09090B] sm:px-20">
-      <Logo className="h-16 sm:h-28" />
-      <Card className="mt-10 w-full p-6 sm:max-w-3xl">
+      <Logo className="h-12 sm:h-16 sm:h-28" />
+      <Card className="mt-10 w-full p-4 sm:max-w-3xl sm:p-6">
         <div className="flex flex-col space-y-6">
           <div className="col-span-full text-center">
-            <div className="text-2xl font-bold tracking-tight text-gray-950 dark:text-white">
+            <div className="text-xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-2xl">
               The Official PERSCOM Widget
             </div>
             <div className="mt-1 text-sm dark:text-gray-400">

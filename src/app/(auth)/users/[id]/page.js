@@ -1,6 +1,4 @@
-import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 import { Alert } from '../../../../components/alert';
-import { Link } from '../../../../components/link';
 import Client from '../../../../lib/client';
 import { RequestError } from '../../../../lib/request-error';
 import { Profile } from '../_components/profile';
@@ -51,15 +49,5 @@ export default async function Page({ params }) {
     }
   }
 
-  return (
-    <div className="flex flex-col space-y-4">
-      <div className="flex flex-row items-center justify-start space-x-1 active:text-blue-600">
-        <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-        <Link href={'/roster'} className="text-xs">
-          Back to Roster
-        </Link>
-      </div>
-      <Profile user={user.data} />
-    </div>
-  );
+  return <Profile user={user.data} />;
 }

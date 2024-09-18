@@ -12,7 +12,7 @@ export function Information({ user }) {
   const profile_photo = profile_photo_url ?? rank_image_url ?? null;
 
   return (
-    <Card className="w-full justify-start p-6 md:w-1/3">
+    <Card className="w-full justify-start p-4 sm:p-6 md:w-1/3">
       <div className="flex items-center justify-between">
         <h5 className="text-xl font-bold text-gray-950 dark:text-white">Personnel Profile</h5>
         {status && <Status text={status_name} color={status_color} />}
