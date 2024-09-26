@@ -12,15 +12,9 @@ export const metadata = {
 };
 
 export default async function Page() {
-  let groups = {};
+  let roster = {};
   try {
-    groups = await new Client().getGroups({
-      scopes: [
-        {
-          name: 'orderForRoster'
-        }
-      ]
-    });
+    roster = await new Client().getRoster();
   } catch (error) {
     if (error instanceof RequestError) {
       return <Alert type="failure">{error.message}</Alert>;
@@ -30,8 +24,8 @@ export default async function Page() {
   return (
     <Card>
       <Tabs style="underline">
-        {groups?.data && !!groups.data.length ? (
-          groups.data.map((group, index) => (
+        {roster?.data && !!roster.data.length ? (
+          roster.data.map((group, index) => (
             <TabItem key={index} title={group.name}>
               <>
                 {group.units && !!group.units.length ? (
