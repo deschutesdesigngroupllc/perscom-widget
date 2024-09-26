@@ -177,6 +177,16 @@ export default class Client {
   }
 
   /**
+   * Get the roster
+   *
+   * @param {object} params
+   * @returns {Promise<*>}
+   */
+  async getRoster(params = {}) {
+    return await this.request('roster', 'GET', null, params);
+  }
+
+  /**
    * Get a user
    *
    * @param id
