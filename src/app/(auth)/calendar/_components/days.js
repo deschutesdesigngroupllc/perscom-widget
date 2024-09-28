@@ -132,8 +132,8 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                   <div
                     key={dayIndex}
                     className={cx('relative min-h-40 px-3 py-2', {
-                      'bg-white dark:bg-gray-800': day.isCurrentMonth,
-                      'bg-gray-50 dark:bg-gray-700': !day.isCurrentMonth,
+                      'bg-white dark:bg-gray-900': day.isCurrentMonth,
+                      'bg-gray-50 dark:bg-gray-800': !day.isCurrentMonth,
                       'rounded-bl-lg': dayIndex === 0 && weekIndex === arrayOfWeeks.length - 1,
                       'rounded-br-lg':
                         dayIndex === week.dates.length - 1 && weekIndex === arrayOfWeeks.length - 1
@@ -141,8 +141,8 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                   >
                     <time
                       dateTime={day.date}
-                      className={cx({
-                        'flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white':
+                      className={cx('dark:text-gray-400', {
+                        'flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white dark:text-white':
                           day.isCurrentDay
                       })}
                     >
@@ -200,8 +200,8 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                   className={cx(
                     'flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10 focus-visible:outline-none dark:hover:bg-gray-900',
                     {
-                      'bg-white dark:bg-gray-800': day.isCurrentMonth,
-                      'bg-gray-50 dark:bg-gray-700': !day.isCurrentMonth,
+                      'bg-white dark:bg-gray-900': day.isCurrentMonth,
+                      'bg-gray-50 dark:bg-gray-800': !day.isCurrentMonth,
                       'font-semibold': day.isSelected || day.isCurrentDay,
                       'text-white': day.isSelected,
                       'text-blue-600': !day.isSelected && day.isCurrentDay,
@@ -219,7 +219,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
                 >
                   <time
                     dateTime={day.date}
-                    className={cx('ml-auto', {
+                    className={cx('ml-auto dark:text-gray-400', {
                       'flex h-6 w-6 items-center justify-center rounded-full': day.isSelected,
                       'bg-blue-600': day.isSelected && day.isCurrentDay,
                       'bg-gray-900': day.isSelected && !day.isCurrentDay
