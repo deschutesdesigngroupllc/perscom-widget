@@ -74,7 +74,7 @@ export function Calendar({ events }) {
 
   return (
     <Card>
-      <div className="rounded-md bg-gray-50 dark:bg-gray-700">
+      <div className="rounded-md bg-gray-50 dark:bg-[#09090B]">
         <div className="lg:flex lg:h-full lg:flex-col">
           <Header {...headerProps} />
           <div

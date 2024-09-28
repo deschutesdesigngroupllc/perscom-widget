@@ -50,9 +50,6 @@ export default class Client {
       }
     };
 
-    console.debug('API Url: ' + environment);
-    console.debug('API Key: ' + apiKey);
-
     const url = new URL(apiUrl() + endpoint);
 
     if (params) {

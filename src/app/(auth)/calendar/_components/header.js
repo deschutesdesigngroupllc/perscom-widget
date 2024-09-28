@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 export function Header({ currentMonth, previousMonth, goToToday, nextMonth }) {
   return (
     <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-gray-600 lg:flex-none">
-      <div className="text-xs font-bold uppercase dark:text-gray-400">
+      <div className="text-xs font-bold uppercase text-gray-950 dark:text-white">
         <time dateTime={currentMonth.format('YYYY-MM')}>{currentMonth.format('MMMM YYYY')}</time>
       </div>
       <div className="flex items-center">
@@ -20,7 +20,7 @@ export function Header({ currentMonth, previousMonth, goToToday, nextMonth }) {
           </button>
           <button
             type="button"
-            className="hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-950 hover:bg-gray-50 focus:relative dark:border-gray-900 dark:text-gray-400 dark:hover:bg-gray-900 md:block"
+            className="hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-950 hover:bg-gray-50 focus:relative dark:border-gray-900 dark:text-white dark:hover:bg-gray-900 md:block"
             onClick={() => goToToday()}
           >
             Today

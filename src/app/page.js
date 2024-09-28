@@ -36,6 +36,12 @@ export default function Page() {
               Awards
             </Link>
             <Link
+              href={'/calendar'}
+              className="inline-flexclassNames-center group w-full justify-center rounded-full bg-gray-100 px-4 py-2 text-center text-sm font-semibold hover:bg-gray-50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-gray-200 active:text-gray-600"
+            >
+              Calendar
+            </Link>
+            <Link
               href={'/forms'}
               className="inline-flexclassNames-center group w-full justify-center rounded-full bg-gray-100 px-4 py-2 text-center text-sm font-semibold hover:bg-gray-50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:bg-gray-200 active:text-gray-600"
             >
