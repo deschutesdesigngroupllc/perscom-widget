@@ -13,7 +13,7 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
     <>
       {selectedDay.events && !!selectedDay.events.length && (
         <div className="p-6 lg:hidden">
-          <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5 dark:divide-gray-700 dark:bg-gray-900">
+          <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-xs shadow ring-1 ring-black ring-opacity-5 dark:divide-gray-700 dark:bg-gray-900">
             {selectedDay.events.map((event) => (
               <li
                 key={event.id}
@@ -21,7 +21,7 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
               >
                 <a href="#">
                   <div className="flex flex-col space-y-2">
-                    <div className="font-bold dark:text-white">{event.name}</div>
+                    <div className="text-sm font-bold dark:text-white">{event.name}</div>
                     {event.description && (
                       <div
                         className="pb-4 text-gray-500 dark:text-gray-400"
@@ -75,7 +75,7 @@ export function Events({ selectedDay, selectedEvent, modalState, setModalState }
       <Modal dismissible show={modalState} onClose={() => setModalState(false)}>
         <ModalHeader theme={{}}>{selectedEvent.name}</ModalHeader>
         <ModalBody>
-          <div className="flex flex-col space-y-2 text-sm">
+          <div className="flex flex-col space-y-2 text-xs">
             {selectedEvent.description && (
               <div
                 className="pb-4 dark:text-gray-400"
