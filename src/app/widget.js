@@ -43,7 +43,7 @@ class Widget {
       iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/@iframe-resizer/parent';
       iframeResizerScript.type = 'text/javascript';
       iframeResizerScript.onload = () => {
-        window.iframeResize({ log: false, license: 'GPLv3' }, `#${IFRAME_ID}`);
+        window.iframeResize({ log: false, license: 'GPLv3', waitForLoad : true }, `#${IFRAME_ID}`);
       };
 
       document.body.appendChild(iframeResizerScript);
