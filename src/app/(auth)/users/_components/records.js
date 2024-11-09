@@ -77,7 +77,7 @@ export function Records({ user }) {
                     {status_name}
                   </div>
                 )}
-                {text && <div className="text-xs">{text}</div>}
+                {text && <div className="text-xs" dangerouslySetInnerHTML={{ __html: text }}></div>}
               </div>
             );
           },
@@ -131,7 +131,9 @@ export function Records({ user }) {
                 )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
-                  {text && <div className="text-xs">{text}</div>}
+                  {text && (
+                    <div className="text-xs" dangerouslySetInnerHTML={{ __html: text }}></div>
+                  )}
                 </div>
               </div>
             );
@@ -173,7 +175,9 @@ export function Records({ user }) {
         },
         {
           name: 'Record',
-          selector: (row) => row.text
+          selector: (row) => {
+            return <div className="text-xs" dangerouslySetInnerHTML={{ __html: row.text }}></div>;
+          }
         }
       ]
     },
@@ -209,7 +213,9 @@ export function Records({ user }) {
                 )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
-                  {text && <div className="text-xs">{text}</div>}
+                  {text && (
+                    <div className="text-xs" dangerouslySetInnerHTML={{ __html: text }}></div>
+                  )}
                 </div>
               </div>
             );
@@ -264,7 +270,9 @@ export function Records({ user }) {
                 )}
                 <div className="flex flex-col justify-center space-y-1">
                   {name && <div className="font-semibold">{name}</div>}
-                  {text && <div className="text-xs">{text}</div>}
+                  {text && (
+                    <div className="text-xs" dangerouslySetInnerHTML={{ __html: text }}></div>
+                  )}
                 </div>
               </div>
             );
@@ -306,7 +314,9 @@ export function Records({ user }) {
         },
         {
           name: 'Record',
-          selector: (row) => row.text
+          selector: (row) => {
+            return <div className="text-xs" dangerouslySetInnerHTML={{ __html: row.text }}></div>;
+          }
         }
       ]
     }
