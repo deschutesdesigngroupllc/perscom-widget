@@ -36,6 +36,6 @@ export default class Auth {
    * @returns {*|string}
    */
   async getEnvironment() {
-    return headers().get('x-perscom-environment') ?? process.env.API_ENV ?? 'production';
+    return headers().get('x-perscom-env') ?? process.env.API_ENV ?? 'production';
   }
 }
