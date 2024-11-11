@@ -5,8 +5,8 @@ const optionalAttributes = [
     value: ''
   },
   {
-    attribute: 'data-environment',
-    parameter: 'environment',
+    attribute: 'data-env',
+    parameter: 'env',
     value: ''
   },
   {

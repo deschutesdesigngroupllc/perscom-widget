@@ -8,7 +8,7 @@
     "start:widget": "node widget-server.js",
     "dev": "next dev",
     "build": "next build",
-    "build:widget": "parcel build src/app/widget.js --dist-dir public",
+    "build:widget": "webpack --config webpack.widget.config.js",
     "lint": "next lint",
     "format": "prettier '{src,__tests__,examples}/**/*.{js,json,html}' './*.{js,json}' --write --config ./prettier.config.js",
     "test": "jest",
@@ -28,12 +28,12 @@
     "swr": "^2.2.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.1.1",
     "@iframe-resizer/child": "5.3.2",
     "@next/bundle-analyzer": "^14.1.0",
-    "@parcel/compressor-brotli": "^2.12.0",
-    "@parcel/compressor-gzip": "^2.12.0",
     "@sentry/nextjs": "^7.110.1",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^6.6.3",
@@ -41,9 +41,11 @@
     "@testing-library/user-event": "^14.5.1",
     "@vercel/speed-insights": "^1.0.2",
     "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.2.1",
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.0.0",
@@ -58,7 +60,6 @@
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "node-static": "^0.7.11",
-    "parcel": "^2.12",
     "parse-domain": "^8.0.1",
     "postcss": "^8.4.21",
     "prettier": "^3.3.3",
@@ -69,8 +70,12 @@
     "styled-components": "^6.1.8",
     "swc": "^1.0.11",
     "tailwindcss": "^3.4.1",
+    "terser-webpack-plugin": "^5.3.10",
     "vm-browserify": "^1.1.2",
-    "web-vitals": "^3.5.0"
+    "web-vitals": "^3.5.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   },
   "eslintConfig": {
     "extends": [
