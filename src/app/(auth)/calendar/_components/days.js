@@ -1,20 +1,13 @@
 'use client';
 
 import cx from 'classnames';
-import dayjs from 'dayjs';
-import timezonePlugin from 'dayjs/plugin/timezone';
-import utcPlugin from 'dayjs/plugin/utc';
 import { useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
-import { rrulestr } from 'rrule';
+import { DateHelper } from '../../../../lib/date';
+import { RRuleHelper } from '../../../../lib/rrule';
 
 export function Days({ currentMonth, handleDayEventSelect, events }) {
   const searchParams = useSearchParams();
-
-  dayjs.extend(utcPlugin);
-  dayjs.extend(timezonePlugin);
-  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
-
   const [arrayOfWeeks, setArrayOfWeeks] = useState([]);
   const [selectedDay, setSelectedDay] = useState({});
 
@@ -36,21 +29,19 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
     };
   };
 
-  const formatEvent = (event) => {
+  const formatEvent = (event, timezone) => {
+    const rruleHelper = new RRuleHelper(event, timezone);
+
     return {
       id: event.id,
       name: event.name,
       description: event.description,
-      start: dayjs(event.start).tz(searchParams.get('timezone') ?? 'UTC'),
-      end: dayjs(event.start)
-        .tz(searchParams.get('timezone') ?? 'UTC')
-        .isSame(dayjs(event.end), 'day')
-        ? dayjs(event.end)
-        : null,
+      start: new DateHelper(event.starts, timezone),
+      end: new DateHelper(event.ends, timezone),
       color: event?.calendar?.color,
       allDay: event.all_day,
       repeats: event.repeats,
-      rrule: event.repeats ? rrulestr(event.rrule) : null,
+      rrule: rruleHelper.canGenerateRRule() ? rruleHelper.getRRule() : null,
       calendar: event.calendar?.name,
       location: event.location,
       details: event.content
@@ -58,14 +49,17 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
   };
 
   const getAllDays = () => {
+    const timezone = searchParams.get('timezone') ?? 'UTC';
+
     const parsedSingleEvents =
       events.data &&
-      events.data.filter((event) => !event.repeats).map((event) => formatEvent(event));
+      events.data.filter((event) => !event.repeats).map((event) => formatEvent(event, timezone));
+
     const parsedRepeatingEvents =
       events.data &&
       events.data
-        .filter((event) => event.repeats && event.rrule)
-        .map((event) => formatEvent(event));
+        .filter((event) => event.repeats && event.schedule)
+        .map((event) => formatEvent(event, timezone));
 
     let parsedEvents = parsedSingleEvents;
     let currentDate = currentMonth
@@ -79,7 +73,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
         ...event.rrule
           .between(currentDate.toDate(), currentDate.add(45, 'day').toDate())
           .map(function (occurrence) {
-            return { ...event, start: dayjs(occurrence) };
+            return { ...event, start: new DateHelper(occurrence, timezone) };
           })
       );
     });
@@ -91,7 +85,7 @@ export function Days({ currentMonth, handleDayEventSelect, events }) {
     while (currentDate.weekday(0).toObject().months !== nextMonth) {
       const formatted = formatDateObject(currentDate);
       formatted['events'] = parsedEvents.filter(function (event) {
-        return currentDate.isSame(dayjs(event.start), 'day');
+        return currentDate.isSame(event.start.getDate(), 'day');
       });
 
       weekDates.push(formatted);

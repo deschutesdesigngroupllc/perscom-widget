@@ -1,6 +1,6 @@
 const path = require('path');
-const dotenv = require('dotenv')
-const webpack = require('webpack')
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 
 dotenv.config();
@@ -10,7 +10,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'widget.js',
+    filename: 'widget.js'
   },
 
   module: {
@@ -37,12 +37,12 @@ module.exports = {
           mangle: true,
           compress: {
             drop_console: true,
-            pure_funcs: ['console.info', 'console.debug', 'console.log'],
-          },
+            pure_funcs: ['console.info', 'console.debug', 'console.log']
+          }
         },
-        extractComments: false,
-      }),
-    ],
+        extractComments: false
+      })
+    ]
   },
 
   plugins: [

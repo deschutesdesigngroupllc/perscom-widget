@@ -1,19 +1,14 @@
 'use client';
 
 import cx from 'classnames';
-import dayjs from 'dayjs';
-import timezonePlugin from 'dayjs/plugin/timezone';
-import utcPlugin from 'dayjs/plugin/utc';
 import { Avatar } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
 import TimeAgo from 'react-timeago';
+import { DateHelper } from '../../../../lib/date';
 
 export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
   const searchParams = useSearchParams();
-
-  dayjs.extend(utcPlugin);
-  dayjs.extend(timezonePlugin);
-  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+  const timezone = searchParams.get('timezone') ?? 'UTC';
 
   const {
     id,
@@ -49,6 +44,8 @@ export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
   const getText = (text, description) => {
     return text ?? description ?? 'No content exists for this item.';
   };
+
+  const createdAt = new DateHelper(created_at, timezone);
 
   return (
     <div className="flex flex-col space-y-4" key={id} data-testid={headline}>
@@ -95,13 +92,9 @@ export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
               'text-green-700': color === 'success',
               'text-yellow-700': color === 'warning'
             })}
-            dateTime={dayjs(created_at)
-              .tz(searchParams.get('timezone') ?? 'UTC')
-              .format('YYYY-MM-DD')}
+            dateTime={createdAt.format('YYYY-MM-DD')}
           >
-            {dayjs(created_at)
-              .tz(searchParams.get('timezone') ?? 'UTC')
-              .format('dddd, MMM D, YYYY')}
+            {createdAt.format('dddd, MMM D, YYYY')}
           </time>
         </div>
         <div>
@@ -128,13 +121,9 @@ export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
             'text-green-700': color === 'success',
             'text-yellow-700': color === 'warning'
           })}
-          dateTime={dayjs(created_at)
-            .tz(searchParams.get('timezone') ?? 'UTC')
-            .format('YYYY-MM-DD')}
+          dateTime={createdAt.format('YYYY-MM-DD')}
         >
-          {dayjs(created_at)
-            .tz(searchParams.get('timezone') ?? 'UTC')
-            .format('dddd, MMM D, YYYY')}
+          {createdAt.format('dddd, MMM D, YYYY')}
         </time>
       </div>
       <div className="!-my-4 -mx-6 border-t border-gray-100 bg-gray-50 text-gray-700 last:rounded-b dark:border-gray-900 dark:bg-[#09090B] dark:text-gray-400">
