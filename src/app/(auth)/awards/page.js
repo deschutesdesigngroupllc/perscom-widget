@@ -35,12 +35,14 @@ export default async function Page({ searchParams }) {
                 <TableRow key={award.id} data-testid={award.name}>
                   <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                     {award.image?.image_url ? (
-                      <div className="relative mx-auto h-20">
+                      <div className="relative mx-auto flex h-20 items-center justify-center">
                         <Image
                           src={award.image.image_url}
                           alt={award.name}
-                          fill
-                          objectFit="contain"
+                          width={80}
+                          height={80}
+                          priority={true}
+                          style={{ width: 'auto' }}
                         />
                       </div>
                     ) : (
@@ -52,13 +54,14 @@ export default async function Page({ searchParams }) {
                   <TableCell className="!whitespace-normal break-normal !py-4">
                     <>
                       {award.image?.image_url && (
-                        <div className="relative mb-2 flex h-12 sm:hidden">
+                        <div className="relative mb-2 flex h-8 sm:hidden">
                           <Image
-                            className="!w-auto"
                             src={award.image.image_url}
                             alt={award.name}
-                            fill
-                            objectFit="contain"
+                            width={32}
+                            height={32}
+                            priority={true}
+                            style={{ width: 'auto' }}
                           />
                         </div>
                       )}

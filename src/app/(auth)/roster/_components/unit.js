@@ -34,8 +34,15 @@ export function Unit({ unit }) {
                     {rank && (
                       <div className="flex w-8 flex-shrink-0 items-center">
                         {image_url ? (
-                          <div className="relative h-8 w-8">
-                            <Image src={image_url} alt={rank_name} fill objectFit="contain" />
+                          <div className="relative flex h-8 w-8 items-center justify-center">
+                            <Image
+                              src={image_url}
+                              alt={rank_name}
+                              width={32}
+                              height={32}
+                              priority={true}
+                              style={{ width: 'auto' }}
+                            />
                           </div>
                         ) : (
                           <div className="text-xs">{abbreviation}</div>

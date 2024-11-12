@@ -1,21 +1,16 @@
 'use client';
 
-import dayjs from 'dayjs';
-import timezonePlugin from 'dayjs/plugin/timezone';
-import utcPlugin from 'dayjs/plugin/utc';
 import { Badge, TabItem } from 'flowbite-react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../../components/card';
 import { Datatable } from '../../../../components/datatable';
 import { Tabs } from '../../../../components/tabs';
+import { DateHelper } from '../../../../lib/date';
 
 export function Records({ user }) {
   const searchParams = useSearchParams();
-
-  dayjs.extend(utcPlugin);
-  dayjs.extend(timezonePlugin);
-  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
+  const timezone = searchParams.get('timezone') ?? 'UTC';
 
   const tabs = [
     {
@@ -26,11 +21,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'
@@ -107,11 +100,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'
@@ -123,10 +114,10 @@ export function Records({ user }) {
             const { image, name } = award ?? {};
             const { image_url } = image ?? {};
             return (
-              <div className="flex space-x-4">
+              <div className="flex items-center space-x-4">
                 {image_url && (
-                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
-                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
+                    <Image src={image_url} alt={name} width={64} height={20} />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
@@ -164,11 +155,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'
@@ -189,11 +178,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'
@@ -205,10 +192,10 @@ export function Records({ user }) {
             const { image, name } = qualification ?? {};
             const { image_url } = image ?? {};
             return (
-              <div className="flex space-x-4">
+              <div className="flex items-center space-x-4">
                 {image_url && (
-                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
-                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
+                    <Image src={image_url} alt={name} width={64} height={20} />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
@@ -246,11 +233,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'
@@ -262,10 +247,10 @@ export function Records({ user }) {
             const { image, name } = rank ?? {};
             const { image_url } = image ?? {};
             return (
-              <div className="flex space-x-4">
+              <div className="flex items-center space-x-4">
                 {image_url && (
-                  <div className="relative h-6 w-6 sm:h-8 sm:w-8">
-                    <Image src={image_url} alt={name} fill objectFit="contain" />
+                  <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
+                    <Image src={image_url} alt={name} width={64} height={64} />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
@@ -303,11 +288,9 @@ export function Records({ user }) {
         {
           name: 'Date',
           selector: (row) => {
-            const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+            const date = new DateHelper(row.created_at, timezone);
 
-            return (
-              <time dateTime={date.format('YYYY-MM-DD')}>{date.format('dddd, MMM D, YYYY')}</time>
-            );
+            return date.toHtml();
           },
           sortable: true,
           maxWidth: '250px'

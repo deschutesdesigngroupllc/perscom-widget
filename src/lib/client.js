@@ -91,7 +91,7 @@ export default class Client {
   async getEvents(params = {}) {
     return await this.request('events', 'GET', null, {
       ...params,
-      ...{ include: 'calendar', limit: '100' }
+      ...{ include: 'calendar,schedule', limit: '100' }
     });
   }
 

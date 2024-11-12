@@ -1,14 +1,11 @@
 'use client';
 
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import timezonePlugin from 'dayjs/plugin/timezone';
-import utcPlugin from 'dayjs/plugin/utc';
 import { TabItem } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../../components/card';
 import { Datatable } from '../../../../components/datatable';
 import { Tabs } from '../../../../components/tabs';
+import { DateHelper } from '../../../../lib/date';
 
 export function Assignment({ user }) {
   const { position, unit, specialty, secondary_assignment_records, last_assignment_change_date } =
@@ -18,18 +15,10 @@ export function Assignment({ user }) {
   const { name: unit_name } = unit ?? {};
 
   const searchParams = useSearchParams();
+  const timezone = searchParams.get('timezone') ?? 'UTC';
 
-  dayjs.extend(utcPlugin);
-  dayjs.extend(timezonePlugin);
-  dayjs.extend(relativeTime);
-  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
-
-  const lastAssignmentChangeDate = dayjs(last_assignment_change_date).tz(
-    searchParams.get('timezone') ?? 'UTC'
-  );
-  const timeInAssignment = dayjs(last_assignment_change_date)
-    .tz(searchParams.get('timezone') ?? 'UTC')
-    .fromNow(true);
+  const lastAssignmentChangeDate = new DateHelper(last_assignment_change_date, timezone);
+  const timeInAssignment = lastAssignmentChangeDate.diffFrom(new Date().toDateString());
 
   return (
     <Card className="p-4 sm:p-6">
@@ -61,9 +50,7 @@ export function Assignment({ user }) {
                   Last Assignment Change Date
                 </p>
                 <p className="truncate text-xs text-gray-700 dark:text-gray-400">
-                  <time dateTime={lastAssignmentChangeDate.format('YYYY-MM-DD')}>
-                    {lastAssignmentChangeDate.format('dddd, MMM D, YYYY')}
-                  </time>
+                  {lastAssignmentChangeDate.toHtml()}
                 </p>
               </li>
               <li className="py-2">
@@ -85,13 +72,9 @@ export function Assignment({ user }) {
                 {
                   name: 'Date',
                   selector: (row) => {
-                    const date = dayjs(row.created_at).tz(searchParams.get('timezone') ?? 'UTC');
+                    const date = new DateHelper(row.created_at, timezone);
 
-                    return (
-                      <time dateTime={date.format('YYYY-MM-DD')}>
-                        {date.format('dddd, MMM D, YYYY')}
-                      </time>
-                    );
+                    return date.toHtml();
                   },
                   sortable: true,
                   maxWidth: '250px'

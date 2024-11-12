@@ -1,24 +1,19 @@
 'use client';
 
-import dayjs from 'dayjs';
-import timezonePlugin from 'dayjs/plugin/timezone';
-import utcPlugin from 'dayjs/plugin/utc';
 import { useSearchParams } from 'next/navigation';
 import { Card } from '../../../../components/card';
 import { Status } from '../../../../components/status';
+import { DateHelper } from '../../../../lib/date';
 
 export function Demographics({ user }) {
   const { name, created_at, updated_at, last_seen_at, online } = user;
 
   const searchParams = useSearchParams();
+  const timezone = searchParams.get('timezone') ?? 'UTC';
 
-  dayjs.extend(utcPlugin);
-  dayjs.extend(timezonePlugin);
-  dayjs.tz.setDefault(searchParams.get('timezone') ?? 'UTC');
-
-  const createdAt = dayjs(created_at).tz(searchParams.get('timezone') ?? 'UTC');
-  const updatedAt = dayjs(updated_at).tz(searchParams.get('timezone') ?? 'UTC');
-  const lastSeenAt = dayjs(last_seen_at).tz(searchParams.get('timezone') ?? 'UTC');
+  const createdAt = new DateHelper(created_at, timezone);
+  const updatedAt = new DateHelper(updated_at, timezone);
+  const lastSeenAt = new DateHelper(last_seen_at, timezone);
 
   return (
     <Card className="w-full justify-start p-4 sm:p-6 md:w-2/3">
@@ -43,9 +38,7 @@ export function Demographics({ user }) {
               Joined At
             </p>
             <p className="truncate text-xs text-gray-700 dark:text-gray-400">
-              <time dateTime={createdAt.format('YYYY-MM-DD')}>
-                {createdAt.format('dddd, MMM D, YYYY')}
-              </time>
+              {createdAt.toHtml()}
             </p>
           </li>
           <li className="py-2">
@@ -53,9 +46,7 @@ export function Demographics({ user }) {
               Last Updated At
             </p>
             <p className="truncate text-xs text-gray-700 dark:text-gray-400">
-              <time dateTime={updatedAt.format('YYYY-MM-DD')}>
-                {updatedAt.format('dddd, MMM D, YYYY')}
-              </time>
+              {updatedAt.toHtml()}
             </p>
           </li>
           <li className="py-2">
@@ -63,9 +54,7 @@ export function Demographics({ user }) {
               Last Online At
             </p>
             <p className="truncate text-xs text-gray-700 dark:text-gray-400">
-              <time dateTime={lastSeenAt.format('YYYY-MM-DD')}>
-                {lastSeenAt.format('dddd, MMM D, YYYY')}
-              </time>
+              {lastSeenAt.toHtml()}
             </p>
           </li>
         </ul>
