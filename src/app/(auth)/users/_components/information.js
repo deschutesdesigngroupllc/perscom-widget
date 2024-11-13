@@ -1,6 +1,6 @@
+import { Card } from '@/components/card';
+import { Status } from '@/components/status';
 import Image from 'next/image';
-import { Card } from '../../../../components/card';
-import { Status } from '../../../../components/status';
 
 export function Information({ user }) {
   const { name, rank, position, profile_photo_url, status } = user;

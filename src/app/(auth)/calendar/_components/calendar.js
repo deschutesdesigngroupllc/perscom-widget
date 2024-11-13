@@ -1,5 +1,6 @@
 'use client';
 
+import { Card } from '@/components/card';
 import cx from 'classnames';
 import dayjs, { locale } from 'dayjs';
 import isTodayPlugin from 'dayjs/plugin/isToday';
@@ -8,7 +9,6 @@ import objectPlugin from 'dayjs/plugin/toObject';
 import utcPlugin from 'dayjs/plugin/utc';
 import weekdayPlugin from 'dayjs/plugin/weekday';
 import { useState } from 'react';
-import { Card } from '../../../../components/card';
 import { Days } from './days';
 import { Events } from './events';
 import { Header } from './header';

@@ -1,7 +1,7 @@
 'use client';
 
+import useSession from '@/hooks/use-session';
 import { TextInput } from 'flowbite-react';
-import useSession from '../hooks/use-session';
 import { Submit } from './submit';
 
 export default function Login() {

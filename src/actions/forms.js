@@ -1,6 +1,6 @@
 'use server';
 
-import Client from '../lib/client';
+import Client from '@/lib/client';
 
 /**
  * Submit a form

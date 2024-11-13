@@ -1,12 +1,12 @@
 'use client';
 
+import { Card } from '@/components/card';
+import { Datatable } from '@/components/datatable';
+import { Tabs } from '@/components/tabs';
+import { DateHelper } from '@/lib/date';
 import { Badge, TabItem } from 'flowbite-react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { Card } from '../../../../components/card';
-import { Datatable } from '../../../../components/datatable';
-import { Tabs } from '../../../../components/tabs';
-import { DateHelper } from '../../../../lib/date';
 
 export function Records({ user }) {
   const searchParams = useSearchParams();

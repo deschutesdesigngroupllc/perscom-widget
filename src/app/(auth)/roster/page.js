@@ -1,9 +1,9 @@
+import { Alert } from '@/components/alert';
+import { Card } from '@/components/card';
+import { Tabs } from '@/components/tabs';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 import { TabItem } from 'flowbite-react';
-import { Alert } from '../../../components/alert';
-import { Card } from '../../../components/card';
-import { Tabs } from '../../../components/tabs';
-import Client from '../../../lib/client';
-import { RequestError } from '../../../lib/request-error';
 import { Unit } from './_components/unit';
 
 export const dynamic = 'force-dynamic';

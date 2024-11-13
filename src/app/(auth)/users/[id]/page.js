@@ -1,6 +1,6 @@
-import { Alert } from '../../../../components/alert';
-import Client from '../../../../lib/client';
-import { RequestError } from '../../../../lib/request-error';
+import { Alert } from '@/components/alert';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 import { Profile } from '../_components/profile';
 
 export const dynamic = 'force-dynamic';

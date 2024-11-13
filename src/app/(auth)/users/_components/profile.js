@@ -8,8 +8,6 @@ import { Records } from './records';
 export function Profile({ user }) {
   const { name, cover_photo_url } = user;
 
-  console.log(cover_photo_url?.includes('ui-avatars'));
-
   return (
     <div className="flex min-h-fit flex-col space-y-4">
       {cover_photo_url && (

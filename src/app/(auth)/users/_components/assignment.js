@@ -1,11 +1,11 @@
 'use client';
 
+import { Card } from '@/components/card';
+import { Datatable } from '@/components/datatable';
+import { Tabs } from '@/components/tabs';
+import { DateHelper } from '@/lib/date';
 import { TabItem } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
-import { Card } from '../../../../components/card';
-import { Datatable } from '../../../../components/datatable';
-import { Tabs } from '../../../../components/tabs';
-import { DateHelper } from '../../../../lib/date';
 
 export function Assignment({ user }) {
   const { position, unit, specialty, secondary_assignment_records, last_assignment_change_date } =

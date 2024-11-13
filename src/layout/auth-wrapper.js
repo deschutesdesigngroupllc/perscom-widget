@@ -1,7 +1,7 @@
+import { sessionOptions } from '@/lib/session';
 import { getIronSession } from 'iron-session';
 import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { sessionOptions } from '../lib/session';
 
 export async function getSession(shouldSleep = true) {
   return await getIronSession(cookies(), sessionOptions);

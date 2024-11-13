@@ -1,8 +1,8 @@
+import { Link } from '@/components/link';
+import { Status } from '@/components/status';
+import { Table } from '@/components/table';
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Image from 'next/image';
-import { Link } from '../../../../components/link';
-import { Status } from '../../../../components/status';
-import { Table } from '../../../../components/table';
 
 export function Unit({ unit }) {
   const { name, users } = unit;

@@ -1,6 +1,6 @@
+import { defaultSession } from '@/lib/session';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
-import { defaultSession } from '../lib/session';
 
 const sessionApiRoute = '/api/session';
 

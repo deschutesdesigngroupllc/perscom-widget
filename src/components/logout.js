@@ -1,6 +1,6 @@
 'use client';
 
-import useSession from '../hooks/use-session';
+import useSession from '@/hooks/use-session';
 import { Button } from './button';
 
 export default function Logout() {

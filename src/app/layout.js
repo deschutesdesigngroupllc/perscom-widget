@@ -1,9 +1,9 @@
+import { Footer } from '@/components/footer';
+import { IframeResizerProvider } from '@/providers/iframe';
+import { SessionProvider } from '@/providers/session';
+import { ThemeProvider } from '@/providers/theme';
 import cx from 'classnames';
 import { Inter } from 'next/font/google';
-import { Footer } from '../components/footer';
-import { IframeResizerProvider } from '../providers/iframe';
-import { SessionProvider } from '../providers/session';
-import { ThemeProvider } from '../providers/theme';
 import './globals.css';
 //import { SpeedInsights } from '@vercel/speed-insights/next';
 
