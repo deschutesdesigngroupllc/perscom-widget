@@ -1,9 +1,9 @@
 'use client';
 
+import { Card } from '@/components/card';
+import { Status } from '@/components/status';
+import { DateHelper } from '@/lib/date';
 import { useSearchParams } from 'next/navigation';
-import { Card } from '../../../../components/card';
-import { Status } from '../../../../components/status';
-import { DateHelper } from '../../../../lib/date';
 
 export function Demographics({ user }) {
   const { name, created_at, updated_at, last_seen_at, online } = user;

@@ -1,10 +1,10 @@
 'use client';
 
+import { DateHelper } from '@/lib/date';
+import { RRuleHelper } from '@/lib/rrule';
 import cx from 'classnames';
 import { useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
-import { DateHelper } from '../../../../lib/date';
-import { RRuleHelper } from '../../../../lib/rrule';
 
 export function Days({ currentMonth, handleDayEventSelect, events }) {
   const searchParams = useSearchParams();

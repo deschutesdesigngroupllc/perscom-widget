@@ -1,16 +1,16 @@
+import { Card } from '@/components/card';
+import { Link } from '@/components/link';
+import Login from '@/components/login';
+import { Logo } from '@/components/logo';
+import Logout from '@/components/logout';
 import { headers } from 'next/headers';
-import { Card } from '../components/card';
-import { Link } from '../components/link';
-import Login from '../components/login';
-import { Logo } from '../components/logo';
-import Logout from '../components/logout';
 
 export default function Page() {
   const hasApiKey = headers().has('x-perscom-apikey');
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-50 px-4 py-20 dark:bg-[#09090B] sm:px-20">
-      <Logo className="h-12 sm:h-16 sm:h-28" />
+      <Logo className="h-12 sm:h-16" />
       <Card className="mt-10 w-full p-4 sm:max-w-3xl sm:p-6">
         <div className="flex flex-col space-y-6">
           <div className="col-span-full text-center">

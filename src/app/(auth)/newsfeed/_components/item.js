@@ -1,10 +1,10 @@
 'use client';
 
+import { DateHelper } from '@/lib/date';
 import cx from 'classnames';
 import { Avatar } from 'flowbite-react';
 import { useSearchParams } from 'next/navigation';
 import TimeAgo from 'react-timeago';
-import { DateHelper } from '../../../../lib/date';
 
 export function Item({ item, currentUser, onLikeClick, onUnlikeClick }) {
   const searchParams = useSearchParams();

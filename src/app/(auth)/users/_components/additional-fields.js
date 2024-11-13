@@ -1,6 +1,6 @@
+import { Card } from '@/components/card';
+import { Value } from '@/components/value';
 import get from 'lodash/get';
-import { Card } from '../../../../components/card';
-import { Value } from '../../../../components/value';
 
 export function AdditionalFields({ user }) {
   const { fields } = user;

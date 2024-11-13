@@ -1,11 +1,11 @@
+import { Alert } from '@/components/alert';
+import { Card } from '@/components/card';
+import { Pagination } from '@/components/pagination';
+import { Table } from '@/components/table';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
 import Image from 'next/image';
-import { Alert } from '../../../components/alert';
-import { Card } from '../../../components/card';
-import { Pagination } from '../../../components/pagination';
-import { Table } from '../../../components/table';
-import Client from '../../../lib/client';
-import { RequestError } from '../../../lib/request-error';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
@@ -35,14 +35,14 @@ export default async function Page({ searchParams }) {
                 <TableRow key={award.id} data-testid={award.name}>
                   <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                     {award.image?.image_url ? (
-                      <div className="relative mx-auto flex h-20 items-center justify-center">
+                      <div className="relative mx-auto flex size-20 items-center justify-center">
                         <Image
                           src={award.image.image_url}
                           alt={award.name}
                           width={80}
                           height={80}
                           priority={true}
-                          style={{ width: 'auto' }}
+                          className="h-full w-full object-contain"
                         />
                       </div>
                     ) : (
@@ -54,14 +54,14 @@ export default async function Page({ searchParams }) {
                   <TableCell className="!whitespace-normal break-normal !py-4">
                     <>
                       {award.image?.image_url && (
-                        <div className="relative mb-2 flex h-8 sm:hidden">
+                        <div className="relative mb-2 flex size-8 sm:hidden">
                           <Image
                             src={award.image.image_url}
                             alt={award.name}
                             width={32}
                             height={32}
                             priority={true}
-                            style={{ width: 'auto' }}
+                            className="h-full w-full object-contain"
                           />
                         </div>
                       )}

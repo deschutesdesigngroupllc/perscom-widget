@@ -1,8 +1,8 @@
 'use client';
 
+import { submitForm } from '@/actions/forms';
 import { useRef } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { submitForm } from '../actions/forms';
 import { Alert } from './alert';
 import { Card } from './card';
 import { Field } from './field';

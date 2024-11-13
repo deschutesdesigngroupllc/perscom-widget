@@ -1,8 +1,8 @@
 'use client';
 
+import { pluralize } from '@/utils/helpers';
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 import { Avatar, AvatarGroup, Tooltip } from 'flowbite-react';
-import { pluralize } from '../../../../utils/helpers';
 
 export function Likes({ likes, currentUser }) {
   const newsfeedItemIsLiked = (id) => {

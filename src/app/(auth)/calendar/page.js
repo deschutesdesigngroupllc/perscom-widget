@@ -1,6 +1,6 @@
-import { Alert } from '../../../components/alert';
-import Client from '../../../lib/client';
-import { RequestError } from '../../../lib/request-error';
+import { Alert } from '@/components/alert';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 import { Calendar } from './_components/calendar';
 
 export const dynamic = 'force-dynamic';

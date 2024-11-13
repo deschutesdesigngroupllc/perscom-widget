@@ -1,7 +1,7 @@
+import { compressString, decompressString } from '@/lib/gzip';
+import { defaultSession, sessionOptions } from '@/lib/session';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
-import { compressString, decompressString } from '../../../lib/gzip';
-import { defaultSession, sessionOptions } from '../../../lib/session';
 
 export const dynamic = 'force-dynamic';
 

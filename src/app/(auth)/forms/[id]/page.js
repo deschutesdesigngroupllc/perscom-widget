@@ -1,7 +1,7 @@
-import { Alert } from '../../../../components/alert';
-import { Form } from '../../../../components/form';
-import Client from '../../../../lib/client';
-import { RequestError } from '../../../../lib/request-error';
+import { Alert } from '@/components/alert';
+import { Form } from '@/components/form';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {

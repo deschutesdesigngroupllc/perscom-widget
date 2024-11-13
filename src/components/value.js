@@ -1,9 +1,9 @@
 'use client';
 
+import { DateHelper } from '@/lib/date';
+import { Countries } from '@/resources/countries';
 import { useSearchParams } from 'next/navigation';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { DateHelper } from '../lib/date';
-import { Countries } from '../resources/countries';
 
 export function Value({ field, value }) {
   const searchParams = useSearchParams();

@@ -1,6 +1,6 @@
 'use client';
 
-import useSession from '../hooks/use-session';
+import useSession from '@/hooks/use-session';
 
 export function SessionProvider({ children }) {
   const { isLoading } = useSession();

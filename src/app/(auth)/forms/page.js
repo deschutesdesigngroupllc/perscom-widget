@@ -1,11 +1,11 @@
+import { Alert } from '@/components/alert';
+import { ButtonLink } from '@/components/button-link';
+import { Card } from '@/components/card';
+import { Pagination } from '@/components/pagination';
+import { Table } from '@/components/table';
+import Client from '@/lib/client';
+import { RequestError } from '@/lib/request-error';
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import { Alert } from '../../../components/alert';
-import { ButtonLink } from '../../../components/button-link';
-import { Card } from '../../../components/card';
-import { Pagination } from '../../../components/pagination';
-import { Table } from '../../../components/table';
-import Client from '../../../lib/client';
-import { RequestError } from '../../../lib/request-error';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
