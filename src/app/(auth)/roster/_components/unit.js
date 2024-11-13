@@ -56,14 +56,14 @@ export function Unit({ unit }) {
                       >
                         {name}
                       </Link>
-                      <div className="flex flex-row items-center space-x-0.5 sm:space-x-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-1">
                         {specialty_name && (
                           <div className="text-nowrap font-medium text-gray-700 dark:text-gray-400">
                             {specialty_name}
                           </div>
                         )}
                         {specialty_name && position_name && (
-                          <div className="block">
+                          <div className="hidden sm:block">
                             <svg
                               viewBox="0 0 2 2"
                               className="mx-2 inline h-0.5 w-0.5 fill-current"
