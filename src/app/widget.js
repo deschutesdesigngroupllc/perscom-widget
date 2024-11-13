@@ -1,4 +1,4 @@
-import { findIncomingAttributes } from '@/utils/parameters';
+import { findIncomingAttributes } from '../utils/parameters';
 import { parseDomain } from 'parse-domain';
 
 const IFRAME_ID = 'perscom_widget_iframe';
