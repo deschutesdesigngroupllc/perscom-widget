@@ -19,7 +19,7 @@ export function Information({ user }) {
       </div>
       <div className="flex flex-grow flex-col items-center justify-center space-y-4 py-4">
         {profile_photo && (
-          <div className="relative flex h-28 w-28 items-center justify-center">
+          <div className="relative flex size-28 items-center justify-center">
             {typeof profile_photo === 'string' && profile_photo.includes('ui-avatars') ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={profile_photo} alt={name} />
@@ -30,7 +30,7 @@ export function Information({ user }) {
                 width={112}
                 height={112}
                 priority={true}
-                placholder="blur"
+                className="h-full w-full object-contain"
               />
             )}
           </div>

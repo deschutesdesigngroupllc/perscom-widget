@@ -34,14 +34,14 @@ export function Unit({ unit }) {
                     {rank && (
                       <div className="flex w-8 flex-shrink-0 items-center">
                         {image_url ? (
-                          <div className="relative flex h-8 w-8 items-center justify-center">
+                          <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden">
                             <Image
                               src={image_url}
                               alt={rank_name}
                               width={32}
                               height={32}
                               priority={true}
-                              style={{ width: 'auto' }}
+                              className="h-full w-full object-contain"
                             />
                           </div>
                         ) : (

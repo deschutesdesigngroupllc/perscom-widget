@@ -117,7 +117,13 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image src={image_url} alt={name} width={64} height={20} />
+                    <Image
+                      src={image_url}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
@@ -195,7 +201,13 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image src={image_url} alt={name} width={64} height={20} />
+                    <Image
+                      src={image_url}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
@@ -250,7 +262,13 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image src={image_url} alt={name} width={64} height={64} />
+                    <Image
+                      src={image_url}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                 )}
                 <div className="flex flex-col justify-center space-y-1">
