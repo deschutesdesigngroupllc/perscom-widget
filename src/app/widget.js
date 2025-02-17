@@ -40,7 +40,7 @@ class Widget {
   setupIframeResizer = () => {
     if (document.getElementById(IFRAME_ID)) {
       const iframeResizerScript = document.createElement('script');
-      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/@iframe-resizer/parent';
+      iframeResizerScript.src = 'https://cdn.jsdelivr.net/npm/@iframe-resizer/parent@5.3.2';
       iframeResizerScript.type = 'text/javascript';
       iframeResizerScript.onload = () => {
         window.iframeResize({ log: false, license: 'GPLv3', waitForLoad: true }, `#${IFRAME_ID}`);
