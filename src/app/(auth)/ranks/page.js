@@ -5,7 +5,6 @@ import { Table } from '@/components/table';
 import Client from '@/lib/client';
 import { RequestError } from '@/lib/request-error';
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 export const metadata = {
@@ -36,12 +35,12 @@ export default async function Page({ searchParams }) {
                   <TableCell className="hidden w-1/6 !py-4 sm:table-cell">
                     {rank.image?.image_url ? (
                       <div className="relative mx-auto flex size-20 items-center justify-center">
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           src={rank.image.image_url}
                           alt={rank.name}
                           width={80}
                           height={80}
-                          priority={true}
                           className="h-full w-full object-contain"
                         />
                       </div>
@@ -55,12 +54,12 @@ export default async function Page({ searchParams }) {
                     <>
                       {rank.image?.image_url && (
                         <div className="relative mb-2 flex size-8 sm:hidden">
-                          <Image
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
                             src={rank.image.image_url}
                             alt={rank.name}
                             width={32}
                             height={32}
-                            priority={true}
                             className="h-full w-full object-contain"
                           />
                         </div>
