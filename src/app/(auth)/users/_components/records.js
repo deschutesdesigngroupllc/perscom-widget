@@ -5,7 +5,6 @@ import { Datatable } from '@/components/datatable';
 import { Tabs } from '@/components/tabs';
 import { DateHelper } from '@/lib/date';
 import { Badge, TabItem } from 'flowbite-react';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 export function Records({ user }) {
@@ -117,7 +116,8 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={image_url}
                       alt={name}
                       width={32}
@@ -201,7 +201,8 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={image_url}
                       alt={name}
                       width={32}
@@ -262,7 +263,8 @@ export function Records({ user }) {
               <div className="flex items-center space-x-4">
                 {image_url && (
                   <div className="flex size-6 flex-1 flex-col justify-center sm:size-8">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={image_url}
                       alt={name}
                       width={32}

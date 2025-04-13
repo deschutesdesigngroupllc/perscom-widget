@@ -2,7 +2,6 @@ import { Link } from '@/components/link';
 import { Status } from '@/components/status';
 import { Table } from '@/components/table';
 import { TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 'flowbite-react';
-import Image from 'next/image';
 
 export function Unit({ unit }) {
   const { name, users } = unit;
@@ -35,12 +34,12 @@ export function Unit({ unit }) {
                       <div className="flex w-8 flex-shrink-0 items-center">
                         {image_url ? (
                           <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden">
-                            <Image
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                               src={image_url}
                               alt={rank_name}
                               width={32}
                               height={32}
-                              priority={true}
                               className="h-full w-full object-contain"
                             />
                           </div>
@@ -96,9 +95,13 @@ export function Unit({ unit }) {
             );
           })
         ) : (
-          <div className="flex items-center justify-center p-8 text-xs">
-            There are no personnel assigned to this unit.
-          </div>
+          <TableRow>
+            <TableCell colSpan="5">
+              <div className="flex items-center justify-center p-4 text-xs">
+                There are no personnel assigned to this unit.
+              </div>
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>

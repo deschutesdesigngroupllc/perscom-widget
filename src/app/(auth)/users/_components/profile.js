@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { AdditionalFields } from './additional-fields';
 import { Assignment } from './assignment';
 import { Demographics } from './demographics';
@@ -16,13 +15,16 @@ export function Profile({ user }) {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={cover_photo_url} alt={name} />
           ) : (
-            <Image
-              src={cover_photo_url}
-              alt={name}
-              fill
-              placholder="blur"
-              style={{ objectFit: 'contain' }}
-            />
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={cover_photo_url}
+                alt={name}
+                fill
+                placholder="blur"
+                style={{ objectFit: 'contain' }}
+              />
+            </>
           )}
         </div>
       )}

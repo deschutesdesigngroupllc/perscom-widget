@@ -1,6 +1,5 @@
 import { Card } from '@/components/card';
 import { Status } from '@/components/status';
-import Image from 'next/image';
 
 export function Information({ user }) {
   const { name, rank, position, profile_photo_url, status } = user;
@@ -24,14 +23,16 @@ export function Information({ user }) {
               // eslint-disable-next-line @next/next/no-img-element
               <img src={profile_photo} alt={name} />
             ) : (
-              <Image
-                src={profile_photo}
-                alt={name}
-                width={112}
-                height={112}
-                priority={true}
-                className="h-full w-full object-contain"
-              />
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={profile_photo}
+                  alt={name}
+                  width={112}
+                  height={112}
+                  className="h-full w-full object-contain"
+                />
+              </>
             )}
           </div>
         )}

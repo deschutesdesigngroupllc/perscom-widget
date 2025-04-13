@@ -34,7 +34,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -46,7 +46,7 @@ export function Field({ field }) {
           name={field.key}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         >
           <option disabled={true} value="">
@@ -72,7 +72,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -86,7 +86,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -100,7 +100,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -126,7 +126,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -141,7 +141,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
@@ -155,7 +155,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           rows={4}
           sizing="sm"
         />
@@ -228,7 +228,7 @@ export function Field({ field }) {
           placeholder={field.placeholder}
           required={field.required}
           readOnly={field.readonly}
-          helperText={<div className="text-xs">{field.help}</div>}
+          helperText={<span className="text-xs">{field.help}</span>}
           sizing="sm"
         />
       );
