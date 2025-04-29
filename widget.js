@@ -67,7 +67,7 @@ class Widget {
           response.headers.get('content-type')?.includes('application/json')
         ) {
           const json = await response.json();
-          html = `<div><div style="font-weight: bold; font-size: 1rem">${json.error.message}</div><ul style="font-size: 0.9rem"><li>URL: ${url}</li><li>Request ID: ${json.error.request_id}</li><li>Trace ID: ${json.error.trace_id}</li></ul></div>`;
+          html = `<script src="https://cdn.tailwindcss.com"></script><div class="text-sm"><div class="font-bold">${json.error.message}</div><ul class="mt-2 list-inside"><li><span class="font-semibold">URL:</span> ${url}</li><li><span class="font-semibold">Request ID:</span> ${json.error.request_id}</li><li><span class="font-semibold">Trace ID:</span> ${json.error.trace_id}</li></ul></div>`;
         } else {
           html = await response.text();
         }
