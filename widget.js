@@ -53,6 +53,7 @@ class Widget {
   initializeIframe = async () => {
     if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID)) {
       try {
+        const url = apiUrl + this.widget;
         const response = await fetch(apiUrl + this.widget, {
           headers: {
             Accept: 'text/html',
@@ -60,13 +61,16 @@ class Widget {
           }
         });
 
-        const html = await response.text();
-
-        const cleanHtml = html.replace(
-            '</head>',
-            `<style>.iframe-overlay, .modal-backdrop { display: none !important; }</style></head>`
-        );
-
+        let html;
+        if (
+          response.status >= 500 ||
+          response.headers.get('content-type')?.includes('application/json')
+        ) {
+          const json = await response.json();
+          html = `<div><div style="font-weight: bold; font-size: 1rem">${json.error.message}</div><ul style="font-size: 0.9rem"><li>URL: ${url}</li><li>Request ID: ${json.error.request_id}</li><li>Trace ID: ${json.error.trace_id}</li></ul></div>`;
+        } else {
+          html = await response.text();
+        }
 
         const blob = new Blob([html], { type: 'text/html' });
         const blobUrl = URL.createObjectURL(blob);
