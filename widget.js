@@ -54,9 +54,9 @@ class Widget {
   initializeIframe = async () => {
     if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID)) {
       try {
-        const url = new URL(apiUrl + this.widget)
+        const url = new URL(apiUrl + this.widget);
 
-        url.searchParams.append('apikey', this.apiKey)
+        url.searchParams.append('apikey', this.apiKey);
 
         const iframe = document.createElement('iframe');
         iframe.src = url.toString();
@@ -73,6 +73,10 @@ class Widget {
         iframe.style.outline = 'none';
         iframe.style.boxShadow = 'none';
         iframe.style.filter = 'none';
+        iframe.setAttribute(
+          'sandbox',
+          'allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals'
+        );
 
         this.iframe = iframe;
       } catch (err) {
@@ -94,7 +98,7 @@ class Widget {
   setupNavigationListener = () => {
     window.addEventListener('message', (event) => {
       if (event.data?.type === 'widget:navigate') {
-        console.log(event.data)
+        console.log(event.data);
       }
     });
   };
@@ -104,7 +108,7 @@ class Widget {
       const response = await fetch(apiUrl + path, {
         headers: {
           Accept: 'text/html',
-          Authorization: `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`
         }
       });
 
