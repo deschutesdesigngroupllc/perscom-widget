@@ -27,6 +27,7 @@ class Widget {
     this.initializeIframe().then(() => {
       this.mountIframe();
       this.setupIframeResizer();
+      this.setupNavigationListener();
     });
   };
 
@@ -90,10 +91,6 @@ class Widget {
         iframe.style.outline = 'none';
         iframe.style.boxShadow = 'none';
         iframe.style.filter = 'none';
-        iframe.setAttribute(
-          'sandbox',
-          'allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-modals'
-        );
 
         this.iframe = iframe;
       } catch (err) {
@@ -109,6 +106,36 @@ class Widget {
     if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID)) {
       const wrapper = document.getElementById(WRAPPER_ID);
       wrapper.appendChild(this.iframe);
+    }
+  };
+
+  setupNavigationListener = () => {
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'widget:navigate') {
+        console.log(event.data)
+      }
+    });
+  };
+
+  navigate = async (path) => {
+    try {
+      const response = await fetch(apiUrl + path, {
+        headers: {
+          Accept: 'text/html',
+          Authorization: `Bearer ${this.apiKey}`,
+        }
+      });
+
+      let html = await response.text();
+
+      const blob = new Blob([html], { type: 'text/html' });
+      const blobUrl = URL.createObjectURL(blob);
+
+      if (this.iframe) {
+        this.iframe.src = blobUrl;
+      }
+    } catch (err) {
+      console.error('Navigation failed:', err);
     }
   };
 }
