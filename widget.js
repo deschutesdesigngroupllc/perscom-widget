@@ -54,12 +54,7 @@ class Widget {
   initializeIframe = async () => {
     if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID)) {
       try {
-        const url = new URL(apiUrl + this.widget);
-
-        url.searchParams.append('apikey', this.apiKey);
-
         const iframe = document.createElement('iframe');
-        iframe.src = url.toString();
         iframe.id = IFRAME_ID;
         iframe.crossorigin = 'anonymous';
         iframe.style.width = '1px';
@@ -79,6 +74,7 @@ class Widget {
         );
 
         this.iframe = iframe;
+        this.navigate(this.widget);
       } catch (err) {
         console.error('Failed to initialize PERSCOM widget:', err);
       }
@@ -97,31 +93,18 @@ class Widget {
 
   setupNavigationListener = () => {
     window.addEventListener('message', (event) => {
-      if (event.data?.type === 'widget:navigate') {
-        console.log(event.data);
+      if (event.data?.type === 'widget:navigate' && event.data?.path) {
+        this.navigate(event.data.path);
       }
     });
   };
 
-  navigate = async (path) => {
-    try {
-      const response = await fetch(apiUrl + path, {
-        headers: {
-          Accept: 'text/html',
-          Authorization: `Bearer ${this.apiKey}`
-        }
-      });
+  navigate = (path) => {
+    const url = new URL(apiUrl + path);
+    url.searchParams.append('apikey', this.apiKey);
 
-      let html = await response.text();
-
-      const blob = new Blob([html], { type: 'text/html' });
-      const blobUrl = URL.createObjectURL(blob);
-
-      if (this.iframe) {
-        this.iframe.src = blobUrl;
-      }
-    } catch (err) {
-      console.error('Navigation failed:', err);
+    if (this.iframe) {
+      this.iframe.src = url.toString();
     }
   };
 }
