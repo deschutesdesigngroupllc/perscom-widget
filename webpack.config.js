@@ -2,6 +2,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 dotenv.config();
 
@@ -11,13 +12,13 @@ module.exports = {
   entry: './widget.js',
 
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'widget.js'
   },
 
   mode: isProduction ? 'production' : 'development',
 
-  devtool: isProduction ? false : 'source-map',
+  devtool: isProduction ? 'source-map' : false,
 
   module: {
     rules: [
@@ -55,6 +56,11 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env)
+    }),
+    !isProduction &&
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      inject: 'body'
     })
-  ]
+  ].filter(Boolean)
 };

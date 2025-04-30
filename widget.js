@@ -54,30 +54,12 @@ class Widget {
   initializeIframe = async () => {
     if (!document.getElementById(IFRAME_ID) && document.getElementById(WRAPPER_ID)) {
       try {
-        const url = apiUrl + this.widget;
-        const response = await fetch(apiUrl + this.widget, {
-          headers: {
-            Accept: 'text/html',
-            Authorization: `Bearer ${this.apiKey}`
-          }
-        });
+        const url = new URL(apiUrl + this.widget)
 
-        let html;
-        if (
-          response.status >= 500 ||
-          response.headers.get('content-type')?.includes('application/json')
-        ) {
-          const json = await response.json();
-          html = `<script src="https://cdn.tailwindcss.com"></script><div class="text-sm"><div class="font-bold">${json.error.message}</div><ul class="mt-2 list-inside"><li><span class="font-semibold">URL:</span> ${url}</li><li><span class="font-semibold">Request ID:</span> ${json.error.request_id}</li><li><span class="font-semibold">Trace ID:</span> ${json.error.trace_id}</li></ul></div>`;
-        } else {
-          html = await response.text();
-        }
-
-        const blob = new Blob([html], { type: 'text/html' });
-        const blobUrl = URL.createObjectURL(blob);
+        url.searchParams.append('apikey', this.apiKey)
 
         const iframe = document.createElement('iframe');
-        iframe.src = blobUrl;
+        iframe.src = url.toString();
         iframe.id = IFRAME_ID;
         iframe.crossorigin = 'anonymous';
         iframe.style.width = '1px';
