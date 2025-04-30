@@ -58,9 +58,9 @@ module.exports = {
       'process.env': JSON.stringify(process.env)
     }),
     !isProduction &&
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      inject: 'body'
-    })
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+        inject: 'body'
+      })
   ].filter(Boolean)
 };
