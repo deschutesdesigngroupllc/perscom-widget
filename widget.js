@@ -19,10 +19,14 @@ class Widget {
    *
    * @param widget
    * @param apiKey
+   * @param resource
+   * @param dark
    */
-  init = (widget = 'roster', apiKey = null) => {
+  init = (widget = 'roster', apiKey = null, resource = null, dark = false) => {
     this.widget = widget;
     this.apiKey = apiKey;
+    this.resource = resource;
+    this.dark = dark;
 
     this.initializeIframe().then(() => {
       this.mountIframe();
@@ -103,6 +107,10 @@ class Widget {
     const url = new URL(apiUrl + path);
     url.searchParams.append('apikey', this.apiKey);
 
+    if (this.dark) {
+      url.searchParams.append('dark', 'true');
+    }
+
     if (this.iframe) {
       this.iframe.src = url.toString();
     }
@@ -124,6 +132,8 @@ class Widget {
 
   const widget = scriptTag.getAttribute('data-widget');
   const apiKey = scriptTag.getAttribute('data-apikey');
+  const resource = scriptTag.getAttribute('data-resource');
+  const dark = scriptTag.getAttribute('data-dark') === 'true';
 
   console.log({
     widget: widget,
@@ -131,5 +141,5 @@ class Widget {
   });
 
   window.perscom = new Widget();
-  window.perscom.init(widget, apiKey);
+  window.perscom.init(widget, apiKey, resource, dark);
 })();
