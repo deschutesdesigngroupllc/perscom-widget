@@ -7,7 +7,7 @@
 /coverage
 
 # production
-/public/widget.*
+/dist
 
 # misc
 ssl
@@ -22,21 +22,10 @@ ssl
 .env.staging
 local
 
-# Next
-.next
-.swc
-
-# parcel
-.cache
-.parcel-cache
-
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # sentry
 .sentryclirc
-
-# vercel
-.vercel
-.env*.local
