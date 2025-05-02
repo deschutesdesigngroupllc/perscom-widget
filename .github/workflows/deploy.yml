@@ -47,7 +47,7 @@ jobs:
       - name: Build Widget
         run: npm run build
         env:
-          API_URL: https://api.staging.perscom.io/v2/widgets/
+          API_URL: https://api.perscom.io/v2/widgets/
 
       - name: Copy Artifacts To S3
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
@@ -97,7 +97,7 @@ jobs:
       - name: Build Widget
         run: npm run build
         env:
-          API_URL: https://api.perscom.io/v2/widgets/
+          API_URL: https://api.staging.perscom.io/v2/widgets/
 
       - name: Copy Artifacts To S3
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
