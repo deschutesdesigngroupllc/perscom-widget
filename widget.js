@@ -95,6 +95,9 @@ class Widget {
     }
   };
 
+  /**
+   * Register an event listener for changing the iframe src
+   */
   setupNavigationListener = () => {
     window.addEventListener('message', (event) => {
       if (event.data?.type === 'widget:navigate' && event.data?.path) {
@@ -103,6 +106,11 @@ class Widget {
     });
   };
 
+  /**
+   * Update the iframe src to a new URL
+   *
+   * @param path
+   */
   navigate = (path) => {
     const url = new URL(apiUrl + path);
     url.searchParams.append('apikey', this.apiKey);
