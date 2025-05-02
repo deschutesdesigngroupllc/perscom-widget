@@ -51,11 +51,11 @@ jobs:
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
 
       - name: Create Sentry Release
-        uses: getsentry/action-release@v1
+        uses: getsentry/action-release@v3
         with:
           environment: production
           version: ${{ env.VERSION }}
-          sourcemaps: ./dist ./build/static/js
+          sourcemaps: ./dist
 
   staging:
     name: Deploy to Staging
@@ -99,8 +99,8 @@ jobs:
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
       - name: Create Sentry Release
-        uses: getsentry/action-release@v1
+        uses: getsentry/action-release@v3
         with:
           environment: staging
           version: ${{ env.VERSION }}
-          sourcemaps: ./dist ./build/static/js
+          sourcemaps: ./dist
