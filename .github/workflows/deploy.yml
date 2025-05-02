@@ -6,7 +6,7 @@ env:
   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION: us-west-2
+  AWS_REGION: us-west-2
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ jobs:
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
-          aws-region: us-west-2
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Get Version
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -57,6 +57,12 @@ jobs:
           version: ${{ env.VERSION }}
           sourcemaps: ./dist
 
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_PRODUCTION }}
+          PATHS: "/*"
+
   staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
@@ -72,7 +78,7 @@ jobs:
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
-          aws-region: us-west-2
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Get Version
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -104,3 +110,9 @@ jobs:
           environment: staging
           version: ${{ env.VERSION }}
           sourcemaps: ./dist
+
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID_STAGING }}
+          PATHS: "/*"
