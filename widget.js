@@ -7,6 +7,7 @@
 
 const apiUrl = process.env.API_URL || 'https://api.perscom-app.test/v2/widgets/';
 
+const SCRIPT_ID = 'perscom_widget';
 const IFRAME_ID = 'perscom_widget_iframe';
 const WRAPPER_ID = 'perscom_widget_wrapper';
 
@@ -129,11 +130,19 @@ class Widget {
  * Initialize widget class
  */
 (() => {
-  const scriptTag = document.getElementById('perscom_widget');
+  const scriptTag = document.getElementById(SCRIPT_ID);
+  const wrapperTag = document.getElementById(WRAPPER_ID);
 
   if (!scriptTag) {
     console.error(
-      'PERSCOM widget script tag not found. Please include a script tag with id "perscom_widget" in your HTML.'
+      'PERSCOM widget script tag not found. Please include a script tag with ID "perscom_widget" in your HTML. Documentation and examples available at https://docs.perscom.io.',
+    );
+    return;
+  }
+
+  if (!wrapperTag) {
+    console.error(
+      'PERSCOM widget wrapper tag not found. Please make sure to wrap your "perscom_widget" script inside a div with ID "perscom_widget_wrapper". Documentation and examples available at https://docs.perscom.io.'
     );
     return;
   }
