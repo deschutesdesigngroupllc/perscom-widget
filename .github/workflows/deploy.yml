@@ -1,11 +1,12 @@
 name: Deploy Widget
 
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
   SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-west-2
 
 on:
   workflow_dispatch:
@@ -26,6 +27,11 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v3
 
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-west-2
+
       - name: Get Version
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
@@ -38,28 +44,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Setup Vercel
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
-
-      - name: Setup Environment Variables
-        run: |
-          vercel env pull .env.local --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          echo SENTRY_RELEASE=${{ env.VERSION }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ env.VERSION }} >> .env.local
-
       - name: Build Widget
-        run: npm run build:widget
-        env:
-          WIDGET_URL: https://widget.perscom.io
+        run: npm run build
 
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Copy Artifacts To S3
+        run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
 
       - name: Create Sentry Release
         uses: getsentry/action-release@v1
@@ -80,8 +69,19 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v3
 
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-west-2
+
       - name: Get Version
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -92,28 +92,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Setup Vercel
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_SCOPE}}
-
-      - name: Setup Environment Variables
-        run: |
-          vercel env pull .env.local --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-          echo SENTRY_RELEASE=${{ env.VERSION }} >> .env.local
-          echo NEXT_PUBLIC_WIDGET_VERSION=${{ env.VERSION }} >> .env.local
-
       - name: Build Widget
-        run: npm run build:widget
-        env:
-          WIDGET_URL: https://widget.staging.perscom.io
+        run: npm run build
 
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Copy Artifacts To S3
+        run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
 
       - name: Create Sentry Release
         uses: getsentry/action-release@v1

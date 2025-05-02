@@ -102,6 +102,7 @@ class Widget {
   setupNavigationListener = () => {
     window.addEventListener('message', (event) => {
       if (event.data?.type === 'widget:navigate' && event.data?.path) {
+        console.debug('Received widget navigate event', event);
         this.navigate(event.data.path);
       }
     });
@@ -135,7 +136,7 @@ class Widget {
 
   if (!scriptTag) {
     console.error(
-      'PERSCOM widget script tag not found. Please include a script tag with ID "perscom_widget" in your HTML. Documentation and examples available at https://docs.perscom.io.',
+      'PERSCOM widget script tag not found. Please include a script tag with ID "perscom_widget" in your HTML. Documentation and examples available at https://docs.perscom.io.'
     );
     return;
   }
