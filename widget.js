@@ -5,7 +5,7 @@
  * @description A JavaScript widget for embedding PERSCOM functionality into web pages.
  */
 
-const apiUrl = process.env.API_URL || 'https://api.perscom-app.test/v2/widgets/';
+const apiUrl = process.env.API_URL || 'https://api.perscom.test/v2/widgets/';
 
 const SCRIPT_ID = 'perscom_widget';
 const IFRAME_ID = 'perscom_widget_iframe';
