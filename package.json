@@ -12,7 +12,7 @@
     "test:ci": "jest --ci"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
+    "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.27.1",
     "@next/bundle-analyzer": "^14.1.0",
     "@sentry/nextjs": "^7.110.1",
