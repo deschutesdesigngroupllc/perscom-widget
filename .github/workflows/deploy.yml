@@ -1,9 +1,6 @@
 name: Deploy Widget
 
 env:
-  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-  SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: us-east-1
@@ -25,10 +22,10 @@ jobs:
       url: https://widget.perscom.io
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
           aws-region: ${{ env.AWS_REGION }}
 
@@ -38,7 +35,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Dependencies
@@ -75,10 +72,10 @@ jobs:
       url: https://widget.staging.perscom.io
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4.1.0
+        uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
           aws-region: ${{ env.AWS_REGION }}
 
@@ -88,7 +85,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Dependencies
@@ -101,13 +98,6 @@ jobs:
 
       - name: Copy Artifacts To S3
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_STAGING }} --delete
-
-      - name: Create Sentry Release
-        uses: getsentry/action-release@v3
-        with:
-          environment: staging
-          version: ${{ env.VERSION }}
-          sourcemaps: ./dist
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
