@@ -8,13 +8,13 @@
     "format": "prettier './*.{js,json}' --write --config ./prettier.config.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
+    "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.27.1",
     "babel-loader": "^10.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "html-webpack-plugin": "^5.6.3",
-    "prettier": "^3.3.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.96.1",
