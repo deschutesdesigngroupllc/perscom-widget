@@ -1,6 +1,6 @@
-# Contributing to the PERSCOM Widget
+# Contribution Guide
 
-Thank you for your interest in contributing to PERSCOM Widget! We welcome contributions from the community to help improve and grow this project. Please take a moment to read through the following guidelines to ensure a smooth contribution process.
+Thank you for your interest in contributing to PERSCOM! We welcome contributions from the community to help improve and grow this project. Please take a moment to read through the following guidelines to ensure a smooth contribution process.
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
@@ -63,7 +63,7 @@ Once your changes are ready, push your branch to your forked repository on GitHu
 git push origin feature/your-feature-name
 ```
 
-Then, navigate to the [original repository](https://github.com/DeschutesDesignGroupLLC/perscom-widget) and create a pull request. Provide a clear title and description of your changes.
+Then, navigate to the [original repository](https://github.com/DeschutesDesignGroupLLC/perscom-widget) and create a pull request against the `develop` branch. Provide a clear title and description of your changes.
 
 ### Pull Request Checklist
 
@@ -75,7 +75,7 @@ Before submitting your pull request, please make sure you have done the followin
 
 ## Community and Communication
 
-Join our [community chat](https://community.deschutesdesigngroup.com) to stay connected with other contributors and maintainers. We appreciate your feedback and involvement!
+Join our [Slack](https://slack.deschutesdesigngroup.com) to stay connected with other contributors and maintainers. We appreciate your feedback and involvement!
 
 ## License
 
