@@ -8,7 +8,7 @@ The PERSCOM Widget offers a simple and effective way to integrate your PERSCOM.i
 
 ![GitHub Release](https://img.shields.io/github/v/release/deschutesdesigngroupllc/perscom-widget?display_name=release)
 ![GitHub License](https://img.shields.io/github/license/DeschutesDesignGroupLLC/perscom-php-sdk)
-[![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=slack&logoColor=white)](https://slack.deschutesdesigngroup.com)
+[![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=slack&logoColor=white)](https://perscom.io/slack)
 </div>
 
 ## Introduction
