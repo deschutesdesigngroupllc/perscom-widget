@@ -153,11 +153,6 @@ class Widget {
   const resource = scriptTag.getAttribute('data-resource');
   const dark = scriptTag.getAttribute('data-dark') === 'true';
 
-  console.log({
-    widget: widget,
-    apiKey: apiKey
-  });
-
   window.perscom = new Widget();
   window.perscom.init(widget, apiKey, resource, dark);
 })();
