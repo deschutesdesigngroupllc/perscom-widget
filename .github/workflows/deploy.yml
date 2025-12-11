@@ -33,7 +33,7 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'npm'
@@ -48,13 +48,6 @@ jobs:
 
       - name: Copy Artifacts To S3
         run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME_PRODUCTION }} --delete
-
-      - name: Create Sentry Release
-        uses: getsentry/action-release@v3
-        with:
-          environment: production
-          version: ${{ env.VERSION }}
-          sourcemaps: ./dist
 
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
@@ -83,7 +76,7 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: 'npm'
